@@ -1,0 +1,381 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout title="Projekt: Supply Chain and Freight Analytics | Portfolio Jakub Nicpoń">
+    <Navbar />
+
+    <main>
+        <header class="project-hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1>Supply Chain and Freight Analytics</h1>
+                        <div class="section-underline"></div>
+                        <p data-translate="heroDesc">Analiza w obszarze logistyki oparta na zrealizowanych usługach transportowych. Projekt polegał na przekształceniu surowych danych o dostawach, przewoźnikach i kosztach frachtu w interaktywny dashboard. Pozwala on na szybką identyfikację wąskich gardeł w łańcuchu dostaw, ocenę wydajności partnerów logistycznych (OTD - On-Time Delivery) oraz optymalizację kosztów na kluczowych trasach.</p>
+            
+                        <a href="#project-details-card" class="scroll-down-link">
+                            <span class="mouse-icon">
+                               <span class="wheel"></span>
+                            </span>
+                            <span data-translate="btnDetails">Zobacz szczegóły</span>
+                         </a>
+                    </div>
+                    <div class="hero-image-wrapper">
+                        <img src="/assets/Project3.png" alt="Dashboard logistyczny" class="project-image" loading="eager" />
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="project-highlights">
+            <div class="container">
+                <h2 data-translate="kpiTitle">Kluczowe Wskaźniki</h2>
+                <div class="section-underline centered-underline"></div>
+                <div class="kpi-grid">
+                    <div class="kpi-card"><span class="kpi-value">2 450</span><span class="kpi-label" data-translate="kpi1Label">Zlecenia Spedycyjne</span></div>
+                    <div class="kpi-card"><span class="kpi-value">92.4%</span><span class="kpi-label" data-translate="kpi2Label">Terminowość (OTD)</span></div>
+                    <div class="kpi-card"><span class="kpi-value">€1.2M</span><span class="kpi-label" data-translate="kpi3Label">Całkowity Koszt Frachtu</span></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="project-details">
+            <div class="container">
+                <h2 data-translate="detailsTitle">Szczegóły Projektu</h2>
+                <div class="section-underline centered-underline"></div>
+                
+                <div class="details-card" id="project-details-card">
+    
+                    <div class="toggle-buttons">
+                        <button class="toggle-btn is-active" onclick="showSection('sectionColumns')" data-translate="tabColumns">Opis Kolumn</button>
+                        <button class="toggle-btn" onclick="showSection('sectionKPIs')" data-translate="tabKPIs">Kluczowe Wskaźniki</button>
+                        <button class="toggle-btn" onclick="showSection('sectionAnalysis')" data-translate="tabAnalysis">Analiza</button>
+                        <button class="toggle-btn" onclick="showSection('sectionMethodology')" data-translate="tabMethodology">Metodologia</button>
+                    </div>
+                    
+                    <div id="info-sections-container">
+                        <div id="sectionColumns" class="info-section active" role="region">
+                            <table class="kpi-table">
+                                <thead><tr><th data-translate="tableHeaderColumn">Kolumna</th><th data-translate="tableHeaderDesc">Opis</th></tr></thead>
+                                <tbody id="columnsTableBody"></tbody>
+                            </table>
+                        </div>
+    
+                        <div id="sectionKPIs" class="info-section" role="region">
+                             <table class="kpi-table">
+                                 <thead><tr><th>KPI</th><th data-translate="tableHeaderResult">Wynik</th></tr></thead>
+                                 <tbody id="kpisTableBody"></tbody>
+                            </table>
+                        </div>
+    
+                        <div id="sectionAnalysis" class="info-section" role="region">
+                            <div class="analysis-grid">
+                                <div class="analysis-table-container">
+                                    <table class="kpi-table">
+                                        <thead><tr><th data-translate="tableHeaderArea">Obszar Analizy</th><th data-translate="tableHeaderConclusions">Wnioski</th></tr></thead>
+                                        <tbody id="analysisTableBody"></tbody>
+                                    </table>
+                                </div>
+                                <div class="analysis-conclusions">
+                                    <ol id="analysisListBody"></ol>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div id="sectionMethodology" class="info-section" role="region">
+                            <table class="kpi-table">
+                                <thead><tr><th data-translate="tableHeaderStep">Krok Procesu</th><th data-translate="tableHeaderDesc">Opis</th></tr></thead>
+                                <tbody id="methodologyTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="project-files">
+            <div class="container">
+                <h2 data-translate="downloadTitle">Pobierz Zasoby Projektu</h2>
+                <div class="section-underline centered-underline"></div>
+                <div class="files-container">
+                    <a href="/assets/Project3.png" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadDashboard">Pobierz Dashboard (PNG)</span></a>
+                    <!-- Dostosuj nazwę pliku w atrybucie href -->
+                    <a href="/assets/SupplyChainData.xlsx" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadExcel">Pobierz Plik Excel</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+
+    <style is:global>
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1;}
+        .section-underline { margin: 20px 0 30px 0; width: 80px; height: 4px; border-radius: 2px; background: var(--line-gradient); }
+        .centered-underline { margin: 20px auto 30px auto; }
+        
+        .project-hero { padding: 140px 0 80px; position: relative; overflow: hidden; z-index: 1;}
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-content h1 { font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 0; color: var(--text-primary); }
+        .hero-content p { font-size: 1.2rem; color: var(--text-secondary); max-width: 500px; }
+        .hero-image-wrapper { perspective: 1000px; }
+        .project-image { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: var(--card-shadow); cursor: pointer; border: 1px solid var(--border-color); transition: transform 0.3s ease, border-color 0.3s ease; }
+        .project-image:hover { transform: scale(1.05) rotateY(-5deg) rotateX(5deg); border-color: var(--cyan); }
+        
+        .scroll-down-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 40px; color: var(--text-secondary); font-weight: 600; text-decoration: none; cursor: pointer; transition: color 0.3s ease, transform 0.3s ease; }
+        .scroll-down-link:hover { color: var(--cyan); transform: translateY(-3px); }
+        .mouse-icon { width: 24px; height: 40px; border: 2px solid var(--text-secondary); border-radius: 20px; position: relative; transition: border-color 0.3s ease; }
+        .scroll-down-link:hover .mouse-icon { border-color: var(--cyan); }
+        .mouse-icon .wheel { display: block; width: 4px; height: 8px; background-color: var(--cyan); border-radius: 2px; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); animation: scroll-wheel-anim 2s infinite ease-in-out; }
+        @keyframes scroll-wheel-anim { 0% { transform: translate(-50%, 0); opacity: 1; } 50% { transform: translate(-50%, 10px); opacity: 1; } 100% { transform: translate(-50%, 20px); opacity: 0; } }
+
+        .project-highlights { padding: 80px 0; z-index: 1; position: relative;}
+        .project-highlights h2, .project-details h2, .project-files h2 { text-align: center; font-size: 2.5rem; font-weight: 700; background: var(--line-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; justify-content: center;}
+        
+        .kpi-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; text-align: center; position: relative; overflow: visible; backdrop-filter: blur(10px); transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 50%); opacity: 0; transition: opacity 0.3s; border-radius: 15px; pointer-events: none; z-index: 0; }
+        .kpi-card > * { position: relative; z-index: 1; }
+        .kpi-card:hover { transform: translateY(-8px) scale(1.03); border-color: var(--cyan); box-shadow: var(--card-shadow); }
+        .kpi-card:hover::before { opacity: 1; }
+        
+        .kpi-value { display: block; font-size: 2.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+        .kpi-label { font-size: 1rem; color: var(--text-secondary); }
+        
+        .project-details { padding: 80px 0; z-index: 1; position: relative;}
+        .details-card { background: var(--bg-surface); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--card-shadow); transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+        .toggle-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
+        .toggle-btn { appearance: none; background: var(--btn-bg); border: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 600; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 12px 24px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;}
+        .toggle-btn:hover { color: var(--text-primary); border-color: var(--cyan); transform: translateY(-2px); }
+        .toggle-btn.is-active { background: var(--line-gradient); color: white; border-color: transparent; transform: scale(1.05); box-shadow: 0 5px 15px var(--spotlight-color); }
+        .info-section { display: none; margin-top: 20px; padding-top: 30px; border-top: 1px solid var(--border-color); }
+        .info-section.active { display: block; animation: fadeIn .4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .kpi-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        .kpi-table th, .kpi-table td { padding: 14px 10px; border-bottom: 1px solid var(--border-color); text-align: center; width: 50%; }
+        .kpi-table tr:last-child td { border-bottom: none; }
+        .kpi-table thead th { font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .kpi-table td { color: var(--text-secondary); }
+        
+        .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .analysis-conclusions ol { list-style: none; padding-left: 0; counter-reset: conclusion-counter; }
+        .analysis-conclusions li { position: relative; padding-left: 45px; margin-bottom: 25px; }
+        .analysis-conclusions li::before { counter-increment: conclusion-counter; content: counter(conclusion-counter); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; border-radius: 50%; background: var(--line-gradient); color: white; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+        .analysis-conclusions strong { display: block; margin-bottom: 5px; color: var(--text-primary); font-size: 1.1rem; }
+        .analysis-conclusions p { color: var(--text-secondary); font-size: 0.95rem; margin: 0; }
+
+        .project-files { padding: 20px 0; z-index: 1; position: relative;}
+        .files-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 50px; }
+        .gradient__border__container { display: inline-block; position: relative; padding: 1px; border-radius: 30px; background: var(--line-gradient); background-size: 200% 200%; animation: spin-gradient 6s linear infinite; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; min-width: 150px; text-align: center; text-decoration: none; box-shadow: 0 4px 20px var(--spotlight-color); }
+        .gradient__border__container:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--spotlight-color); }
+        .gradient__border__container .gradient__border__text { display: block; background: var(--bg-surface); border-radius: 29px; padding: 0.8rem 2rem; font-size: 1rem; font-weight: 600; color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+        .gradient__border__container:hover .gradient__border__text { background: transparent; color: #fff;}
+        @keyframes spin-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        @media (max-width: 900px) { 
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; } 
+            .hero-content { order: 2; } 
+            .hero-image-wrapper { order: 1; } 
+            .hero-content .section-underline, .hero-content .scroll-down-link { margin-left: auto; margin-right: auto; } 
+            .analysis-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+        @media (max-width: 600px) { 
+            .hero-content h1 { font-size: 2.8rem; } 
+            .project-highlights h2, .project-details h2, .project-files h2 { font-size: 2rem; } 
+            .details-card { padding: 25px; } 
+        }
+    </style>
+
+    <script is:inline>
+        const projectTranslations = {
+            pl: {
+                pageTitle: "Projekt: Supply Chain & Freight Analytics | Portfolio Jakub Nicpoń",
+                heroDesc: "Analiza w obszarze logistyki oparta na zrealizowanych usługach transportowych. Projekt polegał na przekształceniu surowych danych o dostawach, przewoźnikach i kosztach frachtu w interaktywny dashboard. Pozwala on na szybką identyfikację wąskich gardeł w łańcuchu dostaw, ocenę wydajności partnerów logistycznych (OTD) oraz optymalizację kosztów na kluczowych trasach.",
+                btnDetails: "Zobacz szczegóły",
+                kpiTitle: "Kluczowe Wskaźniki",
+                kpi1Label: "Zlecenia Spedycyjne",
+                kpi2Label: "Terminowość (OTD)",
+                kpi3Label: "Całkowity Koszt Frachtu",
+                detailsTitle: "Szczegóły Projektu",
+                tabColumns: "Opis Kolumn",
+                tabKPIs: "Kluczowe Wskaźniki",
+                tabAnalysis: "Analiza",
+                tabMethodology: "Metodologia",
+                tableHeaderColumn: "Kolumna",
+                tableHeaderDesc: "Opis",
+                tableHeaderResult: "Wynik",
+                tableHeaderArea: "Obszar Analizy",
+                tableHeaderConclusions: "Wnioski",
+                tableHeaderStep: "Krok Procesu",
+                downloadTitle: "Pobierz Zasoby Projektu",
+                btnDownloadDashboard: "Pobierz Dashboard (PNG)",
+                btnDownloadExcel: "Pobierz Plik Excel",
+                
+                colsData: `
+                    <tr><td>Order ID</td><td>Unikalny numer zlecenia spedycyjnego</td></tr>
+                    <tr><td>Origin City</td><td>Miejsce załadunku (kraj/miasto)</td></tr>
+                    <tr><td>Destination City</td><td>Miejsce rozładunku (kraj/miasto)</td></tr>
+                    <tr><td>Carrier Name</td><td>Firma transportowa realizująca fracht</td></tr>
+                    <tr><td>Shipment Date</td><td>Data wyjazdu z punktu załadunku</td></tr>
+                    <tr><td>Delivery Date</td><td>Faktyczna data dostarczenia towaru</td></tr>
+                    <tr><td>Freight Cost</td><td>Koszt realizacji zlecenia transportowego</td></tr>
+                    <tr><td>Delivery Status</td><td>Status dostawy (np. On Time, Delayed)</td></tr>
+                    <tr><td>Weight (kg)</td><td>Waga ładunku w kilogramach</td></tr>
+                `,
+                kpisData: `
+                    <tr><td>Liczba Zleceń</td><td>2 450</td></tr>
+                    <tr><td>Terminowość Dostaw (OTD)</td><td>92.4%</td></tr>
+                    <tr><td>Całkowity Koszt Frachtu</td><td>€1,245,600</td></tr>
+                    <tr><td>Średni Koszt Zlecenia</td><td>€508.40</td></tr>
+                    <tr><td>Najlepszy Przewoźnik (OTD)</td><td>TransLogistics (96.2%)</td></tr>
+                    <tr><td>Trasa o najwyższym koszcie</td><td>Berlin - Paryż (€142,000)</td></tr>
+                `,
+                analysisTableData: `
+                    <tr><td>Terminowość (OTD)</td><td>Ogólny wskaźnik On-Time Delivery wynosi 92.4%. Spadki terminowości (poniżej 85%) odnotowano głównie w miesiącach zimowych na trasach skandynawskich.</td></tr>
+                    <tr><td>Koszty Frachtu</td><td>Największy udział w kosztach transportu mają trasy międzynarodowe pow. 1000 km, z dominującym kierunkiem na Francję i Niemcy.</td></tr>
+                    <tr><td>Wydajność Przewoźników</td><td>Trzech z dziesięciu głównych przewoźników generuje ponad 60% opóźnień. Wymaga to renegocjacji SLA lub zmiany alokacji wolumenów.</td></tr>
+                    <tr><td>Waga a Koszt</td><td>Zaobserwowano nieliniowy wzrost kosztów dla ładunków powyżej 15 ton, co sugeruje potrzebę lepszej konsolidacji (FTL zamiast LTL).</td></tr>
+                `,
+                analysisListData: `
+                    <li><strong>Optymalizacja wydajności przewoźników</strong><p>Identyfikacja przewoźników z najniższym wskaźnikiem OTD pozwala na przesunięcie wolumenów transportowych do bardziej niezawodnych partnerów, co bezpośrednio poprawia satysfakcję klienta końcowego.</p></li>
+                    <li><strong>Zarządzanie kosztami na kluczowych trasach</strong><p>Szczegółowa analiza tras o najwyższym koszcie za kilometr pozwoliła na wytypowanie kierunków wymagających renegocjacji stawek ryczałtowych.</p></li>
+                    <li><strong>Sezonowość opóźnień</strong><p>Wyodrębnienie danych historycznych pokazało spadek terminowości w Q4. Odpowiednie planowanie buforów czasowych na ten okres pozwoli uniknąć przestojów na produkcji.</p></li>
+                `,
+                methodologyData: `
+                    <tr><td>Czyszczenie Danych</td><td>Usunięcie duplikatów zleceń, standaryzacja nazw przewoźników oraz formatowania dat.</td></tr>
+                    <tr><td>Kalkulacja Wskaźników</td><td>Obliczenie wskaźnika OTD na podstawie różnicy między planowaną a faktyczną datą dostawy.</td></tr>
+                    <tr><td>Tabele Przestawne</td><td>Agregacja kosztów i opóźnień w rozbiciu na przewoźników oraz trasy geograficzne.</td></tr>
+                    <tr><td>Dashboard</td><td>Wizualizacja trendów kosztowych oraz mapowanie najdroższych korytarzy transportowych.</td></tr>
+                `
+            },
+            en: {
+                pageTitle: "Project: Supply Chain & Freight Analytics | Jakub Nicpoń's Portfolio",
+                heroDesc: "Logistics analysis based on completed transport services. The project transformed raw data on deliveries, carriers, and freight costs into an interactive dashboard. It allows for quick identification of supply chain bottlenecks, evaluation of logistics partners' performance (On-Time Delivery), and cost optimization on key routes.",
+                btnDetails: "See details",
+                kpiTitle: "KPI",
+                kpi1Label: "Total Shipments",
+                kpi2Label: "On-Time Delivery (OTD)",
+                kpi3Label: "Total Freight Cost",
+                detailsTitle: "Project Details",
+                tabColumns: "Column Description",
+                tabKPIs: "KPI",
+                tabAnalysis: "Analysis",
+                tabMethodology: "Methodology",
+                tableHeaderColumn: "Column",
+                tableHeaderDesc: "Description",
+                tableHeaderResult: "Result",
+                tableHeaderArea: "Analysis Area",
+                tableHeaderConclusions: "Conclusions",
+                tableHeaderStep: "Process Step",
+                downloadTitle: "Download Project Assets",
+                btnDownloadDashboard: "Download Dashboard (PNG)",
+                btnDownloadExcel: "Download Excel File",
+                
+                colsData: `
+                    <tr><td>Order ID</td><td>Unique freight order identifier</td></tr>
+                    <tr><td>Origin City</td><td>Loading location (country/city)</td></tr>
+                    <tr><td>Destination City</td><td>Unloading location (country/city)</td></tr>
+                    <tr><td>Carrier Name</td><td>Transport company executing the freight</td></tr>
+                    <tr><td>Shipment Date</td><td>Departure date from origin</td></tr>
+                    <tr><td>Delivery Date</td><td>Actual delivery date</td></tr>
+                    <tr><td>Freight Cost</td><td>Cost of executing the transport order</td></tr>
+                    <tr><td>Delivery Status</td><td>Delivery status (e.g., On Time, Delayed)</td></tr>
+                    <tr><td>Weight (kg)</td><td>Cargo weight in kilograms</td></tr>
+                `,
+                kpisData: `
+                    <tr><td>Total Shipments</td><td>2,450</td></tr>
+                    <tr><td>On-Time Delivery (OTD)</td><td>92.4%</td></tr>
+                    <tr><td>Total Freight Cost</td><td>€1,245,600</td></tr>
+                    <tr><td>Avg Cost Per Shipment</td><td>€508.40</td></tr>
+                    <tr><td>Top Carrier (OTD)</td><td>TransLogistics (96.2%)</td></tr>
+                    <tr><td>Highest Cost Route</td><td>Berlin - Paris (€142,000)</td></tr>
+                `,
+                analysisTableData: `
+                    <tr><td>On-Time Delivery (OTD)</td><td>The overall OTD rate is 92.4%. Declines in punctuality (below 85%) were noted mainly during winter months on Scandinavian routes.</td></tr>
+                    <tr><td>Freight Costs</td><td>International routes over 1,000 km account for the largest share of transport costs, with France and Germany as dominant destinations.</td></tr>
+                    <tr><td>Carrier Performance</td><td>Three out of ten main carriers generate over 60% of all delays. This requires SLA renegotiation or volume reallocation.</td></tr>
+                    <tr><td>Weight vs Cost</td><td>A non-linear cost increase was observed for loads over 15 tons, suggesting a need for better consolidation (FTL instead of LTL).</td></tr>
+                `,
+                analysisListData: `
+                    <li><strong>Optimizing Carrier Performance</strong><p>Identifying carriers with the lowest OTD rates allows for shifting transport volumes to more reliable partners, directly improving end-customer satisfaction.</p></li>
+                    <li><strong>Cost Management on Key Routes</strong><p>Detailed analysis of routes with the highest cost per kilometer helped identify destinations requiring flat-rate renegotiations.</p></li>
+                    <li><strong>Seasonality of Delays</strong><p>Extracting historical data revealed a drop in punctuality during Q4. Proper planning of time buffers for this period will help avoid production downtimes.</p></li>
+                `,
+                methodologyData: `
+                    <tr><td>Data Cleaning</td><td>Removing duplicate orders, standardizing carrier names, and fixing date formatting.</td></tr>
+                    <tr><td>Metric Calculation</td><td>Calculating the OTD rate based on the difference between the planned and actual delivery dates.</td></tr>
+                    <tr><td>Pivot Tables</td><td>Aggregating costs and delays broken down by carriers and geographical routes.</td></tr>
+                    <tr><td>Dashboard</td><td>Visualizing cost trends and mapping the most expensive transport corridors.</td></tr>
+                `
+            }
+        };
+
+        const setLocalLanguage = (lang) => {
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.dataset.translate;
+                if (projectTranslations[lang] && projectTranslations[lang][key]) { el.innerHTML = projectTranslations[lang][key]; }
+            });
+            
+            if(projectTranslations[lang]) {
+                const map = {
+                    'columnsTableBody': 'colsData',
+                    'kpisTableBody': 'kpisData',
+                    'analysisTableBody': 'analysisTableData',
+                    'analysisListBody': 'analysisListData',
+                    'methodologyTableBody': 'methodologyData'
+                };
+                for (const [id, key] of Object.entries(map)) {
+                    const el = document.getElementById(id);
+                    if(el) el.innerHTML = projectTranslations[lang][key];
+                }
+            }
+        };
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLocalLanguage(btn.dataset.lang));
+        });
+
+        setLocalLanguage(localStorage.getItem('preferredLanguage') || 'pl');
+
+        window.showSection = function(id) {
+            document.querySelectorAll(".info-section").forEach(s => s.classList.remove("active"));
+            document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("is-active"));
+            document.getElementById(id).classList.add("active");
+            document.querySelector(`button[onclick="showSection('${id}')"]`).classList.add("is-active");
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.scroll-down-link').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    if (targetId.length > 1 && window.lenis) {
+                        window.lenis.scrollTo('#' + targetId, {
+                            offset: -90,
+                            duration: 1.5,
+                            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                        });
+                    }
+                });
+            });
+
+            const projectImg = document.querySelector('.project-image');
+            if (projectImg) {
+                projectImg.addEventListener('click', () => {
+                    if(window.openLightbox) { window.openLightbox(projectImg.getAttribute('src')); }
+                });
+            }
+
+            document.querySelectorAll(".kpi-card").forEach(t => {
+                t.addEventListener("mousemove", e => {
+                    const o = t.getBoundingClientRect();
+                    t.style.setProperty("--mouse-x", `${e.clientX - o.left}px`);
+                    t.style.setProperty("--mouse-y", `${e.clientY - o.top}px`);
+                });
+            });
+        });
+    </script>
+</BaseLayout>

@@ -1,0 +1,639 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout title="SQL Case Study: Nashville Housing Data Refinery | Portfolio Jakub Nicpoń">
+    <Navbar />
+
+    <main class="container">
+        <header class="project-hero">
+            <h1 data-translate="heroTitle">Nashville Housing Data Refinery</h1>
+            <div class="section-underline centered-underline"></div>
+            <p data-translate="heroDesc">
+                Celem tego projektu było przeprowadzenie kompleksowego procesu ETL na zbiorze ponad 56 000 rekordów. Przekształcenie "brudnych" i niespójnych danych źródłowych za pomocą SQL w wysokiej jakości model relacyjny (star Schema), gotowy do zasilenia systemów BI.
+            </p>
+            <div class="nav-buttons">
+                <a href="#step-1" class="btn-nav btn-primary" data-translate="btnSql">Zobacz zapytania SQL</a>
+                <a href="#audit-section" class="btn-nav btn-secondary" data-translate="btnIssues">Zidentyfikowane Problemy</a>
+                <a href="/assets/Nashville_Housing_Data.csv" download class="btn-nav btn-outline" data-translate="btnDownload">Pobierz pliki CSV</a>
+            </div>
+        </header>
+
+        <section class="audit-section" id="audit-section">
+            <h2 style="text-align: center;" data-translate="issuesTitle">Zidentyfikowane Problemy (Data Profiling)</h2>
+            <div class="section-underline centered-underline"></div>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 40px;" data-translate="issuesDesc">Analiza wykazała szereg błędów uniemożliwiających rzetelną analizę:</p>
+            
+            <div class="audit-grid">
+                <div class="city-card">
+                    <h4 data-translate="issue1Title">Brak atomowości adresów</h4>
+                    <p data-translate="issue1Desc">Kolumna Property Address zawiera numer domu, nazwę ulicy i miasto w jednym ciągu tekstowym, co uniemożliwia analizę cen na poziomie konkretnych ulic czy dzielnic.</p>
+                </div>
+                <div class="city-card">
+                    <h4 data-translate="issue2Title">Zanieczyszczone typy danych</h4>
+                    <p data-translate="issue2Desc">Pola finansowe (Sale Price) zawierające znaki waluty ($) i przecinki traktowane są przez SQL jako tekst. Dodatkowo daty zapisane są w niejednolitych formatach tekstowych.</p>
+                </div>
+                <div class="city-card">
+                    <h4 data-translate="issue3Title">Luki w danych i Duplikaty</h4>
+                    <p data-translate="issue3Desc">Setki rekordów nie posiadają adresu nieruchomości (możliwego do odzyskania poprzez Parcel ID). Zbiór zawiera również powielone, identyczne transakcje sztucznie zawyżające obrót.</p>
+                </div>
+                <div class="city-card">
+                    <h4 data-translate="issue4Title">Błędy logiczne i kategoryzacja</h4>
+                    <p data-translate="issue4Desc">Przypadki, w których dom sprzedano przed datą jego budowy. Niejednolita flaga statusu (np. Y, N, Yes, No) utrudniająca budowanie metryk.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="sql-step" id="step-1">
+            <h3 data-translate="step1Title">01. Inicjalizacja bazy i schematów</h3>
+            <span class="step-description" data-translate="step1Desc">-- Utworzenie bazy, schematów (raw, staging, cleaned) dla zachowania architektury warstwowej.</span>
+            <div class="code-container">
+<pre><code><span class="sql-com">-- Stworzenie bazy danych</span>
+<span class="sql-key">CREATE DATABASE</span> cleaning_nashville_housing;
+<span class="sql-key">GO</span>
+<span class="sql-key">USE</span> cleaning_nashville_housing;
+<span class="sql-key">GO</span>
+
+<span class="sql-com">-- Stworzenie schematów/etapów pracy</span>
+<span class="sql-key">CREATE SCHEMA</span> raw;
+<span class="sql-key">GO</span>
+<span class="sql-key">CREATE SCHEMA</span> staging;
+<span class="sql-key">GO</span>
+<span class="sql-key">CREATE SCHEMA</span> cleaned;
+<span class="sql-key">GO</span></code></pre>
+            </div>
+        </div>
+
+        <div class="sql-step" id="step-2">
+            <h3 data-translate="step2Title">02. Utworzenie tabeli na surowe dane (RAW)</h3>
+            <span class="step-description" data-translate="step2Desc">-- Stworzenie szerokiej tabeli NVARCHAR(MAX) przyjmującej "brudne" dane bez ryzyka błędu parsowania czy ucięcia tekstu.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">CREATE TABLE</span> raw.housing_raw (
+    <span class="sql-str">"Unnamed: 0.1"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Unnamed: 0"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Parcel ID"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Land Use"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Property Address"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Suite/ Condo   #"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Property City"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Sale Date"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Sale Price"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Legal Reference"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Sold As Vacant"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Multiple Parcels Involved in Sale"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Owner Name"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Address"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"City"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"State"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Acreage"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Tax District"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Neighborhood"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"image"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Land Value"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Building Value"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Total Value"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Finished Area"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Foundation Type"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Year Built"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Exterior Wall"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Grade"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Bedrooms"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Full Bath"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>),
+    <span class="sql-str">"Half Bath"</span> <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>)
+);
+<span class="sql-key">GO</span></code></pre>
+            </div>
+        </div>
+
+        <div class="sql-step" id="step-3">
+            <h3 data-translate="step3Title">03. Tabela Staging (struktura)</h3>
+            <span class="step-description" data-translate="step3Desc">-- Przygotowanie tabeli roboczej ze znormalizowanymi typami danych, która przyjmie wyczyszczone wartości z tabeli raw. Dodanie kolumn na Quality Flags.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">CREATE TABLE</span> staging.cleaning_housing (
+    UniqueID <span class="sql-key">INT</span>,
+    ParcelID <span class="sql-key">NVARCHAR</span>(255),
+    LandUse <span class="sql-key">NVARCHAR</span>(255),
+    PropertyAddress <span class="sql-key">NVARCHAR</span>(255),
+    PropertyCity <span class="sql-key">NVARCHAR</span>(255),
+    PropertyState <span class="sql-key">NVARCHAR</span>(50),
+    SaleDate <span class="sql-key">DATE</span>,
+    SalePrice <span class="sql-key">DECIMAL</span>(15,2),
+    SoldAsVacant <span class="sql-key">NVARCHAR</span>(10),
+    OwnerName <span class="sql-key">NVARCHAR</span>(255),
+    YearBuilt <span class="sql-key">INT</span>,
+    TotalValue <span class="sql-key">DECIMAL</span>(15,2),
+    Acreage <span class="sql-key">DECIMAL</span>(10,2),
+    QualityFlags <span class="sql-key">NVARCHAR</span>(<span class="sql-key">MAX</span>), <span class="sql-com">-- Flagi podejrzanych wartosci</span>
+    StreetNumber <span class="sql-key">NVARCHAR</span>(50),
+    StreetName <span class="sql-key">NVARCHAR</span>(255)
+);
+<span class="sql-key">GO</span></code></pre>
+            </div>
+        </div>
+
+        <div class="sql-step" id="step-4">
+            <h3 data-translate="step4Title">04. Import i normalizacja danych (INSERT)</h3>
+            <span class="step-description" data-translate="step4Desc">-- Przeniesienie danych z użyciem bezpiecznego CAST/CONVERT. Czyszczenie znaków walut, formatowanie dat USA oraz standaryzacja pola SoldAsVacant ('Y/N' na 'Yes/No').</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">INSERT INTO</span> staging.cleaning_housing (UniqueID, ParcelID, LandUse, PropertyAddress, PropertyCity, PropertyState, SaleDate, SalePrice, SoldAsVacant, OwnerName, YearBuilt, TotalValue, Acreage)
+<span class="sql-key">SELECT</span>
+    <span class="sql-fun">TRY_CAST</span>([Unnamed: 0] <span class="sql-key">AS INT</span>), <span class="sql-com">-- nawiasy kwadratowe z powodu spacji w nagłówku</span>
+    <span class="sql-fun">TRIM</span>([Parcel ID]),
+    <span class="sql-fun">UPPER</span>(<span class="sql-fun">TRIM</span>([Land Use])),
+    <span class="sql-fun">TRIM</span>([Property Address]),
+    <span class="sql-fun">UPPER</span>(<span class="sql-fun">TRIM</span>([Property City])),
+    <span class="sql-fun">UPPER</span>(<span class="sql-fun">TRIM</span>([State])),
+    <span class="sql-fun">TRY_CONVERT</span>(<span class="sql-key">DATE</span>, [Sale Date], 104), <span class="sql-com">-- format dd.mm.yyyy</span>
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(<span class="sql-fun">REPLACE</span>([Sale Price], <span class="sql-str">'$'</span>, <span class="sql-str">''</span>), <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS DECIMAL</span>(15,2)),
+    <span class="sql-key">CASE</span>
+        <span class="sql-key">WHEN</span> <span class="sql-fun">UPPER</span>(<span class="sql-fun">TRIM</span>([Sold As Vacant])) <span class="sql-key">IN</span> (<span class="sql-str">'Y'</span>, <span class="sql-str">'YES'</span>) <span class="sql-key">THEN</span> <span class="sql-str">'Yes'</span>
+        <span class="sql-key">WHEN</span> <span class="sql-fun">UPPER</span>(<span class="sql-fun">TRIM</span>([Sold As Vacant])) <span class="sql-key">IN</span> (<span class="sql-str">'N'</span>, <span class="sql-str">'NO'</span>) <span class="sql-key">THEN</span> <span class="sql-str">'No'</span>
+        <span class="sql-key">ELSE</span> <span class="sql-str">'Unknown'</span>
+    <span class="sql-key">END</span>,
+    <span class="sql-fun">UPPER</span>(<span class="sql-fun">TRIM</span>([Owner Name])),
+    <span class="sql-fun">TRY_CAST</span>([Year Built] <span class="sql-key">AS INT</span>),
+    <span class="sql-fun">TRY_CAST</span>([Total Value] <span class="sql-key">AS DECIMAL</span>(15,2)),
+    <span class="sql-fun">TRY_CAST</span>([Acreage] <span class="sql-key">AS DECIMAL</span>(10,2))
+<span class="sql-key">FROM</span> raw.housing_raw;
+<span class="sql-key">GO</span></code></pre>
+            </div>
+         
+        </div>
+
+        <div class="sql-step" id="step-5">
+            <h3 data-translate="step5Title">05. Odzyskiwanie adresów (Self-Join)</h3>
+            <span class="step-description" data-translate="step5Desc">-- Uzupełnianie brakujących adresów nieruchomości poprzez wyszukanie innych transakcji dla tego samego ParcelID (identyfikatora działki).</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">UPDATE</span> a
+<span class="sql-key">SET</span> a.PropertyAddress = <span class="sql-fun">ISNULL</span>(a.PropertyAddress, b.PropertyAddress),
+    a.PropertyCity = <span class="sql-fun">ISNULL</span>(a.PropertyCity, b.PropertyCity),
+    a.PropertyState = <span class="sql-fun">ISNULL</span>(a.PropertyState, b.PropertyState)
+<span class="sql-key">FROM</span> staging.cleaning_housing a
+<span class="sql-key">JOIN</span> staging.cleaning_housing b 
+    <span class="sql-key">ON</span> a.ParcelID = b.ParcelID 
+    <span class="sql-key">AND</span> a.UniqueID &lt;&gt; b.UniqueID <span class="sql-com">-- ta sama dzialka, inna transakcja</span>
+<span class="sql-key">WHERE</span> a.PropertyAddress <span class="sql-key">IS NULL AND</span> b.PropertyAddress <span class="sql-key">IS NOT NULL</span>;
+<span class="sql-key">GO</span></code></pre>
+            </div>
+            
+        </div>
+
+        <div class="sql-step" id="step-6">
+            <h3 data-translate="step6Title">06. Usuwanie nadmiarowych spacji</h3>
+            <span class="step-description" data-translate="step6Desc">-- Iteracyjne użycie REPLACE na polach adresowych i nazwiskach, by pozbyć się podwójnych/potrójnych spacji powstałych przy błędach wprowadzania.</span>
+            <div class="code-container">
+<pre><code><span class="sql-com">-- Usuniecie wielu spacji miedzy slowami</span>
+<span class="sql-key">UPDATE</span> staging.cleaning_housing
+<span class="sql-key">SET</span>
+    PropertyAddress = <span class="sql-fun">REPLACE</span>(<span class="sql-fun">REPLACE</span>(<span class="sql-fun">REPLACE</span>(<span class="sql-fun">TRIM</span>(PropertyAddress), <span class="sql-str">'  '</span>, <span class="sql-str">' '</span>), <span class="sql-str">'  '</span>, <span class="sql-str">' '</span>), <span class="sql-str">'  '</span>, <span class="sql-str">' '</span>),
+    OwnerName = <span class="sql-fun">REPLACE</span>(<span class="sql-fun">REPLACE</span>(<span class="sql-fun">REPLACE</span>(OwnerName, <span class="sql-str">'  '</span>, <span class="sql-str">' '</span>), <span class="sql-str">'  '</span>, <span class="sql-str">' '</span>), <span class="sql-str">'  '</span>, <span class="sql-str">' '</span>)
+<span class="sql-key">WHERE</span> PropertyAddress <span class="sql-key">IS NOT NULL OR</span> OwnerName <span class="sql-key">IS NOT NULL</span>;
+<span class="sql-key">GO</span></code></pre>
+            </div>
+        </div>
+
+        <div class="sql-step" id="step-7">
+            <h3 data-translate="step7Title">07. Rozbicie adresów (CHARINDEX)</h3>
+            <span class="step-description" data-translate="step7Desc">-- Wyodrębnienie numeru budynku oraz nazwy ulicy do osobnych kolumn za pomocą wyszukiwania pierwszej spacji.</span>
+            <div class="code-container">
+<pre><code><span class="sql-com">-- Rozbicie adresu na ulice i numer domu</span>
+<span class="sql-key">UPDATE</span> staging.cleaning_housing
+<span class="sql-key">SET</span>
+    StreetNumber =
+        <span class="sql-key">CASE</span>
+            <span class="sql-key">WHEN</span> <span class="sql-fun">CHARINDEX</span>(<span class="sql-str">' '</span>, PropertyAddress) &gt; 0 <span class="sql-com">-- znajdz chociaz 1 spacje</span>
+            <span class="sql-key">THEN</span> <span class="sql-fun">LEFT</span>(PropertyAddress, <span class="sql-fun">CHARINDEX</span>(<span class="sql-str">' '</span>, PropertyAddress) - 1)
+            <span class="sql-key">ELSE NULL END</span>,
+    StreetName =
+        <span class="sql-key">CASE</span>
+            <span class="sql-key">WHEN</span> <span class="sql-fun">CHARINDEX</span>(<span class="sql-str">' '</span>, PropertyAddress) &gt; 0
+            <span class="sql-key">THEN</span> <span class="sql-fun">TRIM</span>(<span class="sql-fun">SUBSTRING</span>(PropertyAddress, <span class="sql-fun">CHARINDEX</span>(<span class="sql-str">' '</span>, PropertyAddress) + 1, <span class="sql-fun">LEN</span>(PropertyAddress)))
+            <span class="sql-key">ELSE</span> PropertyAddress <span class="sql-key">END</span>
+<span class="sql-key">WHERE</span> PropertyAddress <span class="sql-key">IS NOT NULL</span>;
+<span class="sql-key">GO</span></code></pre>
+            </div>
+        </div>
+
+        <div class="sql-step" id="step-8">
+            <h3 data-translate="step8Title">08. Flagi Jakości (Data Quality)</h3>
+            <span class="step-description" data-translate="step8Desc">-- Oznaczanie podejrzanych anomalii: sprzedaż domu przed jego rokiem budowy oraz sprzedaż poniżej 10% całkowitej wartości rynkowej (Total Value).</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">UPDATE</span> staging.cleaning_housing
+<span class="sql-key">SET</span> QualityFlags = <span class="sql-fun">ISNULL</span>(QualityFlags + <span class="sql-str">'; '</span>, <span class="sql-str">''</span>) + <span class="sql-str">'FUTURE_SALE_ERROR'</span>
+<span class="sql-key">WHERE</span> SaleDate &lt; <span class="sql-fun">DATEFROMPARTS</span>(YearBuilt, 1, 1);
+
+<span class="sql-key">UPDATE</span> staging.cleaning_housing
+<span class="sql-key">SET</span> QualityFlags = <span class="sql-fun">ISNULL</span>(QualityFlags + <span class="sql-str">'; '</span>, <span class="sql-str">''</span>) + <span class="sql-str">'SUSPICIOUS_LOW_PRICE'</span>
+<span class="sql-key">WHERE</span> SalePrice &lt; (TotalValue * 0.1);
+<span class="sql-key">GO</span></code></pre>
+            </div>
+        </div>
+
+        <div class="sql-step" id="step-9">
+            <h3 data-translate="step9Title">09. Normalizacja Land Use</h3>
+            <span class="step-description" data-translate="step9Desc">-- Redukcja niespójnych i ręcznie wpisywanych kategorii użycia gruntu do ujednoliconych głównych worków (CONDO, SINGLE FAMILY, VACANT LAND).</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">UPDATE</span> staging.cleaning_housing
+<span class="sql-key">SET</span> LandUse = <span class="sql-key">CASE</span>
+    <span class="sql-key">WHEN</span> LandUse <span class="sql-key">LIKE</span> <span class="sql-str">'%CONDO%'</span> <span class="sql-key">THEN</span> <span class="sql-str">'CONDO'</span>
+    <span class="sql-key">WHEN</span> LandUse <span class="sql-key">LIKE</span> <span class="sql-str">'%SINGLE FAMILY%'</span> <span class="sql-key">THEN</span> <span class="sql-str">'SINGLE FAMILY'</span>
+    <span class="sql-key">WHEN</span> LandUse <span class="sql-key">LIKE</span> <span class="sql-str">'%VACANT%'</span> <span class="sql-key">THEN</span> <span class="sql-str">'VACANT LAND'</span>
+    <span class="sql-key">ELSE</span> <span class="sql-str">'OTHER'</span>
+<span class="sql-key">END</span>;
+<span class="sql-key">GO</span></code></pre>
+            </div>
+        </div>
+
+        <div class="sql-step" id="step-10">
+            <h3 data-translate="step10Title">10. Model Wymiarowy (Tabela Lokalizacji)</h3>
+            <span class="step-description" data-translate="step10Desc">-- Wyciągnięcie unikalnych adresów z tabeli faktów do osobnej tabeli wymiarowej z auto-inkrementowanym kluczem w celu odciążenia wielkości bazy.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">CREATE TABLE</span> cleaned.dimension_location (
+    LocationKey <span class="sql-key">INT IDENTITY</span>(1,1) <span class="sql-key">PRIMARY KEY</span>,
+    City <span class="sql-key">NVARCHAR</span>(100),
+    State <span class="sql-key">NVARCHAR</span>(50),
+    StreetName <span class="sql-key">NVARCHAR</span>(255),
+    StreetNumber <span class="sql-key">NVARCHAR</span>(50)
+);
+
+<span class="sql-key">INSERT INTO</span> cleaned.dimension_location (City, State, StreetName, StreetNumber)
+<span class="sql-key">SELECT DISTINCT</span> PropertyCity, PropertyState, StreetName, StreetNumber
+<span class="sql-key">FROM</span> staging.cleaning_housing
+<span class="sql-key">WHERE</span> StreetName <span class="sql-key">IS NOT NULL</span>;
+<span class="sql-key">GO</span></code></pre>
+            </div>
+            
+        <div class="sql-step" id="step-11">
+            <h3 data-translate="step11Title">11. Tabela Faktów i deduplikacja (ROW_NUMBER)</h3>
+            <span class="step-description" data-translate="step11Desc">-- Wykrywanie duplikatów z użyciem ROW_NUMBER (te same transakcje dla działki). Łączenie kluczy wymiarów w docelową tabelę 'fact_sales'.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">WITH</span> No_Duplicates <span class="sql-key">AS</span> (
+    <span class="sql-key">SELECT</span> *,
+        <span class="sql-fun">ROW_NUMBER</span>() <span class="sql-fun">OVER</span> (
+        <span class="sql-fun">PARTITION BY</span> ParcelID, PropertyAddress, SalePrice, SaleDate
+        <span class="sql-key">ORDER BY</span> UniqueID) <span class="sql-key">as</span> rn
+    <span class="sql-key">FROM</span> staging.cleaning_housing
+)
+<span class="sql-key">SELECT</span>
+    nd.UniqueID,
+    nd.SaleDate,
+    nd.SalePrice,
+    nd.TotalValue,
+    nd.YearBuilt,
+    nd.OwnerName,
+    nd.QualityFlags,
+    l.LocationKey
+<span class="sql-key">INTO</span> cleaned.fact_sales
+<span class="sql-key">FROM</span> No_Duplicates nd
+<span class="sql-key">LEFT JOIN</span> cleaned.dimension_location l
+    <span class="sql-key">ON</span> l.City = nd.PropertyCity
+    <span class="sql-key">AND</span> <span class="sql-fun">ISNULL</span>(l.State, <span class="sql-str">''</span>) = <span class="sql-fun">ISNULL</span>(nd.PropertyState, <span class="sql-str">''</span>)
+    <span class="sql-key">AND</span> l.StreetName = nd.StreetName
+    <span class="sql-key">AND</span> <span class="sql-fun">ISNULL</span>(l.StreetNumber, <span class="sql-str">''</span>) = <span class="sql-fun">ISNULL</span>(nd.StreetNumber, <span class="sql-str">''</span>)
+<span class="sql-key">WHERE</span> nd.rn = 1;
+<span class="sql-key">GO</span></code></pre>
+            </div>
+        </div>
+
+        <div class="sql-step" id="step-12">
+            <h3 data-translate="step12Title">12. Finalny widok analityczny (View)</h3>
+            <span class="step-description" data-translate="step12Desc">-- Utworzenie widoku łączącego fakty i wymiary, udostępniającego przeliczone metryki (np. wiek w momencie sprzedaży) gotowe pod zasilenie Power BI.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">CREATE OR ALTER VIEW</span> cleaned.final <span class="sql-key">AS</span>
+<span class="sql-key">SELECT</span>
+    f.UniqueID,
+    f.SaleDate <span class="sql-key">as</span> Sale_Date,
+
+    <span class="sql-com">-- Rozbicie adresu</span>
+    l.StreetName <span class="sql-key">as</span> Street_Name,
+    l.StreetNumber <span class="sql-key">as</span> Street_Number,
+    l.City <span class="sql-key">as</span> City,
+    l.State <span class="sql-key">as</span> State,
+    f.OwnerName <span class="sql-key">as</span> Owner_Name,
+
+    <span class="sql-com">-- Finanse</span>
+    f.SalePrice <span class="sql-key">as</span> Sale_Price,
+    f.TotalValue <span class="sql-key">as</span> Total_Value,
+    f.SalePrice - f.TotalValue <span class="sql-key">as</span> Price_vs_Tax_Value,
+
+    <span class="sql-com">-- Wiek nieruchomosci</span>
+    f.YearBuilt <span class="sql-key">as</span> Year_Built,
+    <span class="sql-fun">YEAR</span>(f.SaleDate) - f.YearBuilt <span class="sql-key">as</span> Property_Age_At_Sale,
+
+    <span class="sql-com">-- Jakość danych</span>
+    <span class="sql-key">CASE</span>
+        <span class="sql-key">WHEN</span> f.QualityFlags <span class="sql-key">IS NULL THEN</span> <span class="sql-str">'Verified'</span>
+        <span class="sql-key">WHEN</span> f.QualityFlags <span class="sql-key">LIKE</span> <span class="sql-str">'%FUTURE_SALE_ERROR%'</span> <span class="sql-key">THEN</span> <span class="sql-str">'Sold before built'</span>
+        <span class="sql-key">WHEN</span> f.QualityFlags <span class="sql-key">LIKE</span> <span class="sql-str">'%SUSPICIOUS_LOW_PRICE%'</span> <span class="sql-key">THEN</span> <span class="sql-str">'Valuation Warning: Price too low'</span>
+        <span class="sql-key">ELSE</span> <span class="sql-str">'Review Needed'</span>
+    <span class="sql-key">END as</span> Data_Quality_Status
+
+<span class="sql-key">FROM</span> cleaned.fact_sales f
+<span class="sql-key">JOIN</span> cleaned.dimension_location l <span class="sql-key">ON</span> f.LocationKey = l.LocationKey;
+<span class="sql-key">GO</span>
+
+<span class="sql-key">SELECT</span> * <span class="sql-key">FROM</span> cleaned.final;</code></pre>
+            </div>
+            
+        </div>
+</div>
+    </main>
+
+    <Footer />
+
+    <style>
+        /* === STYLE SPECYFICZNE DLA STRONY PROJEKTU === */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1;}
+        .section-underline { margin: 20px 0 30px 0; width: 80px; height: 4px; border-radius: 2px; background: var(--line-gradient); }
+        .centered-underline { margin: 20px auto 30px auto; }
+
+        /* HERO SECTION */
+        .project-hero { 
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 120px 0 50px 0;
+        }
+        .project-hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; color: var(--text-primary); }
+        .project-hero p { max-width: 850px; color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; }
+
+        .nav-buttons { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+        .btn-nav {
+            padding: 14px 28px; border-radius: 50px; font-weight: 600; text-decoration: none;
+            transition: all 0.3s ease; border: 1px solid var(--cyan); font-size: 0.95rem; display: inline-block;
+        }
+        .btn-primary { background: var(--line-gradient); color: white; border: none; box-shadow: 0 4px 15px var(--spotlight-color); }
+        .btn-secondary { color: var(--cyan); background: var(--bg-surface); border-color: var(--cyan); }
+        .btn-outline { color: var(--text-primary); border: 1px solid var(--border-color); background: var(--bg-surface); }
+        
+        .btn-nav:hover { transform: translateY(-3px); box-shadow: 0 10px 20px var(--spotlight-color); }
+        .btn-outline:hover { background: var(--hover-bg); border-color: var(--cyan); color: var(--cyan); }
+
+        /* AUDIT / PROBLEMY W DANYCH */
+        .audit-section { padding: 80px 0; }
+        .audit-section h2 { color: var(--text-primary); }
+        .audit-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px; 
+            max-width: 1100px; 
+            margin: 0 auto; 
+        }
+        
+        .city-card { 
+            background: var(--bg-surface); 
+            border: 1px solid var(--border-color); 
+            border-radius: 20px; 
+            padding: 30px; 
+            text-align: left; 
+            position: relative; 
+            overflow: visible;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background-color var(--transition-speed) ease;
+        }
+        
+        .city-card::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; left: 0; width: 100%; height: 100%; 
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--spotlight-color), transparent 40%); 
+            opacity: 0; 
+            transition: opacity 0.3s; 
+            pointer-events: none;
+            border-radius: 20px;
+            z-index: 0;
+        }
+        .city-card > * { position: relative; z-index: 1; }
+        
+        .city-card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--cyan); 
+            box-shadow: var(--card-shadow); 
+        }
+        
+        .city-card:hover::before { opacity: 1; }
+        
+        .city-card h4 { font-size: 1.4rem; margin-bottom: 12px; color: var(--cyan); font-weight: 700; display: flex; align-items: center; gap: 10px;}
+        .city-card p { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+        /* SQL STEPS */
+        .sql-step { padding: 60px 0; border-top: 1px solid var(--border-color); scroll-margin-top: 80px; }
+        .sql-step h3 { font-size: 1.8rem; margin-bottom: 10px; background: var(--line-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .step-description { display: block; font-style: italic; color: var(--text-secondary); margin-bottom: 25px; padding-left: 20px; border-left: 3px solid var(--indigo); font-size: 0.95rem; }
+        
+        /* IDE-like Code Block */
+        .code-container { background: var(--code-bg); border-radius: 12px; border: 1px solid var(--border-color); padding: 25px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);}
+        [data-theme="light"] .code-container { box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); }
+        pre { overflow-x: auto; font-family: 'Consolas', 'Courier New', monospace; color: #c9d1d9; font-size: 0.95rem; margin: 0; }
+        
+        /* Kolorowanie składni SQL */
+        :global(.sql-key) { color: #ff7b72; font-weight: 600;} 
+        :global(.sql-fun) { color: #d2a8ff; } 
+        :global(.sql-com) { color: #8b949e; font-style: italic; } 
+        :global(.sql-str) { color: #a5d6a7; } 
+
+        .result-container { 
+            background: var(--bg-surface); 
+            border: 1px solid var(--border-color); 
+            border-radius: 12px; 
+            padding: 10px; 
+            cursor: pointer;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color var(--transition-speed) ease;
+            text-align: center;
+        }
+        .result-container:hover { border-color: var(--cyan); box-shadow: var(--card-shadow); }
+        .result-img { max-width: 100%; height: auto; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05); }
+        [data-theme="light"] .result-img { border-color: rgba(0,0,0,0.05); }
+
+        @media (max-width: 900px) {
+            .audit-grid { grid-template-columns: 1fr; }
+            .project-hero h1 { font-size: 2.5rem; }
+            .nav-buttons { flex-direction: column; width: 100%; }
+        }
+    </style>
+
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', () => {
+            // === SYSTEM TŁUMACZEŃ ===
+            const translations = {
+                pl: {
+                    pageTitle: "SQL Case Study: Nashville Housing Data Refinery | Jakub Nicpoń",
+                    navHome: "Home",
+                    navAbout: "O Mnie",
+                    navProjects: "Projekty",
+                    heroTitle: "Nashville Housing Data Refinery",
+                    heroDesc: "Celem tego projektu było przeprowadzenie kompleksowego procesu ETL na zbiorze ponad 56 000 rekordów. Przekształcenie \"brudnych\" i niespójnych danych źródłowych za pomocą SQL w wysokiej jakości model relacyjny (Star Schema), gotowy do zasilenia systemów BI.",
+                    
+                    btnSql: "Zobacz zapytania SQL",
+                    btnIssues: "Zidentyfikowane Problemy",
+                    btnDownload: "Pobierz pliki CSV",
+                    
+                    issuesTitle: "Zidentyfikowane Problemy (Data Profiling)",
+                    issuesDesc: "Analiza wykazała szereg błędów uniemożliwiających rzetelną analizę:",
+                    
+                    issue1Title: "Brak atomowości adresów",
+                    issue1Desc: "Kolumna Property Address zawiera numer domu, nazwę ulicy i miasto w jednym ciągu tekstowym, co uniemożliwia analizę cen na poziomie konkretnych ulic czy dzielnic.",
+                    issue2Title: "Zanieczyszczone typy danych",
+                    issue2Desc: "Pola finansowe (Sale Price) zawierające znaki waluty ($) i przecinki traktowane są przez SQL jako tekst. Dodatkowo daty zapisane są w niejednolitych formatach tekstowych.",
+                    issue3Title: "Luki w danych i Duplikaty",
+                    issue3Desc: "Setki rekordów nie posiadają adresu nieruchomości (możliwego do odzyskania poprzez Parcel ID). Zbiór zawiera również powielone, identyczne transakcje sztucznie zawyżające obrót.",
+                    issue4Title: "Błędy logiczne i kategoryzacja",
+                    issue4Desc: "Przypadki, w których dom sprzedano przed datą jego budowy. Niejednolita flaga statusu (np. Y, N, Yes, No) utrudniająca budowanie metryk.",
+
+                    step1Title: "01. Inicjalizacja bazy i schematów",
+                    step1Desc: "-- Utworzenie bazy, schematów (raw, staging, cleaned) dla zachowania architektury warstwowej.",
+                    
+                    step2Title: "02. Utworzenie tabeli na surowe dane (RAW)",
+                    step2Desc: "-- Stworzenie szerokiej tabeli NVARCHAR(MAX) przyjmującej \"brudne\" dane bez ryzyka błędu parsowania czy ucięcia tekstu.",
+                    
+                    step3Title: "03. Tabela Staging (struktura)",
+                    step3Desc: "-- Przygotowanie tabeli roboczej ze znormalizowanymi typami danych, która przyjmie wyczyszczone wartości z tabeli raw. Dodanie kolumn na Quality Flags.",
+                    
+                    step4Title: "04. Import i normalizacja danych (INSERT)",
+                    step4Desc: "-- Przeniesienie danych z użyciem bezpiecznego CAST/CONVERT. Czyszczenie znaków walut, formatowanie dat USA oraz standaryzacja pola SoldAsVacant ('Y/N' na 'Yes/No').",
+                    
+                    step5Title: "05. Odzyskiwanie adresów (Self-Join)",
+                    step5Desc: "-- Uzupełnianie brakujących adresów nieruchomości poprzez wyszukanie innych transakcji dla tego samego ParcelID (identyfikatora działki).",
+                    
+                    step6Title: "06. Usuwanie nadmiarowych spacji",
+                    step6Desc: "-- Iteracyjne użycie REPLACE na polach adresowych i nazwiskach, by pozbyć się podwójnych/potrójnych spacji powstałych przy błędach wprowadzania.",
+                    
+                    step7Title: "07. Rozbicie adresów (CHARINDEX)",
+                    step7Desc: "-- Wyodrębnienie numeru budynku oraz nazwy ulicy do osobnych kolumn za pomocą wyszukiwania pierwszej spacji.",
+                    
+                    step8Title: "08. Flagi Jakości (Data Quality)",
+                    step8Desc: "-- Oznaczanie podejrzanych anomalii: sprzedaż domu przed jego rokiem budowy oraz sprzedaż poniżej 10% całkowitej wartości rynkowej (Total Value).",
+                    
+                    step9Title: "09. Normalizacja Land Use",
+                    step9Desc: "-- Redukcja niespójnych i ręcznie wpisywanych kategorii użycia gruntu do ujednoliconych głównych worków (CONDO, SINGLE FAMILY, VACANT LAND).",
+                    
+                    step10Title: "10. Model Wymiarowy (Tabela Lokalizacji)",
+                    step10Desc: "-- Wyciągnięcie unikalnych adresów z tabeli faktów do osobnej tabeli wymiarowej z auto-inkrementowanym kluczem w celu odciążenia wielkości bazy.",
+                    
+                    step11Title: "11. Tabela Faktów i deduplikacja (ROW_NUMBER)",
+                    step11Desc: "-- Wykrywanie duplikatów z użyciem ROW_NUMBER (te same transakcje dla działki). Łączenie kluczy wymiarów w docelową tabelę 'fact_sales'.",
+                    
+                    step12Title: "12. Finalny widok analityczny (View)",
+                    step12Desc: "-- Utworzenie widoku łączącego fakty i wymiary, udostępniającego przeliczone metryki (np. wiek w momencie sprzedaży) gotowe pod zasilenie Power BI."
+                },
+                en: {
+                    pageTitle: "SQL Case Study: Nashville Housing Data Refinery | Jakub Nicpoń",
+                    navHome: "Home",
+                    navAbout: "About",
+                    navProjects: "Projects",
+                    heroTitle: "Nashville Housing Data Refinery",
+                    heroDesc: "Data cleaning and transformation project of over 56,000 records in SQL Server. Transforming \"dirty\" data into a relational Star Schema ready for BI analysis.",
+                    
+                    btnSql: "View SQL Queries",
+                    btnIssues: "Identified Issues",
+                    btnDownload: "Download CSV Files",
+                    
+                    issuesTitle: "Identified Data Issues (Data Profiling)",
+                    issuesDesc: "The analysis revealed several errors preventing reliable analysis:",
+                    
+                    issue1Title: "Lack of address atomicity",
+                    issue1Desc: "The Property Address column contains house number, street name, and city in a single text string, making analysis at the street or district level impossible.",
+                    issue2Title: "Contaminated data types",
+                    issue2Desc: "Financial fields (Sale Price) containing currency signs ($) and commas are treated by SQL as text. Additionally, dates are saved in inconsistent text formats.",
+                    issue3Title: "Data gaps and Duplicates",
+                    issue3Desc: "Hundreds of records lack a property address (recoverable via Parcel ID). The dataset also contains duplicated, identical transactions artificially inflating turnover.",
+                    issue4Title: "Logical errors and categorization",
+                    issue4Desc: "Cases where a house was sold before its construction date. Inconsistent status flags (e.g., Y, N, Yes, No) making metric building difficult.",
+
+                    step1Title: "01. Database and schemas initialization",
+                    step1Desc: "-- Creating the database, schemas (raw, staging, cleaned) to maintain a layered architecture.",
+                    
+                    step2Title: "02. Creating RAW table",
+                    step2Desc: "-- Creating a wide NVARCHAR(MAX) table to accept \"dirty\" data without truncation errors or parsing failures.",
+                    
+                    step3Title: "03. Staging Table (Structure)",
+                    step3Desc: "-- Preparing a staging table with normalized data types. Added columns for Quality Flags.",
+                    
+                    step4Title: "04. Data Import and Normalization (INSERT)",
+                    step4Desc: "-- Moving data using safe CAST/CONVERT. Cleaning currency signs, formatting US dates, and standardizing 'Y/N' to 'Yes/No'.",
+                    
+                    step5Title: "05. Address Recovery (Self-Join)",
+                    step5Desc: "-- Filling in missing addresses (NULL) based on other transactions for the same parcel (ParcelID).",
+                    
+                    step6Title: "06. Removing excess spaces",
+                    step6Desc: "-- Iterative use of REPLACE on address fields and names to eliminate double/triple spaces caused by manual entry errors.",
+                    
+                    step7Title: "07. Splitting Addresses (CHARINDEX)",
+                    step7Desc: "-- Extracting the building number and street name into separate columns by searching for the first space.",
+                    
+                    step8Title: "08. Quality Flags",
+                    step8Desc: "-- Flagging suspicious anomalies: selling a house before its build year or selling below 10% of total market value.",
+                    
+                    step9Title: "09. Land Use Normalization",
+                    step9Desc: "-- Grouping hundreds of unique, manually entered land use categories into unified main types (CONDO, SINGLE FAMILY, VACANT LAND).",
+                    
+                    step10Title: "10. Dimensional Model (Location Table)",
+                    step10Desc: "-- Extracting unique addresses from the fact table into a separate dimension table with an auto-incremented key to offload database size.",
+                    
+                    step11Title: "11. Fact Table and Deduplication (ROW_NUMBER)",
+                    step11Desc: "-- Detecting duplicates using ROW_NUMBER (same transactions for a parcel). Joining dimension keys into the target 'fact_sales' table.",
+                    
+                    step12Title: "12. Final Analytical View (View)",
+                    step12Desc: "-- Creating a view joining facts and dimensions, providing calculated metrics (e.g., age at sale) ready for Power BI."
+                }
+            };
+
+            const setLocalLanguage = (lang) => {
+                document.querySelectorAll('[data-translate]').forEach(el => {
+                    const key = el.dataset.translate;
+                    if (translations[lang] && translations[lang][key]) { 
+                        el.innerHTML = translations[lang][key]; 
+                    }
+                });
+            };
+
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'pl';
+            setLocalLanguage(preferredLanguage);
+
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    setLocalLanguage(button.dataset.lang);
+                });
+            });
+
+            // --- SMOOTH SCROLL FOR ANCHOR LINKS ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId.length > 1 && window.lenis) {
+                        window.lenis.scrollTo(targetId, {
+                            offset: -90, 
+                            duration: 1.5,
+                            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                        });
+                    }
+                });
+            });
+
+            // --- GLOW EFFECT FOR CARDS ---
+            const cityCards = document.querySelectorAll('.city-card');
+            cityCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+
+            // --- LIGHTBOX INTEGRATION ---
+            const allImages = document.querySelectorAll('.result-img');
+            allImages.forEach(img => {
+                if (img.closest('.audit-card') || img.closest('.sql-step')) {
+                    img.parentElement.addEventListener('click', () => {
+                        if(window.openLightbox) window.openLightbox(img.src);
+                    });
+                }
+            });
+        });
+    </script>
+</BaseLayout>

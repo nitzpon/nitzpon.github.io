@@ -1,0 +1,423 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout title="Projekt: Analytical Sales Dashboard | Portfolio Jakub Nicpoń">
+    <Navbar />
+
+    <main>
+        <header class="project-hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1>Analytical Sales Dashboard</h1>
+                        <div class="section-underline"></div>
+                        <p data-translate="heroDesc">Ten projekt to kompleksowa analiza 1,000 transakcji sprzedaży, której celem było przekształcenie surowych danych w strategiczne wnioski dotyczące rentowności i efektywności operacyjnej. W ramach badania poddałem analizie relację między całkowitym przychodem a zyskiem netto, monitorując jednocześnie realizację celów sprzedażowych oraz wydajność poszczególnych przedstawicieli. Skupiłem się na identyfikacji kluczowych trendów, takich jak ewolucja popularności kategorii produktowych oraz skuteczność zróżnicowanych kampanii marketingowych i źródeł pozyskiwania leadów. Szczególną uwagę poświęciłem segmentacji klientów i kanałom dystrybucji, co pozwoliło na wykrycie istotnych anomalii, takich jak niska rentowność kanału hurtowego mimo wysokiego wolumenu sprzedaży. Całość została osadzona w kontekście geograficznym i czasowym, co umożliwiło precyzyjne wskazanie czynników budujących wzrost wartości koszyka zakupowego w badanych latach.</p>
+            
+                        <a href="#project-details-card" class="scroll-down-link">
+                            <span class="mouse-icon">
+                               <span class="wheel"></span>
+                            </span>
+                            <span data-translate="btnDetails">Zobacz szczegóły</span>
+                         </a>
+                    </div>
+                    <div class="hero-image-wrapper">
+                        <img src="/assets/Project1.png" alt="Dashboard projektu Analytical Sales Dashboard" class="project-image" loading="eager" />
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="project-highlights">
+            <div class="container">
+                <h2 data-translate="kpiTitle">Kluczowe Wskaźniki</h2>
+                <div class="section-underline centered-underline"></div>
+                <div class="kpi-grid">
+                    <div class="kpi-card"><span class="kpi-value">$5.24M</span><span class="kpi-label" data-translate="kpi1Label">Całkowity Przychód</span></div>
+                    <div class="kpi-card"><span class="kpi-value">$1.77M</span><span class="kpi-label" data-translate="kpi2Label">Zysk Netto</span></div>
+                    <div class="kpi-card"><span class="kpi-value">10,225</span><span class="kpi-label" data-translate="kpi3Label">Sprzedane Jednostki</span></div>
+                    <div class="kpi-card"><span class="kpi-value">~66%</span><span class="kpi-label" data-translate="kpi4Label">Średnia Realizacja Celu</span></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="project-details">
+            <div class="container">
+                <h2 data-translate="detailsTitle">Szczegóły Projektu</h2>
+                <div class="section-underline centered-underline"></div>
+                
+                <div class="details-card" id="project-details-card">
+    
+                    <div class="toggle-buttons">
+                        <button class="toggle-btn is-active" onclick="showSection('sectionColumns')" data-translate="tabColumns">Opis Kolumn</button>
+                        <button class="toggle-btn" onclick="showSection('sectionKPIs')" data-translate="tabKPIs">Kluczowe Wskaźniki</button>
+                        <button class="toggle-btn" onclick="showSection('sectionAnalysis')" data-translate="tabAnalysis">Analiza</button>
+                        <button class="toggle-btn" onclick="showSection('sectionMethodology')" data-translate="tabMethodology">Metodologia</button>
+                    </div>
+                    
+                    <div id="info-sections-container">
+                        <div id="sectionColumns" class="info-section active" role="region">
+                            <table class="kpi-table">
+                                <thead><tr><th data-translate="tableHeaderColumn">Kolumna</th><th data-translate="tableHeaderDesc">Opis</th></tr></thead>
+                                <tbody id="columnsTableBody"></tbody>
+                            </table>
+                        </div>
+    
+                        <div id="sectionKPIs" class="info-section" role="region">
+                             <table class="kpi-table">
+                                 <thead><tr><th>KPI</th><th data-translate="tableHeaderResult">Wynik</th></tr></thead>
+                                 <tbody id="kpisTableBody"></tbody>
+                            </table>
+                        </div>
+    
+                        <div id="sectionAnalysis" class="info-section" role="region">
+                            <div class="analysis-grid">
+                                <div class="analysis-table-container">
+                                    <table class="kpi-table">
+                                        <thead><tr><th data-translate="tableHeaderArea">Obszar Analizy</th><th data-translate="tableHeaderConclusions">Wnioski</th></tr></thead>
+                                        <tbody id="analysisTableBody"></tbody>
+                                    </table>
+                                </div>
+                                <div class="analysis-conclusions">
+                                    <ol id="analysisListBody"></ol>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div id="sectionMethodology" class="info-section" role="region">
+                            <table class="kpi-table">
+                                <thead><tr><th data-translate="tableHeaderStep">Krok Procesu</th><th data-translate="tableHeaderDesc">Opis</th></tr></thead>
+                                <tbody id="methodologyTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="project-files">
+            <div class="container">
+                <h2 data-translate="downloadTitle">Pobierz Zasoby Projektu</h2>
+                <div class="section-underline centered-underline"></div>
+                <div class="files-container">
+                    <a href="/assets/Project1.png" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadDashboard">Pobierz Dashboard (PNG)</span></a>
+                    <a href="/assets/P1 Analytical Sales Dashboard.xlsx" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadExcel">Pobierz Plik Excel</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+
+    <style is:global>
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1;}
+    .section-underline { margin: 20px 0 30px 0; width: 80px; height: 4px; border-radius: 2px; background: var(--line-gradient); }
+    .centered-underline { margin: 20px auto 30px auto; }
+    
+    .project-hero { padding: 140px 0 80px; position: relative; overflow: hidden; z-index: 1;}
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hero-content h1 { font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 0; color: var(--text-primary); }
+    .hero-content p { font-size: 1.2rem; color: var(--text-secondary); max-width: 500px; }
+    .hero-image-wrapper { perspective: 1000px; }
+    .project-image { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: var(--card-shadow); cursor: pointer; border: 1px solid var(--border-color); transition: transform 0.3s ease, border-color 0.3s ease; }
+    .project-image:hover { transform: scale(1.05) rotateY(-5deg) rotateX(5deg); border-color: var(--cyan); }
+    .project-gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .project-gallery-grid .project-image:nth-child(3) { grid-column: span 2; }
+    
+    .scroll-down-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 40px; color: var(--text-secondary); font-weight: 600; text-decoration: none; cursor: pointer; transition: color 0.3s ease, transform 0.3s ease; }
+    .scroll-down-link:hover { color: var(--cyan); transform: translateY(-3px); }
+    .mouse-icon { width: 24px; height: 40px; border: 2px solid var(--text-secondary); border-radius: 20px; position: relative; transition: border-color 0.3s ease; }
+    .scroll-down-link:hover .mouse-icon { border-color: var(--cyan); }
+    .mouse-icon .wheel { display: block; width: 4px; height: 8px; background-color: var(--cyan); border-radius: 2px; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); animation: scroll-wheel-anim 2s infinite ease-in-out; }
+    @keyframes scroll-wheel-anim { 0% { transform: translate(-50%, 0); opacity: 1; } 50% { transform: translate(-50%, 10px); opacity: 1; } 100% { transform: translate(-50%, 20px); opacity: 0; } }
+
+    .project-highlights { padding: 80px 0; z-index: 1; position: relative;}
+    .project-highlights h2, .project-details h2, .project-files h2 { text-align: center; font-size: 2.5rem; font-weight: 700; background: var(--line-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; justify-content: center; }
+    
+    .kpi-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; text-align: center; position: relative; overflow: visible; backdrop-filter: blur(10px); transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+    .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 50%); opacity: 0; transition: opacity 0.3s; border-radius: 15px; pointer-events: none; z-index: 0; }
+    .kpi-card > * { position: relative; z-index: 1; }
+    .kpi-card:hover { transform: translateY(-8px) scale(1.03); border-color: var(--cyan); box-shadow: var(--card-shadow); }
+    .kpi-card:hover::before { opacity: 1; }
+    
+    .kpi-value { display: block; font-size: 2.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+    .kpi-label { font-size: 1rem; color: var(--text-secondary); }
+    
+    .project-details { padding: 80px 0; z-index: 1; position: relative;}
+    .details-card { background: var(--bg-surface); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--card-shadow); transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+    .toggle-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
+    .toggle-btn { appearance: none; background: var(--btn-bg); border: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 600; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 12px 24px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;}
+    .toggle-btn:hover { color: var(--text-primary); border-color: var(--cyan); transform: translateY(-2px); }
+    .toggle-btn.is-active { background: var(--line-gradient); color: white; border-color: transparent; transform: scale(1.05); box-shadow: 0 5px 15px var(--spotlight-color); }
+    .info-section { display: none; margin-top: 20px; padding-top: 30px; border-top: 1px solid var(--border-color); }
+    .info-section.active { display: block; animation: fadeIn .4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .kpi-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    .kpi-table th, .kpi-table td { padding: 14px 10px; border-bottom: 1px solid var(--border-color); text-align: center; width: 50%; }
+    .kpi-table tr:last-child td { border-bottom: none; }
+    .kpi-table thead th { font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-table td { color: var(--text-secondary); }
+    
+    .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .analysis-conclusions ol { list-style: none; padding-left: 0; counter-reset: conclusion-counter; }
+    .analysis-conclusions li { position: relative; padding-left: 45px; margin-bottom: 25px; }
+    .analysis-conclusions li::before { counter-increment: conclusion-counter; content: counter(conclusion-counter); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; border-radius: 50%; background: var(--line-gradient); color: white; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+    .analysis-conclusions strong { display: block; margin-bottom: 5px; color: var(--text-primary); font-size: 1.1rem; }
+    .analysis-conclusions p { color: var(--text-secondary); font-size: 0.95rem; margin: 0; }
+
+    .project-files { padding: 20px 0; z-index: 1; position: relative;}
+    .files-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 50px; }
+    .gradient__border__container { display: inline-block; position: relative; padding: 1px; border-radius: 30px; background: var(--line-gradient); background-size: 200% 200%; animation: spin-gradient 6s linear infinite; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; min-width: 150px; text-align: center; text-decoration: none; box-shadow: 0 4px 20px var(--spotlight-color); }
+    .gradient__border__container:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--spotlight-color); }
+    .gradient__border__container .gradient__border__text { display: block; background: var(--bg-surface); border-radius: 29px; padding: 0.8rem 2rem; font-size: 1rem; font-weight: 600; color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+    .gradient__border__container:hover .gradient__border__text { background: transparent; color: #fff;}
+    @keyframes spin-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    
+    @media (max-width: 900px) { 
+        .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; } 
+        .hero-content { order: 2; } 
+        .hero-image-wrapper { order: 1; } 
+        .hero-content .section-underline, .hero-content .scroll-down-link { margin-left: auto; margin-right: auto; } 
+        .analysis-grid { grid-template-columns: 1fr; gap: 30px; }
+    }
+    @media (max-width: 600px) { 
+        .hero-content h1 { font-size: 2.8rem; } 
+        .project-highlights h2, .project-details h2, .project-files h2 { font-size: 2rem; } 
+        .details-card { padding: 25px; } 
+    }
+</style>
+
+    <script is:inline>
+        // === TŁUMACZENIA SPECYFICZNE DLA TEGO PROJEKTU ===
+        const translations = {
+            pl: {
+                pageTitle: "Projekt: Analytical Sales Dashboard | Portfolio Jakub Nicpoń",
+                heroDesc: "Projekt stanowi kompleksową analizę 1000 transakcji, przekształcającą dane w strategiczne wnioski na temat rentowności, wydajności sprzedaży oraz skuteczności kampanii marketingowych. Skupia się na wykrywaniu anomalii biznesowych, takich jak niska marża w kanale hurtowym, oraz badaniu trendów produktowych budujących wzrost wartości koszyka. Dzięki osadzeniu danych w kontekście geograficznym i czasowym, dostarcza precyzyjnych rozwiązań optymalizujących strategię biznesową.",
+                btnDetails: "Zobacz szczegóły",
+                kpiTitle: "Kluczowe Wskaźniki",
+                kpi1Label: "Całkowity Przychód",
+                kpi2Label: "Zysk Netto",
+                kpi3Label: "Sprzedane Jednostki",
+                kpi4Label: "Średnia Realizacja Celu",
+                detailsTitle: "Szczegóły Projektu",
+                tabColumns: "Opis Kolumn",
+                tabKPIs: "Kluczowe Wskaźniki",
+                tabAnalysis: "Analiza",
+                tabMethodology: "Metodologia",
+                tableHeaderColumn: "Kolumna",
+                tableHeaderDesc: "Opis",
+                tableHeaderResult: "Wynik",
+                tableHeaderArea: "Obszar Analizy",
+                tableHeaderConclusions: "Wnioski",
+                tableHeaderStep: "Krok Procesu",
+                downloadTitle: "Pobierz Zasoby Projektu",
+                btnDownloadDashboard: "Pobierz Dashboard (PNG)",
+                btnDownloadExcel: "Pobierz Plik Excel",
+                
+                colsData: `
+                    <tr><td>Date</td><td>Data transakcji sprzedaży i miesiąc raportowy</td></tr>
+                    <tr><td>Sales Representative</td><td>Pracownik odpowiedzialny za sprzedaż</td></tr>
+                    <tr><td>Product Category</td><td>Kategoria sprzedanego produktu</td></tr>
+                    <tr><td>Quantity Sold</td><td>Liczba sprzedanych jednostek</td></tr>
+                    <tr><td>Sales Revenue</td><td>Całkowity przychód z transakcji</td></tr>
+                    <tr><td>COGS</td><td>Koszt własny sprzedaży</td></tr>
+                    <tr><td>Profit Margin</td><td>Rentowność na sprzedaży</td></tr>
+                    <tr><td>Sales Target / Quota</td><td>Cel wydajnościowy dla przedstawiciela</td></tr>
+                    <tr><td>Region / Country</td><td>Geograficzna lokalizacja sprzedaży</td></tr>
+                    <tr><td>Discount / Promotion</td><td>Rodzaj zastosowanej oferty promocyjnej</td></tr>
+                    <tr><td>Sales Channel</td><td>Hurt, Online, Detal</td></tr>
+                    <tr><td>Lead Source</td><td>Sposób pozyskania kontaktu</td></tr>
+                    <tr><td>Customer Segment</td><td>Docelowa grupa klientów</td></tr>
+                    <tr><td>Total Profit</td><td>Zysk netto z transakcji</td></tr>
+                `,
+                kpisData: `
+                    <tr><td>Całkowity Przychód</td><td>$5,241,798</td></tr>
+                    <tr><td>Zysk Netto</td><td>$1,772,628</td></tr>
+                    <tr><td>Sprzedane Jednostki</td><td>10,225</td></tr>
+                    <tr><td>Liczba Transakcji</td><td>1,000</td></tr>
+                    <tr><td>Średnia Realizacja Celu</td><td>~66%</td></tr>
+                    <tr><td>Najlepszy Sprzedawca</td><td>Daniel White (przychód $1,387,112)</td></tr>
+                    <tr><td>Top Produkt (przychód)</td><td>Tablet ($1,146,053)</td></tr>
+                    <tr><td>Najlepszy Kanał Sprzedaży</td><td>Hurt ($1,816,119)</td></tr>
+                    <tr><td>Top Segment Klienta</td><td>Indywidualny ($1,806,973)</td></tr>
+                `,
+                analysisTableData: `
+                    <tr><td>Przychód i Zysk Netto</td><td>Całkowity przychód ze sprzedaży osiągnął $5.24M, a zysk netto $1.77M.</td></tr>
+                    <tr><td>Realizacja Celu</td><td>Średnia realizacja celu sprzedażowego wynosi 66% dla wszystkich przedstawicieli.</td></tr>
+                    <tr><td>Wyniki Sprzedawców</td><td>Daniel White generuje najwyższy przychód ($1.39M), tuż za nim Cathy Brown ($1.32M) i Bob Smith ($1.28M).</td></tr>
+                    <tr><td>Przychód z Kampanii</td><td>Promocja "Kup 1, Drugi Gratis" wygenerowała największy przychód ($1.36M), mimo mniejszej liczby transakcji niż "Oferta Sezonowa".</td></tr>
+                    <tr><td>Wyniki Produktów</td><td>Tablety prowadzą pod względem przychodu ($1.15M), a za nimi laptopy ($1.09M) i smartfony ($1.03M).</td></tr>
+                    <tr><td>Wyniki Regionalne</td><td>Najlepsze wyniki sprzedaży odnotowano w Chinach ($1.42M) i Australii ($1.32M).</td></tr>
+                    <tr><td>Kanały Sprzedaży</td><td>Kanał hurtowy dominuje pod względem przychodu ($1.82M), nieznacznie wyprzedzając sprzedaż online ($1.76M).</td></tr>
+                    <tr><td>Segmenty Klientów</td><td>Klienci indywidualni generują najwyższy przychód ($1.81M), a za nimi klienci korporacyjni ($1.75M).</td></tr>
+                    <tr><td>Źródła Leadów</td><td>Polecenia są najsilniejszym źródłem leadów ($1.43M), a tuż za nimi media społecznościowe i e-mail.</td></tr>
+                `,
+                analysisListData: `
+                    <li><strong>Wzrost przychodów przy spadku wolumenu</strong><p>W 2023 roku, mimo sprzedaży mniejszej liczby produktów niż w 2022, firma osiągnęła wyższy przychód. Ten paradoks świadczy o wzroście średniej wartości koszyka, co może wynikać ze sprzedaży droższych produktów lub skutecznych strategii cenowych.</p></li>
+                    <li><strong>Zmiana liderów produktowych</strong><p>W 2022 roku kluczowym produktem był laptop (ponad 629 tys. USD przychodu), który w 2023 roku stał się najgorzej sprzedającym się. W 2023 roku przychody zdywersyfikowały się, a cztery produkty (Tablet, Smartfon, Słuchawki, Monitor) wygenerowały ponad 500 tys. USD każdy, co pokazuje zdrową stabilność portfela produktowego.</p></li>
+                    <li><strong>Ewolucja strategii marketingowych</strong><p>Najskuteczniejsza kampania zmieniła się z "Sessional Offer" w 2022 roku (694 tys. USD) na "Buy one, get one free" (BOGO) w 2023 roku (720 tys. USD). Ta zmiana wskazuje na adaptację do preferencji rynkowych i poszukiwanie nowych, bardziej dochodowych metod promocji.</p></li>
+                    <li><strong>Problem z rentownością kanału hurtowego</strong><p>Fakt, że pomimo, iż kanał hurtowy generuje największe przychody, to w rzeczywistości ma najniższy zysk netto. Oznacza to, że wysoki wolumen sprzedaży w tym kanale nie przekłada się na proporcjonalny zysk, prawdopodobnie ze względu na niskie marże, wysokie koszty operacyjne lub rabaty.</p></li>
+                `,
+                methodologyData: `
+                    <tr><td>Czyszczenie i Strukturyzacja</td><td>Standaryzacja kolumn, poprawa formatów dat, usunięcie niespójności.</td></tr>
+                    <tr><td>Tabele Przestawne</td><td>Agregacja danych sprzedażowych w celu podsumowania wyników.</td></tr>
+                    <tr><td>Wykresy Przestawne</td><td>Wizualizacja trendów przychodów, marż oraz porównanie kampanii i kanałów.</td></tr>
+                    <tr><td>Fragmentatory</td><td>Dodanie interaktywnych filtrów (rok, miesiąc, region, produkt, sprzedawca).</td></tr>
+                    <tr><td>Pola Obliczeniowe</td><td>Stworzenie wskaźnika porównującego realizację celu między sprzedawcami.</td></tr>
+                `
+            },
+            en: {
+                pageTitle: "Project: Analytical Sales Dashboard | Jakub Nicpoń's Portfolio",
+                heroDesc: "An in-depth analysis of 1,000 sales transactions using an interactive Excel dashboard to monitor key performance indicators (KPIs) and optimize business strategies.",
+                btnDetails: "See details",
+                kpiTitle: "KPI",
+                kpi1Label: "Total Revenue",
+                kpi2Label: "Net Profit",
+                kpi3Label: "Units Sold",
+                kpi4Label: "Avg Target Achievement",
+                detailsTitle: "Project Details",
+                tabColumns: "Column Description",
+                tabKPIs: "KPI",
+                tabAnalysis: "Analysis",
+                tabMethodology: "Methodology",
+                tableHeaderColumn: "Column",
+                tableHeaderDesc: "Description",
+                tableHeaderResult: "Result",
+                tableHeaderArea: "Analysis Area",
+                tableHeaderConclusions: "Conclusions",
+                tableHeaderStep: "Process Step",
+                downloadTitle: "Download Project Assets",
+                btnDownloadDashboard: "Download Dashboard (PNG)",
+                btnDownloadExcel: "Download Excel File",
+                
+                // DANE TABELARYCZNE (EN)
+                colsData: `
+                    <tr><td>Date</td><td>Date of sales transaction and reporting month</td></tr>
+                    <tr><td>Sales Representative</td><td>Employee responsible for the sale</td></tr>
+                    <tr><td>Product Category</td><td>Category of the product sold</td></tr>
+                    <tr><td>Quantity Sold</td><td>Number of units sold</td></tr>
+                    <tr><td>Sales Revenue</td><td>Total revenue from the transaction</td></tr>
+                    <tr><td>COGS</td><td>Cost of Goods Sold</td></tr>
+                    <tr><td>Profit Margin</td><td>Profitability of the sale</td></tr>
+                    <tr><td>Sales Target / Quota</td><td>Performance goal for the representative</td></tr>
+                    <tr><td>Region / Country</td><td>Geographical location of the sale</td></tr>
+                    <tr><td>Discount / Promotion</td><td>Type of promotional offer applied</td></tr>
+                    <tr><td>Sales Channel</td><td>Wholesale, Online, Retail</td></tr>
+                    <tr><td>Lead Source</td><td>Method of acquiring the contact</td></tr>
+                    <tr><td>Customer Segment</td><td>Target customer group</td></tr>
+                    <tr><td>Total Profit</td><td>Net profit from the transaction</td></tr>
+                `,
+                kpisData: `
+                    <tr><td>Total Revenue</td><td>$5,241,798</td></tr>
+                    <tr><td>Net Profit</td><td>$1,772,628</td></tr>
+                    <tr><td>Units Sold</td><td>10,225</td></tr>
+                    <tr><td>Number of Transactions</td><td>1,000</td></tr>
+                    <tr><td>Avg Target Achievement</td><td>~66%</td></tr>
+                    <tr><td>Top Salesperson</td><td>Daniel White (revenue $1,387,112)</td></tr>
+                    <tr><td>Top Product (revenue)</td><td>Tablet ($1,146,053)</td></tr>
+                    <tr><td>Top Sales Channel</td><td>Wholesale ($1,816,119)</td></tr>
+                    <tr><td>Top Customer Segment</td><td>Individual ($1,806,973)</td></tr>
+                `,
+                analysisTableData: `
+                    <tr><td>Revenue and Net Profit</td><td>Total sales revenue reached $5.24M, with a net profit of $1.77M.</td></tr>
+                    <tr><td>Target Achievement</td><td>The average sales target achievement is 66% across all representatives.</td></tr>
+                    <tr><td>Salesperson Performance</td><td>Daniel White generates the highest revenue ($1.39M), followed closely by Cathy Brown ($1.32M) and Bob Smith ($1.28M).</td></tr>
+                    <tr><td>Campaign Revenue</td><td>The "Buy 1, Get 1 Free" promotion generated the highest revenue ($1.36M), despite having fewer transactions than the "Seasonal Offer".</td></tr>
+                    <tr><td>Product Performance</td><td>Tablets lead in revenue ($1.15M), followed by laptops ($1.09M) and smartphones ($1.03M).</td></tr>
+                    <tr><td>Regional Performance</td><td>The best sales results were recorded in China ($1.42M) and Australia ($1.32M).</td></tr>
+                    <tr><td>Sales Channels</td><td>The wholesale channel dominates in revenue ($1.82M), slightly ahead of online sales ($1.76M).</td></tr>
+                    <tr><td>Customer Segments</td><td>Individual customers generate the highest revenue ($1.81M), followed by corporate customers ($1.75M).</td></tr>
+                    <tr><td>Lead Sources</td><td>Referrals are the strongest lead source ($1.43M), closely followed by social media and email.</td></tr>
+                `,
+                analysisListData: `
+                    <li><strong>Revenue growth with declining volume</strong><p>In 2023, despite selling fewer products than in 2022, the company achieved higher revenue. This paradox indicates an increase in average order value, possibly due to selling more expensive products or effective pricing strategies.</p></li>
+                    <li><strong>Shift in product leaders</strong><p>In 2022, the key product was the laptop (over $629K revenue), which became the worst-selling product in 2023. In 2023, revenue diversified, and four products (Tablet, Smartphone, Headphones, Monitor) each generated over $500K, showing healthy product portfolio stability.</p></li>
+                    <li><strong>Evolution of marketing strategies</strong><p>The most effective campaign shifted from "Seasonal Offer" in 2022 ($694K) to "Buy one, get one free" (BOGO) in 2023 ($720K). This shift indicates adaptation to market preferences and the search for new, more profitable promotion methods.</p></li>
+                    <li><strong>Profitability issue in wholesale channel</strong><p>The fact that, despite the wholesale channel generating the highest revenue, it actually has the lowest net profit. This means the high sales volume in this channel does not translate into proportional profit, likely due to low margins, high operational costs, or discounts.</p></li>
+                `,
+                methodologyData: `
+                    <tr><td>Cleaning and Structuring</td><td>Column standardization, date format correction, inconsistency removal.</td></tr>
+                    <tr><td>Pivot Tables</td><td>Aggregation of sales data to summarize results.</td></tr>
+                    <tr><td>Pivot Charts</td><td>Visualization of revenue and margin trends, as well as campaign and channel comparisons.</td></tr>
+                    <tr><td>Slicers</td><td>Addition of interactive filters (year, month, region, product, salesperson).</td></tr>
+                    <tr><td>Calculated Fields</td><td>Creation of a metric to compare target achievement among salespeople.</td></tr>
+                `
+            }
+        };
+
+        const setLocalLanguage = (lang) => {
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.dataset.translate;
+                if (translations[lang] && translations[lang][key]) { el.innerHTML = translations[lang][key]; }
+            });
+            
+            if(translations[lang]) {
+                const map = {
+                    'columnsTableBody': 'colsData',
+                    'kpisTableBody': 'kpisData',
+                    'analysisTableBody': 'analysisTableData',
+                    'analysisListBody': 'analysisListData',
+                    'methodologyTableBody': 'methodologyData'
+                };
+                for (const [id, key] of Object.entries(map)) {
+                    const el = document.getElementById(id);
+                    if(el) el.innerHTML = translations[lang][key];
+                }
+            }
+        };
+
+        // Nasłuchiwanie na przyciski w Navbarze
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLocalLanguage(btn.dataset.lang));
+        });
+
+        // Inicjalizacja języka
+        setLocalLanguage(localStorage.getItem('preferredLanguage') || 'pl');
+
+        // Funkcja przełączania zakładek "Szczegóły Projektu"
+        window.showSection = function(id) {
+            document.querySelectorAll(".info-section").forEach(s => s.classList.remove("active"));
+            document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("is-active"));
+            document.getElementById(id).classList.add("active");
+            document.querySelector(`button[onclick="showSection('${id}')"]`).classList.add("is-active");
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scrollowanie kotwic wewnątrz projektu
+            document.querySelectorAll('.scroll-down-link').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    if (targetId.length > 1 && window.lenis) {
+                        window.lenis.scrollTo('#' + targetId, {
+                            offset: -90,
+                            duration: 1.5,
+                            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                        });
+                    }
+                });
+            });
+
+            // Otwieranie lightboxa dla zdjęcia projektu
+            const projectImg = document.querySelector('.project-image');
+            if (projectImg) {
+                projectImg.addEventListener('click', () => {
+                    if(window.openLightbox) { window.openLightbox(projectImg.getAttribute('src')); }
+                });
+            }
+
+            // Animacja Glow pod kartami KPI
+            document.querySelectorAll(".kpi-card").forEach(t => {
+                t.addEventListener("mousemove", e => {
+                    const o = t.getBoundingClientRect();
+                    t.style.setProperty("--mouse-x", `${e.clientX - o.left}px`);
+                    t.style.setProperty("--mouse-y", `${e.clientY - o.top}px`);
+                });
+            });
+        });
+    </script>
+</BaseLayout>

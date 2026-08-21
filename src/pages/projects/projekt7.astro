@@ -1,0 +1,600 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout title="SQL Case Study: Coffee Shops Analysis | Portfolio Jakub Nicpoń">
+    <Navbar />
+
+    <main class="container">
+        <header class="project-hero">
+            <h1 data-translate="heroTitle">Coffee Shops Market Analysis</h1>
+            <div class="section-underline centered-underline"></div>
+            <p data-translate="heroDesc">
+                Analiza danych rynkowych kawiarni w Indiach. Wykorzystałem SQL do zbadania rentowności produktów, 
+                nasycenia rynku oraz dynamiki przychodów, co pozwoliło wyłonić kluczowe miasta pod przyszłe inwestycje.
+            </p>
+            <div class="nav-buttons">
+                <a href="#step-0" class="btn-nav btn-primary" data-translate="btnSql">Zobacz zapytania SQL</a>
+                <a href="#final-analysis" class="btn-nav btn-secondary" data-translate="btnAnalysis">Analiza Końcowa</a>
+                <a href="/assets/Coffeehouse.rar" download class="btn-nav btn-outline" data-translate="btnDownload">Pobierz pliki CSV</a>
+            </div>
+        </header>
+
+        <section class="audit-section">
+            <h2 style="text-align: center;" data-translate="auditTitle">Struktura tabel</h2>
+            <div class="section-underline centered-underline"></div>
+            <div class="audit-grid">
+                <div class="audit-card">
+                    <h4>Tabela: City</h4>
+                    <div class="result-container"><img src="/assets/001.png" class="result-img" alt="Struktura tabeli City"></div>
+                </div>
+                <div class="audit-card">
+                    <h4>Tabela: Customers</h4>
+                    <div class="result-container"><img src="/assets/002.png" class="result-img" alt="Struktura tabeli Customers"></div>
+                </div>
+                <div class="audit-card">
+                    <h4>Tabela: Products</h4>
+                    <div class="result-container"><img src="/assets/003.png" class="result-img" alt="Struktura tabeli Products"></div>
+                </div>
+                <div class="audit-card">
+                    <h4>Tabela: Sales</h4>
+                    <div class="result-container"><img src="/assets/004.png" class="result-img" alt="Struktura tabeli Sales"></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sql-step" id="step-0">
+            <h3 data-translate="step0Title">00. Stworzenie bazy i struktury pod import danych</h3>
+            <span class="step-description" data-translate="step0Desc">-- Co obliczam i po co: Przygotowuję fundament pod projekt, czyli tworzę bazę i tabele z relacjami, żeby wszystko było na swoim miejscu przed importem danych.</span>
+            <div class="code-container">
+<pre><code><span class="sql-com">-- Krok 1: Utworzenie bazy danych oraz ustawienie jej jako aktywnej</span>
+<span class="sql-key">CREATE DATABASE</span> coffee_shops_project;
+<span class="sql-key">USE</span> coffee_shops_project;
+
+<span class="sql-com">-- Krok 2: Przygotowanie schematu bazy danych</span>
+<span class="sql-key">DROP TABLE IF EXISTS</span> city;
+<span class="sql-key">CREATE TABLE</span> city (
+    city_id <span class="sql-key">int PRIMARY KEY</span>,
+    city_name <span class="sql-key">varchar</span>(30),
+    population <span class="sql-key">int</span>,
+    estimated_rent <span class="sql-key">float</span>,
+    city_rank <span class="sql-key">int</span>
+);
+
+<span class="sql-key">CREATE TABLE</span> customers (
+    customer_id <span class="sql-key">int PRIMARY KEY</span>,
+    customer_name <span class="sql-key">varchar</span>(30),
+    city_id <span class="sql-key">int</span>,
+    <span class="sql-key">CONSTRAINT</span> fk_city <span class="sql-key">FOREIGN KEY</span> (city_id) <span class="sql-key">REFERENCES</span> city (city_id)
+);
+
+<span class="sql-key">CREATE TABLE</span> products (
+    product_id <span class="sql-key">int PRIMARY KEY</span>,
+    product_name <span class="sql-key">varchar</span>(30),
+    price <span class="sql-key">float</span>
+);
+
+<span class="sql-key">CREATE TABLE</span> sales (
+    sale_id <span class="sql-key">int PRIMARY KEY</span>,
+    product_id <span class="sql-key">int</span>,
+    customer_id <span class="sql-key">int</span>,
+    sale_date <span class="sql-key">date</span>,
+    total <span class="sql-key">float</span>,
+    rating <span class="sql-key">int</span>,
+    <span class="sql-key">CONSTRAINT</span> fk_products <span class="sql-key">FOREIGN KEY</span> (product_id) <span class="sql-key">REFERENCES</span> products (product_id),
+    <span class="sql-key">CONSTRAINT</span> fk_customers <span class="sql-key">FOREIGN KEY</span> (customer_id) <span class="sql-key">REFERENCES</span> customers (customer_id)
+);</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/model.png" class="result-img" alt="Model bazy danych"></div>
+        </div>
+
+        <div class="sql-step" id="step-1">
+            <h3 data-translate="step1Title">01. Szacowana liczba konsumentów</h3>
+            <span class="step-description" data-translate="step1Desc">-- Ilu potencjalnych kawoszy mieszka w każdym mieście, zakładając, że co piąta osoba pije kawę. (wg. Google - 20% populacji Indii pije kawę)</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">SELECT</span>
+    city_name,
+    <span class="sql-fun">ROUND</span>(population * 0.2 / 1000000, 2) consumers_in_mln,
+    city_rank
+<span class="sql-key">FROM</span> city
+<span class="sql-key">ORDER BY</span> population <span class="sql-key">DESC</span>;</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/res_1.png" class="result-img" alt="Wynik zapytania 1"></div>
+        </div>
+
+        <div class="sql-step" id="step-2">
+            <h3 data-translate="step2Title">02. Całkowity przychód ze sprzedaży</h3>
+            <span class="step-description" data-translate="step2Desc">-- Suma przychodów z ostatniego kwartału 2023 roku, żeby zobaczyć, które miasta najlepiej zarabiały pod koniec roku.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">WITH</span> Q4_2023_revenue <span class="sql-key">AS</span> (
+    <span class="sql-key">SELECT</span>
+        ci.city_name,
+        <span class="sql-fun">SUM</span>(s.total) revenue_by_city
+    <span class="sql-key">FROM</span> sales s
+    <span class="sql-key">JOIN</span> customers cu <span class="sql-key">ON</span> s.customer_id = cu.customer_id
+    <span class="sql-key">JOIN</span> city ci <span class="sql-key">ON</span> cu.city_id = ci.city_id
+    <span class="sql-key">WHERE</span>
+        <span class="sql-fun">EXTRACT</span>(YEAR <span class="sql-key">FROM</span> s.sale_date) = 2023
+        <span class="sql-key">AND</span>
+        <span class="sql-fun">EXTRACT</span>(QUARTER <span class="sql-key">FROM</span> s.sale_date) = 4
+    <span class="sql-key">GROUP BY</span> ci.city_name
+)
+<span class="sql-key">SELECT</span>
+    city_name,
+    revenue_by_city,
+    <span class="sql-fun">SUM</span>(revenue_by_city) <span class="sql-fun">OVER</span>() total_revenue,
+    <span class="sql-fun">CONCAT</span>(<span class="sql-fun">ROUND</span>(revenue_by_city/<span class="sql-fun">SUM</span>(revenue_by_city) <span class="sql-fun">OVER</span>() * 100, 2), '%') revenue_part
+<span class="sql-key">FROM</span> Q4_2023_revenue
+<span class="sql-key">ORDER BY</span> revenue_by_city <span class="sql-key">DESC</span>;</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/res_2.png" class="result-img" alt="Wynik zapytania 2"></div>
+        </div>
+
+        <div class="sql-step" id="step-3">
+            <h3 data-translate="step3Title">03. Wolumen sprzedaży produktów</h3>
+            <span class="step-description" data-translate="step3Desc">-- Sprawdzenie, co ludzie najchętniej kupują i które produkty przynoszą najwięcej gotówki.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">SELECT</span>
+    p.product_name,
+    <span class="sql-fun">COUNT</span>(s.product_id) units_sold,
+    <span class="sql-fun">SUM</span>(s.total) revenue
+<span class="sql-key">FROM</span> sales s
+<span class="sql-key">LEFT JOIN</span> products p <span class="sql-key">ON</span> s.product_id = p.product_id
+<span class="sql-key">GROUP BY</span> p.product_name
+<span class="sql-key">ORDER BY</span> units_sold <span class="sql-key">DESC</span>;</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/res_3.png" class="result-img" alt="Wynik zapytania 3"></div>
+        </div>
+
+        <div class="sql-step" id="step-4">
+            <h3 data-translate="step4Title">04. Średnia kwota koszyka wg miast</h3>
+            <span class="step-description" data-translate="step4Desc">-- Sprawdzenie, ile przeciętnie klient zostawia pieniędzy podczas jednej wizyty w zależności od miasta.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">SELECT</span>
+    ci.city_name city,
+    <span class="sql-fun">ROUND</span>(<span class="sql-fun">AVG</span>(s.total), 2) avg_revenue
+<span class="sql-key">FROM</span> sales s
+<span class="sql-key">JOIN</span> customers cu <span class="sql-key">ON</span> s.customer_id = cu.customer_id
+<span class="sql-key">JOIN</span> city ci <span class="sql-key">ON</span> cu.city_id = ci.city_id
+<span class="sql-key">GROUP BY</span> city
+<span class="sql-key">ORDER BY</span> avg_revenue <span class="sql-key">DESC</span>;</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/res_4.png" class="result-img" alt="Wynik zapytania 4"></div>
+        </div>
+
+        <div class="sql-step" id="step-5">
+            <h3 data-translate="step5Title">05. Średni przychód na klienta</h3>
+            <span class="step-description" data-translate="step5Desc">-- Jaka kwota średnio wyciągana jest od jednego, konkretnego klienta – gdzie mamy najbardziej lojalnych fanów.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">SELECT</span>
+    ci.city_name city,
+    <span class="sql-fun">SUM</span>(s.total) total_revenue,
+    <span class="sql-fun">COUNT</span>(<span class="sql-key">DISTINCT</span> cu.customer_id) unique_customers,
+    <span class="sql-fun">ROUND</span>(<span class="sql-fun">SUM</span>(s.total) / <span class="sql-fun">COUNT</span>(<span class="sql-key">DISTINCT</span> cu.customer_id), 2) avg_revenue_per_customer
+<span class="sql-key">FROM</span> sales s
+<span class="sql-key">JOIN</span> customers cu <span class="sql-key">ON</span> s.customer_id = cu.customer_id
+<span class="sql-key">JOIN</span> city ci <span class="sql-key">ON</span> cu.city_id = ci.city_id
+<span class="sql-key">GROUP BY</span> ci.city_name
+<span class="sql-key">ORDER BY</span> avg_revenue_per_customer <span class="sql-key">DESC</span>;</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/res_5.png" class="result-img" alt="Wynik zapytania 5"></div>
+        </div>
+
+        <div class="sql-step" id="step-6">
+            <h3 data-translate="step6Title">06. Nasycenie rynku (Penetration Rate)</h3>
+            <span class="step-description" data-translate="step6Desc">-- Porównanie liczby realnych klientów do wszystkich potencjalnych kawoszy w mieście, żeby zobaczyć, ile rynku potencjalnie jest "spenetrowane".</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">WITH</span> city_details <span class="sql-key">AS</span> (
+    <span class="sql-key">SELECT</span> city_name city, <span class="sql-fun">ROUND</span>((population * 0.2) / 1000000, 2) consumers_in_mln <span class="sql-key">FROM</span> city),
+customer_details <span class="sql-key">AS</span> (
+    <span class="sql-key">SELECT</span> ci.city_name city, <span class="sql-fun">COUNT</span>(<span class="sql-key">DISTINCT</span> cu.customer_id) unique_customers
+    <span class="sql-key">FROM</span> sales s <span class="sql-key">JOIN</span> customers cu <span class="sql-key">ON</span> s.customer_id = cu.customer_id
+    <span class="sql-key">JOIN</span> city ci <span class="sql-key">ON</span> cu.city_id = ci.city_id <span class="sql-key">GROUP BY</span> city)
+<span class="sql-key">SELECT</span>
+    cud.city, cid.consumers_in_mln, cud.unique_customers,
+    <span class="sql-fun">ROUND</span>((cud.unique_customers / (cid.consumers_in_mln * 1000000)) * 100, 5) penetration_rate_pct
+<span class="sql-key">FROM</span> city_details cid <span class="sql-key">JOIN</span> customer_details cud <span class="sql-key">ON</span> cid.city = cud.city
+<span class="sql-key">ORDER BY</span> penetration_rate_pct <span class="sql-key">DESC</span>;</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/res_6.png" class="result-img" alt="Wynik zapytania 6"></div>
+        </div>
+
+        <div class="sql-step" id="step-7">
+            <h3 data-translate="step7Title">07. Top 3 Produkty w każdym mieście</h3>
+            <span class="step-description" data-translate="step7Desc">-- Ranking najlepiej sprzedających się rzeczy dla każdego miasta z osobna.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">WITH</span> top_selling_products_by_city <span class="sql-key">AS</span> (
+    <span class="sql-key">SELECT</span>
+        ci.city_name city, p.product_name product, <span class="sql-fun">COUNT</span>(s.product_id) sales_count,
+        <span class="sql-fun">DENSE_RANK</span>() <span class="sql-fun">OVER</span> (<span class="sql-fun">PARTITION BY</span> ci.city_name <span class="sql-key">ORDER BY</span> <span class="sql-fun">COUNT</span>(s.product_id) <span class="sql-key">DESC</span>) ranking
+    <span class="sql-key">FROM</span> sales s <span class="sql-key">JOIN</span> products p <span class="sql-key">ON</span> s.product_id = p.product_id
+    <span class="sql-key">JOIN</span> customers cu <span class="sql-key">ON</span> s.customer_id = cu.customer_id
+    <span class="sql-key">JOIN</span> city ci <span class="sql-key">ON</span> cu.city_id = ci.city_id
+    <span class="sql-key">GROUP BY</span> ci.city_name, p.product_name)
+<span class="sql-key">SELECT</span> city, product, sales_count, ranking
+<span class="sql-key">FROM</span> top_selling_products_by_city <span class="sql-key">WHERE</span> ranking <span class="sql-key">BETWEEN</span> 1 <span class="sql-key">AND</span> 3;</code></pre>
+            </div>
+        </div>
+
+        <div class="sql-step" id="step-8">
+            <h3 data-translate="step8Title">08. Produkty nigdy niesprzedane</h3>
+            <span class="step-description" data-translate="step8Desc">-- Towary oraz ich ilość, których nikt w danym mieście jeszcze nie kupił, żeby orientacyjnie wiedzieć, gdzie w najmniejszym stopniu widnieje popyt na oferowany towar.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">WITH</span> all_combinations <span class="sql-key">AS</span> (
+    <span class="sql-key">SELECT</span> ci.city_id, ci.city_name, p.product_id, p.product_name
+    <span class="sql-key">FROM</span> city ci <span class="sql-key">CROSS JOIN</span> products p),
+sold_in_cities <span class="sql-key">AS</span> (
+    <span class="sql-key">SELECT DISTINCT</span> cu.city_id, s.product_id
+    <span class="sql-key">FROM</span> sales s <span class="sql-key">JOIN</span> customers cu <span class="sql-key">ON</span> s.customer_id = cu.customer_id)
+<span class="sql-key">SELECT</span>
+    ac.city_name, <span class="sql-fun">COUNT</span>(ac.product_id) unsold_products_count,
+    <span class="sql-fun">GROUP_CONCAT</span>(ac.product_name <span class="sql-key">SEPARATOR</span> ', ') Unsold_products
+<span class="sql-key">FROM</span> all_combinations ac <span class="sql-key">LEFT JOIN</span> sold_in_cities sic 
+    <span class="sql-key">ON</span> ac.city_id = sic.city_id <span class="sql-key">AND</span> ac.product_id = sic.product_id
+<span class="sql-key">WHERE</span> sic.product_id <span class="sql-key">IS NULL</span> <span class="sql-key">GROUP BY</span> ac.city_name;</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/res_8.png" class="result-img" alt="Wynik zapytania 8"></div>
+        </div>
+
+        <div class="sql-step" id="step-9">
+            <h3 data-translate="step9Title">09. Procent populacji jako klienci</h3>
+            <span class="step-description" data-translate="step9Desc">-- Wyliczenie, jaki ułamek całego miasta stanowią klienci, żeby ocenić skalę biznesu.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">SELECT</span>
+    ci.city_name city, ci.population population,
+    <span class="sql-fun">COUNT</span>(<span class="sql-key">DISTINCT</span> c.customer_id) unique_customers,
+    <span class="sql-fun">CAST</span>(<span class="sql-fun">COUNT</span>(<span class="sql-key">DISTINCT</span> c.customer_id) / <span class="sql-fun">NULLIF</span>(ci.population, 0) * 100 <span class="sql-key">AS DECIMAL</span> (10,4)) unique_percent
+<span class="sql-key">FROM</span> city ci <span class="sql-key">LEFT JOIN</span> customers c <span class="sql-key">ON</span> ci.city_id = c.city_id
+<span class="sql-key">JOIN</span> sales s <span class="sql-key">ON</span> c.customer_id = s.customer_id
+<span class="sql-key">GROUP BY</span> ci.city_name, ci.population <span class="sql-key">ORDER BY</span> unique_percent <span class="sql-key">DESC</span>;</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/res_9.png" class="result-img" alt="Wynik zapytania 9"></div>
+        </div>
+
+        <div class="sql-step" id="step-10">
+            <h3 data-translate="step10Title">10. Przychód na unikalnego i ogólnego klienta</h3>
+            <span class="step-description" data-translate="step10Desc">-- Zestawienie przychodów z liczbą klientów, żeby wiedzieć, gdzie zarabiamy najwięcej na pojedynczym zamówieniu.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">SELECT</span>
+    ci.city_name city,
+    <span class="sql-fun">COUNT</span>(s.customer_id) total_customers,
+    <span class="sql-fun">COUNT</span>(<span class="sql-key">DISTINCT</span> s.customer_id) unique_customers,
+    <span class="sql-fun">SUM</span>(s.total) sales_revenue,
+    <span class="sql-fun">COALESCE</span>(<span class="sql-fun">ROUND</span>(<span class="sql-fun">SUM</span>(s.total)/<span class="sql-fun">NULLIF</span>(<span class="sql-fun">COUNT</span>(c.customer_id), 0), 2), 0) sales_per_customer
+<span class="sql-key">FROM</span> city ci <span class="sql-key">LEFT JOIN</span> customers c <span class="sql-key">ON</span> ci.city_id = c.city_id
+<span class="sql-key">LEFT JOIN</span> sales s <span class="sql-key">ON</span> c.customer_id = s.customer_id
+<span class="sql-key">GROUP BY</span> ci.city_name <span class="sql-key">ORDER BY</span> sales_per_customer <span class="sql-key">DESC</span>;</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/res_10.png" class="result-img" alt="Wynik zapytania 10"></div>
+        </div>
+
+        <div class="sql-step" id="step-11">
+            <h3 data-translate="step11Title">11. Stosunek sprzedaży do czynszu</h3>
+            <span class="step-description" data-translate="step11Desc">-- Sprawdzenie, czy zarobki w miastach pokrywają wysokie czynsze i czy stacjonarne lokale mają tam sens.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">SELECT</span>
+    ci.city_name,
+    <span class="sql-fun">ROUND</span>(<span class="sql-fun">SUM</span>(s.total) / ci.estimated_rent, 2) sales_to_rent_ratio,
+    <span class="sql-fun">ROUND</span>(ci.estimated_rent / <span class="sql-fun">NULLIF</span>(<span class="sql-fun">COUNT</span>(<span class="sql-key">DISTINCT</span> s.customer_id), 0), 2) avg_rent_per_customer
+<span class="sql-key">FROM</span> sales s <span class="sql-key">JOIN</span> customers c <span class="sql-key">ON</span> s.customer_id = c.customer_id
+<span class="sql-key">JOIN</span> city ci <span class="sql-key">ON</span> c.city_id = ci.city_id
+<span class="sql-key">GROUP BY</span> ci.city_name, ci.estimated_rent <span class="sql-key">ORDER BY</span> sales_to_rent_ratio <span class="sql-key">DESC</span>;</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/res_11.png" class="result-img" alt="Wynik zapytania 11"></div>
+        </div>
+
+        <div class="sql-step" id="step-12">
+            <h3 data-translate="step12Title">12. Dynamika wzrostu przychodów (QoQ)</h3>
+            <span class="step-description" data-translate="step12Desc">-- Porównanie wyników sprzedaży między Q3 a Q4 2023 r. w celu wyznaczenia tempa wzrostu w poszczególnych miastach.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">WITH</span> quarterly_sales <span class="sql-key">AS</span> (
+    <span class="sql-key">SELECT</span> ci.city_name, <span class="sql-fun">EXTRACT</span>(QUARTER <span class="sql-key">FROM</span> s.sale_date) quarter, <span class="sql-fun">SUM</span>(s.total) revenue
+    <span class="sql-key">FROM</span> sales s <span class="sql-key">JOIN</span> customers cu <span class="sql-key">ON</span> s.customer_id = cu.customer_id
+    <span class="sql-key">JOIN</span> city ci <span class="sql-key">ON</span> cu.city_id = ci.city_id <span class="sql-key">WHERE</span> <span class="sql-fun">EXTRACT</span>(YEAR <span class="sql-key">FROM</span> s.sale_date) = 2023
+    <span class="sql-key">GROUP BY</span> ci.city_name, quarter)
+<span class="sql-key">SELECT</span>
+    curr.city_name, prev.revenue revenue_q3, curr.revenue revenue_q4,
+    <span class="sql-fun">ROUND</span>(((curr.revenue - prev.revenue) / prev.revenue) * 100, 2) qoq_growth_pct
+<span class="sql-key">FROM</span> quarterly_sales curr <span class="sql-key">JOIN</span> quarterly_sales prev 
+    <span class="sql-key">ON</span> curr.city_name = prev.city_name <span class="sql-key">AND</span> curr.quarter = 4 <span class="sql-key">AND</span> prev.quarter = 3
+<span class="sql-key">ORDER BY</span> qoq_growth_pct <span class="sql-key">DESC</span>;</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/res_12.png" class="result-img" alt="Wynik zapytania 12"></div>
+        </div>
+
+        <div class="sql-step" id="step-13">
+            <h3 data-translate="step13Title">13. Udział segmentu Premium</h3>
+            <span class="step-description" data-translate="step13Desc">-- Sprawdzenie, jaki procent sprzedaży stanowią produkty droższe niż średnia kwota, które miasta preferują droższy asortyment.</span>
+            <div class="code-container">
+<pre><code><span class="sql-key">SELECT</span>
+    ci.city_name,
+    <span class="sql-fun">COUNT</span>(<span class="sql-key">CASE WHEN</span> p.price > (<span class="sql-key">SELECT</span> <span class="sql-fun">AVG</span>(price) <span class="sql-key">FROM</span> products) <span class="sql-key">THEN</span> 1 <span class="sql-key">END</span>) premium_units_sold,
+    <span class="sql-fun">ROUND</span>(<span class="sql-fun">COUNT</span>(<span class="sql-key">CASE WHEN</span> p.price > (<span class="sql-key">SELECT</span> <span class="sql-fun">AVG</span>(price) <span class="sql-key">FROM</span> products) <span class="sql-key">THEN</span> 1 <span class="sql-key">END</span>) / <span class="sql-fun">COUNT</span>(s.sale_id) * 100, 2) premium_share_pct
+<span class="sql-key">FROM</span> sales s <span class="sql-key">JOIN</span> products p <span class="sql-key">ON</span> s.product_id = p.product_id
+<span class="sql-key">JOIN</span> customers cu <span class="sql-key">ON</span> s.customer_id = cu.customer_id
+<span class="sql-key">JOIN</span> city ci <span class="sql-key">ON</span> cu.city_id = ci.city_id
+<span class="sql-key">GROUP BY</span> ci.city_name <span class="sql-key">ORDER BY</span> premium_share_pct <span class="sql-key">DESC</span>;</code></pre>
+            </div>
+            <div class="result-container"><img src="/assets/res_13.png" class="result-img" alt="Wynik zapytania 13"></div>
+        </div>
+
+        <section class="final-analysis" id="final-analysis">
+            <h2 data-translate="finalTitle">Rekomendacja: Top 3 Miasta do Inwestycji</h2>
+            <div class="section-underline centered-underline"></div>
+            <p class="intro-text" data-translate="finalDesc">Po dogłębnej analizie relacji sprzedaży, dynamiki wzrostu i bazy klientów, oto ostateczne podium:</p>
+            <div class="top-cities-grid">
+                <div class="city-card">
+                    <h4>01. Pune</h4>
+                    <p data-translate="city1Desc">Bezkonkurencyjny lider przychodów (22.12% udziału) z najwyższą efektywnością finansową na klienta.</p>
+                </div>
+                <div class="city-card">
+                    <h4>02. Chennai</h4>
+                    <p data-translate="city2Desc">Bardzo silny segment premium i stabilna baza lojalnych konsumentów.</p>
+                </div>
+                <div class="city-card">
+                    <h4>03. Jaipur</h4>
+                    <p data-translate="city3Desc">Fenomenalna baza unikalnych klientów (69 osób), która bije na głowę znacznie większe metropolie.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close">&times;</button>
+        <img src="" alt="Powiększony obraz" class="lightbox-image">
+    </div>
+
+    <Footer />
+
+    <style is:global>
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1;}
+        .section-underline { margin: 20px 0 30px 0; width: 80px; height: 4px; border-radius: 2px; background: var(--line-gradient); }
+        .centered-underline { margin: 20px auto 30px auto; }
+
+        .project-hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 70px; }
+        .project-hero h1 { font-size: 3.8rem; font-weight: 800; margin-bottom: 20px; color: var(--text-primary); }
+        .project-hero p { max-width: 800px; color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 40px; }
+
+        .nav-buttons { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+        .btn-nav { padding: 14px 28px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: 1px solid var(--cyan); font-size: 0.95rem; display: inline-block; }
+        .btn-primary { background: var(--line-gradient); color: white; border: none; box-shadow: 0 4px 15px var(--spotlight-color); }
+        .btn-secondary { color: var(--cyan); background: var(--bg-surface); border-color: var(--cyan); }
+        .btn-outline { color: var(--text-primary); border: 1px solid var(--border-color); background: var(--bg-surface); }
+        .btn-nav:hover { transform: translateY(-3px); box-shadow: 0 10px 20px var(--spotlight-color); }
+        .btn-outline:hover { background: var(--hover-bg); border-color: var(--cyan); color: var(--cyan); }
+
+        .audit-section { padding: 100px 0; }
+        .audit-section h2 { color: var(--text-primary); }
+        .audit-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1100px; margin: 0 auto; justify-items: center; }
+        .audit-card { width: 100%; text-align: center; }
+        .audit-card h4 { margin-bottom: 15px; color: var(--cyan); font-size: 1.2rem; }
+        
+        .audit-card .result-container { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 10px; height: 220px; overflow: hidden; display: flex; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(10px); }
+        .audit-card:hover .result-container { border-color: var(--cyan); box-shadow: var(--card-shadow); }
+        .audit-card .result-img { width: 100%; height: 100%; object-fit: cover; object-position: top center; border-radius: 6px; transition: transform 0.5s ease; }
+        .audit-card:hover .result-img { transform: scale(1.05); }
+
+        .sql-step { padding: 80px 0; border-top: 1px solid var(--border-color); scroll-margin-top: 80px; }
+        .sql-step h3 { font-size: 2.2rem; margin-bottom: 10px; background: var(--line-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .step-description { display: block; font-style: italic; color: var(--text-secondary); margin-bottom: 25px; padding-left: 20px; border-left: 3px solid var(--indigo); }
+        
+        .code-container { background: #0d1117; border-radius: 12px; border: 1px solid var(--border-color); padding: 25px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);}
+        pre { overflow-x: auto; font-family: 'Consolas', 'Courier New', monospace; color: #c9d1d9; font-size: 0.95rem; }
+        .sql-key { color: #ff7b72; } .sql-fun { color: #d2a8ff; } .sql-com { color: #8b949e; }
+
+        .sql-step .result-container { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; cursor: pointer; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+        .sql-step .result-container:hover { border-color: var(--cyan); box-shadow: var(--card-shadow); }
+        .sql-step .result-img { width: 100%; height: auto; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05); }
+
+        .final-analysis { padding: 100px 0; background: transparent; margin: 80px 0; text-align: center; scroll-margin-top: 100px; }
+        .final-analysis h2 { color: var(--text-primary); font-size: 2.5rem; }
+        .final-analysis p.intro-text { color: var(--text-secondary); font-size: 1.1rem; }
+        .top-cities-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+        
+        .city-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 20px; padding: 30px; text-align: center; position: relative; overflow: visible; backdrop-filter: blur(10px); }
+        .city-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 40%); opacity: 0; transition: opacity 0.3s; pointer-events: none; border-radius: 20px; z-index: 0; }
+        .city-card > * { position: relative; z-index: 1; }
+        .city-card:hover { transform: translateY(-8px) scale(1.02); border-color: var(--cyan); box-shadow: var(--card-shadow); }
+        .city-card:hover::before { opacity: 1; }
+        .city-card h4 { font-size: 1.8rem; margin-bottom: 15px; color: var(--text-primary); font-weight: 700; }
+        .city-card p { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; }
+
+        @media (max-width: 900px) {
+            .audit-grid, .top-cities-grid { grid-template-columns: 1fr; }
+            .project-hero h1 { font-size: 2.5rem; }
+            .nav-buttons { flex-direction: column; width: 100%; }
+        }
+    </style>
+
+    <script is:inline>
+        const translations = {
+            pl: {
+                pageTitle: "SQL Case Study: Coffee Shops Analysis | Jakub Nicpoń",
+                navHome: "Home",
+                navAbout: "O Mnie",
+                navProjects: "Projekty",
+                heroTitle: "Coffee Shops Market Analysis",
+                heroDesc: "Analiza danych rynkowych kawiarni w Indiach. Wykorzystałem SQL do zbadania rentowności produktów, nasycenia rynku oraz dynamiki przychodów, co pozwoliło wyłonić kluczowe miasta pod przyszłe inwestycje.",
+                btnSql: "Zobacz zapytania SQL",
+                btnAnalysis: "Analiza Końcowa",
+                btnDownload: "Pobierz pliki CSV",
+                auditTitle: "Struktura tabel",
+                
+                step0Title: "00. Stworzenie bazy i struktury pod import danych",
+                step0Desc: "-- Co obliczam i po co: Przygotowuję fundament pod projekt, czyli tworzę bazę i tabele z relacjami, żeby wszystko było na swoim miejscu przed importem danych.",
+                
+                step1Title: "01. Szacowana liczba konsumentów",
+                step1Desc: "-- Ilu potencjalnych kawoszy mieszka w każdym mieście, zakładając, że co piąta osoba pije kawę. (wg. Google - 20% populacji Indii pije kawę)",
+                
+                step2Title: "02. Całkowity przychód ze sprzedaży",
+                step2Desc: "-- Suma przychodów z ostatniego kwartału 2023 roku, żeby zobaczyć, które miasta najlepiej zarabiały pod koniec roku.",
+                
+                step3Title: "03. Wolumen sprzedaży produktów",
+                step3Desc: "-- Sprawdzenie, co ludzie najchętniej kupują i które produkty przynoszą najwięcej gotówki.",
+                
+                step4Title: "04. Średnia kwota koszyka wg miast",
+                step4Desc: "-- Sprawdzenie, ile przeciętnie klient zostawia pieniędzy podczas jednej wizyty w zależności od miasta.",
+                
+                step5Title: "05. Średni przychód na klienta",
+                step5Desc: "-- Jaka kwota średnio wyciągana jest od jednego, konkretnego klienta – gdzie mamy najbardziej lojalnych fanów.",
+                
+                step6Title: "06. Nasycenie rynku (Penetration Rate)",
+                step6Desc: "-- Porównanie liczby realnych klientów do wszystkich potencjalnych kawoszy w mieście, żeby zobaczyć, ile rynku potencjalnie jest \"spenetrowane\".",
+                
+                step7Title: "07. Top 3 Produkty w każdym mieście",
+                step7Desc: "-- Ranking najlepiej sprzedających się rzeczy dla każdego miasta z osobna.",
+                
+                step8Title: "08. Produkty nigdy niesprzedane",
+                step8Desc: "-- Towary oraz ich ilość, których nikt w danym mieście jeszcze nie kupił, żeby orientacyjnie wiedzieć, gdzie w najmniejszym stopniu widnieje popyt na oferowany towar.",
+                
+                step9Title: "09. Procent populacji jako klienci",
+                step9Desc: "-- Wyliczenie, jaki ułamek całego miasta stanowią klienci, żeby ocenić skalę biznesu.",
+                
+                step10Title: "10. Przychód na unikalnego i ogólnego klienta",
+                step10Desc: "-- Zestawienie przychodów z liczbą klientów, żeby wiedzieć, gdzie zarabiamy najwięcej na pojedynczym zamówieniu.",
+                
+                step11Title: "11. Stosunek sprzedaży do czynszu",
+                step11Desc: "-- Sprawdzenie, czy zarobki w miastach pokrywają wysokie czynsze i czy stacjonarne lokale mają tam sens.",
+                
+                step12Title: "12. Dynamika wzrostu przychodów (QoQ)",
+                step12Desc: "-- Porównanie wyników sprzedaży między Q3 a Q4 2023 r. w celu wyznaczenia tempa wzrostu w poszczególnych miastach.",
+                
+                step13Title: "13. Udział segmentu Premium",
+                step13Desc: "-- Sprawdzenie, jaki procent sprzedaży stanowią produkty droższe niż średnia kwota, które miasta preferują droższy asortyment.",
+                
+                finalTitle: "Rekomendacja: Top 3 Miasta do Inwestycji",
+                finalDesc: "Po dogłębnej analizie relacji sprzedaży, dynamiki wzrostu i bazy klientów, oto ostateczne podium:",
+                city1Desc: "Bezkonkurencyjny lider przychodów (22.12% udziału) z najwyższą efektywnością finansową na klienta.",
+                city2Desc: "Bardzo silny segment premium i stabilna baza lojalnych konsumentów.",
+                city3Desc: "Fenomenalna baza unikalnych klientów (69 osób), która bije na głowę znacznie większe metropolie."
+            },
+            en: {
+                pageTitle: "SQL Case Study: Coffee Shops Analysis | Jakub Nicpoń",
+                navHome: "Home",
+                navAbout: "About",
+                navProjects: "Projects",
+                heroTitle: "Coffee Shops Market Analysis",
+                heroDesc: "Market data analysis of coffee shops in India. I used SQL to investigate product profitability, market penetration, and revenue dynamics to identify key cities for future investments.",
+                btnSql: "View SQL Queries",
+                btnAnalysis: "Final Analysis",
+                btnDownload: "Download CSV Files",
+                auditTitle: "Table Structure",
+                
+                step0Title: "00. Database and structure creation for data import",
+                step0Desc: "-- What I calculate and why: Preparing the foundation for the project, creating the database and tables with relations so everything is ready before data import.",
+                
+                step1Title: "01. Estimated number of consumers",
+                step1Desc: "-- How many potential coffee drinkers live in each city, assuming one in five people drinks coffee. (According to Google - 20% of India's population drinks coffee)",
+                
+                step2Title: "02. Total sales revenue",
+                step2Desc: "-- Sum of revenues from the last quarter of 2023 to see which cities earned the most at the end of the year.",
+                
+                step3Title: "03. Product sales volume",
+                step3Desc: "-- Checking what people buy most often and which products generate the most cash.",
+                
+                step4Title: "04. Average order value by city",
+                step4Desc: "-- Checking how much money an average customer leaves during a single visit depending on the city.",
+                
+                step5Title: "05. Average revenue per customer",
+                step5Desc: "-- What average amount is drawn from a single, specific customer – where we have the most loyal fans.",
+                
+                step6Title: "06. Market Penetration Rate",
+                step6Desc: "-- Comparing the number of real customers to all potential coffee drinkers in the city to see how much of the market is potentially 'penetrated'.",
+                
+                step7Title: "07. Top 3 Products in each city",
+                step7Desc: "-- Ranking of the best-selling items for each city individually.",
+                
+                step8Title: "08. Unsold products",
+                step8Desc: "-- Goods and their quantities that no one in a given city has bought yet, to get a rough idea where demand for the offered goods is lowest.",
+                
+                step9Title: "09. Percentage of population as customers",
+                step9Desc: "-- Calculating what fraction of the entire city are customers to assess the scale of the business.",
+                
+                step10Title: "10. Revenue per unique and general customer",
+                step10Desc: "-- Juxtaposing revenues with the number of customers to know where we earn the most on a single order.",
+                
+                step11Title: "11. Sales to rent ratio",
+                step11Desc: "-- Checking if earnings in cities cover high rents and if physical premises make sense there.",
+                
+                step12Title: "12. Revenue growth dynamics (QoQ)",
+                step12Desc: "-- Comparing sales results between Q3 and Q4 of 2023 to determine the growth rate in individual cities.",
+                
+                step13Title: "13. Premium segment share",
+                step13Desc: "-- Checking what percentage of sales consists of products more expensive than the average amount, to see which cities prefer a more expensive assortment.",
+                
+                finalTitle: "Recommendation: Top 3 Cities for Investment",
+                finalDesc: "After an in-depth analysis of sales relations, growth dynamics, and customer base, here is the final podium:",
+                city1Desc: "Unrivaled revenue leader (22.12% share) with the highest financial efficiency per customer.",
+                city2Desc: "A very strong premium segment and a stable base of loyal consumers.",
+                city3Desc: "A phenomenal base of unique customers (69 people), outperforming much larger metropolises."
+            }
+        };
+
+        const setLocalLanguage = (lang) => {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.dataset.translate;
+                if (translations[lang] && translations[lang][key]) { 
+                    el.innerHTML = translations[lang][key]; 
+                }
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            localStorage.setItem('preferredLanguage', lang);
+        };
+
+        document.querySelectorAll('.lang-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                setLocalLanguage(button.dataset.lang);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'pl';
+            setLocalLanguage(preferredLanguage);
+
+            // Lightbox
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = lightbox.querySelector('.lightbox-image');
+            const lightboxClose = lightbox.querySelector('.lightbox-close');
+            const allImages = document.querySelectorAll('.result-img');
+
+            const openLightbox = (imgSrc) => {
+                lightboxImg.src = imgSrc;
+                lightbox.classList.add('open');
+                if (window.lenis) window.lenis.stop();
+            };
+
+            const closeLightbox = () => {
+                lightbox.classList.remove('open');
+                if (window.lenis) window.lenis.start();
+            };
+
+            allImages.forEach(img => {
+                img.parentElement.addEventListener('click', () => {
+                    openLightbox(img.src);
+                });
+            });
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+            });
+
+            // Glow effect for city cards
+            document.querySelectorAll('.city-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                });
+            });
+        });
+    </script>
+</BaseLayout>

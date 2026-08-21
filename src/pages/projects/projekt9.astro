@@ -1,0 +1,1064 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout title="Projekt: TikTok Spotify Correlation Analysis | Portfolio Jakub Nicpoń">
+  <Navbar />
+
+  <main class="container">
+    <header class="project-hero">
+      <h1 data-translate="heroTitle">Projekt: TikTok Spotify Correlation Analysis</h1>
+      <div class="section-underline centered-underline"></div>
+      <p data-translate="heroDesc">
+        Analiza wpływu popularności utworów na TikToku na ich odtworzenia na Spotify. Projekt łączy inżynierię danych w SQL Server (czyszczenie, kategoryzacja, tworzenie widoków) z zaawansowanym modelowaniem w Power BI (miary DAX, Drill-Through, badanie korelacji i testy statystyczne T-Value).
+      </p>
+      <div class="nav-buttons">
+        <a href="#project-details-card" class="btn-nav btn-primary" onclick="showSection('sectionSQL')" data-translate="btnSql">SQL: Inżynieria Danych</a>
+        <a href="#project-details-card" class="btn-nav btn-secondary" onclick="showSection('sectionDAX')" data-translate="btnDax">DAX: Miary & Model</a>
+        <a href="#project-details-card" class="btn-nav btn-outline" onclick="showSection('sectionInsights')" data-translate="btnInsights">Analiza & Wnioski</a>
+      </div>
+      
+      <div class="hero-image-wrapper">
+        <div class="project-gallery-grid">
+          <img src="/assets/TikTokSpotify1.png" alt="Dashboard Main Page" class="project-image" loading="eager" />
+          <img src="/assets/TikTokSpotify2.png" alt="Drill-Through Page" class="project-image" loading="lazy" />
+          <img src="/assets/TikTokSpotify3.png" alt="Categories Correlation" class="project-image" loading="lazy" />
+          <img src="/assets/TikTokSpotify4.png" alt="Ranking Different" class="project-image" loading="lazy" />
+          <img src="/assets/TikTokSpotify5.png" alt="Explicit Analysis" class="project-image" loading="lazy" />
+        </div>
+      </div>
+    </header>
+
+    <section class="project-highlights">
+      <h2 data-translate="kpiTitle">Kluczowe Wskaźniki Korelacji (TikTok vs Spotify)</h2>
+      <div class="section-underline centered-underline"></div>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-value">0.04</span>
+          <span class="kpi-label" data-translate="kpi1Label">Pierwotna Korelacja (Całość)</span>
+          <span class="kpi-trend trend-down" data-translate="kpi1Trend">Zakłócona przez outliery</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-value">0.25</span>
+          <span class="kpi-label" data-translate="kpi2Label">Korelacja (bez outlierów)</span>
+          <span class="kpi-trend trend-up" data-translate="kpi2Trend">Niska, ale znacząca</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-value">-0.03</span>
+          <span class="kpi-label" data-translate="kpi3Label">Korelacja Viral (>1M postów)</span>
+          <span class="kpi-trend trend-down" data-translate="kpi3Trend">Brak przełożenia na streaming</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-details">
+      <h2 data-translate="detailsTitle">Architektura Projektu</h2>
+      <div class="section-underline centered-underline"></div>
+      
+      <div class="details-card" id="project-details-card">
+        <div class="toggle-buttons">
+          <button class="toggle-btn is-active" onclick="showSection('sectionSQL')" data-translate="tabSQL">1. SQL: Pipeline Danych</button>
+          <button class="toggle-btn" onclick="showSection('sectionDAX')" data-translate="tabDAX">2. Power BI: DAX</button>
+          <button class="toggle-btn" onclick="showSection('sectionPowerBI')" data-translate="tabPBI">3. Struktura Raportu</button>
+          <button class="toggle-btn" onclick="showSection('sectionInsights')" data-translate="tabInsights">4. Analiza & Wnioski</button>
+        </div>
+        
+        <div id="info-sections-container">
+          <div id="sectionSQL" class="info-section active" role="region">
+            <div id="sqlContentBody"></div>
+          </div>
+          <div id="sectionDAX" class="info-section" role="region">
+            <div id="daxContentBody"></div>
+          </div>
+          <div id="sectionPowerBI" class="info-section" role="region">
+            <div id="pbiContentBody"></div>
+          </div>
+          <div id="sectionInsights" class="info-section" role="region">
+            <div class="analysis-grid">
+              <div class="analysis-conclusions">
+                <ol id="insightsContentBody"></ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="project-files">
+      <h2 data-translate="downloadTitle">Pobierz Zasoby Projektu</h2>
+      <div class="section-underline centered-underline"></div>
+      <div class="files-container">
+        <a href="/assets/Most_Streamed_Spotify_Songs.csv" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadRaw">Pobierz plik CSV</span></a>
+        <a href="/assets/TikTok Spotify Dashboard.pbix" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadPBI">Pobierz Plik Power BI</span></a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <style>
+    /* STYLE SPECYFICZNE DLA STRONY PROJEKTU */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1;}
+    .section-underline { margin: 20px 0 30px 0; width: 80px; height: 4px; border-radius: 2px; background: var(--line-gradient); }
+    .centered-underline { margin: 20px auto 30px auto; }
+    
+    .project-hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 0 50px 0; }
+    .project-hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; color: var(--text-primary); }
+    .project-hero p { max-width: 850px; color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; }
+
+    .nav-buttons { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+    .btn-nav { padding: 14px 28px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: 1px solid var(--cyan); font-size: 0.95rem; display: inline-block; cursor: pointer; }
+    .btn-primary { background: var(--line-gradient); color: white; border: none; box-shadow: 0 4px 15px var(--spotlight-color); }
+    .btn-secondary { color: var(--cyan); background: var(--bg-surface); border-color: var(--cyan); }
+    .btn-outline { color: var(--text-primary); border: 1px solid var(--border-color); background: var(--bg-surface); }
+    
+    .btn-nav:hover { transform: translateY(-3px); box-shadow: 0 10px 20px var(--spotlight-color); }
+    .btn-outline:hover { background: var(--hover-bg); border-color: var(--cyan); color: var(--cyan); }
+
+    .hero-image-wrapper { perspective: 1000px; margin-top: 50px; width: 100%;}
+    .project-image { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: var(--card-shadow); cursor: pointer; border: 1px solid var(--border-color); transition: transform 0.3s ease, border-color 0.3s ease; }
+    .project-image:hover { transform: scale(1.05) rotateY(-5deg) rotateX(5deg); border-color: var(--cyan); }
+    .project-gallery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; }
+    
+    .project-gallery-grid .project-image:nth-child(1) { grid-column: span 3; }
+    .project-gallery-grid .project-image:nth-child(2) { grid-column: span 3; }
+    .project-gallery-grid .project-image:nth-child(3) { grid-column: span 2; }
+    .project-gallery-grid .project-image:nth-child(4) { grid-column: span 2; }
+    .project-gallery-grid .project-image:nth-child(5) { grid-column: span 2; }
+
+    /* KPI SECTION */
+    .project-highlights { padding: 80px 0; z-index: 1; position: relative;}
+    .project-highlights h2, .project-details h2, .project-files h2 { text-align: center; font-size: 2.5rem; font-weight: 700; background: var(--line-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-top: 50px; justify-content: center; }
+    
+    .kpi-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; text-align: center; position: relative; overflow: visible; backdrop-filter: blur(10px); transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background-color var(--transition-speed) ease; }
+    .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--spotlight-color), transparent 50%); opacity: 0; transition: opacity 0.3s; border-radius: 15px; pointer-events: none; z-index: 0; }
+    .kpi-card > * { position: relative; z-index: 1; }
+    .kpi-card:hover { transform: translateY(-8px) scale(1.03); border-color: var(--cyan); box-shadow: var(--card-shadow); }
+    .kpi-card:hover::before { opacity: 1; }
+    
+    .kpi-value { display: block; font-size: 2.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+    .kpi-label { font-size: 1rem; color: var(--text-secondary); }
+    .kpi-trend { display: inline-block; padding: 4px 8px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-top: 10px; }
+    .trend-up { background: rgba(33, 163, 102, 0.2); color: #21a366; }
+    .trend-down { background: rgba(220, 53, 69, 0.2); color: #dc3545; }
+
+    /* DETAILS SECTION (TABS) */
+    .project-details { padding: 80px 0; z-index: 1; position: relative;}
+    .details-card { background: var(--bg-surface); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--card-shadow); transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+    
+    .toggle-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
+    .toggle-btn { appearance: none; background: var(--btn-bg); border: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 600; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 12px 24px; border-radius: 12px; cursor: pointer; transition: all .2s ease;}
+    .toggle-btn:hover { color: var(--text-primary); border-color: var(--cyan); transform: translateY(-2px); }
+    .toggle-btn.is-active { background: var(--line-gradient); color: white; border-color: transparent; transform: scale(1.05); box-shadow: 0 5px 15px var(--spotlight-color); }
+    
+    .info-section { display: none; margin-top: 20px; padding-top: 30px; border-top: 1px solid var(--border-color); }
+    .info-section.active { display: block; animation: fadeIn .4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    /* ANALIZA WNIOSKÓW (INSIGHTS) */
+    .analysis-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
+    :global(.analysis-conclusions ol) { list-style: none; padding-left: 0; counter-reset: conclusion-counter; }
+    :global(.analysis-conclusions li) { position: relative; padding-left: 45px; margin-bottom: 35px; background: rgba(255,255,255,0.02); padding: 25px 25px 25px 65px; border-radius: 12px; border: 1px solid var(--border-color); }
+    :global(.analysis-conclusions li::before) { counter-increment: conclusion-counter; content: counter(conclusion-counter); position: absolute; left: 15px; top: 25px; width: 35px; height: 35px; border-radius: 50%; background: var(--line-gradient); color: white; font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px var(--spotlight-color);}
+    :global(.analysis-conclusions li > strong) { display: block; margin-bottom: 5px; color: var(--text-primary); font-size: 1.1rem; }    :global(.analysis-conclusions p) { color: var(--text-secondary); font-size: 1rem; margin-bottom: 15px; }
+
+    /* STRUKTURA RAPORTU */
+    :global(.report-structure) { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+    :global(.report-card) { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; }
+    :global(.report-card:hover) { border-color: var(--cyan); box-shadow: 0 5px 20px var(--spotlight-color); transform: translateY(-5px); }
+    :global(.report-card h4) { color: var(--cyan); font-size: 1.3rem; margin-bottom: 15px; font-weight: 700; display: flex; align-items: center; gap: 12px; }
+    :global(.report-card p) { color: var(--text-secondary); margin: 0; font-size: 0.95rem; line-height: 1.6; }
+    :global(.report-card svg) { width: 28px; height: 28px; color: var(--text-primary); }
+
+    /* SQL & DAX BLOCKS */
+    :global(.step-description) { display: block; font-style: italic; color: var(--text-secondary); margin-bottom: 25px; padding-left: 20px; border-left: 3px solid var(--indigo); font-size: 0.95rem; }
+    :global(.code-container) { background: var(--code-bg); border-radius: 12px; border: 1px solid var(--border-color); padding: 25px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative;}
+    [data-theme="light"] :global(.code-container) { box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); }
+    :global(.code-container::before) { position: absolute; top: 12px; right: 20px; font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.3); }
+    :global(.code-container.sql-block::before) { content: 'SQL'; }
+    :global(.code-container.dax-block::before) { content: 'DAX'; }
+    
+    :global(pre) { overflow-x: auto; font-family: 'Consolas', 'Courier New', monospace; color: #c9d1d9; font-size: 0.95rem; }
+    
+    /* SQL Syntax */
+    :global(.sql-key) { color: #ff7b72; font-weight: 600;} 
+    :global(.sql-fun) { color: #d2a8ff; } 
+    :global(.sql-com) { color: #8b949e; font-style: italic; } 
+    :global(.sql-str) { color: #a5d6a7; } 
+
+    /* DAX Syntax */
+    :global(.dax-measure) { color: #79C0FF; font-weight: 600;}
+    :global(.dax-operator) { color: #ff7b72; font-weight: bold;}
+    :global(.dax-fun) { color: #D2A8FF; font-weight: 600;}
+    :global(.dax-table) { color: #ffab70; }
+    :global(.dax-var) { color: #ff7b72; }
+
+    /* FILES SECTION */
+    .project-files { padding: 20px 0; z-index: 1; position: relative;}
+    .files-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 50px; }
+    .gradient__border__container { display: inline-block; position: relative; padding: 1px; border-radius: 30px; background: var(--line-gradient); background-size: 200% 200%; animation: spin-gradient 6s linear infinite; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; min-width: 150px; text-align: center; text-decoration: none; box-shadow: 0 4px 20px var(--spotlight-color); }
+    .gradient__border__container:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--spotlight-color); }
+    .gradient__border__container .gradient__border__text { display: block; background: var(--bg-surface); border-radius: 29px; padding: 0.8rem 2rem; font-size: 1rem; font-weight: 600; color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+    .gradient__border__container:hover .gradient__border__text { background: transparent; color: #fff;}
+    @keyframes spin-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+    @media (max-width: 900px) {
+      .project-hero h1 { font-size: 2.5rem; }
+      .nav-buttons { flex-direction: column; width: 100%; }
+      .project-gallery-grid { grid-template-columns: 1fr; }
+      .project-gallery-grid .project-image:nth-child(n) { grid-column: span 1; }
+      :global(.report-structure) { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) { 
+      :global(.analysis-conclusions li) { padding: 20px 15px 20px 15px; } 
+      :global(.analysis-conclusions li::before) { top: -15px; left: 15px;} 
+    }
+  </style>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const translations = {
+        pl: {
+          pageTitle: "Projekt: TikTok Spotify Correlation Analysis | Portfolio Jakub Nicpoń",
+          navHome: "Home",
+          navAbout: "O Mnie",
+          navProjects: "Projekty",
+          heroTitle: "Projekt: TikTok Spotify Correlation Analysis",
+          heroDesc: "Analiza wpływu popularności utworów na TikToku na ich odtworzenia na Spotify. Projekt łączy inżynierię danych w SQL Server (czyszczenie, kategoryzacja, tworzenie widoków) z zaawansowanym modelowaniem w Power BI (miary DAX, Drill-Through, badanie korelacji i testy statystyczne T-Value).",
+          
+          btnSql: "SQL: Inżynieria Danych",
+          btnDax: "DAX: Miary & Model",
+          btnInsights: "Analiza & Wnioski",
+          
+          kpiTitle: "Kluczowe Wskaźniki Korelacji (TikTok vs Spotify)",
+          kpi1Label: "Pierwotna Korelacja (Całość)",
+          kpi1Trend: "Zakłócona przez outliery",
+          kpi2Label: "Korelacja (bez outlierów)",
+          kpi2Trend: "Niska, ale znacząca",
+          kpi3Label: "Korelacja Viral (>1M postów)",
+          kpi3Trend: "Brak przełożenia na streaming",
+          
+          detailsTitle: "Architektura Projektu",
+          tabSQL: "1. SQL: Pipeline Danych",
+          tabDAX: "2. Power BI: DAX",
+          tabPBI: "3. Struktura Raportu",
+          tabInsights: "4. Analiza & Wnioski",
+          
+          downloadTitle: "Pobierz Zasoby Projektu",
+          btnDownloadRaw: "Pobierz plik CSV",
+          btnDownloadPBI: "Pobierz Plik Power BI",
+
+          sqlContent: `
+            <span class="step-description">Krok 1: Utworzenie bazy danych.</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-key">CREATE DATABASE</span> SpotifyTikTokAnalysis;
+<span class="sql-key">GO</span>
+
+<span class="sql-key">USE</span> SpotifyTikTokAnalysis;
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Krok 2: Stworzenie schematów jako etapów pracy z danymi.</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 2. Stworzenie schematow jako etapow pracy z danymi</span>
+<span class="sql-key">CREATE SCHEMA</span> raw;
+<span class="sql-key">GO</span>
+<span class="sql-key">CREATE SCHEMA</span> staging;
+<span class="sql-key">GO</span>
+<span class="sql-key">CREATE SCHEMA</span> final;
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Krok 3: Stworzenie tabeli do importu surowych danych (NVARCHAR).</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 3. Stworzenie tabeli do importu surowych danych z pliku Most Streamed Spotify Songs.csv</span>
+<span class="sql-key">CREATE TABLE</span> raw.SpotifySongs (
+    Track <span class="sql-key">NVARCHAR</span>(500),
+    Album_Name <span class="sql-key">NVARCHAR</span>(500),
+    Artist <span class="sql-key">NVARCHAR</span>(500),
+    Release_Date <span class="sql-key">NVARCHAR</span>(100),
+    ISRC <span class="sql-key">NVARCHAR</span>(100),
+    All_Time_Rank <span class="sql-key">NVARCHAR</span>(100),
+    Track_Score <span class="sql-key">NVARCHAR</span>(100),
+    Spotify_Streams <span class="sql-key">NVARCHAR</span>(100),
+    Spotify_Playlist_Count <span class="sql-key">NVARCHAR</span>(100),
+    Spotify_Playlist_Reach <span class="sql-key">NVARCHAR</span>(100),
+    Spotify_Popularity <span class="sql-key">NVARCHAR</span>(100),
+    YouTube_Views <span class="sql-key">NVARCHAR</span>(100),
+    YouTube_Likes <span class="sql-key">NVARCHAR</span>(100),
+    TikTok_Posts <span class="sql-key">NVARCHAR</span>(100),
+    TikTok_Likes <span class="sql-key">NVARCHAR</span>(100),
+    TikTok_Views <span class="sql-key">NVARCHAR</span>(100),
+    YouTube_Playlist_Reach <span class="sql-key">NVARCHAR</span>(100),
+    Apple_Music_Playlist_Count <span class="sql-key">NVARCHAR</span>(100),
+    AirPlay_Spins <span class="sql-key">NVARCHAR</span>(100),
+    SiriusXM_Spins <span class="sql-key">NVARCHAR</span>(100),
+    Deezer_Playlist_Count <span class="sql-key">NVARCHAR</span>(100),
+    Deezer_Playlist_Reach <span class="sql-key">NVARCHAR</span>(100),
+    Amazon_Playlist_Count <span class="sql-key">NVARCHAR</span>(100),
+    Pandora_Streams <span class="sql-key">NVARCHAR</span>(100),
+    Pandora_Track_Stations <span class="sql-key">NVARCHAR</span>(100),
+    Soundcloud_Streams <span class="sql-key">NVARCHAR</span>(100),
+    Shazam_Counts <span class="sql-key">NVARCHAR</span>(100),
+    TIDAL_Popularity <span class="sql-key">NVARCHAR</span>(100),
+    Explicit_Track <span class="sql-key">NVARCHAR</span>(50)
+);
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Krok 4: Stworzenie docelowej tabeli w schemacie 'staging' z właściwymi typami danych (BIGINT ze względu na Power BI).</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 4. Stworzenie docelowej tabeli z własciwymi typami danych</span>
+<span class="sql-com">-- przez blad w Power BI trzeba bylo uzyc BIGINT</span>
+<span class="sql-key">CREATE TABLE</span> staging.SpotifySongs (
+    Id <span class="sql-key">INT IDENTITY</span>(1,1) <span class="sql-key">PRIMARY KEY</span>, <span class="sql-com">-- autoinkrementacja</span>
+    Track <span class="sql-key">NVARCHAR</span>(500),
+    Album_Name <span class="sql-key">NVARCHAR</span>(500),
+    Artist <span class="sql-key">NVARCHAR</span>(500),
+    Release_Date <span class="sql-key">DATE</span>,
+    ISRC <span class="sql-key">NVARCHAR</span>(100),
+    All_Time_Rank <span class="sql-key">BIGINT</span>, <span class="sql-com">-- zmiana na BIGINT</span>
+    Track_Score <span class="sql-key">FLOAT</span>,
+    Spotify_Streams <span class="sql-key">BIGINT</span>,
+    Spotify_Playlist_Count <span class="sql-key">BIGINT</span>, <span class="sql-com">-- zmiana na BIGINT</span>
+    Spotify_Popularity <span class="sql-key">BIGINT</span>, <span class="sql-com">-- zmiana na BIGINT</span>
+    YouTube_Views <span class="sql-key">BIGINT</span>,
+    YouTube_Likes <span class="sql-key">BIGINT</span>,
+    TikTok_Posts <span class="sql-key">BIGINT</span>,
+    TikTok_Likes <span class="sql-key">BIGINT</span>,
+    TikTok_Views <span class="sql-key">BIGINT</span>,
+    Explicit_Track <span class="sql-key">BIT</span> <span class="sql-com">-- true/false - pozniej w Power BI zamiana na Explicit/Clean</span>
+);
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Krok 5: Wyczyszczenie i import danych z warstwy RAW do STAGING. Usunięcie przecinków i konwersja.</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 5. Wyczyszczenie i import danych z warstwy RAW do STAGING</span>
+<span class="sql-key">INSERT INTO</span> staging.SpotifySongs (
+    Track, Album_Name, Artist, Release_Date, ISRC, All_Time_Rank, Track_Score,
+    Spotify_Streams, Spotify_Playlist_Count, Spotify_Popularity,
+    YouTube_Views, YouTube_Likes, TikTok_Posts, TikTok_Likes, TikTok_Views, Explicit_Track
+)
+<span class="sql-key">SELECT</span>
+    <span class="sql-fun">TRIM</span>(Track),
+    <span class="sql-fun">TRIM</span>(Album_Name),
+    <span class="sql-fun">TRIM</span>(Artist),
+    <span class="sql-fun">TRY_CAST</span>(Release_Date <span class="sql-key">AS DATE</span>),
+    <span class="sql-fun">TRIM</span>(ISRC),
+    <span class="sql-com">-- usuniecie przecinkow w celu unikniecia bledow przy liczbach</span>
+    <span class="sql-com">-- uzywamy BIGINT dla bezpieczenstwa przy duzych liczbach</span>
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(All_Time_Rank, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(Track_Score, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS FLOAT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(Spotify_Streams, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(Spotify_Playlist_Count, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(Spotify_Popularity, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(YouTube_Views, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(YouTube_Likes, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(TikTok_Posts, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(TikTok_Likes, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(TikTok_Views, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(Explicit_Track <span class="sql-key">AS BIT</span>)
+    <span class="sql-key">FROM</span> raw.SpotifySongs;
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Krok 6: Stworzenie widoku z kategoryzacją utworów ze względu na liczbę postów na TikToku.</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 6. Stworzenie widoku z podstawowymi metrykami i kategoryzacja utworow na TikToku</span>
+<span class="sql-key">CREATE OR ALTER VIEW</span> final.TikTok_Categories <span class="sql-key">AS</span>
+<span class="sql-key">WITH</span> CategorizedTracks <span class="sql-key">AS</span> (
+    <span class="sql-key">SELECT</span>
+        Id,
+        Spotify_Streams,
+        YouTube_Views,
+        TikTok_Posts,
+        <span class="sql-key">CASE</span>
+            <span class="sql-key">WHEN</span> TikTok_Posts >= 1000000 <span class="sql-key">THEN</span> <span class="sql-str">'1. Viral (> 1M posts)'</span>
+            <span class="sql-key">WHEN</span> TikTok_Posts >= 100000 <span class="sql-key">THEN</span> <span class="sql-str">'2. Popular (100k - 1M posts)'</span>
+            <span class="sql-key">WHEN</span> TikTok_Posts > 0 <span class="sql-key">THEN</span> <span class="sql-str">'3. Niche (< 100k posts)'</span>
+            <span class="sql-key">ELSE</span> <span class="sql-str">'4. No TikTok Data/Zero'</span>
+        <span class="sql-key">END AS</span> TikTok_Category
+    <span class="sql-key">FROM</span> staging.SpotifySongs
+)
+<span class="sql-key">SELECT</span>
+    TikTok_Category,
+    <span class="sql-fun">COUNT</span>(Id) <span class="sql-key">AS</span> Number_Of_Tracks,
+    <span class="sql-fun">AVG</span>(<span class="sql-fun">CAST</span>(Spotify_Streams <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Avg_Spotify_Streams,
+    <span class="sql-fun">AVG</span>(<span class="sql-fun">CAST</span>(YouTube_Views <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Avg_YouTube_Views
+<span class="sql-key">FROM</span> CategorizedTracks
+<span class="sql-key">GROUP BY</span> TikTok_Category;
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Krok 7: Stworzenie widoku agregującego wyniki per artysta.</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 7. Stworzenie widoku agregujacego wyniki per artysta</span>
+<span class="sql-key">CREATE OR ALTER VIEW</span> final.Artist_Performance <span class="sql-key">AS</span>
+<span class="sql-key">SELECT</span>
+    Artist,
+    <span class="sql-fun">COUNT</span>(Id) <span class="sql-key">AS</span> Tracks_Count,
+    <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(Spotify_Streams <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Total_Spotify_Streams,
+    <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(TikTok_Posts <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Total_TikTok_Posts,
+    <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(TikTok_Views <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Total_TikTok_Views,
+    <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(YouTube_Views <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Total_YouTube_Views,
+    <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(Spotify_Playlist_Count <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Total_Spotify_Playlists
+<span class="sql-key">FROM</span> staging.SpotifySongs
+<span class="sql-key">WHERE</span> Artist <span class="sql-key">IS NOT NULL AND</span> Artist != <span class="sql-str">''</span>
+<span class="sql-key">GROUP BY</span> Artist
+<span class="sql-key">HAVING</span> <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(Spotify_Streams <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">IS NOT NULL</span> <span class="sql-com">-- bez sensu analizowac wplyw TikToka na 0 odsluchan</span>
+   <span class="sql-key">AND</span> <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(Spotify_Streams <span class="sql-key">AS BIGINT</span>)) > 0;
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Krok 8: Stworzenie widoku porównującego rankingi (Spotify Rank vs TikTok Rank).</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 8. Stworzenie widoku porownujacego wyniki (ranking)</span>
+<span class="sql-key">CREATE VIEW</span> final.Platform_Rankings <span class="sql-key">AS</span>
+    <span class="sql-key">SELECT</span>
+        track,
+        artist,
+        Spotify_Streams,
+        TikTok_Views,
+        <span class="sql-fun">DENSE_RANK</span>() <span class="sql-fun">OVER</span>(<span class="sql-key">ORDER BY</span> Spotify_Streams <span class="sql-key">DESC</span>) <span class="sql-key">AS</span> Spotify_Rank,
+        <span class="sql-fun">DENSE_RANK</span>() <span class="sql-fun">OVER</span>(<span class="sql-key">ORDER BY</span> TikTok_Views <span class="sql-key">DESC</span>) <span class="sql-key">AS</span> TikTok_Rank,
+        (<span class="sql-fun">CAST</span>(<span class="sql-fun">DENSE_RANK</span>() <span class="sql-fun">OVER</span>(<span class="sql-key">ORDER BY</span> TikTok_Views <span class="sql-key">DESC</span>) <span class="sql-key">AS INT</span>) - <span class="sql-fun">CAST</span>(<span class="sql-fun">DENSE_RANK</span>() <span class="sql-fun">OVER</span>(<span class="sql-key">ORDER BY</span> Spotify_Streams <span class="sql-key">DESC</span>) <span class="sql-key">AS INT</span>)) <span class="sql-key">AS</span> Ranking_Diff
+<span class="sql-key">FROM</span> staging.SpotifySongs
+<span class="sql-key">WHERE</span> Spotify_Streams <span class="sql-key">IS NOT NULL AND</span> TikTok_Views <span class="sql-key">IS NOT NULL AND</span> TikTok_Views > 0;
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Krok 9: Stworzenie widoku ze wskaźnikami konwersji (Engagement Ratio).</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 9. Stworzenie widoku ze wskaznikami konwersji (engagement)</span>
+<span class="sql-key">CREATE OR ALTER VIEW</span> final.Engagement_Ratio <span class="sql-key">AS</span>
+<span class="sql-key">SELECT</span>
+    Id,
+    Track,
+    Artist,
+    Release_Date,
+    <span class="sql-fun">YEAR</span>(Release_Date) <span class="sql-key">AS</span> Release_Year,
+    Explicit_Track,
+    Spotify_Streams,
+    Spotify_Playlist_Count,
+    Spotify_Popularity,
+    TikTok_Posts,
+    TikTok_Views,
+    TikTok_Likes,
+    YouTube_Views,
+    <span class="sql-key">CASE</span>
+        <span class="sql-key">WHEN</span> TikTok_Posts >= 1000000 <span class="sql-key">THEN</span> <span class="sql-str">'1. Viral (> 1M posts)'</span>
+        <span class="sql-key">WHEN</span> TikTok_Posts >= 100000 <span class="sql-key">THEN</span> <span class="sql-str">'2. Popular (100k - 1M posts)'</span>
+        <span class="sql-key">WHEN</span> TikTok_Posts > 0 <span class="sql-key">THEN</span> <span class="sql-str">'3. Niche (< 100k posts)'</span>
+        <span class="sql-key">ELSE</span> <span class="sql-str">'4. No TikTok Data/Zero'</span>
+    <span class="sql-key">END AS</span> TikTok_Category,
+    <span class="sql-fun">ROUND</span>(<span class="sql-key">CASE</span>
+        <span class="sql-key">WHEN</span> TikTok_Views > 0 <span class="sql-key">THEN</span> <span class="sql-fun">CAST</span>(Spotify_Streams <span class="sql-key">AS FLOAT</span>) / TikTok_Views <span class="sql-key">ELSE</span> 0 <span class="sql-key">END</span>, 2) <span class="sql-key">AS</span> Spotify_To_TikTok_Ratio,
+    <span class="sql-fun">ROUND</span>(<span class="sql-key">CASE</span>
+        <span class="sql-key">WHEN</span> TikTok_Views > 0 <span class="sql-key">THEN</span> (<span class="sql-fun">CAST</span>(TikTok_Likes <span class="sql-key">AS FLOAT</span>) / TikTok_Views) * 100 <span class="sql-key">ELSE</span> 0 <span class="sql-key">END</span>, 2) <span class="sql-key">AS</span> TikTok_Engagement_Rate
+<span class="sql-key">FROM</span> staging.SpotifySongs;
+<span class="sql-key">GO</span></code></pre></div>`,
+          
+          daxContent: `
+            <span class="step-description">Przegląd 13 użytych w projekcie miar DAX. Najważniejszym punktem było obliczenie rzetelnej korelacji. Standardowe miary ulegały zakłóceniom przez tzw. Outliery (mega-hity). Musiałem zastosować dynamiczne filtrowanie z użyciem PERCENTILEX.INC odcinając górne 5% wyników i ostatecznie przetestować je wskaźnikiem T-Value.</span>
+            
+            <div class="code-container dax-block"><p><strong>1. Track Count</strong></p><pre><code><span class="dax-measure">Track Count</span> <span class="dax-operator">=</span> <span class="dax-fun">COUNT</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Id])</code></pre></div>
+            <div class="code-container dax-block"><p><strong>2. Total TikTok Views</strong></p><pre><code><span class="dax-measure">Total TikTok Views</span> <span class="dax-operator">=</span> <span class="dax-fun">SUM</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])</code></pre></div>
+            <div class="code-container dax-block"><p><strong>3. Total TikTok Posts</strong></p><pre><code><span class="dax-measure">Total TikTok Posts</span> <span class="dax-operator">=</span> <span class="dax-fun">SUM</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Posts])</code></pre></div>
+            <div class="code-container dax-block"><p><strong>4. Total Spotify Streams</strong></p><pre><code><span class="dax-measure">Total Spotify Streams</span> <span class="dax-operator">=</span> <span class="dax-fun">SUM</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>5. Avg Spotify to TikTok Ratio</strong><br><span class="sql-com">// Zamiast tradycyjnej średniej, która przekłamuje outliery, sumuję całość i dzielę (ważona metryka)</span></p><pre><code><span class="dax-measure">Avg Spotify to TikTok Ratio</span> <span class="dax-operator">=</span> 
+<span class="dax-fun">DIVIDE</span>(
+    <span class="dax-fun">SUM</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams]), 
+    <span class="dax-fun">SUM</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views]),
+    <span class="dax-operator">0</span>
+)</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>6. Avg TikTok Engagement</strong></p><pre><code><span class="dax-measure">Avg TikTok Engagement</span> <span class="dax-operator">=</span> <span class="dax-fun">AVERAGE</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Engagement_Rate]) <span class="dax-operator">/</span> <span class="dax-operator">100</span> <span class="sql-com">// zmiana na %</span></code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>7. Correlation TikTok Spotify (Całość)</strong></p><pre><code><span class="dax-measure">Correlation TikTok Spotify</span> <span class="dax-operator">=</span> 
+<span class="sql-com">// srednia dla calego zbioru</span>
+<span class="dax-var">VAR</span> AVG_TikTok <span class="dax-operator">=</span> <span class="dax-fun">AVERAGE</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])
+<span class="dax-var">VAR</span> AVG_Spotify <span class="dax-operator">=</span> <span class="dax-fun">AVERAGE</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(<span class="sql-com">--licznik: suma iloczynow odchylen, mianownik: odchylenia standardowe</span>
+        <span class="dax-fun">SUMX</span>(
+            <span class="dax-table">'final Engagement_Ratio'</span>, 
+            (<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok) <span class="dax-operator">*</span> (<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify)
+        ),
+        <span class="dax-fun">SQRT</span>(
+            <span class="dax-fun">SUMX</span>(<span class="dax-table">'final Engagement_Ratio'</span>, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok, <span class="dax-operator">2</span>)) <span class="dax-operator">*</span> <span class="dax-fun">SUMX</span>(<span class="dax-table">'final Engagement_Ratio'</span>, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify, <span class="dax-operator">2</span>))
+        )
+    )</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>8. Correlation No Outliers</strong></p><pre><code><span class="dax-measure">Correlation No Outliers</span> <span class="dax-operator">=</span> 
+<span class="sql-com">// progi dla outlierow -> odciecie top i min 5% wartosci</span>
+<span class="dax-var">VAR</span> TopSpotify <span class="dax-operator">=</span> <span class="dax-fun">PERCENTILEX.INC</span>(<span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>), <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams], <span class="dax-operator">0.95</span>)
+<span class="dax-var">VAR</span> TopTikTok <span class="dax-operator">=</span> <span class="dax-fun">PERCENTILEX.INC</span>(<span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>), <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views], <span class="dax-operator">0.95</span>)
+
+<span class="sql-com">// tabela bez ogromnych wartosci</span>
+<span class="dax-var">VAR</span> CleanTable <span class="dax-operator">=</span> 
+    <span class="dax-fun">FILTER</span>(
+        <span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>),
+        <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator"><</span> TopSpotify <span class="dax-operator">&&</span> 
+        <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator"><</span> TopTikTok <span class="dax-operator">&&</span>
+        <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">></span> <span class="dax-operator">0</span> <span class="sql-com">// bez zer zeby nie psuly sredniej</span>
+    )
+
+<span class="sql-com">// srednia dla normalnych piosenek bez ogromnych outlierow -> averagex zostawia przesiane dane z powyzszego filtra</span>
+<span class="dax-var">VAR</span> AVG_T <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(CleanTable, <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])
+<span class="dax-var">VAR</span> AVG_S <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(CleanTable, <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])
+
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(
+        <span class="dax-fun">SUMX</span>(CleanTable, (<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_T) <span class="dax-operator">*</span> (<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_S)),
+        <span class="dax-fun">SQRT</span>(
+            <span class="dax-fun">SUMX</span>(CleanTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_T, <span class="dax-operator">2</span>)) <span class="dax-operator">*</span> <span class="dax-fun">SUMX</span>(CleanTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_S, <span class="dax-operator">2</span>))
+        )
+    )</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>9. Correlation No TikTok</strong></p><pre><code><span class="dax-measure">Correlation No TikTok</span> <span class="dax-operator">=</span> 
+<span class="dax-var">VAR</span> SubTable <span class="dax-operator">=</span> <span class="dax-fun">FILTER</span>(<span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>), <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Category] <span class="dax-operator">=</span> <span class="dax-string">"4. No TikTok Data/Zero"</span>)
+<span class="dax-var">VAR</span> AVG_TikTok <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])
+<span class="dax-var">VAR</span> AVG_Spotify <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(
+        <span class="dax-fun">SUMX</span>(SubTable, (<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok) <span class="dax-operator">*</span> (<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify)),
+        <span class="dax-fun">SQRT</span>(<span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok, <span class="dax-operator">2</span>)) <span class="dax-operator">*</span> <span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify, <span class="dax-operator">2</span>)))
+    )</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>10. Correlation Niche TikTok</strong></p><pre><code><span class="dax-measure">Correlation Niche TikTok</span> <span class="dax-operator">=</span> 
+<span class="dax-var">VAR</span> SubTable <span class="dax-operator">=</span> <span class="dax-fun">FILTER</span>(<span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>), <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Category] <span class="dax-operator">=</span> <span class="dax-string">"3. Niche (< 100k posts)"</span>)
+<span class="dax-var">VAR</span> AVG_TikTok <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])
+<span class="dax-var">VAR</span> AVG_Spotify <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(
+        <span class="dax-fun">SUMX</span>(SubTable, (<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok) <span class="dax-operator">*</span> (<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify)),
+        <span class="dax-fun">SQRT</span>(<span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok, <span class="dax-operator">2</span>)) <span class="dax-operator">*</span> <span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify, <span class="dax-operator">2</span>)))
+    )</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>11. Correlation Popular TikTok</strong></p><pre><code><span class="dax-measure">Correlation Popular TikTok</span> <span class="dax-operator">=</span> 
+<span class="dax-var">VAR</span> SubTable <span class="dax-operator">=</span> <span class="dax-fun">FILTER</span>(<span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>), <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Category] <span class="dax-operator">=</span> <span class="dax-string">"2. Popular (100k - 1M posts)"</span>)
+<span class="dax-var">VAR</span> AVG_TikTok <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])
+<span class="dax-var">VAR</span> AVG_Spotify <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(
+        <span class="dax-fun">SUMX</span>(SubTable, (<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok) <span class="dax-operator">*</span> (<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify)),
+        <span class="dax-fun">SQRT</span>(<span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok, <span class="dax-operator">2</span>)) <span class="dax-operator">*</span> <span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify, <span class="dax-operator">2</span>)))
+    )</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>12. Correlation Viral TikTok</strong></p><pre><code><span class="dax-measure">Correlation Viral TikTok</span> <span class="dax-operator">=</span> 
+<span class="dax-var">VAR</span> SubTable <span class="dax-operator">=</span> <span class="dax-fun">FILTER</span>(<span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>), <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Category] <span class="dax-operator">=</span> <span class="dax-string">"1. Viral (> 1M posts)"</span>)
+<span class="dax-var">VAR</span> AVG_TikTok <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])
+<span class="dax-var">VAR</span> AVG_Spotify <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(
+        <span class="dax-fun">SUMX</span>(SubTable, (<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok) <span class="dax-operator">*</span> (<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify)),
+        <span class="dax-fun">SQRT</span>(<span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok, <span class="dax-operator">2</span>)) <span class="dax-fun">*</span> <span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify, <span class="dax-operator">2</span>)))
+    )</code></pre></div>
+
+            <span class="step-description">Weryfikacja statystyczna korelacji (T-Test). Im wyższa wartość t (powyżej 1.96), tym istotniejsza statystycznie i bardziej wiarygodna jest badana zależność.</span>
+            <div class="code-container dax-block"><p><strong>13. T Statistic</strong></p><pre><code><span class="dax-measure">T Statistic</span> <span class="dax-operator">=</span> 
+<span class="dax-var">VAR</span> r <span class="dax-operator">=</span> [Correlation No Outliers] <span class="sql-com">// korelacja bez outlierow -> 0,25</span>
+<span class="dax-var">VAR</span> n <span class="dax-operator">=</span> <span class="dax-fun">COUNTROWS</span>(<span class="dax-table">'final Engagement_Ratio'</span>) <span class="sql-com">// liczba piosenek</span>
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(
+        r <span class="dax-operator">*</span> <span class="dax-fun">SQRT</span>(n <span class="dax-operator">-</span> 2),
+        <span class="dax-fun">SQRT</span>(1 <span class="dax-operator">-</span> <span class="dax-fun">POWER</span>(r, 2))
+    )</code></pre></div>`,
+          
+          pbiContent: `
+            <div class="report-structure">
+              <div class="report-card">
+                <h4>
+                  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"></path></svg>
+                  1. Strona Główna (Wykres Punktowy i Drill-Through)
+                </h4>
+                <p>Główny punkt raportu ilustrujący korelację między odtworzeniami na Spotify a wyświetleniami na TikToku na osiach X i Y. Dodano tu funkcję **Drill-Through** — użytkownicy mogą kliknąć prawym przyciskiem myszy na interesujący utwór (punkt) i przejść do ukrytej strony "Single Track Deep Dive", która szczegółowo analizuje dany hit.</p>
+              </div>
+              <div class="report-card">
+                <h4>
+                  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"></path></svg>
+                  2. Korelacja Kategorii
+                </h4>
+                <p>Strona informująca o korelacji w zależności od wiralności na TikToku (No TikTok, Niche, Popular, Viral). Ukazuje paradoks polegający na tym, że hity z memów wideo nie zawsze stają się hitami muzycznymi na platformach streamingowych.</p>
+              </div>
+              <div class="report-card">
+                <h4>
+                  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path></svg>
+                  3. Różnica w Rankingach
+                </h4>
+                <p>Strona z tabelą porównującą surowe rankingi. Oblicza w locie, o ile pozycji dany utwór awansował lub spadł w ogólnym zestawieniu obu platform.</p>
+              </div>
+              <div class="report-card">
+                <h4>
+                  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                  4. Analiza Treści Niecenzuralnych (Explicit)
+                </h4>
+                <p>Odpowiada na pytanie biznesowe: czy wulgaryzmy (Explicit) sprzedają się lepiej? Analiza udziału piosenek Explicit i Clean w poszczególnych kategoriach z podziałem na konkretnych artystów.</p>
+              </div>
+            </div>`,
+
+          insightsContent: `
+            <li>
+              <strong>Iluzja Braku Związku (Korelacja: 0.04)</strong>
+              <p>Początkowa korelacja wynosząca zaledwie 0.04 sugerowała całkowity brak związku między platformami. Okazało się to błędem skali i zanieczyszczenia danych. Globalny wynik był masowo zaburzony przez mega-hity (górne 5% utworów, np. The Weeknd - Blinding Lights), które generują miliardy odtworzeń przez tradycyjne media (radio, główne playlisty Spotify), całkowicie niezależnie od trendów na TikToku.</p>
+            </li>
+            <li>
+              <strong>Prawdziwa Siła TikToka (Korelacja: 0.25)</strong>
+              <p>Po odcięciu wartości odstających (outlierów) za pomocą miary DAX <code>PERCENTILEX.INC</code>, korelacja wzrosła do 0.25. Jest to najważniejszy dowód w projekcie, poparty wysoką wartością <strong>T-statistic</strong>. Dla 95% utworów (niszowych i aspirujących artystów) istnieje wyraźny, pozytywny związek między zasięgami na TikToku a konsumpcją na Spotify.</p>
+            </li>
+            <li>
+              <strong>Memy nie zarabiają na Spotify (Korelacja Viral: -0.03)</strong>
+              <p>W kategorii o najwyższej popularności (Viral > 1M postów) korelacja zanika, a wręcz staje się ujemna. Osiągnięcie skrajnej wizualnej wiralności nie gwarantuje sukcesu muzycznego. Utwór często staje się jedynie "tłem dla krótkich filmików", co nie przekonuje użytkownika do przejścia na Spotify i przesłuchania pełnego, zarabiającego utworu.</p>
+            </li>`
+        },
+        
+        en: {
+          pageTitle: "Project: TikTok Spotify Correlation Analysis | Portfolio Jakub Nicpoń",
+          navHome: "Home",
+          navAbout: "About Me",
+          navProjects: "Projects",
+          heroTitle: "Project: TikTok Spotify Correlation Analysis",
+          heroDesc: "An analysis of the impact of song popularity on TikTok on their Spotify streams. The project combines data engineering in SQL Server (cleaning, categorization, view creation) with advanced modeling in Power BI (DAX measures, Drill-Through, correlation analysis, and T-Value statistical tests).",
+          
+          btnSql: "SQL: Data Engineering",
+          btnDax: "DAX: Measures & Model",
+          btnInsights: "Analysis & Insights",
+          
+          kpiTitle: "Key Correlation Indicators (TikTok vs Spotify)",
+          kpi1Label: "Initial Correlation (Overall)",
+          kpi1Trend: "Distorted by outliers",
+          kpi2Label: "Correlation (No outliers)",
+          kpi2Trend: "Low, but significant",
+          kpi3Label: "Viral Correlation (>1M posts)",
+          kpi3Trend: "No impact on streaming",
+          
+          detailsTitle: "Project Architecture",
+          tabSQL: "1. SQL: Data Pipeline",
+          tabDAX: "2. Power BI: DAX",
+          tabPBI: "3. Report Structure",
+          tabInsights: "4. Analysis & Insights",
+          
+          downloadTitle: "Download Project Resources",
+          btnDownloadRaw: "Download CSV File",
+          btnDownloadPBI: "Download Power BI File",
+
+          sqlContent: `
+            <span class="step-description">Step 1: Create the database.</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-key">CREATE DATABASE</span> SpotifyTikTokAnalysis;
+<span class="sql-key">GO</span>
+
+<span class="sql-key">USE</span> SpotifyTikTokAnalysis;
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Step 2: Create schemas as stages of data processing.</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 2. Create schemas as stages of data processing</span>
+<span class="sql-key">CREATE SCHEMA</span> raw;
+<span class="sql-key">GO</span>
+<span class="sql-key">CREATE SCHEMA</span> staging;
+<span class="sql-key">GO</span>
+<span class="sql-key">CREATE SCHEMA</span> final;
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Step 3: Create a table for importing raw data (NVARCHAR).</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 3. Create a table for importing raw data from the Most Streamed Spotify Songs.csv file</span>
+<span class="sql-key">CREATE TABLE</span> raw.SpotifySongs (
+    Track <span class="sql-key">NVARCHAR</span>(500),
+    Album_Name <span class="sql-key">NVARCHAR</span>(500),
+    Artist <span class="sql-key">NVARCHAR</span>(500),
+    Release_Date <span class="sql-key">NVARCHAR</span>(100),
+    ISRC <span class="sql-key">NVARCHAR</span>(100),
+    All_Time_Rank <span class="sql-key">NVARCHAR</span>(100),
+    Track_Score <span class="sql-key">NVARCHAR</span>(100),
+    Spotify_Streams <span class="sql-key">NVARCHAR</span>(100),
+    Spotify_Playlist_Count <span class="sql-key">NVARCHAR</span>(100),
+    Spotify_Playlist_Reach <span class="sql-key">NVARCHAR</span>(100),
+    Spotify_Popularity <span class="sql-key">NVARCHAR</span>(100),
+    YouTube_Views <span class="sql-key">NVARCHAR</span>(100),
+    YouTube_Likes <span class="sql-key">NVARCHAR</span>(100),
+    TikTok_Posts <span class="sql-key">NVARCHAR</span>(100),
+    TikTok_Likes <span class="sql-key">NVARCHAR</span>(100),
+    TikTok_Views <span class="sql-key">NVARCHAR</span>(100),
+    YouTube_Playlist_Reach <span class="sql-key">NVARCHAR</span>(100),
+    Apple_Music_Playlist_Count <span class="sql-key">NVARCHAR</span>(100),
+    AirPlay_Spins <span class="sql-key">NVARCHAR</span>(100),
+    SiriusXM_Spins <span class="sql-key">NVARCHAR</span>(100),
+    Deezer_Playlist_Count <span class="sql-key">NVARCHAR</span>(100),
+    Deezer_Playlist_Reach <span class="sql-key">NVARCHAR</span>(100),
+    Amazon_Playlist_Count <span class="sql-key">NVARCHAR</span>(100),
+    Pandora_Streams <span class="sql-key">NVARCHAR</span>(100),
+    Pandora_Track_Stations <span class="sql-key">NVARCHAR</span>(100),
+    Soundcloud_Streams <span class="sql-key">NVARCHAR</span>(100),
+    Shazam_Counts <span class="sql-key">NVARCHAR</span>(100),
+    TIDAL_Popularity <span class="sql-key">NVARCHAR</span>(100),
+    Explicit_Track <span class="sql-key">NVARCHAR</span>(50)
+);
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Step 4: Create the target table in the 'staging' schema with appropriate data types (BIGINT due to Power BI).</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 4. Create the target table with appropriate data types</span>
+<span class="sql-com">-- due to a bug in Power BI, BIGINT had to be used</span>
+<span class="sql-key">CREATE TABLE</span> staging.SpotifySongs (
+    Id <span class="sql-key">INT IDENTITY</span>(1,1) <span class="sql-key">PRIMARY KEY</span>, <span class="sql-com">-- auto-increment</span>
+    Track <span class="sql-key">NVARCHAR</span>(500),
+    Album_Name <span class="sql-key">NVARCHAR</span>(500),
+    Artist <span class="sql-key">NVARCHAR</span>(500),
+    Release_Date <span class="sql-key">DATE</span>,
+    ISRC <span class="sql-key">NVARCHAR</span>(100),
+    All_Time_Rank <span class="sql-key">BIGINT</span>, <span class="sql-com">-- changed to BIGINT</span>
+    Track_Score <span class="sql-key">FLOAT</span>,
+    Spotify_Streams <span class="sql-key">BIGINT</span>,
+    Spotify_Playlist_Count <span class="sql-key">BIGINT</span>, <span class="sql-com">-- changed to BIGINT</span>
+    Spotify_Popularity <span class="sql-key">BIGINT</span>, <span class="sql-com">-- changed to BIGINT</span>
+    YouTube_Views <span class="sql-key">BIGINT</span>,
+    YouTube_Likes <span class="sql-key">BIGINT</span>,
+    TikTok_Posts <span class="sql-key">BIGINT</span>,
+    TikTok_Likes <span class="sql-key">BIGINT</span>,
+    TikTok_Views <span class="sql-key">BIGINT</span>,
+    Explicit_Track <span class="sql-key">BIT</span> <span class="sql-com">-- true/false - later converted to Explicit/Clean in Power BI</span>
+);
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Step 5: Clean and import data from RAW to STAGING layer. Remove commas and cast data types.</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 5. Clean and import data from RAW to STAGING layer</span>
+<span class="sql-key">INSERT INTO</span> staging.SpotifySongs (
+    Track, Album_Name, Artist, Release_Date, ISRC, All_Time_Rank, Track_Score,
+    Spotify_Streams, Spotify_Playlist_Count, Spotify_Popularity,
+    YouTube_Views, YouTube_Likes, TikTok_Posts, TikTok_Likes, TikTok_Views, Explicit_Track
+)
+<span class="sql-key">SELECT</span>
+    <span class="sql-fun">TRIM</span>(Track),
+    <span class="sql-fun">TRIM</span>(Album_Name),
+    <span class="sql-fun">TRIM</span>(Artist),
+    <span class="sql-fun">TRY_CAST</span>(Release_Date <span class="sql-key">AS DATE</span>),
+    <span class="sql-fun">TRIM</span>(ISRC),
+    <span class="sql-com">-- remove commas to avoid numerical errors</span>
+    <span class="sql-com">-- using BIGINT for safety with large numbers</span>
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(All_Time_Rank, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(Track_Score, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS FLOAT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(Spotify_Streams, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(Spotify_Playlist_Count, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(Spotify_Popularity, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(YouTube_Views, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(YouTube_Likes, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(TikTok_Posts, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(TikTok_Likes, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(<span class="sql-fun">REPLACE</span>(TikTok_Views, <span class="sql-str">','</span>, <span class="sql-str">''</span>) <span class="sql-key">AS BIGINT</span>),
+    <span class="sql-fun">TRY_CAST</span>(Explicit_Track <span class="sql-key">AS BIT</span>)
+    <span class="sql-key">FROM</span> raw.SpotifySongs;
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Step 6: Create a view with track categorization based on the number of TikTok posts.</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 6. Create a view with basic metrics and track categorization on TikTok</span>
+<span class="sql-key">CREATE OR ALTER VIEW</span> final.TikTok_Categories <span class="sql-key">AS</span>
+<span class="sql-key">WITH</span> CategorizedTracks <span class="sql-key">AS</span> (
+    <span class="sql-key">SELECT</span>
+        Id,
+        Spotify_Streams,
+        YouTube_Views,
+        TikTok_Posts,
+        <span class="sql-key">CASE</span>
+            <span class="sql-key">WHEN</span> TikTok_Posts >= 1000000 <span class="sql-key">THEN</span> <span class="sql-str">'1. Viral (> 1M posts)'</span>
+            <span class="sql-key">WHEN</span> TikTok_Posts >= 100000 <span class="sql-key">THEN</span> <span class="sql-str">'2. Popular (100k - 1M posts)'</span>
+            <span class="sql-key">WHEN</span> TikTok_Posts > 0 <span class="sql-key">THEN</span> <span class="sql-str">'3. Niche (< 100k posts)'</span>
+            <span class="sql-key">ELSE</span> <span class="sql-str">'4. No TikTok Data/Zero'</span>
+        <span class="sql-key">END AS</span> TikTok_Category
+    <span class="sql-key">FROM</span> staging.SpotifySongs
+)
+<span class="sql-key">SELECT</span>
+    TikTok_Category,
+    <span class="sql-fun">COUNT</span>(Id) <span class="sql-key">AS</span> Number_Of_Tracks,
+    <span class="sql-fun">AVG</span>(<span class="sql-fun">CAST</span>(Spotify_Streams <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Avg_Spotify_Streams,
+    <span class="sql-fun">AVG</span>(<span class="sql-fun">CAST</span>(YouTube_Views <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Avg_YouTube_Views
+<span class="sql-key">FROM</span> CategorizedTracks
+<span class="sql-key">GROUP BY</span> TikTok_Category;
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Step 7: Create a view aggregating results per artist.</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 7. Create a view aggregating results per artist</span>
+<span class="sql-key">CREATE OR ALTER VIEW</span> final.Artist_Performance <span class="sql-key">AS</span>
+<span class="sql-key">SELECT</span>
+    Artist,
+    <span class="sql-fun">COUNT</span>(Id) <span class="sql-key">AS</span> Tracks_Count,
+    <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(Spotify_Streams <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Total_Spotify_Streams,
+    <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(TikTok_Posts <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Total_TikTok_Posts,
+    <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(TikTok_Views <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Total_TikTok_Views,
+    <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(YouTube_Views <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Total_YouTube_Views,
+    <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(Spotify_Playlist_Count <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">AS</span> Total_Spotify_Playlists
+<span class="sql-key">FROM</span> staging.SpotifySongs
+<span class="sql-key">WHERE</span> Artist <span class="sql-key">IS NOT NULL AND</span> Artist != <span class="sql-str">''</span>
+<span class="sql-key">GROUP BY</span> Artist
+<span class="sql-key">HAVING</span> <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(Spotify_Streams <span class="sql-key">AS BIGINT</span>)) <span class="sql-key">IS NOT NULL</span> <span class="sql-com">-- no point in analyzing TikTok's impact on 0 streams</span>
+   <span class="sql-key">AND</span> <span class="sql-fun">SUM</span>(<span class="sql-fun">CAST</span>(Spotify_Streams <span class="sql-key">AS BIGINT</span>)) > 0;
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Step 8: Create a view comparing rankings (Spotify Rank vs TikTok Rank).</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 8. Create a view comparing results (ranking)</span>
+<span class="sql-key">CREATE VIEW</span> final.Platform_Rankings <span class="sql-key">AS</span>
+    <span class="sql-key">SELECT</span>
+        track,
+        artist,
+        Spotify_Streams,
+        TikTok_Views,
+        <span class="sql-fun">DENSE_RANK</span>() <span class="sql-fun">OVER</span>(<span class="sql-key">ORDER BY</span> Spotify_Streams <span class="sql-key">DESC</span>) <span class="sql-key">AS</span> Spotify_Rank,
+        <span class="sql-fun">DENSE_RANK</span>() <span class="sql-fun">OVER</span>(<span class="sql-key">ORDER BY</span> TikTok_Views <span class="sql-key">DESC</span>) <span class="sql-key">AS</span> TikTok_Rank,
+        (<span class="sql-fun">CAST</span>(<span class="sql-fun">DENSE_RANK</span>() <span class="sql-fun">OVER</span>(<span class="sql-key">ORDER BY</span> TikTok_Views <span class="sql-key">DESC</span>) <span class="sql-key">AS INT</span>) - <span class="sql-fun">CAST</span>(<span class="sql-fun">DENSE_RANK</span>() <span class="sql-fun">OVER</span>(<span class="sql-key">ORDER BY</span> Spotify_Streams <span class="sql-key">DESC</span>) <span class="sql-key">AS INT</span>)) <span class="sql-key">AS</span> Ranking_Diff
+<span class="sql-key">FROM</span> staging.SpotifySongs
+<span class="sql-key">WHERE</span> Spotify_Streams <span class="sql-key">IS NOT NULL AND</span> TikTok_Views <span class="sql-key">IS NOT NULL AND</span> TikTok_Views > 0;
+<span class="sql-key">GO</span></code></pre></div>
+
+            <span class="step-description">Step 9: Create a view with conversion metrics (Engagement Ratio).</span>
+            <div class="code-container sql-block"><pre><code><span class="sql-com">-- 9. Create a view with conversion metrics (engagement)</span>
+<span class="sql-key">CREATE OR ALTER VIEW</span> final.Engagement_Ratio <span class="sql-key">AS</span>
+<span class="sql-key">SELECT</span>
+    Id,
+    Track,
+    Artist,
+    Release_Date,
+    <span class="sql-fun">YEAR</span>(Release_Date) <span class="sql-key">AS</span> Release_Year,
+    Explicit_Track,
+    Spotify_Streams,
+    Spotify_Playlist_Count,
+    Spotify_Popularity,
+    TikTok_Posts,
+    TikTok_Views,
+    TikTok_Likes,
+    YouTube_Views,
+    <span class="sql-key">CASE</span>
+        <span class="sql-key">WHEN</span> TikTok_Posts >= 1000000 <span class="sql-key">THEN</span> <span class="sql-str">'1. Viral (> 1M posts)'</span>
+        <span class="sql-key">WHEN</span> TikTok_Posts >= 100000 <span class="sql-key">THEN</span> <span class="sql-str">'2. Popular (100k - 1M posts)'</span>
+        <span class="sql-key">WHEN</span> TikTok_Posts > 0 <span class="sql-key">THEN</span> <span class="sql-str">'3. Niche (< 100k posts)'</span>
+        <span class="sql-key">ELSE</span> <span class="sql-str">'4. No TikTok Data/Zero'</span>
+    <span class="sql-key">END AS</span> TikTok_Category,
+    <span class="sql-fun">ROUND</span>(<span class="sql-key">CASE</span>
+        <span class="sql-key">WHEN</span> TikTok_Views > 0 <span class="sql-key">THEN</span> <span class="sql-fun">CAST</span>(Spotify_Streams <span class="sql-key">AS FLOAT</span>) / TikTok_Views <span class="sql-key">ELSE</span> 0 <span class="sql-key">END</span>, 2) <span class="sql-key">AS</span> Spotify_To_TikTok_Ratio,
+    <span class="sql-fun">ROUND</span>(<span class="sql-key">CASE</span>
+        <span class="sql-key">WHEN</span> TikTok_Views > 0 <span class="sql-key">THEN</span> (<span class="sql-fun">CAST</span>(TikTok_Likes <span class="sql-key">AS FLOAT</span>) / TikTok_Views) * 100 <span class="sql-key">ELSE</span> 0 <span class="sql-key">END</span>, 2) <span class="sql-key">AS</span> TikTok_Engagement_Rate
+<span class="sql-key">FROM</span> staging.SpotifySongs;
+<span class="sql-key">GO</span></code></pre></div>`,
+          
+          daxContent: `
+            <span class="step-description">Overview of the 13 DAX measures used in the project. The most important point was to calculate a reliable correlation. Standard measures were distorted by Outliers (mega-hits). I had to apply dynamic filtering using PERCENTILEX.INC, cutting off the top 5% of results, and finally test them with the T-Value indicator.</span>
+            
+            <div class="code-container dax-block"><p><strong>1. Track Count</strong></p><pre><code><span class="dax-measure">Track Count</span> <span class="dax-operator">=</span> <span class="dax-fun">COUNT</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Id])</code></pre></div>
+            <div class="code-container dax-block"><p><strong>2. Total TikTok Views</strong></p><pre><code><span class="dax-measure">Total TikTok Views</span> <span class="dax-operator">=</span> <span class="dax-fun">SUM</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])</code></pre></div>
+            <div class="code-container dax-block"><p><strong>3. Total TikTok Posts</strong></p><pre><code><span class="dax-measure">Total TikTok Posts</span> <span class="dax-operator">=</span> <span class="dax-fun">SUM</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Posts])</code></pre></div>
+            <div class="code-container dax-block"><p><strong>4. Total Spotify Streams</strong></p><pre><code><span class="dax-measure">Total Spotify Streams</span> <span class="dax-operator">=</span> <span class="dax-fun">SUM</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>5. Avg Spotify to TikTok Ratio</strong><br><span class="sql-com">// Instead of a traditional average that skews outliers, I sum everything and divide (weighted metric)</span></p><pre><code><span class="dax-measure">Avg Spotify to TikTok Ratio</span> <span class="dax-operator">=</span> 
+<span class="dax-fun">DIVIDE</span>(
+    <span class="dax-fun">SUM</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams]), 
+    <span class="dax-fun">SUM</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views]),
+    <span class="dax-operator">0</span>
+)</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>6. Avg TikTok Engagement</strong></p><pre><code><span class="dax-measure">Avg TikTok Engagement</span> <span class="dax-operator">=</span> <span class="dax-fun">AVERAGE</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Engagement_Rate]) <span class="dax-operator">/</span> <span class="dax-operator">100</span> <span class="sql-com">// converted to %</span></code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>7. Correlation TikTok Spotify (Overall)</strong></p><pre><code><span class="dax-measure">Correlation TikTok Spotify</span> <span class="dax-operator">=</span> 
+<span class="sql-com">// average for the entire dataset</span>
+<span class="dax-var">VAR</span> AVG_TikTok <span class="dax-operator">=</span> <span class="dax-fun">AVERAGE</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])
+<span class="dax-var">VAR</span> AVG_Spotify <span class="dax-operator">=</span> <span class="dax-fun">AVERAGE</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(<span class="sql-com">--numerator: sum of product of deviations, denominator: standard deviations</span>
+        <span class="dax-fun">SUMX</span>(
+            <span class="dax-table">'final Engagement_Ratio'</span>, 
+            (<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok) <span class="dax-operator">*</span> (<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify)
+        ),
+        <span class="dax-fun">SQRT</span>(
+            <span class="dax-fun">SUMX</span>(<span class="dax-table">'final Engagement_Ratio'</span>, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok, <span class="dax-operator">2</span>)) <span class="dax-operator">*</span> <span class="dax-fun">SUMX</span>(<span class="dax-table">'final Engagement_Ratio'</span>, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify, <span class="dax-operator">2</span>))
+        )
+    )</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>8. Correlation No Outliers</strong></p><pre><code><span class="dax-measure">Correlation No Outliers</span> <span class="dax-operator">=</span> 
+<span class="sql-com">// thresholds for outliers -> cutting off the top 5% values</span>
+<span class="dax-var">VAR</span> TopSpotify <span class="dax-operator">=</span> <span class="dax-fun">PERCENTILEX.INC</span>(<span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>), <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams], <span class="dax-operator">0.95</span>)
+<span class="dax-var">VAR</span> TopTikTok <span class="dax-operator">=</span> <span class="dax-fun">PERCENTILEX.INC</span>(<span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>), <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views], <span class="dax-operator">0.95</span>)
+
+<span class="sql-com">// table without massive values</span>
+<span class="dax-var">VAR</span> CleanTable <span class="dax-operator">=</span> 
+    <span class="dax-fun">FILTER</span>(
+        <span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>),
+        <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator"><</span> TopSpotify <span class="dax-operator">&&</span> 
+        <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator"><</span> TopTikTok <span class="dax-operator">&&</span>
+        <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">></span> <span class="dax-operator">0</span> <span class="sql-com">// excluding zeros so they don't skew the average</span>
+    )
+
+<span class="sql-com">// average for normal songs without huge outliers -> averagex keeps the filtered data</span>
+<span class="dax-var">VAR</span> AVG_T <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(CleanTable, <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])
+<span class="dax-var">VAR</span> AVG_S <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(CleanTable, <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])
+
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(
+        <span class="dax-fun">SUMX</span>(CleanTable, (<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_T) <span class="dax-operator">*</span> (<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_S)),
+        <span class="dax-fun">SQRT</span>(
+            <span class="dax-fun">SUMX</span>(CleanTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_T, <span class="dax-operator">2</span>)) <span class="dax-operator">*</span> <span class="dax-fun">SUMX</span>(CleanTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_S, <span class="dax-operator">2</span>))
+        )
+    )</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>9. Correlation No TikTok</strong></p><pre><code><span class="dax-measure">Correlation No TikTok</span> <span class="dax-operator">=</span> 
+<span class="dax-var">VAR</span> SubTable <span class="dax-operator">=</span> <span class="dax-fun">FILTER</span>(<span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>), <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Category] <span class="dax-operator">=</span> <span class="dax-string">"4. No TikTok Data/Zero"</span>)
+<span class="dax-var">VAR</span> AVG_TikTok <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])
+<span class="dax-var">VAR</span> AVG_Spotify <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(
+        <span class="dax-fun">SUMX</span>(SubTable, (<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok) <span class="dax-operator">*</span> (<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify)),
+        <span class="dax-fun">SQRT</span>(<span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok, <span class="dax-operator">2</span>)) <span class="dax-operator">*</span> <span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify, <span class="dax-operator">2</span>)))
+    )</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>10. Correlation Niche TikTok</strong></p><pre><code><span class="dax-measure">Correlation Niche TikTok</span> <span class="dax-operator">=</span> 
+<span class="dax-var">VAR</span> SubTable <span class="dax-operator">=</span> <span class="dax-fun">FILTER</span>(<span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>), <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Category] <span class="dax-operator">=</span> <span class="dax-string">"3. Niche (< 100k posts)"</span>)
+<span class="dax-var">VAR</span> AVG_TikTok <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])
+<span class="dax-var">VAR</span> AVG_Spotify <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(
+        <span class="dax-fun">SUMX</span>(SubTable, (<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok) <span class="dax-operator">*</span> (<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify)),
+        <span class="dax-fun">SQRT</span>(<span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok, <span class="dax-operator">2</span>)) <span class="dax-operator">*</span> <span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify, <span class="dax-operator">2</span>)))
+    )</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>11. Correlation Popular TikTok</strong></p><pre><code><span class="dax-measure">Correlation Popular TikTok</span> <span class="dax-operator">=</span> 
+<span class="dax-var">VAR</span> SubTable <span class="dax-operator">=</span> <span class="dax-fun">FILTER</span>(<span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>), <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Category] <span class="dax-operator">=</span> <span class="dax-string">"2. Popular (100k - 1M posts)"</span>)
+<span class="dax-var">VAR</span> AVG_TikTok <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])
+<span class="dax-var">VAR</span> AVG_Spotify <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(
+        <span class="dax-fun">SUMX</span>(SubTable, (<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok) <span class="dax-operator">*</span> (<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify)),
+        <span class="dax-fun">SQRT</span>(<span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok, <span class="dax-operator">2</span>)) <span class="dax-operator">*</span> <span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify, <span class="dax-operator">2</span>)))
+    )</code></pre></div>
+
+            <div class="code-container dax-block"><p><strong>12. Correlation Viral TikTok</strong></p><pre><code><span class="dax-measure">Correlation Viral TikTok</span> <span class="dax-operator">=</span> 
+<span class="dax-var">VAR</span> SubTable <span class="dax-operator">=</span> <span class="dax-fun">FILTER</span>(<span class="dax-fun">ALL</span>(<span class="dax-table">'final Engagement_Ratio'</span>), <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Category] <span class="dax-operator">=</span> <span class="dax-string">"1. Viral (> 1M posts)"</span>)
+<span class="dax-var">VAR</span> AVG_TikTok <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views])
+<span class="dax-var">VAR</span> AVG_Spotify <span class="dax-operator">=</span> <span class="dax-fun">AVERAGEX</span>(SubTable, <span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams])
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(
+        <span class="dax-fun">SUMX</span>(SubTable, (<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok) <span class="dax-operator">*</span> (<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify)),
+        <span class="dax-fun">SQRT</span>(<span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[TikTok_Views] <span class="dax-operator">-</span> AVG_TikTok, <span class="dax-operator">2</span>)) <span class="dax-fun">*</span> <span class="dax-fun">SUMX</span>(SubTable, <span class="dax-fun">POWER</span>(<span class="dax-table">'final Engagement_Ratio'</span>[Spotify_Streams] <span class="dax-operator">-</span> AVG_Spotify, <span class="dax-operator">2</span>)))
+    )</code></pre></div>
+
+            <span class="step-description">Statistical verification of the correlation (T-Test). The higher the t-value (above 1.96), the more statistically significant and reliable the examined relationship is.</span>
+            <div class="code-container dax-block"><p><strong>13. T Statistic</strong></p><pre><code><span class="dax-measure">T Statistic</span> <span class="dax-operator">=</span> 
+<span class="dax-var">VAR</span> r <span class="dax-operator">=</span> [Correlation No Outliers] <span class="sql-com">// correlation without outliers -> 0.25</span>
+<span class="dax-var">VAR</span> n <span class="dax-operator">=</span> <span class="dax-fun">COUNTROWS</span>(<span class="dax-table">'final Engagement_Ratio'</span>) <span class="sql-com">// number of songs</span>
+<span class="dax-var">RETURN</span>
+    <span class="dax-fun">DIVIDE</span>(
+        r <span class="dax-operator">*</span> <span class="dax-fun">SQRT</span>(n <span class="dax-operator">-</span> 2),
+        <span class="dax-fun">SQRT</span>(1 <span class="dax-operator">-</span> <span class="dax-fun">POWER</span>(r, 2))
+    )</code></pre></div>`,
+          
+          pbiContent: `
+            <div class="report-structure">
+              <div class="report-card">
+                <h4>
+                  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"></path></svg>
+                  1. Main Page (Scatter Plot & Drill-Through)
+                </h4>
+                <p>The focal point of the report illustrating the correlation between Spotify Streams and TikTok Views on the X and Y axes. A <strong>Drill-Through</strong> feature was added here — users can right-click an interesting track (dot) and jump to a hidden "Single Track Deep Dive" page that analyzes the hit in detail.</p>
+              </div>
+              <div class="report-card">
+                <h4>
+                  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"></path></svg>
+                  2. Categories Correlation
+                </h4>
+                <p>A page informing about correlation depending on TikTok virality (No TikTok, Niche, Popular, Viral). Shows the paradox that meme video hits don't always become music hits on streaming platforms.</p>
+              </div>
+              <div class="report-card">
+                <h4>
+                  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"></path></svg>
+                  3. Ranking Different
+                </h4>
+                <p>A page with a table comparing raw rankings. Calculates on the fly how many positions a given track jumped down or up in the overall ranking of both platforms.</p>
+              </div>
+              <div class="report-card">
+                <h4>
+                  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                  4. Explicit Analysis
+                </h4>
+                <p>Answers the business question: do profanities (Explicit) sell better? Analysis of the share of Explicit vs Clean songs in individual categories broken down by specific artists.</p>
+              </div>
+            </div>`,
+
+          insightsContent: `
+            <li>
+              <strong>The Illusion of No Connection (Correlation: 0.04)</strong>
+              <p>The initial correlation of barely 0.04 suggested a complete lack of relationship between the platforms. This turned out to be an error of scale and data pollution. The global result was massively skewed by mega-hits (the top 5% of tracks, e.g., The Weeknd - Blinding Lights), which generate billions of streams via traditional media (radio, major Spotify playlists), completely independent of TikTok trends.</p>
+            </li>
+            <li>
+              <strong>The Real Power of TikTok (Correlation: 0.25)</strong>
+              <p>After cutting off the outliers with the DAX <code>PERCENTILEX.INC</code> measure, the correlation increased to 0.25. This is the most crucial proof in the project, backed up by a high <strong>T-statistic</strong>. For 95% of tracks (niche and aspiring artists), there is a clear, positive relationship between TikTok reach and Spotify consumption.</p>
+            </li>
+            <li>
+              <strong>Memes don't earn on Spotify (Viral Correlation: -0.03)</strong>
+              <p>In the highest popularity category (Viral > 1M posts), the correlation vanishes and even turns negative. Achieving extreme visual virality does not guarantee musical success. The song often becomes merely a "background for short videos," which doesn't persuade the user to switch to Spotify and listen to the full, monetizable track.</p>
+            </li>`
+        }
+      };
+
+      const setLocalLanguage = (lang) => {
+        document.querySelectorAll('[data-translate]').forEach(el => {
+          const key = el.dataset.translate;
+          if (translations[lang] && translations[lang][key]) { 
+            el.innerHTML = translations[lang][key]; 
+          }
+        });
+
+        if(translations[lang]) {
+          const sqlBody = document.getElementById('sqlContentBody');
+          if(sqlBody) sqlBody.innerHTML = translations[lang].sqlContent;
+          
+          const daxBody = document.getElementById('daxContentBody');
+          if(daxBody) daxBody.innerHTML = translations[lang].daxContent;
+          
+          const pbiBody = document.getElementById('pbiContentBody');
+          if(pbiBody) pbiBody.innerHTML = translations[lang].pbiContent;
+          
+          const insightsBody = document.getElementById('insightsContentBody');
+          if(insightsBody) insightsBody.innerHTML = translations[lang].insightsContent;
+        }
+      };
+
+      const preferredLanguage = localStorage.getItem('preferredLanguage') || 'pl';
+      setLocalLanguage(preferredLanguage);
+
+      document.querySelectorAll('.lang-btn').forEach(button => {
+        button.addEventListener('click', () => {
+          setLocalLanguage(button.dataset.lang);
+        });
+      });
+
+      // ZAKŁADKI (TABS)
+      window.showSection = function(id) {
+        document.querySelectorAll(".info-section").forEach(s => s.classList.remove("active"));
+        document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("is-active"));
+        
+        const targetSection = document.getElementById(id);
+        if (targetSection) targetSection.classList.add("active");
+        
+        const btn = document.querySelector(`.toggle-btn[onclick="showSection('${id}')"]`);
+        if(btn) btn.classList.add("is-active");
+      };
+
+      // SMOOTH SCROLL (LENIS)
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          
+          if (targetId.length > 1 && window.lenis) {
+            window.lenis.scrollTo(targetId, {
+              offset: -90, 
+              duration: 1.5,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+            });
+          }
+        });
+      });
+
+      // GLOW EFEKT
+      document.querySelectorAll('.kpi-card, .report-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+
+      // LIGHTBOX
+      const projectImages = document.querySelectorAll('.project-image');
+      projectImages.forEach(img => {
+        img.addEventListener('click', () => {
+          if(window.openLightbox) { window.openLightbox(img.getAttribute('src')); }
+        });
+      });
+
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,688 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout title="Projekt: Attrition Analyze | Portfolio Jakub Nicpoń">
+    <Navbar />
+
+    <main>
+        <header class="project-hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1>Attrition Analysis Dashboard</h1>
+                        <div class="section-underline"></div>
+                        <p data-translate="heroDesc">W konkurencyjnym środowisku biznesowym przewagę zyskują ci, którzy nie tylko odnajdują i zatrudniają talenty, ale potrafią je u siebie utrzymać. Ważne jest to, aby przekuć dane o kadrach w użyteczne instrukcje.<br><br>Analiza 114 000 rekordów surowego zbioru danych HR w interaktywnym dashboardzie stworzonym w Power BI nie tylko wspomaga odnalezienie się we wskaźnikach odejść, pozwala monitorować konkretne grupy ryzyka odejść z firmy i świadomie kierować programami wspierającymi utrzymanie kluczowych pracowników.</p>
+            
+                        <a href="#project-details-card" class="scroll-down-link">
+                            <span class="mouse-icon">
+                               <span class="wheel"></span>
+                            </span>
+                            <span data-translate="btnDetails">Zobacz szczegóły</span>
+                         </a>
+                    </div>
+                    <div class="hero-image-wrapper">
+                        <div class="project-gallery-grid">
+                            <img src="/assets/Attrition Analyze 1.2.png" alt="Analiza odejść - Widok 1" class="project-image" loading="eager" />
+                            <img src="/assets/Attrition Analyze 1.3.png" alt="Analiza odejść - Widok 2" class="project-image" loading="lazy" />
+                            <img src="/assets/Attrition Analyze 1.1.png" alt="Analiza odejść - Widok 3" class="project-image" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="project-highlights">
+            <div class="container">
+                <h2 data-translate="kpiTitle">Kluczowe Wskaźniki</h2>
+                <div class="section-underline centered-underline"></div>
+                <div class="kpi-grid">
+                    <div class="kpi-card"><span class="kpi-value">2 925</span><span class="kpi-label" data-translate="kpi1Label">Liczba Pracowników</span></div>
+                    <div class="kpi-card"><span class="kpi-value">492</span><span class="kpi-label" data-translate="kpi2Label">Liczba Odejść</span></div>
+                    <div class="kpi-card"><span class="kpi-value">17%</span><span class="kpi-label" data-translate="kpi3Label">Wskaźnik Odejść</span></div>
+                    <div class="kpi-card"><span class="kpi-value">15%</span><span class="kpi-label" data-translate="kpi4Label">Wskaźnik Odejść Kobiet</span></div>
+                    <div class="kpi-card"><span class="kpi-value">18%</span><span class="kpi-label" data-translate="kpi5Label">Wskaźnik Odejść Mężczyzn</span></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="project-details">
+            <div class="container">
+                <h2 data-translate="detailsTitle">Szczegóły Projektu</h2>
+                <div class="section-underline centered-underline"></div>
+                
+                <div class="details-card" id="project-details-card">
+    
+                    <div class="toggle-buttons">
+                        <button class="toggle-btn is-active" onclick="showSection('sectionColumns')" data-translate="tabColumns">Opis Kolumn</button>
+                        <button class="toggle-btn" onclick="showSection('sectionKPIs')" data-translate="tabKPIs">Kluczowe Wskaźniki</button>
+                        <button class="toggle-btn" onclick="showSection('sectionAnalysis')" data-translate="tabAnalysis">Analiza</button>
+                        <button class="toggle-btn" onclick="showSection('sectionMethodology')" data-translate="tabMethodology">Metodologia</button>
+                    </div>
+                    
+                    <div id="info-sections-container">
+                        
+                        <div id="sectionColumns" class="info-section active" role="region">
+                            <table class="kpi-table">
+                                <thead><tr><th data-translate="tableHeaderColumn">Kolumna</th><th data-translate="tableHeaderDesc">Opis</th></tr></thead>
+                                <tbody id="columnsTableBody"></tbody>
+                            </table>
+                        </div>
+    
+                        <div id="sectionKPIs" class="info-section" role="region">
+                             <table class="kpi-table">
+                                 <thead><tr><th>KPI</th><th data-translate="tableHeaderResult">Wynik</th></tr></thead>
+                                 <tbody id="kpisTableBody"></tbody>
+                            </table>
+                        </div>
+    
+                        <div id="sectionAnalysis" class="info-section" role="region">
+                            <div class="analysis-grid">
+                                <div class="analysis-table-container">
+                                    <table class="kpi-table">
+                                        <thead><tr><th data-translate="tableHeaderArea">Obszar Analizy</th><th data-translate="tableHeaderConclusions">Wnioski</th></tr></thead>
+                                        <tbody id="analysisTableBody"></tbody>
+                                    </table>
+                                </div>
+                                <div class="analysis-conclusions">
+                                    <ol id="analysisListBody"></ol>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div id="sectionMethodology" class="info-section" role="region">
+                            <div id="methodologyTableBody"></div>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="project-files">
+            <div class="container">
+                <h2 data-translate="downloadTitle">Pobierz Zasoby Projektu</h2>
+                <div class="section-underline centered-underline"></div>
+                <div class="files-container">
+                    <a href="/assets/HR Attrition raw data.xlsx" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadRaw">Pobierz surowy zestaw danych</span></a>
+                    <a href="/assets/Attrition Analysis Dashboard.pbix" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadPBI">Pobierz Plik Power Bi</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+
+    <style is:global>
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1;}
+        .section-underline { margin: 20px 0 30px 0; width: 80px; height: 4px; border-radius: 2px; background: var(--line-gradient); }
+        .centered-underline { margin: 20px auto 30px auto; }
+        
+        .project-hero { padding: 140px 0 80px; position: relative; overflow: hidden; z-index: 1;}
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-content h1 { font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 0; color: var(--text-primary); }
+        .hero-content p { font-size: 1.2rem; color: var(--text-secondary); max-width: 500px; }
+        .hero-image-wrapper { perspective: 1000px; }
+        
+        .project-image { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: var(--card-shadow); cursor: pointer; border: 1px solid var(--border-color); transition: transform 0.3s ease, border-color 0.3s ease; }
+        .project-image:hover { transform: scale(1.03); border-color: var(--cyan); }
+        
+        .project-gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .project-gallery-grid .project-image:nth-child(3) { grid-column: span 2; }
+        
+        .scroll-down-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 40px; color: var(--text-secondary); font-weight: 600; text-decoration: none; cursor: pointer; transition: color 0.3s ease, transform 0.3s ease; }
+        .scroll-down-link:hover { color: var(--cyan); transform: translateY(-3px); }
+        .mouse-icon { width: 24px; height: 40px; border: 2px solid var(--text-secondary); border-radius: 20px; position: relative; transition: border-color 0.3s ease; }
+        .scroll-down-link:hover .mouse-icon { border-color: var(--cyan); }
+        .mouse-icon .wheel { display: block; width: 4px; height: 8px; background-color: var(--cyan); border-radius: 2px; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); animation: scroll-wheel-anim 2s infinite ease-in-out; }
+        @keyframes scroll-wheel-anim { 0% { transform: translate(-50%, 0); opacity: 1; } 50% { transform: translate(-50%, 10px); opacity: 1; } 100% { transform: translate(-50%, 20px); opacity: 0; } }
+
+        .project-highlights { padding: 80px 0; z-index: 1; position: relative;}
+        .project-highlights h2, .project-details h2, .project-files h2 { text-align: center; font-size: 2.5rem; font-weight: 700; background: var(--line-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 50px; justify-content: center;}
+        
+        .kpi-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; text-align: center; position: relative; overflow: visible; backdrop-filter: blur(10px); transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 50%); opacity: 0; transition: opacity 0.3s; border-radius: 15px; pointer-events: none; z-index: 0; }
+        .kpi-card > * { position: relative; z-index: 1; }
+        .kpi-card:hover { transform: translateY(-8px) scale(1.03); border-color: var(--cyan); box-shadow: var(--card-shadow); }
+        .kpi-card:hover::before { opacity: 1; }
+        
+        .kpi-value { display: block; font-size: 2.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+        .kpi-label { font-size: 1rem; color: var(--text-secondary); }
+        
+        .project-details { padding: 80px 0; z-index: 1; position: relative;}
+        .details-card { background: var(--bg-surface); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--card-shadow); transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+        .toggle-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
+        .toggle-btn { appearance: none; background: var(--btn-bg); border: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 600; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 12px 24px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;}
+        .toggle-btn:hover { color: var(--text-primary); border-color: var(--cyan); transform: translateY(-2px); }
+        .toggle-btn.is-active { background: var(--line-gradient); color: white; border-color: transparent; transform: scale(1.05); box-shadow: 0 5px 15px var(--spotlight-color); }
+        .info-section { display: none; margin-top: 20px; padding-top: 30px; border-top: 1px solid var(--border-color); }
+        .info-section.active { display: block; animation: fadeIn .4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .kpi-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        .kpi-table th, .kpi-table td { padding: 14px 10px; border-bottom: 1px solid var(--border-color); text-align: center; width: 50%; }
+        .kpi-table tr:last-child td { border-bottom: none; }
+        .kpi-table thead th { font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .kpi-table td { color: var(--text-secondary); }
+        
+        .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .analysis-conclusions ol { list-style: none; padding-left: 0; counter-reset: conclusion-counter; }
+        .analysis-conclusions li { position: relative; padding-left: 45px; margin-bottom: 25px; }
+        .analysis-conclusions li::before { counter-increment: conclusion-counter; content: counter(conclusion-counter); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; border-radius: 50%; background: var(--line-gradient); color: white; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+        .analysis-conclusions strong { display: block; margin-bottom: 5px; color: var(--text-primary); font-size: 1.1rem; }
+        .analysis-conclusions p { color: var(--text-secondary); font-size: 0.95rem; margin: 0; }
+
+        /* Metodologia - bloki DAX */
+        .methodology-steps { list-style: none; padding-left: 0; position: relative; counter-reset: step-counter; }
+        .methodology-steps::before { content: ''; position: absolute; left: 24px; top: 24px; bottom: 24px; width: 2px; background-color: var(--border-color); }
+        .methodology-steps li { position: relative; padding-left: 70px; margin-bottom: 50px; }
+        .methodology-steps li:last-child { margin-bottom: 0; }
+        .methodology-step-header { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
+        .methodology-step-header::before { counter-increment: step-counter; content: "0" counter(step-counter); position: absolute; left: 0; top: 0; width: 50px; height: 50px; background: var(--bg-surface); border: 2px solid var(--border-color); border-radius: 50%; color: var(--text-primary); font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
+        .methodology-step-header svg { width: 32px; height: 32px; color: var(--cyan); }
+        .methodology-step-header h3 { font-size: 1.8rem; font-weight: 700; margin: 0; color: var(--text-primary); }
+        .methodology-content ul { list-style: none; padding-left: 0; margin-bottom: 20px; }
+        .methodology-content li { position: relative; margin-bottom: 12px; padding-left: 25px; color: var(--text-secondary); }
+        .methodology-content li::before { content: '›'; position: absolute; left: 0; top: -2px; color: var(--cyan); font-size: 1.5rem; line-height: 1.6; }
+        .methodology-content code { background-color: rgba(125, 125, 125, 0.2); color: var(--text-primary); padding: 2px 6px; border-radius: 5px; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9em; }
+        .methodology-content p { margin-bottom: 15px; color: var(--text-secondary); }
+        
+        .dax-measure-block { margin-bottom: 25px; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0,0,0,0.2); }
+        [data-theme="light"] .dax-measure-block { background: rgba(0,0,0,0.03); }
+        .dax-measure-block p { padding: 16px 16px 0; margin-bottom: 0; color: var(--text-primary); }
+        .dax-measure-block pre { background: #0D1117; border-top: 1px solid var(--border-color); border-radius: 0 0 11px 11px; padding: 16px; margin: 15px 0 0 0; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; position: relative; }
+        .dax-measure-block pre::before { content: 'DAX'; position: absolute; top: 12px; right: 12px; font-size: 0.8em; font-weight: 600; color: rgba(255,255,255,0.4); }
+        .dax-measure-block pre code { background: none; padding: 0; font-size: 0.95em; line-height: 1.5; color: #c9d1d9; }
+        .dax-measure { color: #D2A8FF; } .dax-function { color: #79C0FF; } .dax-string { color: #A5D6A7; }
+        .dax-keyword { color: #FF7B72; } .dax-operator { color: #c9d1d9; } .dax-comment { color: #8B949E; }
+
+        .project-files { padding: 20px 0; z-index: 1; position: relative;}
+        .files-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 50px; }
+        .gradient__border__container { display: inline-block; position: relative; padding: 1px; border-radius: 30px; background: var(--line-gradient); background-size: 200% 200%; animation: spin-gradient 6s linear infinite; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; min-width: 150px; text-align: center; text-decoration: none; box-shadow: 0 4px 20px var(--spotlight-color); }
+        .gradient__border__container:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--spotlight-color); }
+        .gradient__border__container .gradient__border__text { display: block; background: var(--bg-surface); border-radius: 29px; padding: 0.8rem 2rem; font-size: 1rem; font-weight: 600; color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+        .gradient__border__container:hover .gradient__border__text { background: transparent; color: #fff;}
+        @keyframes spin-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        @media (max-width: 900px) { 
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; } 
+            .hero-content { order: 2; } 
+            .hero-image-wrapper { order: 1; } 
+            .hero-content .section-underline, .hero-content .scroll-down-link { margin-left: auto; margin-right: auto; } 
+            .analysis-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+        @media (max-width: 600px) { 
+            .hero-content h1 { font-size: 2.8rem; } 
+            .project-highlights h2, .project-details h2, .project-files h2 { font-size: 2rem; } 
+            .details-card { padding: 25px; } 
+        }
+    </style>
+
+    <script is:inline>
+        // === TŁUMACZENIA SPECYFICZNE DLA TEGO PROJEKTU ===
+        const translations = {
+            pl: {
+                pageTitle: "Projekt: Attrition Analyze | Portfolio Jakub Nicpoń",
+                heroDesc: "W konkurencyjnym środowisku biznesowym przewagę zyskują ci, którzy nie tylko odnajdują i zatrudniają talenty, ale potrafią je u siebie utrzymać. Ważne jest to, aby przekuć dane o kadrach w użyteczne instrukcje.<br><br>Analiza 114 000 rekordów surowego zbioru danych HR w interaktywnym dashboardzie stworzonym w Power BI nie tylko wspomaga odnalezienie się we wskaźnikach odejść, pozwala monitorować konkretne grupy ryzyka odejść z firmy i świadomie kierować programami wspierającymi utrzymanie kluczowych pracowników.",
+                btnDetails: "Zobacz szczegóły",
+                kpiTitle: "Kluczowe Wskaźniki",
+                kpi1Label: "Liczba Pracowników",
+                kpi2Label: "Liczba Odejść",
+                kpi3Label: "Wskaźnik Odejść",
+                kpi4Label: "Wskaźnik Odejść Kobiet",
+                kpi5Label: "Wskaźnik Odejść Mężczyzn",
+                detailsTitle: "Szczegóły Projektu",
+                tabColumns: "Opis Kolumn",
+                tabKPIs: "Kluczowe Wskaźniki",
+                tabAnalysis: "Analiza",
+                tabMethodology: "Metodologia",
+                tableHeaderColumn: "Kolumna",
+                tableHeaderDesc: "Opis",
+                tableHeaderResult: "Wynik",
+                tableHeaderArea: "Obszar Analizy",
+                tableHeaderConclusions: "Wnioski",
+                downloadTitle: "Pobierz Zasoby Projektu",
+                btnDownloadRaw: "Pobierz surowy zestaw danych",
+                btnDownloadPBI: "Pobierz Plik Power Bi",
+                
+                colsData: `
+                    <tr><td>Attrition</td><td>Informacja, czy pracownik odszedł z firmy</td></tr>
+                    <tr><td>Business Travel</td><td>Częstotliwość podróży służbowych</td></tr>
+                    <tr><td>CF_age band</td><td>Zakres wiekowy</td></tr>
+                    <tr><td>CF_attrition rate</td><td>Stopa rotacji w określonej grupie</td></tr>
+                    <tr><td>Department</td><td>Dział organizacyjny, w którym pracuje pracownik</td></tr>
+                    <tr><td>Education</td><td>Poziom wykształcenia</td></tr>
+                    <tr><td>emp no</td><td>Numer identyfikacyjny pracownika</td></tr>
+                    <tr><td>Employee Count</td><td>Liczba pracowników</td></tr>
+                    <tr><td>Gender</td><td>Płeć pracownika</td></tr>
+                    <tr><td>Job Role</td><td>Stanowisko / funkcja w organizacji</td></tr>
+                    <tr><td>Marital Status</td><td>Stan cywilny pracownika</td></tr>
+                    <tr><td>Over Time</td><td>Czy pracownik wykonuje pracę w godzinach nadliczbowych</td></tr>
+                    <tr><td>Over 18</td><td>Czy pracownik ma ukończone 18 lat</td></tr>
+                    <tr><td>Training Times Last Year</td><td>Liczba szkoleń odbytych w ostatnim roku</td></tr>
+                    <tr><td>Age</td><td>Wiek pracownika</td></tr>
+                    <tr><td>CF_current employee</td><td>Status zatrudnienia: czy pracownik aktualnie pracuje w firmie</td></tr>
+                    <tr><td>Daily Rate</td><td>Dzienna stawka wynagrodzenia</td></tr>
+                    <tr><td>Distance From Home</td><td>Odległość od miejsca zamieszkania do pracy</td></tr>
+                    <tr><td>Education Field</td><td>Kierunek / dziedzina wykształcenia</td></tr>
+                    <tr><td>Employee Number</td><td>Unikalny numer identyfikujący pracownika</td></tr>
+                    <tr><td>Environment Satisfaction</td><td>Poziom satysfakcji z warunków pracy</td></tr>
+                    <tr><td>Hourly Rate</td><td>Stawka godzinowa</td></tr>
+                    <tr><td>Job Involvement</td><td>Zaangażowanie pracownika w wykonywaną pracę</td></tr>
+                    <tr><td>Job Level</td><td>Poziom stanowiska w strukturze organizacyjnej</td></tr>
+                    <tr><td>Job Satisfaction</td><td>Satysfakcja z pracy na stanowisku</td></tr>
+                    <tr><td>Monthly Income</td><td>Miesięczne wynagrodzenie brutto</td></tr>
+                    <tr><td>Monthly Rate</td><td>Miesięczna stawka zarobków</td></tr>
+                    <tr><td>Num Companies Worked</td><td>Liczba wcześniejszych firm, w których pracownik pracował</td></tr>
+                    <tr><td>Percent Salary Hike</td><td>Procentowy wzrost pensji</td></tr>
+                    <tr><td>Performance Rating</td><td>Ocena wydajności pracownika z systemu zarządzania wydajnością</td></tr>
+                    <tr><td>Relationship Satisfaction</td><td>Satysfakcja z relacji z przełożonymi i zespołem</td></tr>
+                    <tr><td>Standard Hours</td><td>Ustalona standardowa liczba godzin pracy</td></tr>
+                    <tr><td>Stock Option Level</td><td>Poziom udziału w programie akcji pracowniczych</td></tr>
+                    <tr><td>Total Working Years</td><td>Łączna liczba lat doświadczenia zawodowego</td></tr>
+                    <tr><td>Work Life Balance</td><td>Równowaga między życiem zawodowym a prywatnym</td></tr>
+                    <tr><td>Years At Company</td><td>Liczba lat przepracowanych w firmie</td></tr>
+                    <tr><td>Years In Current Role</td><td>Lata na obecnym stanowisku</td></tr>
+                    <tr><td>Years Since Last Promotion</td><td>Lata od ostatniego awansu</td></tr>
+                    <tr><td>Years With Current Manager</td><td>Lata pracy pod aktualnym przełożonym</td></tr>
+                `,
+                kpisData: `
+                    <tr><td>Całkowita liczba pracowników</td><td>2 925</td></tr>
+                    <tr><td>Liczba odejść pracowników</td><td>492</td></tr>
+                    <tr><td>Wskaźnik odejść (Attrition Rate)</td><td>17 %</td></tr>
+                    <tr><td>Wskaźnik odejść kobiet</td><td>15 %</td></tr>
+                    <tr><td>Wskaźnik odejść mężczyzn</td><td>18 %</td></tr>
+                    <tr><td>Odejścia w R&D</td><td>282 (57 % całości)</td></tr>
+                    <tr><td>Odejścia w Sales</td><td>186 (38 % całości)</td></tr>
+                    <tr><td>Odejścia w HR</td><td>24 (5 % całości)</td></tr>
+                    <tr><td>Pracownicy z krótkim stażem (0–10 lat)</td><td>378 (77 %)</td></tr>
+                    <tr><td>Pracownicy 26–35 lat</td><td>~49 % odejść</td></tr>
+                    <tr><td>Średni staż odchodzących</td><td>6 – 8 lat</td></tr>
+                    <tr><td>Osoby z wyższym wykształceniem</td><td>324 (65 %)</td></tr>
+                    <tr><td>Zarobki < 5000 USD (wśród odchodzących)</td><td>340 (69 %)</td></tr>
+                    <tr><td>Bardzo zadowoleni pracownicy, którzy odeszli</td><td>134</td></tr>
+                    <tr><td>Niezadowoleni pracownicy, którzy odeszli</td><td>151</td></tr>
+                    <tr><td>Liczba poprzednich prac 0–1</td><td>258 (52 %)</td></tr>
+                    <tr><td>Odchodzący mieszkający blisko pracy</td><td>~ 60 %</td></tr>
+                `,
+                analysisTableData: `
+                    <tr><td>Skala rotacji</td><td>W badanym okresie analizy firma zatrudniała 2925 pracowników, z czego 492 osoby opuściły organizację, tym samym wskaźnik rotacji wyniósł 17%.</td></tr>
+                    <tr><td>Płeć</td><td>Wśród kobiet wskaźnik odejść wyniósł 15% (180 z 1171), a wśród mężczyzn 18% (312 z 1754). Różnica może wynikać z różnych motywatorów (kobiety - czynniki organizacyjne; mężczyźni - finansowe).</td></tr>
+                    <tr><td>Staż pracy w firmie</td><td>Największa rotacja dotyczy osób z krótkim stażem 0–10 lat (378 osób, czyli 77%). Wśród pracowników >20 lat doświadczenia rotacja jest marginalna (< 7%).</td></tr>
+                    <tr><td>Satysfakcja z pracy</td><td>Liczba rezygnacji rośnie wraz ze spadkiem satysfakcji. Ciekawostką jest fakt, że wśród "bardzo zadowolonych" (134 osoby) również występują odejścia (np. dla awansu u konkurencji).</td></tr>
+                    <tr><td>Dochód miesięczny</td><td>69% odchodzących (7 na 10 osób) zarabiało poniżej 5000 USD. Wskaźnik ten spada gwałtownie po przekroczeniu 10 000 USD.</td></tr>
+                    <tr><td>Wiek</td><td>Rotacja skupia się w grupie 26–35 lat (ponad 50% wszystkich odejść), co stanowi najbardziej mobilną grupę zawodową. W grupach powyżej 45 lat poziom odejść maleje.</td></tr>
+                    <tr><td>Wykształcenie</td><td>Większość odchodzących to osoby z Bachelor i Master Degree (65% ogółu), co wskazuje na ich większą elastyczność na rynku pracy.</td></tr>
+                    <tr><td>Dział</td><td>R&D (282 odejścia, 57%) i Sales (186, 38%) generują główną fluktuację kadr. HR notuje wysoką stabilność.</td></tr>
+                    <tr><td>Stanowiska o największej rotacji</td><td>Laboratory Technician (130), Sales Executive (113) i Research Scientist (99). Są to role wymagające wysokiej specjalizacji z presją wyników.</td></tr>
+                    <tr><td>Doświadczenie zawodowe</td><td>52% odchodzących miało 0 lub 1 poprzednie miejsce pracy. Kobiety częściej odchodzą z niewielkim doświadczeniem, mężczyźni - z dużym.</td></tr>
+                    <tr><td>Odległość od miejsca pracy</td><td>Około 60% odchodzących mieszka blisko pracy, co sugeruje, że dojazd nie jest głównym powodem rezygnacji.</td></tr>
+                `,
+                analysisListData: `
+                    <li><strong>Odejścia koncentrują się w pierwszych latach pracy</strong><p>Najwięcej odejść dotyczy osób we wczesnej fazie zatrudnienia (0–10 lat), firma traci ludzi dopiero uczących się organizacji. Oznacza to, że onboarding to kluczowa bariera.<br><strong>Rekomendacja:</strong> Wprowadzenie programów mentoringu z regularnym feedbackiem i mapą rozwoju.</p></li>
+                    <li><strong>Wysoka rotacja w niższych grupach płacowych</strong><p>Pracownicy z zarobkami < 5000 USD to blisko 2/3 wszystkich odejść, zatem mają one podłoże ekonomiczne.<br><strong>Rekomendacja:</strong> Warto wprowadzić regularny benchmarking płac w danym sektorze.</p></li>
+                    <li><strong>Satysfakcja nie gwarantuje lojalności</strong><p>Ponad 25% odejść dotyczy osób zadowolonych z pracy. Sam komfort nie wystarczy, kluczowe są możliwości rozwoju.<br><strong>Rekomendacja:</strong> Rozmowy ewaluacyjne i przejrzysta komunikacja o awansach zanim pracownicy zaczną szukać alternatyw.</p></li>
+                    <li><strong>Różne motywatory wg. płci</strong><p>Mężczyźni odchodzą częściej, zwłaszcza w działach technicznych. U kobiet dominują czynniki komfortu, u mężczyzn – rozwój i wynagrodzenie.<br><strong>Rekomendacja:</strong> Ulepszyć komunikację na linii pracownik-zarząd, zbadanie kwestii menedżerskich.</p></li>
+                `,
+                methodologyData: `
+                    <ol class="methodology-steps">
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.585 5.584L18.413 2.413a2.011 2.011 0 0 0-2.827 0L2.394 15.59a1.99 1.99 0 0 0-.583 1.21L1.24 21.75a1 1 0 0 0 1.01 1.01l4.95-1.173a1.99 1.99 0 0 0 1.21-.583l13.176-13.174a1.99 1.99 0 0 0 0-2.827zM17 4.53l2.47 2.47-2.58 2.58-2.47-2.47zM4.14 20.36l-1 .235.236-1L6.55 16.42l2.03 2.03zm4.24-3.12l-2.03-2.03L15.17 6.4l2.03 2.03z"></path><path d="M21 15h-5a1 1 0 0 0 0 2h5a1 1 0 0 0 0-2z"></path></svg>
+                                <h3>Czyszczenie i Transformacja Danych w Power Query</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <ul>
+                                    <li>Wczytałem dane i przeanalizowałem za pomocą <strong>Column Quality</strong>.</li>
+                                    <li>Usunąłem puste wiersze (<code>null</code>), które obniżały jakość danych.</li>
+                                    <li>Użyłem pierwszych wierszy jako nagłówków tabeli.</li>
+                                    <li>Pozbyłem się kolumn zawierających wyłącznie wartości <code>null</code>.</li>
+                                    <li>Osiągnąłem <strong>100% Column Quality</strong> dla całego zestawu danych.</li>
+                                    <li>Dodałem nową tabelę <code>All Measures</code> dla scentralizowanego zarządzania miarami DAX.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9z" clip-rule="evenodd"></path><path d="M7.22 7.22A.75.75 0 0 1 8.25 6h1.5a.75.75 0 0 1 0 1.5H9v.75a.75.75 0 0 1-1.5 0V7.22zM14.25 6a.75.75 0 0 1 .75.75v.75h-.75a.75.75 0 0 1 0-1.5h.75zM14.25 15.75a.75.75 0 0 1 .75.75V18h-1.5a.75.75 0 0 1 0-1.5h.75v-.75a.75.75 0 0 1 .75-.75zM8.25 18a.75.75 0 0 1-.75-.75v-.75h.75a.75.75 0 0 1 0 1.5H8.25z"></path></svg>
+                                <h3>Dodane Kolumny Warunkowe</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <ul>
+                                    <li><code>Commuting Distance</code>: Klasyfikuje odległość dojazdu do pracy (<code>Distance From Home</code>) na kategorie: <em>Near by</em> (≤10 mil), <em>Far</em> (≤20 mil) i <em>Very far</em> (>20 mil).</li>
+                                    <li><code>Working Years Group</code>: Grupuje staż pracy (<code>Total Working Years</code>) na przedziały: <em>0-10</em>, <em>11-20</em>, <em>21-30</em> i <em>31+</em>.</li>
+                                    <li><code>Job Satisfaction Status</code>: Przekształca ocenę zadowolenia na opisowe statusy: <em>Very Satisfied</em>, <em>Satisfied</em>, <em>Dissatisfied</em>, <em>Very Dissatisfied</em>.</li>
+                                    <li><code>Age bucket</code>: Poprawia domyślną kategoryzację wieku, tworząc logiczne przedziały.</li>
+                                    <li><code>Companies Worked Bucket</code>: Grupuje liczbę firm: <em>0-1</em>, <em>2-3</em>, <em>4 and more</em>.</li>
+                                    <li><code>Monthly Income Balance</code>: Tworzy koszyki przychodów miesięcznych.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a.75.75 0 0 1 0-1.113zM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0z" clip-rule="evenodd"></path></svg>
+                                <h3>Stworzone Miary DAX</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <div class="dax-measure-block">
+                                    <p><strong>Total Employees</strong>: Obliczenie całkowitej liczby pracowników.</p>
+                                    <pre><code><span class="dax-measure">Total Employees</span> <span class="dax-operator">=</span> <span class="dax-function">COUNTROWS</span>(<span class="dax-string">'Cleaned Data'</span>)</code></pre>
+                                </div>
+                                <div class="dax-measure-block">
+                                    <p><strong>Total Attrition</strong>: Zliczenie pracowników, którzy odeszli.</p>
+                                    <pre><code><span class="dax-measure">Total Attrition</span> <span class="dax-operator">=</span> 
+<span class="dax-function">CALCULATE</span>(
+    [Total Employees], 
+    <span class="dax-function">FILTER</span>(<span class="dax-string">'Cleaned Data'</span>, 'Cleaned Data'[Attrition] <span class="dax-operator">=</span> <span class="dax-string">"yes"</span>)
+)</code></pre>
+                                </div>
+                                <div class="dax-measure-block">
+                                    <p><strong>Attrition Level</strong>: Procentowy wskaźnik odejść.</p>
+                                    <pre><code><span class="dax-measure">Attrition Level</span> <span class="dax-operator">=</span> <span class="dax-function">DIVIDE</span>([Total Attrition], [Total Employees], <span class="dax-keyword">0</span>)</code></pre>
+                                </div>
+                                <div class="dax-measure-block">
+                                    <p><strong>Miary odejść per departament</strong>:</p>
+                                    <pre><code><span class="dax-measure">HR Department</span> <span class="dax-operator">=</span> <span class="dax-function">CALCULATE</span>([Total Attrition], <span class="dax-string">'Cleaned Data'</span>[Department] <span class="dax-operator">=</span> <span class="dax-string">"Hr"</span>)
+<span class="dax-measure">R&D Department</span> <span class="dax-operator">=</span> <span class="dax-function">CALCULATE</span>([Total Attrition], <span class="dax-string">'Cleaned Data'</span>[Department] <span class="dax-operator">=</span> <span class="dax-string">"R&D"</span>)
+<span class="dax-measure">Sales Department</span> <span class="dax-operator">=</span> <span class="dax-function">CALCULATE</span>([Total Attrition], <span class="dax-string">'Cleaned Data'</span>[Department] <span class="dax-operator">=</span> <span class="dax-string">"Sales"</span>)</code></pre>
+                                </div>
+                                <div class="dax-measure-block">
+                                    <p><strong>Procentowy udział płci w odejściach</strong>:</p>
+                                    <pre><code><span class="dax-measure">Male Attrition</span> <span class="dax-operator">=</span> 
+<span class="dax-keyword">VAR</span> total_attrition <span class="dax-operator">=</span> [Total Attrition]
+<span class="dax-keyword">VAR</span> male_attrition <span class="dax-operator">=</span> <span class="dax-function">CALCULATE</span>([Total Attrition], <span class="dax-string">'Cleaned Data'</span>[Gender] <span class="dax-operator">=</span> <span class="dax-string">"Male"</span>)
+<span class="dax-keyword">RETURN</span>
+    <span class="dax-function">DIVIDE</span>(male_attrition, total_attrition, <span class="dax-keyword">0</span>)</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a.75.75 0 0 1 0-1.113zM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0z" clip-rule="evenodd"></path></svg>
+                                <h3>Wizualizacja i Template</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <p>Template dla dashboardu stworzony został w programie <strong>PowerPoint</strong> w celu zapewnienia spójnego i profesjonalnego wyglądu, a następnie zaimportowany jako tło w Power BI.</p>
+                            </div>
+                        </li>
+                    </ol>
+                `
+            },
+            en: {
+                pageTitle: "Projekt: Attrition Analysis | Jakub Nicpoń's Portfolio",
+                heroDesc: "In a competitive business environment, those who not only find and hire talent but can retain it gain the advantage. It is crucial to turn HR data into actionable strategies.<br><br>Analysis of 114,000 raw HR dataset records in an interactive dashboard created in Power BI not only helps navigate departure metrics, but allows monitoring specific attrition risk groups and consciously guiding programs supporting key employee retention.",
+                btnDetails: "See details",
+                kpiTitle: "KPI",
+                kpi1Label: "Total Employees",
+                kpi2Label: "Total Attrition",
+                kpi3Label: "Attrition Rate",
+                kpi4Label: "Female Attrition Rate",
+                kpi5Label: "Male Attrition Rate",
+                detailsTitle: "Project Details",
+                tabColumns: "Column Description",
+                tabKPIs: "KPI",
+                tabAnalysis: "Analysis",
+                tabMethodology: "Methodology",
+                tableHeaderColumn: "Column",
+                tableHeaderDesc: "Description",
+                tableHeaderResult: "Result",
+                tableHeaderArea: "Analysis Area",
+                tableHeaderConclusions: "Conclusions",
+                downloadTitle: "Download Project Assets",
+                btnDownloadRaw: "Download Raw Dataset",
+                btnDownloadPBI: "Download Power BI File",
+                
+                colsData: `
+                    <tr><td>Attrition</td><td>Information whether the employee left the company</td></tr>
+                    <tr><td>Business Travel</td><td>Frequency of business trips</td></tr>
+                    <tr><td>CF_age band</td><td>Age range</td></tr>
+                    <tr><td>CF_attrition rate</td><td>Turnover rate in a specific group</td></tr>
+                    <tr><td>Department</td><td>Organizational department</td></tr>
+                    <tr><td>Education</td><td>Level of education</td></tr>
+                    <tr><td>emp no</td><td>Employee identification number</td></tr>
+                    <tr><td>Employee Count</td><td>Number of employees</td></tr>
+                    <tr><td>Gender</td><td>Employee's gender</td></tr>
+                    <tr><td>Job Role</td><td>Job position / role</td></tr>
+                    <tr><td>Marital Status</td><td>Marital status of the employee</td></tr>
+                    <tr><td>Over Time</td><td>Does the employee work overtime</td></tr>
+                    <tr><td>Over 18</td><td>Is the employee over 18 years old</td></tr>
+                    <tr><td>Training Times Last Year</td><td>Number of trainings attended last year</td></tr>
+                    <tr><td>Age</td><td>Employee's age</td></tr>
+                    <tr><td>CF_current employee</td><td>Employment status: currently employed</td></tr>
+                    <tr><td>Daily Rate</td><td>Daily wage rate</td></tr>
+                    <tr><td>Distance From Home</td><td>Distance from home to work</td></tr>
+                    <tr><td>Education Field</td><td>Field of education</td></tr>
+                    <tr><td>Employee Number</td><td>Unique number identifying the employee</td></tr>
+                    <tr><td>Environment Satisfaction</td><td>Satisfaction level with working conditions</td></tr>
+                    <tr><td>Hourly Rate</td><td>Hourly wage rate</td></tr>
+                    <tr><td>Job Involvement</td><td>Employee's involvement in work</td></tr>
+                    <tr><td>Job Level</td><td>Position level in the organizational structure</td></tr>
+                    <tr><td>Job Satisfaction</td><td>Job satisfaction rating</td></tr>
+                    <tr><td>Monthly Income</td><td>Gross monthly income</td></tr>
+                    <tr><td>Monthly Rate</td><td>Monthly salary rate</td></tr>
+                    <tr><td>Num Companies Worked</td><td>Number of previous companies worked for</td></tr>
+                    <tr><td>Percent Salary Hike</td><td>Percentage salary increase</td></tr>
+                    <tr><td>Performance Rating</td><td>Employee performance rating</td></tr>
+                    <tr><td>Relationship Satisfaction</td><td>Satisfaction with relationships with managers and team</td></tr>
+                    <tr><td>Standard Hours</td><td>Established standard working hours</td></tr>
+                    <tr><td>Stock Option Level</td><td>Level of participation in the stock option program</td></tr>
+                    <tr><td>Total Working Years</td><td>Total years of professional experience</td></tr>
+                    <tr><td>Work Life Balance</td><td>Work-life balance rating</td></tr>
+                    <tr><td>Years At Company</td><td>Number of years worked at the company</td></tr>
+                    <tr><td>Years In Current Role</td><td>Years in the current position</td></tr>
+                    <tr><td>Years Since Last Promotion</td><td>Years since last promotion</td></tr>
+                    <tr><td>Years With Current Manager</td><td>Years working under the current manager</td></tr>
+                `,
+                kpisData: `
+                    <tr><td>Total number of employees</td><td>2,925</td></tr>
+                    <tr><td>Number of departures (Attrition)</td><td>492</td></tr>
+                    <tr><td>Attrition Rate</td><td>17%</td></tr>
+                    <tr><td>Female Attrition Rate</td><td>15%</td></tr>
+                    <tr><td>Male Attrition Rate</td><td>18%</td></tr>
+                    <tr><td>Departures in R&D</td><td>282 (57% of total)</td></tr>
+                    <tr><td>Departures in Sales</td><td>186 (38% of total)</td></tr>
+                    <tr><td>Departures in HR</td><td>24 (5% of total)</td></tr>
+                    <tr><td>Employees with short tenure (0-10 years)</td><td>378 (77%)</td></tr>
+                    <tr><td>Employees aged 26-35</td><td>~49% of departures</td></tr>
+                    <tr><td>Average tenure of those leaving</td><td>6-8 years</td></tr>
+                    <tr><td>People with higher education</td><td>324 (65%)</td></tr>
+                    <tr><td>Earnings < $5000 (among departures)</td><td>340 (69%)</td></tr>
+                    <tr><td>Very satisfied employees who left</td><td>134</td></tr>
+                    <tr><td>Dissatisfied employees who left</td><td>151</td></tr>
+                    <tr><td>Number of previous jobs 0-1</td><td>258 (52%)</td></tr>
+                    <tr><td>Departing employees living close to work</td><td>~60%</td></tr>
+                `,
+                analysisTableData: `
+                    <tr><td>Scale of turnover</td><td>During the analysis period, the company employed 2,925 people, of which 492 left, resulting in an attrition rate of 17%.</td></tr>
+                    <tr><td>Gender</td><td>Among women, the attrition rate was 15% (180 out of 1171), and among men 18% (312 out of 1754). The difference may stem from different career motivators.</td></tr>
+                    <tr><td>Tenure in the company</td><td>The highest turnover affects people with a short tenure of 0-10 years (378 people, or 77%). Among employees with >20 years of experience, turnover is marginal (< 7%).</td></tr>
+                    <tr><td>Job satisfaction</td><td>The number of resignations increases as satisfaction decreases. Interestingly, even among "very satisfied" employees (134 people) there are departures (e.g., for promotion elsewhere).</td></tr>
+                    <tr><td>Monthly income</td><td>69% of those leaving (7 out of 10 people) earned less than $5,000. This indicator drops sharply after crossing the $10,000 threshold.</td></tr>
+                    <tr><td>Age</td><td>Turnover is concentrated in the 26-35 age group (over 50% of all departures), which is the most mobile professional group. Above 45, departures decrease.</td></tr>
+                    <tr><td>Education</td><td>Most departures are people with Bachelor and Master Degrees (65% of the total), indicating higher flexibility on the job market.</td></tr>
+                    <tr><td>Department</td><td>R&D (282 departures, 57%) and Sales (186, 38%) generate the main staff fluctuation. HR notes high stability.</td></tr>
+                    <tr><td>Highest turnover positions</td><td>Laboratory Technician (130), Sales Executive (113) and Research Scientist (99). These are highly specialized roles with performance pressure.</td></tr>
+                    <tr><td>Professional experience</td><td>52% of those leaving had 0 or 1 previous job. Women more often leave with little experience, men - with extensive experience.</td></tr>
+                    <tr><td>Distance from work</td><td>About 60% of those leaving live close to work, suggesting that commute is not the main reason for resignation.</td></tr>
+                `,
+                analysisListData: `
+                    <li><strong>Departures are concentrated in the first years of work</strong><p>The most departures concern people in the early stages of employment (0-10 years), the company loses people just learning the organization. This means that onboarding is a key barrier.<br><strong>Recommendation:</strong> Introduce mentoring programs with regular feedback and a development map.</p></li>
+                    <li><strong>High turnover in lower pay brackets</strong><p>Employees with earnings < $5000 account for nearly 2/3 of all departures, so they have an economic basis.<br><strong>Recommendation:</strong> Implement regular salary benchmarking in the sector.</p></li>
+                    <li><strong>Satisfaction does not guarantee loyalty</strong><p>Over 25% of departures concern people satisfied with work. Comfort alone is not enough; development opportunities are crucial.<br><strong>Recommendation:</strong> Evaluation talks and transparent communication about promotions before employees look for alternatives.</p></li>
+                    <li><strong>Different motivators by gender</strong><p>Men leave more often, especially in technical departments. Women prioritize comfort factors, men – development and salary.<br><strong>Recommendation:</strong> Improve employee-management communication, investigate managerial issues.</p></li>
+                `,
+                methodologyData: `
+                    <ol class="methodology-steps">
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.585 5.584L18.413 2.413a2.011 2.011 0 0 0-2.827 0L2.394 15.59a1.99 1.99 0 0 0-.583 1.21L1.24 21.75a1 1 0 0 0 1.01 1.01l4.95-1.173a1.99 1.99 0 0 0 1.21-.583l13.176-13.174a1.99 1.99 0 0 0 0-2.827zM17 4.53l2.47 2.47-2.58 2.58-2.47-2.47zM4.14 20.36l-1 .235.236-1L6.55 16.42l2.03 2.03zm4.24-3.12l-2.03-2.03L15.17 6.4l2.03 2.03z"></path><path d="M21 15h-5a1 1 0 0 0 0 2h5a1 1 0 0 0 0-2z"></path></svg>
+                                <h3>Data Cleaning and Transformation in Power Query</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <ul>
+                                    <li>Loaded data and analyzed it using <strong>Column Quality</strong>.</li>
+                                    <li>Removed empty rows (<code>null</code>) that lowered data quality.</li>
+                                    <li>Used first rows as table headers.</li>
+                                    <li>Removed columns containing only <code>null</code> values.</li>
+                                    <li>Achieved <strong>100% Column Quality</strong> for the entire dataset.</li>
+                                    <li>Added a new <code>All Measures</code> table for centralized DAX measure management.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9z" clip-rule="evenodd"></path><path d="M7.22 7.22A.75.75 0 0 1 8.25 6h1.5a.75.75 0 0 1 0 1.5H9v.75a.75.75 0 0 1-1.5 0V7.22zM14.25 6a.75.75 0 0 1 .75.75v.75h-.75a.75.75 0 0 1 0-1.5h.75zM14.25 15.75a.75.75 0 0 1 .75.75V18h-1.5a.75.75 0 0 1 0-1.5h.75v-.75a.75.75 0 0 1 .75-.75zM8.25 18a.75.75 0 0 1-.75-.75v-.75h.75a.75.75 0 0 1 0 1.5H8.25z"></path></svg>
+                                <h3>Added Conditional Columns</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <ul>
+                                    <li><code>Commuting Distance</code>: Classifies distance to work into: <em>Near by</em> (≤10 miles), <em>Far</em> (≤20 miles) and <em>Very far</em> (>20 miles).</li>
+                                    <li><code>Working Years Group</code>: Groups tenure into ranges: <em>0-10</em>, <em>11-20</em>, <em>21-30</em> and <em>31+</em>.</li>
+                                    <li><code>Job Satisfaction Status</code>: Converts rating into: <em>Very Satisfied</em>, <em>Satisfied</em>, <em>Dissatisfied</em>, <em>Very Dissatisfied</em>.</li>
+                                    <li><code>Age bucket</code>: Corrects default age categorization with logical ranges.</li>
+                                    <li><code>Companies Worked Bucket</code>: Groups the number of companies: <em>0-1</em>, <em>2-3</em>, <em>4 and more</em>.</li>
+                                    <li><code>Monthly Income Balance</code>: Creates monthly income brackets.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a.75.75 0 0 1 0-1.113zM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0z" clip-rule="evenodd"></path></svg>
+                                <h3>Created DAX Measures</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <div class="dax-measure-block">
+                                    <p><strong>Total Employees</strong>: Calculation of the total number of employees.</p>
+                                    <pre><code><span class="dax-measure">Total Employees</span> <span class="dax-operator">=</span> <span class="dax-function">COUNTROWS</span>(<span class="dax-string">'Cleaned Data'</span>)</code></pre>
+                                </div>
+                                <div class="dax-measure-block">
+                                    <p><strong>Total Attrition</strong>: Count of employees who left.</p>
+                                    <pre><code><span class="dax-measure">Total Attrition</span> <span class="dax-operator">=</span> 
+<span class="dax-function">CALCULATE</span>(
+    [Total Employees], 
+    <span class="dax-function">FILTER</span>(<span class="dax-string">'Cleaned Data'</span>, 'Cleaned Data'[Attrition] <span class="dax-operator">=</span> <span class="dax-string">"yes"</span>)
+)</code></pre>
+                                </div>
+                                <div class="dax-measure-block">
+                                    <p><strong>Attrition Level</strong>: Percentage attrition rate.</p>
+                                    <pre><code><span class="dax-measure">Attrition Level</span> <span class="dax-operator">=</span> <span class="dax-function">DIVIDE</span>([Total Attrition], [Total Employees], <span class="dax-keyword">0</span>)</code></pre>
+                                </div>
+                                <div class="dax-measure-block">
+                                    <p><strong>Attrition per department</strong>:</p>
+                                    <pre><code><span class="dax-measure">HR Department</span> <span class="dax-operator">=</span> <span class="dax-function">CALCULATE</span>([Total Attrition], <span class="dax-string">'Cleaned Data'</span>[Department] <span class="dax-operator">=</span> <span class="dax-string">"Hr"</span>)
+<span class="dax-measure">R&D Department</span> <span class="dax-operator">=</span> <span class="dax-function">CALCULATE</span>([Total Attrition], <span class="dax-string">'Cleaned Data'</span>[Department] <span class="dax-operator">=</span> <span class="dax-string">"R&D"</span>)
+<span class="dax-measure">Sales Department</span> <span class="dax-operator">=</span> <span class="dax-function">CALCULATE</span>([Total Attrition], <span class="dax-string">'Cleaned Data'</span>[Department] <span class="dax-operator">=</span> <span class="dax-string">"Sales"</span>)</code></pre>
+                                </div>
+                                <div class="dax-measure-block">
+                                    <p><strong>Gender percentage in attrition</strong>:</p>
+                                    <pre><code><span class="dax-measure">Male Attrition</span> <span class="dax-operator">=</span> 
+<span class="dax-keyword">VAR</span> total_attrition <span class="dax-operator">=</span> [Total Attrition]
+<span class="dax-keyword">VAR</span> male_attrition <span class="dax-operator">=</span> <span class="dax-function">CALCULATE</span>([Total Attrition], <span class="dax-string">'Cleaned Data'</span>[Gender] <span class="dax-operator">=</span> <span class="dax-string">"Male"</span>)
+<span class="dax-keyword">RETURN</span>
+    <span class="dax-function">DIVIDE</span>(male_attrition, total_attrition, <span class="dax-keyword">0</span>)</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"></path><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a.75.75 0 0 1 0-1.113zM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0z" clip-rule="evenodd"></path></svg>
+                                <h3>Visualization and Template</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <p>The dashboard template was created in <strong>PowerPoint</strong> to ensure a consistent and professional look, and then imported as a background into Power BI.</p>
+                            </div>
+                        </li>
+                    </ol>
+                `
+            }
+        };
+
+        const setLocalLanguage = (lang) => {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.dataset.translate;
+                if (translations[lang] && translations[lang][key]) { 
+                    el.innerHTML = translations[lang][key]; 
+                }
+            });
+            if(translations[lang]) {
+                const map = {
+                    'columnsTableBody': 'colsData',
+                    'kpisTableBody': 'kpisData',
+                    'analysisTableBody': 'analysisTableData',
+                    'analysisListBody': 'analysisListData',
+                    'methodologyTableBody': 'methodologyData'
+                };
+                for (const [id, key] of Object.entries(map)) {
+                    const el = document.getElementById(id);
+                    if(el) el.innerHTML = translations[lang][key];
+                }
+            }
+        };
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLocalLanguage(btn.dataset.lang));
+        });
+
+        window.showSection = function(id) {
+            document.querySelectorAll(".info-section").forEach(s => s.classList.remove("active"));
+            document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("is-active"));
+            document.getElementById(id).classList.add("active");
+            document.querySelector(`button[onclick="showSection('${id}')"]`).classList.add("is-active");
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'pl';
+            setLocalLanguage(preferredLanguage);
+
+            const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener("click", () => document.body.classList.toggle("nav-open"));
+                document.querySelectorAll(".mobile-nav-menu a").forEach(t => t.addEventListener("click", () => document.body.classList.remove("nav-open")));
+            }
+            
+            const lenis = new Lenis({
+                duration: 1.5,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: 'vertical',
+                smooth: true,
+                smoothTouch: false,
+                touchMultiplier: 2,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            const lightbox = document.getElementById("lightbox");
+            const openLightbox = (src) => {
+                lightbox.querySelector(".lightbox-image").src = src;
+                lightbox.classList.add("open");
+                lenis.stop();
+            };
+            const closeLightbox = () => {
+                lightbox.classList.remove("open");
+                lenis.start();
+            };
+            
+            document.querySelectorAll(".project-image").forEach(img => {
+                img.addEventListener("click", () => openLightbox(img.src));
+            });
+            lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+            lightbox.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
+
+            document.querySelectorAll(".kpi-card").forEach(t => {
+                t.addEventListener("mousemove", e => {
+                    const o = t.getBoundingClientRect();
+                    t.style.setProperty("--mouse-x", `${e.clientX - o.left}px`);
+                    t.style.setProperty("--mouse-y", `${e.clientY - o.top}px`);
+                });
+            });
+        });
+    </script>
+</BaseLayout>

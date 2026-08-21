@@ -1,0 +1,441 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout title="Projekt: Bank Loan Applications Analysis | Portfolio Jakub Nicpoń">
+    <Navbar />
+
+    <main>
+        <header class="project-hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1>Bank Loan Applications Analysis</h1>
+                        <div class="section-underline"></div>
+                        <p data-translate="heroDesc">Analiza ponad 14 000 udzielonych pożyczek w postaci interaktywnego dashboardu Excel, będącego narzędziem analitycznym – pozwalającym monitorować kluczowe wskaźniki efektywności i świadomie kierować kolejnymi decyzjami kredytowymi.<br><br>Całość oparta jest na zestawie danych składającym się z blisko 360 000 rekordów, co zapewnia nam głęboki wgląd w działalność kredytową banku.</p>
+            
+                        <a href="#project-details-card" class="scroll-down-link">
+                            <span class="mouse-icon">
+                               <span class="wheel"></span>
+                            </span>
+                            <span data-translate="btnDetails">Zobacz szczegóły</span>
+                         </a>
+                    </div>
+                    <div class="hero-image-wrapper">
+                        <img src="/assets/Project2.png" alt="Dashboard projektu Bank Loan Applications" class="project-image" loading="eager" />
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="project-highlights">
+            <div class="container">
+                <h2 data-translate="kpiTitle">Kluczowe Wskaźniki</h2>
+                <div class="section-underline centered-underline"></div>
+                <div class="kpi-grid">
+                    <div class="kpi-card"><span class="kpi-value">14 384</span><span class="kpi-label" data-translate="kpi1Label">Udzielone Pożyczki</span></div>
+                    <div class="kpi-card"><span class="kpi-value">$169.03M</span><span class="kpi-label" data-translate="kpi2Label">Kwota Udzielonych Pożyczek</span></div>
+                    <div class="kpi-card"><span class="kpi-value">$183.45M</span><span class="kpi-label" data-translate="kpi3Label">Kwota Spłacona Przez Kredytobiorców</span></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="project-details">
+            <div class="container">
+                <h2 data-translate="detailsTitle">Szczegóły Projektu</h2>
+                <div class="section-underline centered-underline"></div>
+                
+                <div class="details-card" id="project-details-card">
+    
+                    <div class="toggle-buttons">
+                        <button class="toggle-btn is-active" onclick="showSection('sectionColumns')" data-translate="tabColumns">Opis Kolumn</button>
+                        <button class="toggle-btn" onclick="showSection('sectionKPIs')" data-translate="tabKPIs">Kluczowe Wskaźniki</button>
+                        <button class="toggle-btn" onclick="showSection('sectionAnalysis')" data-translate="tabAnalysis">Analiza</button>
+                        <button class="toggle-btn" onclick="showSection('sectionMethodology')" data-translate="tabMethodology">Metodologia</button>
+                    </div>
+                    
+                    <div id="info-sections-container">
+                        
+                        <div id="sectionColumns" class="info-section active" role="region">
+                            <table class="kpi-table">
+                                <thead><tr><th data-translate="tableHeaderColumn">Kolumna</th><th data-translate="tableHeaderDesc">Opis</th></tr></thead>
+                                <tbody id="columnsTableBody">
+                                    </tbody>
+                            </table>
+                        </div>
+    
+                        <div id="sectionKPIs" class="info-section" role="region">
+                             <table class="kpi-table">
+                                 <thead><tr><th>KPI</th><th data-translate="tableHeaderResult">Wynik</th></tr></thead>
+                                 <tbody id="kpisTableBody">
+                                     </tbody>
+                            </table>
+                        </div>
+    
+                        <div id="sectionAnalysis" class="info-section" role="region">
+                            <div class="analysis-grid">
+                                <div class="analysis-table-container">
+                                    <table class="kpi-table">
+                                        <thead><tr><th data-translate="tableHeaderArea">Obszar Analizy</th><th data-translate="tableHeaderConclusions">Wnioski</th></tr></thead>
+                                        <tbody id="analysisTableBody">
+                                            </tbody>
+                                    </table>
+                                </div>
+                                <div class="analysis-conclusions">
+                                    <ol id="analysisListBody">
+                                        </ol>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div id="sectionMethodology" class="info-section" role="region">
+                            <table class="kpi-table">
+                                <thead><tr><th data-translate="tableHeaderStep">Krok Procesu</th><th data-translate="tableHeaderDesc">Opis</th></tr></thead>
+                                <tbody id="methodologyTableBody">
+                                    </tbody>
+                            </table>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="project-files">
+            <div class="container">
+                <h2 data-translate="downloadTitle">Pobierz Zasoby Projektu</h2>
+                <div class="section-underline centered-underline"></div>
+                <div class="files-container">
+                    <a href="/assets/Project2.png" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadDashboard">Pobierz Dashboard (PNG)</span></a>
+                    <a href="/assets/Bank Loan Applications Data.xlsx" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadExcel">Pobierz Plik Excel</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+
+    <style is:global>
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1;}
+        .section-underline { margin: 20px 0 30px 0; width: 80px; height: 4px; border-radius: 2px; background: var(--line-gradient); }
+        .centered-underline { margin: 20px auto 30px auto; }
+        
+        .project-hero { padding: 140px 0 80px; position: relative; overflow: hidden; z-index: 1;}
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-content h1 { font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 0; color: var(--text-primary); }
+        .hero-content p { font-size: 1.2rem; color: var(--text-secondary); max-width: 500px; }
+        .hero-image-wrapper { perspective: 1000px; }
+        .project-image { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: var(--card-shadow); cursor: pointer; border: 1px solid var(--border-color); transition: transform 0.3s ease, border-color 0.3s ease; }
+        .project-image:hover { transform: scale(1.05) rotateY(-5deg) rotateX(5deg); border-color: var(--cyan); }
+        .project-gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .project-gallery-grid .project-image:nth-child(3) { grid-column: span 2; }
+        
+        .scroll-down-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 40px; color: var(--text-secondary); font-weight: 600; text-decoration: none; cursor: pointer; transition: color 0.3s ease, transform 0.3s ease; }
+        .scroll-down-link:hover { color: var(--cyan); transform: translateY(-3px); }
+        .mouse-icon { width: 24px; height: 40px; border: 2px solid var(--text-secondary); border-radius: 20px; position: relative; transition: border-color 0.3s ease; }
+        .scroll-down-link:hover .mouse-icon { border-color: var(--cyan); }
+        .mouse-icon .wheel { display: block; width: 4px; height: 8px; background-color: var(--cyan); border-radius: 2px; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); animation: scroll-wheel-anim 2s infinite ease-in-out; }
+        @keyframes scroll-wheel-anim { 0% { transform: translate(-50%, 0); opacity: 1; } 50% { transform: translate(-50%, 10px); opacity: 1; } 100% { transform: translate(-50%, 20px); opacity: 0; } }
+
+        .project-highlights { padding: 80px 0; z-index: 1; position: relative;}
+        .project-highlights h2, .project-details h2, .project-files h2 { text-align: center; font-size: 2.5rem; font-weight: 700; background: var(--line-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; justify-content: center;}
+        
+        .kpi-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; text-align: center; position: relative; overflow: visible; backdrop-filter: blur(10px); transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 50%); opacity: 0; transition: opacity 0.3s; border-radius: 15px; pointer-events: none; z-index: 0; }
+        .kpi-card > * { position: relative; z-index: 1; }
+        .kpi-card:hover { transform: translateY(-8px) scale(1.03); border-color: var(--cyan); box-shadow: var(--card-shadow); }
+        .kpi-card:hover::before { opacity: 1; }
+        
+        .kpi-value { display: block; font-size: 2.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+        .kpi-label { font-size: 1rem; color: var(--text-secondary); }
+        
+        .project-details { padding: 80px 0; z-index: 1; position: relative;}
+        .details-card { background: var(--bg-surface); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--card-shadow); transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+        .toggle-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
+        .toggle-btn { appearance: none; background: var(--btn-bg); border: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 600; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 12px 24px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;}
+        .toggle-btn:hover { color: var(--text-primary); border-color: var(--cyan); transform: translateY(-2px); }
+        .toggle-btn.is-active { background: var(--line-gradient); color: white; border-color: transparent; transform: scale(1.05); box-shadow: 0 5px 15px var(--spotlight-color); }
+        .info-section { display: none; margin-top: 20px; padding-top: 30px; border-top: 1px solid var(--border-color); }
+        .info-section.active { display: block; animation: fadeIn .4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .kpi-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        .kpi-table th, .kpi-table td { padding: 14px 10px; border-bottom: 1px solid var(--border-color); text-align: center; width: 50%; }
+        .kpi-table tr:last-child td { border-bottom: none; }
+        .kpi-table thead th { font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .kpi-table td { color: var(--text-secondary); }
+        
+        .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .analysis-conclusions ol { list-style: none; padding-left: 0; counter-reset: conclusion-counter; }
+        .analysis-conclusions li { position: relative; padding-left: 45px; margin-bottom: 25px; }
+        .analysis-conclusions li::before { counter-increment: conclusion-counter; content: counter(conclusion-counter); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; border-radius: 50%; background: var(--line-gradient); color: white; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+        .analysis-conclusions strong { display: block; margin-bottom: 5px; color: var(--text-primary); font-size: 1.1rem; }
+        .analysis-conclusions p { color: var(--text-secondary); font-size: 0.95rem; margin: 0; }
+
+        .project-files { padding: 20px 0; z-index: 1; position: relative;}
+        .files-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 50px; }
+        .gradient__border__container { display: inline-block; position: relative; padding: 1px; border-radius: 30px; background: var(--line-gradient); background-size: 200% 200%; animation: spin-gradient 6s linear infinite; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; min-width: 150px; text-align: center; text-decoration: none; box-shadow: 0 4px 20px var(--spotlight-color); }
+        .gradient__border__container:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--spotlight-color); }
+        .gradient__border__container .gradient__border__text { display: block; background: var(--bg-surface); border-radius: 29px; padding: 0.8rem 2rem; font-size: 1rem; font-weight: 600; color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+        .gradient__border__container:hover .gradient__border__text { background: transparent; color: #fff;}
+        @keyframes spin-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        @media (max-width: 900px) { 
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; } 
+            .hero-content { order: 2; } 
+            .hero-image-wrapper { order: 1; } 
+            .hero-content .section-underline, .hero-content .scroll-down-link { margin-left: auto; margin-right: auto; } 
+            .analysis-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+        @media (max-width: 600px) { 
+            .hero-content h1 { font-size: 2.8rem; } 
+            .project-highlights h2, .project-details h2, .project-files h2 { font-size: 2rem; } 
+            .details-card { padding: 25px; } 
+        }
+    </style>
+
+    <script is:inline>
+        // === TŁUMACZENIA SPECYFICZNE DLA TEGO PROJEKTU ===
+        const projectTranslations = {
+            pl: {
+                pageTitle: "Projekt: Bank Loan Applications Analysis | Portfolio Jakuba Nicponia",
+                heroDesc: "Analiza ponad 14 000 udzielonych pożyczek w postaci interaktywnego dashboardu Excel, będącego narzędziem analitycznym – pozwalającym monitorować kluczowe wskaźniki efektywności i świadomie kierować kolejnymi decyzjami kredytowymi.<br><br>Całość oparta jest na zestawie danych składającym się z blisko 360 000 rekordów, co zapewnia nam głęboki wgląd w działalność kredytową banku.",
+                btnDetails: "Zobacz szczegóły",
+                kpiTitle: "Kluczowe Wskaźniki",
+                kpi1Label: "Udzielone Pożyczki",
+                kpi2Label: "Kwota Udzielonych Pożyczek",
+                kpi3Label: "Kwota Spłacona Przez Kredytobiorców",
+                detailsTitle: "Szczegóły Projektu",
+                tabColumns: "Opis Kolumn",
+                tabKPIs: "Kluczowe Wskaźniki",
+                tabAnalysis: "Analiza",
+                tabMethodology: "Metodologia",
+                tableHeaderColumn: "Kolumna",
+                tableHeaderDesc: "Opis",
+                tableHeaderResult: "Wynik",
+                tableHeaderArea: "Obszar Analizy",
+                tableHeaderConclusions: "Wnioski",
+                tableHeaderStep: "Krok Procesu",
+                downloadTitle: "Pobierz Zasoby Projektu",
+                btnDownloadDashboard: "Pobierz Dashboard (PNG)",
+                btnDownloadExcel: "Pobierz Plik Excel",
+                
+                colsData: `
+                    <tr><td>Id</td><td>Unikalny identyfikator pożyczki lub wniosku</td></tr>
+                    <tr><td>Address_State</td><td>Stan (USA) lub region, w którym mieszka wnioskodawca</td></tr>
+                    <tr><td>Application_Type</td><td>Typ wniosku (indywidualny, wspólny itp.)</td></tr>
+                    <tr><td>Emp_Length</td><td>Długość zatrudnienia w latach</td></tr>
+                    <tr><td>Emp_Title</td><td>Stanowisko pracy wnioskodawcy</td></tr>
+                    <tr><td>Grade</td><td>Ocena kredytowa przypisana przez instytucję pożyczkową</td></tr>
+                    <tr><td>Home_Ownership</td><td>Status posiadania nieruchomości (własność, wynajem, kredyt hipoteczny)</td></tr>
+                    <tr><td>Issue_Date</td><td>Data udzielenia pożyczki</td></tr>
+                    <tr><td>Last_Credit_Pull_Date</td><td>Data ostatniego sprawdzenia historii kredytowej</td></tr>
+                    <tr><td>Last_Payment_Date</td><td>Data ostatniej płatności dokonanej przez klienta</td></tr>
+                    <tr><td>Loan_Status</td><td>Status pożyczki (np. spłacona, zaległa, w toku)</td></tr>
+                    <tr><td>Good or Bad Loan</td><td>Klasyfikacja jakości pożyczki (dobra lub zła)</td></tr>
+                    <tr><td>Next_Payment_Date</td><td>Termin kolejnej planowanej płatności</td></tr>
+                    <tr><td>Member_Id</td><td>Identyfikator członka / klienta w systemie</td></tr>
+                    <tr><td>Purpose</td><td>Cel pożyczki (np. konsolidacja długu, zakup samochodu)</td></tr>
+                    <tr><td>Sub_Grade</td><td>Podkategoria oceny kredytowej (bardziej szczegółowa niż „Grade”)</td></tr>
+                    <tr><td>Term</td><td>Okres spłaty pożyczki (np. 36 lub 60 miesięcy)</td></tr>
+                    <tr><td>Verification_Status</td><td>Status weryfikacji danych finansowych klienta</td></tr>
+                    <tr><td>Annual_Income</td><td>Roczny dochód wnioskodawcy</td></tr>
+                    <tr><td>Dti</td><td>Wskaźnik długu do dochodu (Debt-to-Income ratio)</td></tr>
+                    <tr><td>Installment</td><td>Wysokość miesięcznej raty pożyczki</td></tr>
+                    <tr><td>Int_Rate</td><td>Oprocentowanie pożyczki</td></tr>
+                    <tr><td>Loan_Amount</td><td>Kwota pożyczki</td></tr>
+                    <tr><td>Total_Acc</td><td>Łączna liczba rachunków kredytowych klienta</td></tr>
+                    <tr><td>Total_Payment</td><td>Całkowita suma wpłat dokonanych przez klienta</td></tr>
+                `,
+                kpisData: `
+                    <tr><td>Udzielone pożyczki</td><td>14 384</td></tr>
+                    <tr><td>Kwota udzielonych pożyczek</td><td>$169 032 600</td></tr>
+                    <tr><td>Kwota spłacona przez kredytobiorców</td><td>$183 455 468</td></tr>
+                    <tr><td>Średnia stopa procentowa</td><td>12,30%</td></tr>
+                    <tr><td>Średni wskaźnik Debt To Income (DTI)</td><td>13,35%</td></tr>
+                    <tr><td>Procent pożyczek zaliczonych jako 'Good Loan'</td><td>84%</td></tr>
+                    <tr><td>Procent pożyczek zaliczonych jako 'Bad Loan'</td><td>16%</td></tr>
+                    <tr><td>Najczęstszy cel przeznaczenia pożyczki</td><td>Debt consolidation - spłacenie istniejących długów</td></tr>
+                    <tr><td>Najwyższa liczba pożyczek wg. stażu zatrudnienia</td><td>3547 - grupa 10+ lat</td></tr> 
+                    <tr><td>Stan z największą liczbą udzielonych pożyczek</td><td>California - 2516</td></tr>
+                `,
+                analysisTableData: `
+                    <tr><td>Stabilność Udzielonych Pożyczek</td><td>Udzielono 14,38 tys. pożyczek o łącznym sfinansowaniu $169,02M. Wysoki Wskaźnik Good Loans na poziomie 84% świadczy o stosunkowo dużej stabilności.</td></tr>
+                    <tr><td>Rentowność</td><td>Całkowity zysk banku, wygenerowany przez spłatę udzielonych pożyczek wynosi $14,43M. Największy wkład w tę sumę ma cel Debt Consolidation (spłaty długów za pomocą kredytu), który sam generuje 45,8% (ponad $6,61M) całkowitego zysku.</td></tr>
+                    <tr><td>Najpopularniejsze Cele i Wolumen</td><td>Debt Consolidation jest liderem nie tylko zysku, ale i wolumenu w kwestii celów przeznaczenia pożyczek. Stanowiąc blisko 48% kwoty udzielonego finansowania. Credit Card i Home Improvement to kolejne rentowne cele.</td></tr>
+                    <tr><td>Udział Stanów</td><td>Występuje silna koncentracja geograficzna: Kalifornia (CA, 18%), Nowy Jork (NY, 10%) i Floryda (FL, 7,5%) odpowiadają za znaczną część portfela. We wszystkich tych stanach dominującym celem jest Debt Consolidation.</td></tr>
+                    <tr><td>Struktura Ryzyka i Terminu Spłaty</td><td>Istnieje korelacja dotycząca tego, że im niższa ocena kredytowa (Grade), tym wyższy jest udział pożyczek 60-miesięcznych. Mimo to, pożyczki o średnim ryzyku (Grade B, C, D) są najbardziej dochodowe (prawdopodobnie ze względu na wyższe oprocentowanie i dłuższy okres spłaty).</td></tr>
+                    <tr><td>Pożyczki a Staż Pracy</td><td>Największą grupę stanowią klienci ze stażem 10+ lat, ale druga najliczniejsza grupa to klienci z <1 roku stażu, co stanowi ważny, potencjalnie ryzykowny segment.</td></tr>
+                `,
+                analysisListData: `
+                    <li><strong>Segment Pożyczek na Debt Consolidation</strong><p>Pożyczki w celu Debt Consolidation są punktem krytycznym, ponieważ odpowiadają za 45,8% całości zysku i blisko 48% wolumenu. Utrata udziału w tym obszarze może znacząco wpłynąć na stabilność finansową banku.</p></li>
+                    <li><strong>Optymalizacja Ryzyka Według Oceny</strong><p>Pożyczki o średnim ryzyku (Grade B, C, D) są najbardziej rentowne (generują najwyższe zyski jednostkowe) dzięki dłuższym terminom spłaty (60 mies.) i prawdopodobnie wyższemu oprocentowaniu. Jednocześnie to w tych grupach (C, D) należy spodziewać się wyższego wskaźnika Charged Off (długu niemożliwego do odzyskania).</p><p><strong>Rekomendacja:</strong> Przeprowadzić testy marżowości dla pożyczek 60-miesięcznych o Grade A w celu zwiększenia rentowności w segmencie niskiego ryzyka. Dla Grade D/E wdrożyć bardziej restrykcyjne kryteria DTI oraz wymóg dłuższego stażu zatrudnienia.</p></li>
+                    <li><strong>Zarządzanie Segmentem Krótkiego Stażu Zatrudnienia</strong><p>Grupa klientów ze stażem pracy poniżej 1 roku jest drugą najliczniejszą, co sygnalizuje otwartość banku na ten potencjalnie niestabilny finansowo segment.</p><p><strong>Rekomendacja:</strong> Stworzyć model oceny ryzyka dla klientów z <1 roku stażu. Pożyczki w tym segmencie powinny być ograniczone do celów o niższym ryzyku i niższej kwocie (np. Credit Card zamiast Debt Consolidation) i mieć niższe maksymalne wskaźniki DTI.</p></li>
+                `,
+                methodologyData: `
+                    <tr><td>Czyszczenie i Strukturyzacja</td><td>Standaryzacja kolumn, poprawa formatów dat, usunięcie niespójności z systemu bankowego.</td></tr>
+                    <tr><td>Tabele Przestawne</td><td>Agregacja danych kredytowych w celu podsumowania wolumenów, spłat i celów pożyczkowych.</td></tr>
+                    <tr><td>Wykresy Przestawne</td><td>Wizualizacja trendów w czasie (Issue Date), udziału procentowego i analizy ryzyka (Good/Bad Loan).</td></tr>
+                    <tr><td>Fragmentatory</td><td>Dodanie interaktywnych filtrów (np. rok, miesiąc, stan, stopień Grade).</td></tr>
+                `
+            },
+            en: {
+                pageTitle: "Project: Bank Loan Applications Analysis | Jakub Nicpoń's Portfolio",
+                heroDesc: "Analysis of over 14,000 granted loans in the form of an interactive Excel dashboard, serving as an analytical tool – allowing monitoring of key performance indicators and consciously guiding future credit decisions.<br><br>The whole is based on a dataset consisting of nearly 360,000 records, providing deep insight into the bank's credit operations.",
+                btnDetails: "See details",
+                kpiTitle: "KPI",
+                kpi1Label: "Granted Loans",
+                kpi2Label: "Amount of Granted Loans",
+                kpi3Label: "Amount Repaid by Borrowers",
+                detailsTitle: "Project Details",
+                tabColumns: "Column Description",
+                tabKPIs: "KPI",
+                tabAnalysis: "Analysis",
+                tabMethodology: "Methodology",
+                tableHeaderColumn: "Column",
+                tableHeaderDesc: "Description",
+                tableHeaderResult: "Result",
+                tableHeaderArea: "Analysis Area",
+                tableHeaderConclusions: "Conclusions",
+                tableHeaderStep: "Process Step",
+                downloadTitle: "Download Project Assets",
+                btnDownloadDashboard: "Download Dashboard (PNG)",
+                btnDownloadExcel: "Download Excel File",
+                
+                // DANE TABELARYCZNE (EN)
+                colsData: `
+                    <tr><td>Id</td><td>Unique identifier for the loan or application</td></tr>
+                    <tr><td>Address_State</td><td>State (USA) or region where the applicant lives</td></tr>
+                    <tr><td>Application_Type</td><td>Type of application (individual, joint, etc.)</td></tr>
+                    <tr><td>Emp_Length</td><td>Length of employment in years</td></tr>
+                    <tr><td>Emp_Title</td><td>Applicant's job title</td></tr>
+                    <tr><td>Grade</td><td>Credit grade assigned by the lending institution</td></tr>
+                    <tr><td>Home_Ownership</td><td>Property ownership status (own, rent, mortgage)</td></tr>
+                    <tr><td>Issue_Date</td><td>Loan issue date</td></tr>
+                    <tr><td>Last_Credit_Pull_Date</td><td>Date of the last credit history check</td></tr>
+                    <tr><td>Last_Payment_Date</td><td>Date of the last payment made by the customer</td></tr>
+                    <tr><td>Loan_Status</td><td>Loan status (e.g., fully paid, charged off, current)</td></tr>
+                    <tr><td>Good or Bad Loan</td><td>Loan quality classification (good or bad)</td></tr>
+                    <tr><td>Next_Payment_Date</td><td>Date of the next scheduled payment</td></tr>
+                    <tr><td>Member_Id</td><td>Member / customer ID in the system</td></tr>
+                    <tr><td>Purpose</td><td>Purpose of the loan (e.g., debt consolidation, car purchase)</td></tr>
+                    <tr><td>Sub_Grade</td><td>Credit score subcategory (more detailed than "Grade")</td></tr>
+                    <tr><td>Term</td><td>Loan repayment period (e.g., 36 or 60 months)</td></tr>
+                    <tr><td>Verification_Status</td><td>Customer financial data verification status</td></tr>
+                    <tr><td>Annual_Income</td><td>Applicant's annual income</td></tr>
+                    <tr><td>Dti</td><td>Debt-to-Income ratio</td></tr>
+                    <tr><td>Installment</td><td>Monthly loan installment amount</td></tr>
+                    <tr><td>Int_Rate</td><td>Loan interest rate</td></tr>
+                    <tr><td>Loan_Amount</td><td>Loan amount</td></tr>
+                    <tr><td>Total_Acc</td><td>Total number of customer's credit accounts</td></tr>
+                    <tr><td>Total_Payment</td><td>Total sum of payments made by the customer</td></tr>
+                `,
+                kpisData: `
+                    <tr><td>Granted Loans</td><td>14,384</td></tr>
+                    <tr><td>Amount of Granted Loans</td><td>$169,032,600</td></tr>
+                    <tr><td>Amount Repaid by Borrowers</td><td>$183,455,468</td></tr>
+                    <tr><td>Average Interest Rate</td><td>12.30%</td></tr>
+                    <tr><td>Average Debt-To-Income (DTI) Ratio</td><td>13.35%</td></tr>
+                    <tr><td>Percentage of 'Good Loans'</td><td>84%</td></tr>
+                    <tr><td>Percentage of 'Bad Loans'</td><td>16%</td></tr>
+                    <tr><td>Most Common Loan Purpose</td><td>Debt consolidation - paying off existing debts</td></tr>
+                    <tr><td>Highest Number of Loans by Employment Length</td><td>3,547 - group 10+ years</td></tr> 
+                    <tr><td>State with the Most Granted Loans</td><td>California - 2,516</td></tr>
+                `,
+                analysisTableData: `
+                    <tr><td>Loan Stability</td><td>14.38K loans were granted, totaling $169.02M. A high Good Loan Rate of 84% indicates relatively high stability.</td></tr>
+                    <tr><td>Profitability</td><td>Total bank profit from loan repayments is $14.43M. Debt Consolidation contributes the most to this sum, generating 45.8% (over $6.61M) of total profit alone.</td></tr>
+                    <tr><td>Top Purposes & Volume</td><td>Debt Consolidation leads not only in profit but also in volume, accounting for nearly 48% of the funding provided. Credit Card and Home Improvement are other profitable purposes.</td></tr>
+                    <tr><td>State Share</td><td>Strong geographical concentration: California (CA, 18%), New York (NY, 10%), and Florida (FL, 7.5%) account for a significant part of the portfolio. Debt Consolidation is the dominant purpose across all these states.</td></tr>
+                    <tr><td>Risk & Term Structure</td><td>There is a correlation: the lower the credit grade, the higher the share of 60-month loans. Even so, medium-risk loans (Grade B, C, D) are the most profitable (likely due to higher interest rates and longer repayment periods).</td></tr>
+                    <tr><td>Loans & Employment Length</td><td>The largest group are customers with 10+ years of employment, but the second largest group are customers with <1 year of employment, making it an important, potentially risky segment.</td></tr>
+                `,
+                analysisListData: `
+                    <li><strong>Debt Consolidation Loan Segment</strong><p>Loans for Debt Consolidation are a critical point, accounting for 45.8% of total profit and nearly 48% of the volume. Losing market share in this area could significantly impact the bank's financial stability.</p></li>
+                    <li><strong>Risk Optimization by Grade</strong><p>Medium-risk loans (Grade B, C, D) are the most profitable (generating the highest unit profits) thanks to longer repayment terms (60 months) and likely higher interest rates. At the same time, higher Charged Off rates should be expected in these groups (C, D).</p><p><strong>Recommendation:</strong> Conduct margin tests for 60-month Grade A loans to increase profitability in the low-risk segment. Implement stricter DTI criteria and a longer employment history requirement for Grade D/E.</p></li>
+                    <li><strong>Short Employment Segment Management</strong><p>The group of customers with less than 1 year of work experience is the second largest, signaling the bank's openness to this potentially financially unstable segment.</p><p><strong>Recommendation:</strong> Create a risk assessment model for customers with <1 year of employment. Loans in this segment should be restricted to lower-risk, lower-amount purposes (e.g., Credit Card instead of Debt Consolidation) and have lower maximum DTI ratios.</p></li>
+                `,
+                methodologyData: `
+                    <tr><td>Cleaning and Structuring</td><td>Column standardization, date format correction, removing inconsistencies from the banking system.</td></tr>
+                    <tr><td>Pivot Tables</td><td>Aggregation of credit data to summarize volumes, repayments, and loan purposes.</td></tr>
+                    <tr><td>Pivot Charts</td><td>Visualization of trends over time (Issue Date), percentage share, and risk analysis (Good/Bad Loan).</td></tr>
+                    <tr><td>Slicers</td><td>Addition of interactive filters (e.g., year, month, state, Grade).</td></tr>
+                `
+            }
+        };
+
+        const setLocalLanguage = (lang) => {
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.dataset.translate;
+                if (projectTranslations[lang] && projectTranslations[lang][key]) { el.innerHTML = projectTranslations[lang][key]; }
+            });
+            
+            if(projectTranslations[lang]) {
+                const map = {
+                    'columnsTableBody': 'colsData',
+                    'kpisTableBody': 'kpisData',
+                    'analysisTableBody': 'analysisTableData',
+                    'analysisListBody': 'analysisListData',
+                    'methodologyTableBody': 'methodologyData'
+                };
+                for (const [id, key] of Object.entries(map)) {
+                    const el = document.getElementById(id);
+                    if(el) el.innerHTML = projectTranslations[lang][key];
+                }
+            }
+        };
+
+        // Nasłuchiwanie na przyciski w Navbarze
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLocalLanguage(btn.dataset.lang));
+        });
+
+        // Inicjalizacja języka
+        setLocalLanguage(localStorage.getItem('preferredLanguage') || 'pl');
+
+        // Funkcja przełączania zakładek "Szczegóły Projektu"
+        window.showSection = function(id) {
+            document.querySelectorAll(".info-section").forEach(s => s.classList.remove("active"));
+            document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("is-active"));
+            document.getElementById(id).classList.add("active");
+            document.querySelector(`button[onclick="showSection('${id}')"]`).classList.add("is-active");
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scrollowanie kotwic wewnątrz projektu
+            document.querySelectorAll('.scroll-down-link').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    if (targetId.length > 1 && window.lenis) {
+                        window.lenis.scrollTo('#' + targetId, {
+                            offset: -90,
+                            duration: 1.5,
+                            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                        });
+                    }
+                });
+            });
+
+            // Otwieranie lightboxa dla zdjęcia projektu
+            const projectImg = document.querySelector('.project-image');
+            if (projectImg) {
+                projectImg.addEventListener('click', () => {
+                    if(window.openLightbox) { window.openLightbox(projectImg.getAttribute('src')); }
+                });
+            }
+
+            // Animacja Glow pod kartami KPI
+            document.querySelectorAll(".kpi-card").forEach(t => {
+                t.addEventListener("mousemove", e => {
+                    const o = t.getBoundingClientRect();
+                    t.style.setProperty("--mouse-x", `${e.clientX - o.left}px`);
+                    t.style.setProperty("--mouse-y", `${e.clientY - o.top}px`);
+                });
+            });
+        });
+    </script>
+</BaseLayout>

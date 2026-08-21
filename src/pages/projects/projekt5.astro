@@ -1,0 +1,623 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout title="Projekt: BMW Sales Analysis | Portfolio Jakub Nicpoń">
+    <Navbar />
+
+    <main>
+        <header class="project-hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1 data-translate="heroTitle">BMW Sales Analysis Dashboard</h1>
+                        <div class="section-underline"></div>
+                        <p data-translate="heroDesc">Analiza wyników sprzedaży BMW na podstawie danych obejmujących 15 000 sprzedanych pojazdów o łącznej wartości 1,13 mld dolarów.<br><br>Interaktywny dashboard w Power BI umożliwia śledzenie kluczowych trendów rynkowych, popularności modeli (w tym segmentów EV i M-Power) oraz efektywności poszczególnych kanałów sprzedaży na całym świecie.</p>
+            
+                        <a href="#project-details-card" class="scroll-down-link">
+                            <span class="mouse-icon">
+                               <span class="wheel"></span>
+                            </span>
+                            <span data-translate="btnDetails">Zobacz szczegóły</span>
+                         </a>
+                    </div>
+                    <!-- GALERIA NA 5 ZDJĘĆ -->
+                    <div class="hero-image-wrapper">
+                        <div class="project-gallery-grid">
+                            <img src="/assets/BMW Analysis 1.png" alt="BMW Dashboard - Widok 1" class="project-image" loading="eager" />
+                            <img src="/assets/BMW Analysis 1.1.png" alt="BMW Dashboard - Widok 2" class="project-image" loading="lazy" />
+                            <img src="/assets/BMW Analysis 1.2.png" alt="BMW Dashboard - Widok 3" class="project-image" loading="lazy" />
+                            <img src="/assets/BMW Analysis 1.3.png" alt="BMW Dashboard - Widok 4" class="project-image" loading="lazy" />
+                            <img src="/assets/BMW Analysis 1.4.png" alt="BMW Dashboard - Widok 5" class="project-image" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="project-highlights">
+            <div class="container">
+                <h2 data-translate="kpiTitle">Kluczowe Wskaźniki</h2>
+                <div class="section-underline centered-underline"></div>
+                <div class="kpi-grid">
+                    <div class="kpi-card"><span class="kpi-value">$1,13 mld</span><span class="kpi-label" data-translate="kpi1Label">Całkowity przychód ze sprzedaży</span></div>
+                    <div class="kpi-card"><span class="kpi-value">15 000</span><span class="kpi-label" data-translate="kpi2Label">Liczba sprzedanych samochodów</span></div>
+                    <div class="kpi-card"><span class="kpi-value">$75,2 tys.</span><span class="kpi-label" data-translate="kpi3Label">Średnia cena sprzedaży</span></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="project-details">
+            <div class="container">
+                <h2 data-translate="detailsTitle">Szczegóły Projektu</h2>
+                <div class="section-underline centered-underline"></div>
+                
+                <div class="details-card" id="project-details-card">
+    
+                    <div class="toggle-buttons">
+                        <button class="toggle-btn is-active" onclick="showSection('sectionColumns')" data-translate="tabColumns">Opis Kolumn</button>
+                        <button class="toggle-btn" onclick="showSection('sectionKPIs')" data-translate="tabKPIs">Kluczowe Wskaźniki</button>
+                        <button class="toggle-btn" onclick="showSection('sectionAnalysis')" data-translate="tabAnalysis">Analiza</button>
+                        <button class="toggle-btn" onclick="showSection('sectionMethodology')" data-translate="tabMethodology">Metodologia</button>
+                    </div>
+                    
+                    <div id="info-sections-container">
+                        
+                        <div id="sectionColumns" class="info-section active" role="region">
+                            <table class="kpi-table">
+                                <thead><tr><th data-translate="tableHeaderColumn">Kolumna</th><th data-translate="tableHeaderDesc">Opis</th></tr></thead>
+                                <tbody id="columnsTableBody"></tbody>
+                            </table>
+                        </div>
+    
+                        <div id="sectionKPIs" class="info-section" role="region">
+                             <table class="kpi-table">
+                                 <thead><tr><th>KPI</th><th data-translate="tableHeaderResult">Wynik</th></tr></thead>
+                                 <tbody id="kpisTableBody"></tbody>
+                            </table>
+                        </div>
+    
+                        <div id="sectionAnalysis" class="info-section" role="region">
+                            <div class="analysis-grid">
+                                <div class="analysis-table-container">
+                                    <table class="kpi-table">
+                                        <thead><tr><th data-translate="tableHeaderArea">Obszar Analizy</th><th data-translate="tableHeaderConclusions">Wnioski</th></tr></thead>
+                                        <tbody id="analysisTableBody"></tbody>
+                                    </table>
+                                </div>
+                                <div class="analysis-conclusions">
+                                    <ol id="analysisListBody"></ol>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div id="sectionMethodology" class="info-section" role="region">
+                            <div id="methodologyTableBody"></div>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="project-files">
+            <div class="container">
+                <h2 data-translate="downloadTitle">Pobierz Zasoby Projektu</h2>
+                <div class="section-underline centered-underline"></div>
+                <div class="files-container">
+                    <a href="/assets/BMW_raw_data.rar" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadRaw">Pobierz surowy zestaw danych</span></a>
+                    <a href="/assets/BMW Analysis Dashboard.pbix" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadPBI">Pobierz Plik Power Bi</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+
+    <style is:global>
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1;}
+        .section-underline { margin: 20px 0 30px 0; width: 80px; height: 4px; border-radius: 2px; background: var(--line-gradient); }
+        .centered-underline { margin: 20px auto 30px auto; }
+        
+        .project-hero { padding: 140px 0 80px; position: relative; overflow: hidden; z-index: 1;}
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-content h1 { font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 0; color: var(--text-primary); }
+        .hero-content p { font-size: 1.2rem; color: var(--text-secondary); max-width: 500px; }
+        .hero-image-wrapper { perspective: 1000px; }
+        
+        .project-image { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: var(--card-shadow); cursor: pointer; border: 1px solid var(--border-color); transition: transform 0.3s ease, border-color 0.3s ease; }
+        .project-image:hover { transform: scale(1.03); border-color: var(--cyan); }
+        
+        /* Siatka galerii dostosowana do 5 elementów (piąty zajmuje pełną szerokość) */
+        .project-gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .project-gallery-grid .project-image:nth-child(5) { grid-column: span 2; }
+        
+        .scroll-down-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 40px; color: var(--text-secondary); font-weight: 600; text-decoration: none; cursor: pointer; transition: color 0.3s ease, transform 0.3s ease; }
+        .scroll-down-link:hover { color: var(--cyan); transform: translateY(-3px); }
+        .mouse-icon { width: 24px; height: 40px; border: 2px solid var(--text-secondary); border-radius: 20px; position: relative; transition: border-color 0.3s ease; }
+        .scroll-down-link:hover .mouse-icon { border-color: var(--cyan); }
+        .mouse-icon .wheel { display: block; width: 4px; height: 8px; background-color: var(--cyan); border-radius: 2px; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); animation: scroll-wheel-anim 2s infinite ease-in-out; }
+        @keyframes scroll-wheel-anim { 0% { transform: translate(-50%, 0); opacity: 1; } 50% { transform: translate(-50%, 10px); opacity: 1; } 100% { transform: translate(-50%, 20px); opacity: 0; } }
+
+        .project-highlights { padding: 80px 0; z-index: 1; position: relative;}
+        .project-highlights h2, .project-details h2, .project-files h2 { text-align: center; font-size: 2.5rem; font-weight: 700; background: var(--line-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; justify-content: center;}
+        
+        .kpi-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; text-align: center; position: relative; overflow: visible; backdrop-filter: blur(10px); transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 50%); opacity: 0; transition: opacity 0.3s; border-radius: 15px; pointer-events: none; z-index: 0; }
+        .kpi-card > * { position: relative; z-index: 1; }
+        .kpi-card:hover { transform: translateY(-8px) scale(1.03); border-color: var(--cyan); box-shadow: var(--card-shadow); }
+        .kpi-card:hover::before { opacity: 1; }
+        
+        .kpi-value { display: block; font-size: 2.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+        .kpi-label { font-size: 1rem; color: var(--text-secondary); }
+        
+        .project-details { padding: 80px 0; z-index: 1; position: relative;}
+        .details-card { background: var(--bg-surface); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--card-shadow); transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+        .toggle-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
+        .toggle-btn { appearance: none; background: var(--btn-bg); border: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 600; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 12px 24px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;}
+        .toggle-btn:hover { color: var(--text-primary); border-color: var(--cyan); transform: translateY(-2px); }
+        .toggle-btn.is-active { background: var(--line-gradient); color: white; border-color: transparent; transform: scale(1.05); box-shadow: 0 5px 15px var(--spotlight-color); }
+        .info-section { display: none; margin-top: 20px; padding-top: 30px; border-top: 1px solid var(--border-color); }
+        .info-section.active { display: block; animation: fadeIn .4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .kpi-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        .kpi-table th, .kpi-table td { padding: 14px 10px; border-bottom: 1px solid var(--border-color); text-align: center; width: 50%; }
+        .kpi-table tr:last-child td { border-bottom: none; }
+        .kpi-table thead th { font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .kpi-table td { color: var(--text-secondary); }
+        .kpi-table .table-separator td { font-weight: 800; color: var(--cyan); padding-top: 25px; background-color: rgba(255, 255, 255, 0.02); text-align: center; }
+        
+        .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .analysis-conclusions ol { list-style: none; padding-left: 0; counter-reset: conclusion-counter; }
+        .analysis-conclusions li { position: relative; padding-left: 45px; margin-bottom: 25px; }
+        .analysis-conclusions li::before { counter-increment: conclusion-counter; content: counter(conclusion-counter); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; border-radius: 50%; background: var(--line-gradient); color: white; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+        .analysis-conclusions strong { display: block; margin-bottom: 5px; color: var(--text-primary); font-size: 1.1rem; }
+        .analysis-conclusions p { color: var(--text-secondary); font-size: 0.95rem; margin: 0; }
+
+        /* Metodologia - bloki DAX */
+        .methodology-steps { list-style: none; padding-left: 0; position: relative; counter-reset: step-counter; }
+        .methodology-steps::before { content: ''; position: absolute; left: 24px; top: 24px; bottom: 24px; width: 2px; background-color: var(--border-color); }
+        .methodology-steps li { position: relative; padding-left: 70px; margin-bottom: 50px; }
+        .methodology-steps li:last-child { margin-bottom: 0; }
+        .methodology-step-header { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
+        .methodology-step-header::before { counter-increment: step-counter; content: "0" counter(step-counter); position: absolute; left: 0; top: 0; width: 50px; height: 50px; background: var(--bg-surface); border: 2px solid var(--border-color); border-radius: 50%; color: var(--text-primary); font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
+        .methodology-step-header svg { width: 32px; height: 32px; color: var(--cyan); }
+        .methodology-step-header h3 { font-size: 1.8rem; font-weight: 700; margin: 0; color: var(--text-primary); }
+        .methodology-content ul { list-style: none; padding-left: 0; margin-bottom: 20px; }
+        .methodology-content li { position: relative; margin-bottom: 12px; padding-left: 25px; color: var(--text-secondary); }
+        .methodology-content li::before { content: '›'; position: absolute; left: 0; top: -2px; color: var(--cyan); font-size: 1.5rem; line-height: 1.6; }
+        .methodology-content code { background-color: rgba(125, 125, 125, 0.2); color: var(--text-primary); padding: 2px 6px; border-radius: 5px; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9em; }
+        .methodology-content p { margin-bottom: 15px; color: var(--text-secondary); }
+        
+        .dax-measure-block { margin-bottom: 25px; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0,0,0,0.2); }
+        [data-theme="light"] .dax-measure-block { background: rgba(0,0,0,0.03); }
+        .dax-measure-block p { padding: 16px 16px 0; margin-bottom: 0; color: var(--text-primary); }
+        .dax-measure-block pre { background: #0D1117; border-top: 1px solid var(--border-color); border-radius: 0 0 11px 11px; padding: 16px; margin: 15px 0 0 0; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; position: relative; }
+        .dax-measure-block pre::before { content: 'DAX'; position: absolute; top: 12px; right: 12px; font-size: 0.8em; font-weight: 600; color: rgba(255,255,255,0.4); }
+        .dax-measure-block pre code { background: none; padding: 0; font-size: 0.95em; line-height: 1.5; color: #c9d1d9; }
+        .dax-measure { color: #D2A8FF; } .dax-function { color: #79C0FF; } .dax-string { color: #A5D6A7; }
+        .dax-keyword { color: #FF7B72; } .dax-operator { color: #c9d1d9; } .dax-comment { color: #8B949E; }
+
+        .project-files { padding: 20px 0; z-index: 1; position: relative;}
+        .files-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 50px; }
+        .gradient__border__container { display: inline-block; position: relative; padding: 1px; border-radius: 30px; background: var(--line-gradient); background-size: 200% 200%; animation: spin-gradient 6s linear infinite; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; min-width: 150px; text-align: center; text-decoration: none; box-shadow: 0 4px 20px var(--spotlight-color); }
+        .gradient__border__container:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--spotlight-color); }
+        .gradient__border__container .gradient__border__text { display: block; background: var(--bg-surface); border-radius: 29px; padding: 0.8rem 2rem; font-size: 1rem; font-weight: 600; color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+        .gradient__border__container:hover .gradient__border__text { background: transparent; color: #fff;}
+        @keyframes spin-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        @media (max-width: 900px) { 
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; } 
+            .hero-content { order: 2; } 
+            .hero-image-wrapper { order: 1; } 
+            .hero-content .section-underline, .hero-content .scroll-down-link { margin-left: auto; margin-right: auto; } 
+            .analysis-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+        @media (max-width: 600px) { 
+            .hero-content h1 { font-size: 2.8rem; } 
+            .project-highlights h2, .project-details h2, .project-files h2 { font-size: 2rem; } 
+            .details-card { padding: 25px; } 
+        }
+    </style>
+
+    <script is:inline>
+        // === TŁUMACZENIA SPECYFICZNE DLA TEGO PROJEKTU ===
+        const translations = {
+            pl: {
+                pageTitle: "Projekt: BMW Sales Analysis | Portfolio Jakub Nicpoń",
+                heroTitle: "BMW Sales Analysis Dashboard",
+                heroDesc: "Analiza wyników sprzedaży BMW na podstawie danych obejmujących 15 000 sprzedanych pojazdów o łącznej wartości 1,13 mld dolarów.<br><br>Interaktywny dashboard w Power BI umożliwia śledzenie kluczowych trendów rynkowych, popularności modeli (w tym segmentów EV i M-Power) oraz efektywności poszczególnych kanałów sprzedaży na całym świecie.",
+                btnDetails: "Zobacz szczegóły",
+                kpiTitle: "Kluczowe Wskaźniki",
+                kpi1Label: "Całkowity przychód ze sprzedaży",
+                kpi2Label: "Liczba sprzedanych samochodów",
+                kpi3Label: "Średnia cena sprzedaży",
+                detailsTitle: "Szczegóły Projektu",
+                tabColumns: "Opis Kolumn",
+                tabKPIs: "Kluczowe Wskaźniki",
+                tabAnalysis: "Analiza",
+                tabMethodology: "Metodologia",
+                tableHeaderColumn: "Kolumna",
+                tableHeaderDesc: "Opis",
+                tableHeaderResult: "Wynik",
+                tableHeaderArea: "Obszar Analizy",
+                tableHeaderConclusions: "Wnioski",
+                downloadTitle: "Pobierz Zasoby Projektu",
+                btnDownloadRaw: "Pobierz surowy zestaw danych",
+                btnDownloadPBI: "Pobierz Plik Power Bi",
+                
+                colsData: `
+                    <tr class="table-separator"><td colspan="2">factsTable</td></tr>
+                    <tr><td>Date</td><td>Data transakcji</td></tr>
+                    <tr><td>Year</td><td>Rok sprzedaży</td></tr>
+                    <tr><td>Unit Price</td><td>Cena jednostkowa modelu</td></tr>
+                    <tr><td>Quantity Sold</td><td>Ilość sprzedanych egzemplarzy</td></tr>
+                    <tr><td>Model_ID</td><td>Identyfikator modelu</td></tr>
+                    <tr><td>Country_ID</td><td>Identyfikator kraju</td></tr>
+                    <tr><td>Channel_ID</td><td>Identyfikator kanału sprzedaży</td></tr>
+                    
+                    <tr class="table-separator"><td colspan="2">dimModel</td></tr>
+                    <tr><td>Model_ID</td><td>Identyfikator modelu</td></tr>
+                    <tr><td>Model</td><td>Model BMW</td></tr>
+                    <tr><td>img</td><td>Adres URL zdjęcia modelu</td></tr>
+
+                    <tr class="table-separator"><td colspan="2">dimCountry</td></tr>
+                    <tr><td>Country_ID</td><td>Identyfikator kraju</td></tr>
+                    <tr><td>Region</td><td>Kontynent</td></tr>
+                    <tr><td>Country</td><td>Kraj</td></tr>
+                    <tr><td>Flag</td><td>Adres URL flagi kraju</td></tr>
+
+                    <tr class="table-separator"><td colspan="2">dimChannel</td></tr>
+                    <tr><td>Channel_ID</td><td>Identyfikator kanału sprzedaży</td></tr>
+                    <tr><td>Channel</td><td>Kanał sprzedaży</td></tr>
+                `,
+                kpisData: `
+                    <tr><td>Całkowity przychód</td><td>$1 128 104 547</td></tr>
+                    <tr><td>Liczba sprzedanych pojazdów</td><td>15 002</td></tr>
+                    <tr><td>Średnia cena sprzedaży</td><td>$75 196</td></tr>
+                    <tr><td>Sprzedane samochody elektryczne (BMW I)</td><td>2 960 (19,7% ogółem) (śr. cena $74,65 tys.)</td></tr>
+                    <tr><td>Sprzedane samochody M (M2, M3, M4, M5, M8)</td><td>2 720 (18,1% ogółem) (śr. cena $76,64 tys.)</td></tr>
+                    <tr><td>Kraj o największej ilości sprzedaży</td><td>Stany Zjednoczone - 1019 egzemplarzy</td></tr>
+                    <tr><td>Kraj o najmniejszej ilości sprzedaży</td><td>Włochy - 515 egzemplarzy</td></tr>
+                    <tr><td>Najwyższy przychód wg. kraju sprzedaży</td><td>Meksyk - $76 809 376</td></tr>
+                    <tr><td>Najniższy przychód wg. kraju sprzedaży</td><td>Włochy - $37 339 854</td></tr>
+                    <tr><td>Najlepiej sprzedający się model</td><td>BMW Z4 - 666 egzemplarzy (4,57% przychodu)</td></tr>
+                    <tr><td>Najgorzej sprzedający się model</td><td>BMW M8 - 498 egzemplarzy (3,49% przychodu)</td></tr>
+                    <tr><td>Rok z najwyższym przychodem</td><td>2022 - $229 977 610</td></tr>
+                    <tr><td>Rok z najniższym przychodem</td><td>2020 - $220 690 755</td></tr>
+                    <tr><td>Kwartał z najwyższym przychodem</td><td>Kwartał 1 - $291 561 092</td></tr>
+                    <tr><td>Kwartał z najniższym przychodem</td><td>Kwartał 4 - $267 381 243</td></tr>
+                `,
+                analysisTableData: `
+                    <tr><td>Ogólna Wydajność Sprzedaży</td><td>W analizowanym okresie (2019-2023) firma wygenerowała <strong>$1,13 mld</strong> przychodu, sprzedając <strong>15 002</strong> pojazdy. Odnotowano wzrost przychodu o <strong>+24,7%</strong> w stosunku do roku poprzedniego.</td></tr>
+                    <tr><td>Najpopularniejsze Modele</td><td><strong>BMW Z4</strong> jest liderem sprzedaży (666 szt., $51,6 mln). Na kolejnych miejscach plasują się <strong>Seria 8</strong> (641 szt.) oraz sportowe <strong>M4</strong> (620 szt.).</td></tr>
+                    <tr><td>Trendy Sezonowe i Czasowe</td><td>Najwyższy przychód notowany jest w <strong>Q1 ($291,6 mln)</strong>, co może być efektem wyprzedaży roczników. <strong>Sierpień</strong> wyróżnia się jako najsilniejszy miesiąc ($102,7 mln).</td></tr>
+                    <tr><td>Dystrybucja wg Kanałów</td><td>Kanał <strong>Wholesale</strong> dominuje (6730 szt.). <strong>Online</strong> (3304 szt.) jest kluczowy dla modeli konfigurowanych (np. Z4), a <strong>Dealership</strong> ma szczyt w Q1.</td></tr>
+                    <tr><td>Analiza Geograficzna</td><td>W Ameryce Północnej bestsellerem są SUV-y (X6). W Ameryce Płd. – modele EV (i4) i Z4. Afryka i Azja mocno interesują się pojazdami EV (i8, iX3).</td></tr>
+                    <tr><td>Segmentacja (EV vs. M-Power)</td><td>Pojazdy elektryczne (EV) stanowią już <strong>19,7%</strong> sprzedaży (2 960 szt.). Segment M-Power (18,1%, 2 720 szt.) generuje wysokie przychody dzięki wysokiej marży.</td></tr>
+                `,
+                analysisListData: `
+                    <li><strong>Kanał Online w Sprzedaży Indywidualnej</strong><p>BMW Z4 jest najlepiej sprzedającym się modelem online. To dowód, że klienci szukający unikatowych aut chętnie korzystają z konfiguratorów. W TOP 10 aut kupowanych online jest też Seria 7 i Seria 8.<br><strong>Rekomendacja:</strong> Rozwój interaktywnych konfiguratorów 3D i dedykowane kampanie kierujące użytkowników prosto do sklepu online.</p></li>
+                    <li><strong>Potencjał Rynków Afryki i Azji w Segmencie EV</strong><p>Wysoki udział EV w Afryce (21%) i Azji (20%) pokazuje chłonność na nowe technologie.<br><strong>Rekomendacja:</strong> Wprowadzenie specjalnych ofert, rozbudowa infrastruktury ładowania z lokalnymi partnerami oraz kampanie edukacyjne.</p></li>
+                    <li><strong>Specyfika Potrzeb</strong><p>Przychody ciągną skrajnie różne auta: sportowe Z4, luksusowa Seria 8 i wyczynowe M4. Rynek ceni różnorodność.<br><strong>Rekomendacja:</strong> Równoległy rozwój obu linii produktowych z wyraźnie osobnym marketingiem dla różnych grup docelowych.</p></li>
+                    <li><strong>Sezonowość Sprzedaży i Rola Dealerów</strong><p>Rekordowy Q1 i siła kanału Dealership na początku roku wskazuje na skuteczność wyprzedaży rocznikowych.<br><strong>Rekomendacja:</strong> Wzmocnienie wsparcia dla dealerów przed Q1 i analiza możliwości przeniesienia tej strategii również na Q4.</p></li>
+                `,
+                methodologyData: `
+                    <ol class="methodology-steps">
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M21.585 5.584L18.413 2.413a2.011 2.011 0 0 0-2.827 0L2.394 15.59a1.99 1.99 0 0 0-.583 1.21L1.24 21.75a1 1 0 0 0 1.01 1.01l4.95-1.173a1.99 1.99 0 0 0 1.21-.583l13.176-13.174a1.99 1.99 0 0 0 0-2.827zM17 4.53l2.47 2.47-2.58 2.58-2.47-2.47zM4.14 20.36l-1 .235.236-1L6.55 16.42l2.03 2.03zm4.24-3.12l-2.03-2.03L15.17 6.4l2.03 2.03z"></path></svg>
+                                <h3>Walidacja i Modelowanie Danych w Power Query</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <ul>
+                                    <li>Po wczytaniu pliku <code>BMW_Sales_Data.csv</code> zmieniłem nazwę na <code>factsTable</code>.</li>
+                                    <li>Zmieniłem nazwę <code>Revenue</code> na <code>Unit Price</code> dla lepszego odzwierciedlenia danych.</li>
+                                    <li>Stworzyłem tabele wymiarowe (<code>dimModel</code>, <code>dimCountry</code>, <code>dimChannel</code>), przypisując klucze główne.</li>
+                                    <li>Połączyłem tabele za pomocą relacji i usunąłem zbędne teksty z tabeli faktów, tworząc czysty model gwiazdy (Star Schema).</li>
+                                    <li>Wczytałem pliki graficzne i scaliłem je z tabelami wymiarowymi dla obsługi obrazów.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75zM5.25 6.75c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h13.5c.621 0 1.125-.504 1.125-1.125V7.875c0-.621-.504-1.125-1.125-1.125H5.25z"></path></svg>
+                                <h3>Dynamiczna Tabela Kalendarza</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <p>Stworzenie tabeli opartej na funkcji DAX <code>CALENDARAUTO()</code> ułatwia analizę czasową.</p>
+                                <div class="dax-measure-block">
+                                    <pre><code><span class="dax-measure">Calendar</span> <span class="dax-operator">=</span> 
+    <span class="dax-function">ADDCOLUMNS</span>(
+        <span class="dax-function">CALENDARAUTO</span>(),
+        <span class="dax-string">"Year"</span>, <span class="dax-function">YEAR</span>([Date]),
+        <span class="dax-string">"Month"</span>, <span class="dax-function">FORMAT</span>([Date], <span class="dax-string">"MMM"</span>),
+        <span class="dax-string">"Quarter"</span>, <span class="dax-string">"Q"</span> & <span class="dax-function">FORMAT</span>([Date],<span class="dax-string">"Q"</span>)
+    )</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9z"></path></svg>
+                                <h3>Kluczowe Miary Analityczne (DAX)</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <div class="dax-measure-block"><p>Przychód ze sprzedaży (Revenue):</p>
+                                    <pre><code><span class="dax-measure">Revenue</span> <span class="dax-operator">=</span> <span class="dax-function">SUMX</span>(factsTable, [Unit Price] <span class="dax-operator">*</span> [Quantity Sold])</code></pre>
+                                </div>
+                                <div class="dax-measure-block"><p>Wzrost Przychodów (YoY %):</p>
+                                    <pre><code><span class="dax-measure">Revenue change %</span> <span class="dax-operator">=</span> 
+<span class="dax-keyword">VAR</span> arrowDirection <span class="dax-operator">=</span> [Revenue] <span class="dax-operator">-</span> [Revenue PY]
+<span class="dax-keyword">VAR</span> revenueGrowth <span class="dax-operator">=</span> <span class="dax-function">DIVIDE</span>(arrowDirection, [Revenue PY])
+<span class="dax-keyword">RETURN</span>
+    <span class="dax-function">IF</span>( arrowDirection > <span class="dax-keyword">0</span>, <span class="dax-string">"+"</span> & <span class="dax-function">ROUND</span>(revenueGrowth * <span class="dax-keyword">100</span>, <span class="dax-keyword">1</span>) & <span class="dax-string">"% 🡅"</span>,
+        <span class="dax-function">ROUND</span>(revenueGrowth * <span class="dax-keyword">100</span>, <span class="dax-keyword">1</span>) & <span class="dax-string">"% 🡇"</span> )</code></pre>
+                                </div>
+                                <div class="dax-measure-block"><p>Sprzedaż samochodów EV (Elektrycznych):</p>
+                                    <pre><code><span class="dax-measure">EV Count</span> <span class="dax-operator">=</span> <span class="dax-function">CALCULATE</span>( [Qty Sold], <span class="dax-function">FILTER</span>('dimModel', <span class="dax-function">CONTAINSSTRING</span>('dimModel'[Model], <span class="dax-string">"BMW i"</span>)))</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v11.25C1.5 17.16 2.34 18 3.375 18H9.75v1.5H6A.75.75 0 0 0 6 21h12a.75.75 0 0 0 0-1.5h-3.75v-1.5h6.375c1.035 0 1.875-.84 1.875-1.875V4.875C22.5 3.839 21.66 3 20.625 3H3.375zM3 16.5V4.875C3 4.401 3.4 4.5 3.375 4.5h17.25c0 0 .375-.099.375.375V16.5c0 .499-.401.375-.375.375H3.375c0 0-.375.124-.375-.375z"></path></svg>
+                                <h3>Wizualizacje Sparklines i UI</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <p>Do tabel dodano wykresy trendu oparte w 100% na wektorach graficznych (SVG) generowanych kodem DAX, co optymalizuje wydajność raportu.</p>
+                                <ul>
+                                    <li><strong>Dynamiczny paramater osi:</strong> Użytkownik może przełączać oś czasu na wykresach (Rok, Miesiąc, Kwartał).</li>
+                                    <li><strong>Zakładki (Bookmarks):</strong> Ukryty i wywoływany panel filtrów na życzenie oszczędza miejsce na ekranie.</li>
+                                    <li><strong>Design:</strong> Szablon zbudowany w PowerPoint dla idealnego wyrównania elementów.</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ol>
+                `
+            },
+            en: {
+                pageTitle: "Projekt: BMW Sales Analysis | Portfolio Jakub Nicpoń's Portfolio",
+                heroTitle: "BMW Sales Analysis Dashboard",
+                heroDesc: "Analysis of BMW sales performance based on data covering 15,000 sold vehicles with a total value of $1.13 billion.<br><br>An interactive Power BI dashboard allows tracking key market trends, model popularity (including EV and M-Power segments), and the effectiveness of various sales channels worldwide.",
+                btnDetails: "See details",
+                kpiTitle: "KPI",
+                kpi1Label: "Total Sales Revenue",
+                kpi2Label: "Number of Cars Sold",
+                kpi3Label: "Average Sales Price",
+                detailsTitle: "Project Details",
+                tabColumns: "Column Description",
+                tabKPIs: "KPI",
+                tabAnalysis: "Analysis",
+                tabMethodology: "Methodology",
+                tableHeaderColumn: "Column",
+                tableHeaderDesc: "Description",
+                tableHeaderResult: "Result",
+                tableHeaderArea: "Analysis Area",
+                tableHeaderConclusions: "Conclusions",
+                downloadTitle: "Download Project Assets",
+                btnDownloadRaw: "Download Raw Dataset",
+                btnDownloadPBI: "Download Power BI File",
+                
+                colsData: `
+                    <tr class="table-separator"><td colspan="2">factsTable</td></tr>
+                    <tr><td>Date</td><td>Transaction date</td></tr>
+                    <tr><td>Year</td><td>Sales year</td></tr>
+                    <tr><td>Unit Price</td><td>Model unit price</td></tr>
+                    <tr><td>Quantity Sold</td><td>Number of units sold</td></tr>
+                    <tr><td>Model_ID</td><td>Model identifier</td></tr>
+                    <tr><td>Country_ID</td><td>Country identifier</td></tr>
+                    <tr><td>Channel_ID</td><td>Sales channel identifier</td></tr>
+                    
+                    <tr class="table-separator"><td colspan="2">dimModel</td></tr>
+                    <tr><td>Model_ID</td><td>Model identifier</td></tr>
+                    <tr><td>Model</td><td>BMW Model</td></tr>
+                    <tr><td>img</td><td>Model image URL</td></tr>
+
+                    <tr class="table-separator"><td colspan="2">dimCountry</td></tr>
+                    <tr><td>Country_ID</td><td>Country identifier</td></tr>
+                    <tr><td>Region</td><td>Continent</td></tr>
+                    <tr><td>Country</td><td>Country</td></tr>
+                    <tr><td>Flag</td><td>Country flag URL</td></tr>
+
+                    <tr class="table-separator"><td colspan="2">dimChannel</td></tr>
+                    <tr><td>Channel_ID</td><td>Sales channel identifier</td></tr>
+                    <tr><td>Channel</td><td>Sales channel</td></tr>
+                `,
+                kpisData: `
+                    <tr><td>Total Revenue</td><td>$1,128,104,547</td></tr>
+                    <tr><td>Number of Vehicles Sold</td><td>15,002</td></tr>
+                    <tr><td>Average Sales Price</td><td>$75,196</td></tr>
+                    <tr><td>EV Cars Sold (BMW I)</td><td>2,960 (19.7% of total) (avg price $74.65k)</td></tr>
+                    <tr><td>M-Power Cars Sold (M2, M3, M4, M5, M8)</td><td>2,720 (18.1% of total) (avg price $76.64k)</td></tr>
+                    <tr><td>Country with Most Sales (units)</td><td>United States - 1,019 units</td></tr>
+                    <tr><td>Country with Least Sales (units)</td><td>Italy - 515 units</td></tr>
+                    <tr><td>Highest Revenue by Country</td><td>Mexico - $76,809,376</td></tr>
+                    <tr><td>Lowest Revenue by Country</td><td>Italy - $37,339,854</td></tr>
+                    <tr><td>Best Selling Model</td><td>BMW Z4 - 666 units (4.57% of total revenue)</td></tr>
+                    <tr><td>Worst Selling Model</td><td>BMW M8 - 498 units (3.49% of total revenue)</td></tr>
+                    <tr><td>Year with Highest Revenue</td><td>2022 - $229,977,610</td></tr>
+                    <tr><td>Year with Lowest Revenue</td><td>2020 - $220,690,755</td></tr>
+                    <tr><td>Quarter with Highest Revenue</td><td>Quarter 1 - $291,561,092</td></tr>
+                    <tr><td>Quarter with Lowest Revenue</td><td>Quarter 4 - $267,381,243</td></tr>
+                `,
+                analysisTableData: `
+                    <tr><td>Overall Sales Performance</td><td>During 2019-2023, the company generated <strong>$1.13B</strong> in revenue, selling <strong>15,002</strong> vehicles. An impressive revenue growth of <strong>+24.7%</strong> YoY indicates strong strategy execution.</td></tr>
+                    <tr><td>Most Popular Models</td><td><strong>BMW Z4</strong> is the leader (666 units, $51.6M). Following closely are the <strong>8 Series</strong> (641 units) and the sporty <strong>M4</strong> (620 units), which drives massive profit despite fewer units.</td></tr>
+                    <tr><td>Seasonal and Time Trends</td><td>Highest revenue is recorded in <strong>Q1 ($291.6M)</strong>, driven by year-end clearance effects. <strong>August</strong> stands out as the best single month ($102.7M).</td></tr>
+                    <tr><td>Distribution by Channel</td><td>The <strong>Wholesale</strong> channel dominates volume (6,730 units). <strong>Online</strong> (3,304 units) is critical for individually configured models (e.g., Z4), while <strong>Dealership</strong> peaks in Q1.</td></tr>
+                    <tr><td>Geographical Analysis</td><td>North America loves SUVs (X6). South America leans towards EV (i4) and Z4. Africa and Asia show strong demand for EVs (i8, iX3), while Europe prefers luxury coupes (8 Series).</td></tr>
+                    <tr><td>Segmentation (EV vs. M-Power)</td><td>EVs represent <strong>19.7%</strong> of total sales (2,960 units). The M-Power segment holds steady at 18.1% (2,720 units), generating very high margins.</td></tr>
+                `,
+                analysisListData: `
+                    <li><strong>Online Channel for Individual Sales</strong><p>BMW Z4 is the best-selling online model. This proves customers seeking unique cars love online configurators. The top 10 online models also include the 7 and 8 Series.<br><strong>Recommendation:</strong> Strengthen online platform investments, develop 3D interactive configurators, and direct digital marketing to these tools.</p></li>
+                    <li><strong>EV Potential in Africa and Asia</strong><p>High EV adoption in Africa (21%) and Asia (20%) shows these markets are eager for new tech.<br><strong>Recommendation:</strong> Introduce dedicated EV offers, expand charging infrastructure locally, and run targeted educational campaigns.</p></li>
+                    <li><strong>Specific Market Needs</strong><p>Extreme opposites drive revenue: the Z4 roadster, the luxury 8 Series, and the racing M4. The market values both style and raw power.<br><strong>Recommendation:</strong> Maintain parallel development of both vehicle lines with heavily segmented marketing.</p></li>
+                    <li><strong>Seasonality and Dealerships</strong><p>Record Q1 revenue driven by dealerships highlights the power of clearance sales.<br><strong>Recommendation:</strong> Increase dealer support heading into Q1 and explore shifting this aggressive strategy to Q4 as well.</p></li>
+                `,
+                methodologyData: `
+                    <ol class="methodology-steps">
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M21.585 5.584L18.413 2.413a2.011 2.011 0 0 0-2.827 0L2.394 15.59a1.99 1.99 0 0 0-.583 1.21L1.24 21.75a1 1 0 0 0 1.01 1.01l4.95-1.173a1.99 1.99 0 0 0 1.21-.583l13.176-13.174a1.99 1.99 0 0 0 0-2.827zM17 4.53l2.47 2.47-2.58 2.58-2.47-2.47zM4.14 20.36l-1 .235.236-1L6.55 16.42l2.03 2.03zm4.24-3.12l-2.03-2.03L15.17 6.4l2.03 2.03z"></path></svg>
+                                <h3>Data Validation & Modeling in Power Query</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <ul>
+                                    <li>Loaded <code>BMW_Sales_Data.csv</code> and renamed it to <code>factsTable</code>.</li>
+                                    <li>Renamed <code>Revenue</code> to <code>Unit Price</code> to better reflect the column's logic.</li>
+                                    <li>Created dimension tables (<code>dimModel</code>, <code>dimCountry</code>, <code>dimChannel</code>) with Primary Keys.</li>
+                                    <li>Merged and cleaned tables to create a perfect Star Schema.</li>
+                                    <li>Loaded additional image/flag URL files and merged them into the model.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75zM5.25 6.75c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h13.5c.621 0 1.125-.504 1.125-1.125V7.875c0-.621-.504-1.125-1.125-1.125H5.25z"></path></svg>
+                                <h3>Dynamic Calendar Table</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <p>Created a flexible time-intelligence table using DAX <code>CALENDARAUTO()</code>.</p>
+                                <div class="dax-measure-block">
+                                    <pre><code><span class="dax-measure">Calendar</span> <span class="dax-operator">=</span> 
+    <span class="dax-function">ADDCOLUMNS</span>(
+        <span class="dax-function">CALENDARAUTO</span>(),
+        <span class="dax-string">"Year"</span>, <span class="dax-function">YEAR</span>([Date]),
+        <span class="dax-string">"Month"</span>, <span class="dax-function">FORMAT</span>([Date], <span class="dax-string">"MMM"</span>),
+        <span class="dax-string">"Quarter"</span>, <span class="dax-string">"Q"</span> & <span class="dax-function">FORMAT</span>([Date],<span class="dax-string">"Q"</span>)
+    )</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9z"></path></svg>
+                                <h3>Key Analytical Measures (DAX)</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <div class="dax-measure-block"><p>Total Sales Revenue:</p>
+                                    <pre><code><span class="dax-measure">Revenue</span> <span class="dax-operator">=</span> <span class="dax-function">SUMX</span>(factsTable, [Unit Price] <span class="dax-operator">*</span> [Quantity Sold])</code></pre>
+                                </div>
+                                <div class="dax-measure-block"><p>Revenue Growth (YoY %):</p>
+                                    <pre><code><span class="dax-measure">Revenue change %</span> <span class="dax-operator">=</span> 
+<span class="dax-keyword">VAR</span> arrowDirection <span class="dax-operator">=</span> [Revenue] <span class="dax-operator">-</span> [Revenue PY]
+<span class="dax-keyword">VAR</span> revenueGrowth <span class="dax-operator">=</span> <span class="dax-function">DIVIDE</span>(arrowDirection, [Revenue PY])
+<span class="dax-keyword">RETURN</span>
+    <span class="dax-function">IF</span>( arrowDirection > <span class="dax-keyword">0</span>, <span class="dax-string">"+"</span> & <span class="dax-function">ROUND</span>(revenueGrowth * <span class="dax-keyword">100</span>, <span class="dax-keyword">1</span>) & <span class="dax-string">"% 🡅"</span>,
+        <span class="dax-function">ROUND</span>(revenueGrowth * <span class="dax-keyword">100</span>, <span class="dax-keyword">1</span>) & <span class="dax-string">"% 🡇"</span> )</code></pre>
+                                </div>
+                                <div class="dax-measure-block"><p>EV (Electric Vehicle) Sales:</p>
+                                    <pre><code><span class="dax-measure">EV Count</span> <span class="dax-operator">=</span> <span class="dax-function">CALCULATE</span>( [Qty Sold], <span class="dax-function">FILTER</span>('dimModel', <span class="dax-function">CONTAINSSTRING</span>('dimModel'[Model], <span class="dax-string">"BMW i"</span>)))</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v11.25C1.5 17.16 2.34 18 3.375 18H9.75v1.5H6A.75.75 0 0 0 6 21h12a.75.75 0 0 0 0-1.5h-3.75v-1.5h6.375c1.035 0 1.875-.84 1.875-1.875V4.875C22.5 3.839 21.66 3 20.625 3H3.375zM3 16.5V4.875C3 4.401 3.4 4.5 3.375 4.5h17.25c0 0 .375-.099.375.375V16.5c0 .499-.401.375-.375.375H3.375c0 0-.375.124-.375-.375z"></path></svg>
+                                <h3>Sparklines & UI Visualization</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <p>Sparkline vectors (SVG) generated 100% via DAX were embedded into tables for maximum visual performance.</p>
+                                <ul>
+                                    <li><strong>Dynamic Parameter Axis:</strong> Users can toggle X-axis context (Year, Month, Quarter) instantly.</li>
+                                    <li><strong>Bookmarks:</strong> Hidden pop-out filter pane to save screen real estate.</li>
+                                    <li><strong>Design:</strong> Pixel-perfect templates built in PowerPoint applied as backgrounds.</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ol>
+                `
+            }
+        };
+
+        const setLocalLanguage = (lang) => {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.dataset.translate;
+                if (translations[lang] && translations[lang][key]) { 
+                    el.innerHTML = translations[lang][key]; 
+                }
+            });
+            if(translations[lang]) {
+                const map = {
+                    'columnsTableBody': 'colsData',
+                    'kpisTableBody': 'kpisData',
+                    'analysisTableBody': 'analysisTableData',
+                    'analysisListBody': 'analysisListData',
+                    'methodologyTableBody': 'methodologyData'
+                };
+                for (const [id, key] of Object.entries(map)) {
+                    const el = document.getElementById(id);
+                    if(el) el.innerHTML = translations[lang][key];
+                }
+            }
+        };
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLocalLanguage(btn.dataset.lang));
+        });
+
+        window.showSection = function(id) {
+            document.querySelectorAll(".info-section").forEach(s => s.classList.remove("active"));
+            document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("is-active"));
+            document.getElementById(id).classList.add("active");
+            document.querySelector(`button[onclick="showSection('${id}')"]`).classList.add("is-active");
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'pl';
+            setLocalLanguage(preferredLanguage);
+
+            const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener("click", () => document.body.classList.toggle("nav-open"));
+                document.querySelectorAll(".mobile-nav-menu a").forEach(t => t.addEventListener("click", () => document.body.classList.remove("nav-open")));
+            }
+            
+            const lenis = new Lenis({
+                duration: 1.5,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: 'vertical',
+                smooth: true,
+                smoothTouch: false,
+                touchMultiplier: 2,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            const lightbox = document.getElementById("lightbox");
+            const openLightbox = (src) => {
+                lightbox.querySelector(".lightbox-image").src = src;
+                lightbox.classList.add("open");
+                lenis.stop();
+            };
+            const closeLightbox = () => {
+                lightbox.classList.remove("open");
+                lenis.start();
+            };
+            
+            document.querySelectorAll(".project-image").forEach(img => {
+                img.addEventListener("click", () => openLightbox(img.src));
+            });
+            lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+            lightbox.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
+
+            document.querySelectorAll(".kpi-card").forEach(t => {
+                t.addEventListener("mousemove", e => {
+                    const o = t.getBoundingClientRect();
+                    t.style.setProperty("--mouse-x", `${e.clientX - o.left}px`);
+                    t.style.setProperty("--mouse-y", `${e.clientY - o.top}px`);
+                });
+            });
+        });
+    </script>
+</BaseLayout>

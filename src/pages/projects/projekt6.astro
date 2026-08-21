@@ -1,0 +1,712 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout title="Projekt: Healthcare Analysis | Portfolio Jakub Nicpoń">
+    <Navbar />
+
+    <main>
+        <header class="project-hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1 data-translate="heroTitle">Healthcare Analysis Dashboard</h1>
+                        <div class="section-underline"></div>
+                        <p data-translate="heroDesc">Analiza danych medycznych pozwala na odkrywanie kluczowych trendów w leczeniu pacjentów, optymalizację kosztów i zarządzanie zasobami szpitalnymi.<br><br>Interaktywny dashboard, stworzony na podstawie 50 000 rekordów, umożliwia dynamiczną analizę demografii pacjentów, efektywności leczenia w zależności od schorzeń oraz rentowności poszczególnych oddziałów i placówek.</p>
+            
+                        <a href="#project-details-card" class="scroll-down-link">
+                            <span class="mouse-icon">
+                               <span class="wheel"></span>
+                            </span>
+                            <span data-translate="btnDetails">Zobacz szczegóły</span>
+                         </a>
+                    </div>
+                    <!-- GALERIA NA 5 ZDJĘĆ -->
+                    <div class="hero-image-wrapper">
+                        <div class="project-gallery-grid">
+                            <img src="/assets/Hospital Analyze 1.2.png" alt="Analiza szpitali w USA - Widok 1" class="project-image" loading="eager" />
+                            <img src="/assets/Hospital Analyze 1.3.png" alt="Analiza szpitali w USA - Widok 2" class="project-image" loading="lazy" />
+                            <img src="/assets/Hospital Analyze 1.1.png" alt="Analiza szpitali w USA - Widok 3" class="project-image" loading="lazy" />
+                            <img src="/assets/Hospital Analyze 1.4.png" alt="Analiza szpitali w USA - Widok 4" class="project-image" loading="lazy" />
+                            <img src="/assets/Hospital Analyze 1.5.png" alt="Analiza szpitali w USA - Widok 5" class="project-image" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="project-highlights">
+            <div class="container">
+                <h2 data-translate="kpiTitle">Kluczowe Wskaźniki</h2>
+                <div class="section-underline centered-underline"></div>
+                <div class="kpi-grid">
+                    <div class="kpi-card"><span class="kpi-value">1827</span><span class="kpi-label" data-translate="kpi1Label">Dni <br>(badany okres)</span></div>
+                    <div class="kpi-card"><span class="kpi-value">55 500</span><span class="kpi-label" data-translate="kpi2Label">Liczba obsłużonych pacjentów</span></div>
+                    <div class="kpi-card"><span class="kpi-value">$1,42 mld</span><span class="kpi-label" data-translate="kpi3Label">Całkowity przychód szpitali</span></div>
+                    <div class="kpi-card"><span class="kpi-value">52 lata</span><span class="kpi-label" data-translate="kpi4Label">Średni wiek pacjenta</span></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="project-details">
+            <div class="container">
+                <h2 data-translate="detailsTitle">Szczegóły Projektu</h2>
+                <div class="section-underline centered-underline"></div>
+                
+                <div class="details-card" id="project-details-card">
+    
+                    <div class="toggle-buttons">
+                        <button class="toggle-btn" onclick="showSection('sectionColumns')" data-translate="tabColumns">Opis Kolumn</button>
+                        <button class="toggle-btn" onclick="showSection('sectionKPIs')" data-translate="tabKPIs">Kluczowe Wskaźniki</button>
+                        <button class="toggle-btn" onclick="showSection('sectionAnalysis')" data-translate="tabAnalysis">Analiza</button>
+                        <button class="toggle-btn is-active" onclick="showSection('sectionMethodology')" data-translate="tabMethodology">Metodologia</button>
+                    </div>
+                    
+                    <div id="info-sections-container">
+                        
+                        <div id="sectionColumns" class="info-section" role="region">
+                            <table class="kpi-table">
+                                <thead><tr><th data-translate="tableHeaderColumn">Kolumna</th><th data-translate="tableHeaderDesc">Opis</th></tr></thead>
+                                <tbody id="columnsTableBody"></tbody>
+                            </table>
+                        </div>
+    
+                        <div id="sectionKPIs" class="info-section" role="region">
+                             <table class="kpi-table">
+                                 <thead><tr><th>KPI</th><th data-translate="tableHeaderResult">Wynik</th></tr></thead>
+                                 <tbody id="kpisTableBody"></tbody>
+                            </table>
+                        </div>
+    
+                        <div id="sectionAnalysis" class="info-section" role="region">
+                            <div class="analysis-grid">
+                                <div class="analysis-table-container">
+                                    <table class="kpi-table">
+                                        <thead><tr><th data-translate="tableHeaderArea">Obszar Analizy</th><th data-translate="tableHeaderConclusions">Wnioski</th></tr></thead>
+                                        <tbody id="analysisTableBody"></tbody>
+                                    </table>
+                                </div>
+                                <div class="analysis-conclusions">
+                                    <ol id="analysisListBody"></ol>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div id="sectionMethodology" class="info-section active" role="region">
+                            <div id="methodologyTableBody"></div>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="project-files">
+            <div class="container">
+                <h2 data-translate="downloadTitle">Pobierz Zasoby Projektu</h2>
+                <div class="section-underline centered-underline"></div>
+                <div class="files-container">
+                    <a href="/assets/Hospital analyze raw data.csv" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadRaw">Pobierz surowy zestaw danych</span></a>
+                    <a href="/assets/USA Hospitals Analysis Dashboard.pbix" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadPBI">Pobierz Plik Power BI</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Zamknij podgląd">&times;</button>
+        <img src="" alt="Powiększony obraz projektu" class="lightbox-image">
+    </div>
+
+    <style is:global>
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1;}
+        .section-underline { margin: 20px 0 30px 0; width: 80px; height: 4px; border-radius: 2px; background: var(--line-gradient); }
+        .centered-underline { margin: 20px auto 30px auto; }
+        
+        .project-hero { padding: 140px 0 80px; position: relative; overflow: hidden; z-index: 1;}
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-content h1 { font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 0; color: var(--text-primary); }
+        .hero-content p { font-size: 1.2rem; color: var(--text-secondary); max-width: 500px; }
+        .hero-image-wrapper { perspective: 1000px; }
+        
+        .project-image { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: var(--card-shadow); cursor: pointer; border: 1px solid var(--border-color); transition: transform 0.3s ease, border-color 0.3s ease; }
+        .project-image:hover { transform: scale(1.03); border-color: var(--cyan); }
+        
+        /* Siatka galerii dostosowana do 5 elementów (piąty zajmuje pełną szerokość) */
+        .project-gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .project-gallery-grid .project-image:nth-child(5) { grid-column: span 2; }
+        
+        .scroll-down-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 40px; color: var(--text-secondary); font-weight: 600; text-decoration: none; cursor: pointer; transition: color 0.3s ease, transform 0.3s ease; }
+        .scroll-down-link:hover { color: var(--cyan); transform: translateY(-3px); }
+        .mouse-icon { width: 24px; height: 40px; border: 2px solid var(--text-secondary); border-radius: 20px; position: relative; transition: border-color 0.3s ease; }
+        .scroll-down-link:hover .mouse-icon { border-color: var(--cyan); }
+        .mouse-icon .wheel { display: block; width: 4px; height: 8px; background-color: var(--cyan); border-radius: 2px; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); animation: scroll-wheel-anim 2s infinite ease-in-out; }
+        @keyframes scroll-wheel-anim { 0% { transform: translate(-50%, 0); opacity: 1; } 50% { transform: translate(-50%, 10px); opacity: 1; } 100% { transform: translate(-50%, 20px); opacity: 0; } }
+
+        .project-highlights { padding: 80px 0; z-index: 1; position: relative;}
+        .project-highlights h2, .project-details h2, .project-files h2 { text-align: center; font-size: 2.5rem; font-weight: 700; background: var(--line-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-top: 50px; justify-content: center;}
+        
+        .kpi-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; text-align: center; position: relative; overflow: visible; backdrop-filter: blur(10px); transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 50%); opacity: 0; transition: opacity 0.3s; border-radius: 15px; pointer-events: none; z-index: 0; }
+        .kpi-card > * { position: relative; z-index: 1; }
+        .kpi-card:hover { transform: translateY(-8px) scale(1.03); border-color: var(--cyan); box-shadow: var(--card-shadow); }
+        .kpi-card:hover::before { opacity: 1; }
+        
+        .kpi-value { display: block; font-size: 2.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+        .kpi-label { font-size: 1rem; color: var(--text-secondary); }
+        
+        .project-details { padding: 80px 0; z-index: 1; position: relative;}
+        .details-card { background: var(--bg-surface); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--card-shadow); transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+        .toggle-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
+        .toggle-btn { appearance: none; background: var(--btn-bg); border: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 600; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 12px 24px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;}
+        .toggle-btn:hover { color: var(--text-primary); border-color: var(--cyan); transform: translateY(-2px); }
+        .toggle-btn.is-active { background: var(--line-gradient); color: white; border-color: transparent; transform: scale(1.05); box-shadow: 0 5px 15px var(--spotlight-color); }
+        .info-section { display: none; margin-top: 20px; padding-top: 30px; border-top: 1px solid var(--border-color); }
+        .info-section.active { display: block; animation: fadeIn .4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .kpi-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        .kpi-table th, .kpi-table td { padding: 14px 10px; border-bottom: 1px solid var(--border-color); text-align: center; width: 50%; }
+        .kpi-table tr:last-child td { border-bottom: none; }
+        .kpi-table thead th { font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .kpi-table td { color: var(--text-secondary); }
+        .kpi-table .table-separator td { font-weight: 800; color: var(--cyan); padding-top: 25px; background-color: rgba(255, 255, 255, 0.02); text-align: center; }
+        
+        .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .analysis-conclusions ol { list-style: none; padding-left: 0; counter-reset: conclusion-counter; }
+        .analysis-conclusions li { position: relative; padding-left: 45px; margin-bottom: 25px; }
+        .analysis-conclusions li::before { counter-increment: conclusion-counter; content: counter(conclusion-counter); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; border-radius: 50%; background: var(--line-gradient); color: white; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+        .analysis-conclusions strong { display: block; margin-bottom: 5px; color: var(--text-primary); font-size: 1.1rem; }
+        .analysis-conclusions p { color: var(--text-secondary); font-size: 0.95rem; margin: 0; }
+
+        /* Metodologia - bloki DAX */
+        .methodology-steps { list-style: none; padding-left: 0; position: relative; counter-reset: step-counter; }
+        .methodology-steps::before { content: ''; position: absolute; left: 24px; top: 24px; bottom: 24px; width: 2px; background-color: var(--border-color); }
+        .methodology-steps li { position: relative; padding-left: 70px; margin-bottom: 50px; }
+        .methodology-steps li:last-child { margin-bottom: 0; }
+        .methodology-step-header { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
+        .methodology-step-header::before { counter-increment: step-counter; content: "0" counter(step-counter); position: absolute; left: 0; top: 0; width: 50px; height: 50px; background: var(--bg-surface); border: 2px solid var(--border-color); border-radius: 50%; color: var(--text-primary); font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
+        .methodology-step-header svg { width: 32px; height: 32px; color: var(--cyan); }
+        .methodology-step-header h3 { font-size: 1.8rem; font-weight: 700; margin: 0; color: var(--text-primary); }
+        .methodology-content ul { list-style: none; padding-left: 0; margin-bottom: 20px; }
+        .methodology-content li { position: relative; margin-bottom: 12px; padding-left: 25px; color: var(--text-secondary); }
+        .methodology-content li::before { content: '›'; position: absolute; left: 0; top: -2px; color: var(--cyan); font-size: 1.5rem; line-height: 1.6; }
+        .methodology-content code { background-color: rgba(125, 125, 125, 0.2); color: var(--text-primary); padding: 2px 6px; border-radius: 5px; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9em; }
+        .methodology-content p { margin-bottom: 15px; color: var(--text-secondary); }
+        
+        .dax-measure-block { margin-bottom: 25px; border: 1px solid var(--border-color); border-radius: 12px; background: rgba(0,0,0,0.2); }
+        [data-theme="light"] .dax-measure-block { background: rgba(0,0,0,0.03); }
+        .dax-measure-block p { padding: 16px 16px 0; margin-bottom: 0; color: var(--text-primary); }
+        .dax-measure-block pre { background: #0D1117; border-top: 1px solid var(--border-color); border-radius: 0 0 11px 11px; padding: 16px; margin: 15px 0 0 0; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; position: relative; }
+        .dax-measure-block pre::before { content: 'DAX'; position: absolute; top: 12px; right: 12px; font-size: 0.8em; font-weight: 600; color: rgba(255,255,255,0.4); }
+        .dax-measure-block pre code { background: none; padding: 0; font-size: 0.95em; line-height: 1.5; color: #c9d1d9; }
+        .dax-measure { color: #D2A8FF; } .dax-function { color: #79C0FF; } .dax-string { color: #A5D6A7; }
+        .dax-keyword { color: #FF7B72; } .dax-operator { color: #c9d1d9; } .dax-comment { color: #8B949E; }
+
+        .project-files { padding: 20px 0; z-index: 1; position: relative;}
+        .files-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 50px; }
+        .gradient__border__container { display: inline-block; position: relative; padding: 1px; border-radius: 30px; background: var(--line-gradient); background-size: 200% 200%; animation: spin-gradient 6s linear infinite; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; min-width: 150px; text-align: center; text-decoration: none; box-shadow: 0 4px 20px var(--spotlight-color); }
+        .gradient__border__container:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--spotlight-color); }
+        .gradient__border__container .gradient__border__text { display: block; background: var(--bg-surface); border-radius: 29px; padding: 0.8rem 2rem; font-size: 1rem; font-weight: 600; color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+        .gradient__border__container:hover .gradient__border__text { background: transparent; color: #fff;}
+        @keyframes spin-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        .lightbox { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.92); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .lightbox.open { opacity: 1; pointer-events: all; }
+        .lightbox-image { max-width: 90vw; max-height: 90vh; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .lightbox-close { position: absolute; top: 20px; right: 20px; width: 50px; height: 50px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; color: #fff; font-size: 28px; line-height: 50px; text-align: center; cursor: pointer; transition: background 0.2s, transform 0.2s; z-index: 2001; }
+        .lightbox-close:hover { background: rgba(255,60,60,0.8); transform: scale(1.1); border-color: transparent;}
+        
+        @media (max-width: 900px) { 
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; } 
+            .hero-content { order: 2; } 
+            .hero-image-wrapper { order: 1; } 
+            .hero-content .section-underline, .hero-content .scroll-down-link { margin-left: auto; margin-right: auto; } 
+            .analysis-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+        @media (max-width: 600px) { 
+            .hero-content h1 { font-size: 2.8rem; } 
+            .project-highlights h2, .project-details h2, .project-files h2 { font-size: 2rem; } 
+            .details-card { padding: 25px; } 
+        }
+    </style>
+
+    <script is:inline>
+        // === TŁUMACZENIA SPECYFICZNE DLA TEGO PROJEKTU ===
+        const translations = {
+            pl: {
+                pageTitle: "Projekt: Healthcare Analysis | Portfolio Jakub Nicpoń",
+                heroTitle: "Healthcare Analysis Dashboard",
+                heroDesc: "Analiza danych medycznych pozwala na odkrywanie kluczowych trendów w leczeniu pacjentów, optymalizację kosztów i zarządzanie zasobami szpitalnymi.<br><br>Interaktywny dashboard, stworzony na podstawie 50 000 rekordów, umożliwia dynamiczną analizę demografii pacjentów, efektywności leczenia w zależności od schorzeń oraz rentowności poszczególnych oddziałów i placówek.",
+                btnDetails: "Zobacz szczegóły",
+                kpiTitle: "Kluczowe Wskaźniki",
+                kpi1Label: "Dni <br>(badany okres)",
+                kpi2Label: "Liczba obsłużonych pacjentów",
+                kpi3Label: "Całkowity przychód szpitali",
+                kpi4Label: "Średni wiek pacjenta",
+                detailsTitle: "Szczegóły Projektu",
+                tabColumns: "Opis Kolumn",
+                tabKPIs: "Kluczowe Wskaźniki",
+                tabAnalysis: "Analiza",
+                tabMethodology: "Metodologia",
+                tableHeaderColumn: "Kolumna",
+                tableHeaderDesc: "Opis",
+                tableHeaderResult: "Wynik",
+                tableHeaderArea: "Obszar Analizy",
+                tableHeaderConclusions: "Wnioski",
+                downloadTitle: "Pobierz Zasoby Projektu",
+                btnDownloadRaw: "Pobierz surowy zestaw danych",
+                btnDownloadPBI: "Pobierz Plik Power BI",
+                
+                colsData: `
+                    <tr><td>Patient ID</td><td>ID pacjenta</td></tr>
+                    <tr><td>Age</td><td>Wiek</td></tr>
+                    <tr><td>Gender</td><td>Płeć</td></tr>
+                    <tr><td>Blood Type</td><td>Grupa krwi</td></tr>
+                    <tr><td>Medical Condition</td><td>Stan zdrowia / Choroba</td></tr>
+                    <tr><td>Date of Admission</td><td>Data przyjęcia do szpitala</td></tr>
+                    <tr><td>Doctor</td><td>Lekarz</td></tr>
+                    <tr><td>Hospital</td><td>Szpital</td></tr>
+                    <tr><td>Insurance Provider</td><td>Ubezpieczyciel</td></tr>
+                    <tr><td>Billing Amount</td><td>Kwota rachunku / Opłata</td></tr>
+                    <tr><td>Room Number</td><td>Numer sali</td></tr>
+                    <tr><td>Admission Type</td><td>Typ przyjęcia (np. Planowe, Nagłe)</td></tr>
+                    <tr><td>Discharge Date</td><td>Data wypisu ze szpitala</td></tr>
+                    <tr><td>Medication</td><td>Przyjmowane leki</td></tr>
+                    <tr><td>Test Results</td><td>Wyniki badań</td></tr>
+                    <tr><td>Hospital Latitude</td><td>Szerokość geograficzna szpitala</td></tr>
+                    <tr><td>Hospital Longitude</td><td>Długość geograficzna szpitala</td></tr>
+                `,
+                kpisData: `
+                    <tr><td>Całkowita liczba pacjentów</td><td>55 500</td></tr>
+                    <tr><td>Średni wiek pacjenta</td><td>52 lata</td></tr>
+                    <tr><td>Najstarszy i najmłodszy pacjent</td><td>89 / 13 lat</td></tr>
+                    <tr><td>Najliczniejsza grupa wiekowa pacjentów</td><td>56-65 lat</td></tr>
+                    <tr><td>Pacjenci wg. płci</td><td>50% - kobiety, 40% - mężczyźni, 10% - osoby niebinarne</td></tr>
+                    <tr><td>Średnia długość pobytu</td><td>15,5 dnia</td></tr>
+                    <tr><td>Najdłuższy pobyt</td><td>30 dni (1657 pacjentów)</td></tr>
+                    <tr><td>Najczęściej występujące schorzenia</td><td>Cukrzyca / nadciśniecie ~ 13 875 przypadków</td></tr>
+                    <tr><td>Najczęstszy stan podczas przyjęcia</td><td>Przyjęcie planowe 18 655</td></tr>
+                    <tr><td>Udział nagłych hospitalizacji</td><td>Przyjęcie nagłe 32,9%</td></tr>
+                    <tr><td>Średni koszt leczenia na pacjenta</td><td>$25 539</td></tr>
+                    <tr><td>Najwyższy rachunek</td><td>$52 764</td></tr>
+                    <tr><td>Szpital z największymi przychodami</td><td>Houston Methodist Hospital ~ $521 mln</td></tr>
+                    <tr><td>Największy ubezpieczyciel</td><td>Medicare ~ $707 mln przychodów dla szpitali</td></tr>
+                `,
+                analysisTableData: `
+                    <tr><td>Dominacja Chorób Przewlekłych</td><td>Schorzenia takie jak <strong>Cukrzyca, Nadciśnienie i Otyłość</strong> dominują w statystykach, stanowiąc 73% przyjęć i generując przychód > $1,03 mld.</td></tr>
+                    <tr><td>Rozpiętość Wieku Pacjentów</td><td>Rozrzut wieku (13-89 lat) świadczy o obsłudze szerokiego spektrum potrzeb – od pediatrii po geriatrię.</td></tr>
+                    <tr><td>Wiek a Rodzaj Przyjęcia</td><td>W grupie 76+ przyjęcia pilne (Urgent) stanowią dominujący typ, co wskazuje na specyficzne potrzeby seniorów.</td></tr>
+                    <tr><td>Demografia Płci</td><td>W każdej grupie wiekowej i dla większości schorzeń (z wyjątkiem otyłości) przyjmowanych jest więcej kobiet niż mężczyzn.</td></tr>
+                    <tr><td>Długość Pobytu (LOS)</td><td>Średnia długość pobytu dla przypadków pilnych utrzymuje się na wysokim poziomie (>15 dni) przez cały rok.</td></tr>
+                    <tr><td>Rola Houston Methodist Hospital</td><td>Szpital ten odpowiada za blisko 37% ($521 mln) przychodu, co wskazuje na jego centralną pozycję rynkową.</td></tr>
+                    <tr><td>Paradoks Kosztów w Houston</td><td>Mimo zanotowania najwyższego rachunku ($52k), średni koszt leczenia tam jest niższy od ogólnej średniej (dużo tanich procedur).</td></tr>
+                    <tr><td>Wpływ Ubezpieczycieli</td><td><strong>Medicare</strong> dominuje rynek (>50% przychodów z ubezpieczeń, $707 mln), uzależniając stabilność szpitali od jednego płatnika.</td></tr>
+                `,
+                analysisListData: `
+                    <li><strong>Wysoki Koszt Leczenia Astmy</strong><p>Mimo że Astma stanowi tylko 7% przyjęć, generuje najwyższą średnią opłatę ($25,678). Wskazuje to na potrzebę analizy ścieżek leczenia dla rzadziej występujących, ale kosztownych chorób.</p></li>
+                    <li><strong>Efektywność Houston Methodist Hospital</strong><p>Szpital dominuje przychodowo, lecz jego średni rachunek jest poniżej średniej. Oznacza to wysoką skalę operacji przy potencjalnie niższej efektywności kosztowej w niektórych obszarach.<br><strong>Rekomendacja:</strong> Przeprowadzenie szczegółowego benchmarku operacyjnego i kosztowego w celu identyfikacji źródeł wysokich kosztów.</p></li>
+                    <li><strong>Zarządzanie Obciążeniem Weekendowym</strong><p>Weekend odpowiada za 28,5% wszystkich przyjęć. To znaczące obciążenie, które wymaga planowania zasobów.<br><strong>Rekomendacja:</strong> Weryfikacja, czy obsada personelu w weekendy jest adekwatna, aby uniknąć przeciążenia.</p></li>
+                `,
+                methodologyData: `
+                    <ol class="methodology-steps">
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M21.585 5.584L18.413 2.413a2.011 2.011 0 0 0-2.827 0L2.394 15.59a1.99 1.99 0 0 0-.583 1.21L1.24 21.75a1 1 0 0 0 1.01 1.01l4.95-1.173a1.99 1.99 0 0 0 1.21-.583l13.176-13.174a1.99 1.99 0 0 0 0-2.827zM17 4.53l2.47 2.47-2.58 2.58-2.47-2.47zM4.14 20.36l-1 .235.236-1L6.55 16.42l2.03 2.03zm4.24-3.12l-2.03-2.03L15.17 6.4l2.03 2.03z"></path></svg>
+                                <h3>Czyszczenie i Transformacja Danych w Power Query</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <ul>
+                                    <li>Aby usunąć błędy parsowania, zmieniłem format dat w kolumnach <code>Date of Admission</code> i <code>Discharge Date</code>, używając lokalizacji <strong>English (United States)</strong>.</li>
+                                    <li>Przekształciłem typ danych dla kolumny <code>Billing Amount</code> na liczbę dziesiętną, uprzednio zamieniając kropki na przecinki, aby uniknąć błędów wynikających z regionalnych ustawień systemu.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75zM5.25 6.75c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h13.5c.621 0 1.125-.504 1.125-1.125V7.875c0-.621-.504-1.125-1.125-1.125H5.25z"></path></svg>
+                                <h3>Stworzenie Tabeli Kalendarza</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <p>W celu analizy danych w czasie i konstrukcji miar YoY, stworzyłem dynamiczną tabelę kalendarza połączoną z głównym zbiorem danych.</p>
+                                <div class="dax-measure-block">
+                                    <pre><code><span class="dax-measure">Calendar</span> <span class="dax-operator">=</span> 
+<span class="dax-keyword">VAR</span> mindate <span class="dax-operator">=</span> <span class="dax-function">MIN</span>(<span class="dax-string">'Healthcare dataset'[Date of Admission]</span>)
+<span class="dax-keyword">VAR</span> maxdate <span class="dax-operator">=</span> <span class="dax-function">MAX</span>(<span class="dax-string">'Healthcare dataset'[Date of Admission]</span>)
+<span class="dax-keyword">VAR</span> UsedCalendar <span class="dax-operator">=</span> <span class="dax-function">CALENDAR</span>(mindate, maxdate)
+
+<span class="dax-keyword">RETURN</span>
+<span class="dax-function">ADDCOLUMNS</span>(
+    UsedCalendar,
+    <span class="dax-string">"Year"</span>, <span class="dax-function">YEAR</span>([Date]),
+    <span class="dax-string">"Quarter"</span>, <span class="dax-function">QUARTER</span>([Date]),
+    <span class="dax-string">"Month Name"</span>, <span class="dax-function">FORMAT</span>([Date], <span class="dax-string">"MMMM"</span>),
+    <span class="dax-string">"Day Type"</span>, <span class="dax-function">IF</span>(<span class="dax-function">WEEKDAY</span>([Date], 2) <span class="dax-operator">></span> 5, <span class="dax-string">"Weekend"</span>, <span class="dax-string">"Weekday"</span>)
+)</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.75 2.25a.75.75 0 0 0-1.5 0v8.25H3a.75.75 0 0 0 0 1.5h8.25V21a.75.75 0 0 0 1.5 0v-8.25H21a.75.75 0 0 0 0-1.5h-8.25V2.25z"></path></svg>
+                                <h3>Dodanie Kolumn Obliczeniowych</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <div class="dax-measure-block"><p><strong>Age Group</strong>: Kategoryzacja pacjentów według wieku.</p>
+                                    <pre><code><span class="dax-measure">Age Group</span> <span class="dax-operator">=</span> 
+<span class="dax-function">SWITCH</span>(
+    <span class="dax-keyword">TRUE</span>(),
+    'Healthcare dataset'[Age] <span class="dax-operator"><</span> 18, <span class="dax-string">"<18"</span>,
+    'Healthcare dataset'[Age] <span class="dax-operator"><=</span> 35, <span class="dax-string">"18-35"</span>,
+    'Healthcare dataset'[Age] <span class="dax-operator"><=</span> 55, <span class="dax-string">"36-55"</span>,
+    <span class="dax-string">">55"</span> 
+)</code></pre>
+                                </div>
+                                <div class="dax-measure-block"><p><strong>Length Of Stay</strong>: Obliczenie długości pobytu w dniach.</p>
+                                    <pre><code><span class="dax-measure">Length Of Stay</span> <span class="dax-operator">=</span> <span class="dax-function">DATEDIFF</span>('Healthcare dataset'[Date of Admission], 'Healthcare dataset'[Discharge Date], <span class="dax-keyword">DAY</span>)</code></pre>
+                                </div>
+                                <div class="dax-measure-block"><p><strong>Length Of Stay Bucket</strong>: Kategoryzacja długości pobytu.</p>
+                                    <pre><code><span class="dax-measure">Length Of Stay Bucket</span> <span class="dax-operator">=</span> 
+<span class="dax-function">SWITCH</span>(
+    <span class="dax-keyword">TRUE</span>(),
+    'Healthcare dataset'[Lenght Of Stay] <span class="dax-operator"><=</span> 3, <span class="dax-string">"Short Stay (1-3)"</span>,
+    'Healthcare dataset'[Lenght Of Stay] <span class="dax-operator"><=</span> 7, <span class="dax-string">"Moderate Stay (4-7)"</span>,
+    'Healthcare dataset'[Lenght Of Stay] <span class="dax-operator"><=</span> 14, <span class="dax-string">"Long Stay (8-14)"</span>,
+    <span class="dax-string">"Extended Stay (15+)"</span>
+)</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6zm4.5 9a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75zm0-3a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75zM6 6.75A.75.75 0 0 1 6.75 6h.008a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 6.75zM6.75 9a.75.75 0 0 0 0 1.5h.008a.75.75 0 0 0 0-1.5H6.75z" clip-rule="evenodd"></path></svg>
+                                <h3>Stworzenie Kluczowych Miar (KPI)</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <div class="dax-measure-block"><p><strong>Patients Admitted</strong>:</p><pre><code><span class="dax-measure">Patients Admitted</span> <span class="dax-operator">=</span> <span class="dax-function">COUNT</span>(<span class="dax-string">'Healthcare dataset'[Patient ID]</span>)</code></pre></div>
+                                <div class="dax-measure-block"><p><strong>Readmitted Patients</strong>: Zlicza pacjentów przyjętych > 1 raz.</p><pre><code><span class="dax-measure">Readmitted patients</span> <span class="dax-operator">=</span> <span class="dax-function">COUNTROWS</span>(<span class="dax-function">FILTER</span>(<span class="dax-function">VALUES</span>(<span class="dax-string">'Healthcare dataset'[Patient ID]</span>),<span class="dax-function">CALCULATE</span>(<span class="dax-function">COUNT</span>(<span class="dax-string">'Healthcare dataset'[Patient ID]</span>)) <span class="dax-operator">></span> <span class="dax-number">1</span>))</code></pre></div>
+                                <div class="dax-measure-block"><p><strong>AVG Billing Amount</strong>:</p><pre><code><span class="dax-measure">AVG Billing Amount</span> <span class="dax-operator">=</span> <span class="dax-function">AVERAGE</span>(<span class="dax-string">'Healthcare dataset'[Billing Amount]</span>)</code></pre></div>
+                                <div class="dax-measure-block"><p><strong>AVG Length Of Stay</strong>:</p><pre><code><span class="dax-measure">AVG Length Of Stay</span> <span class="dax-operator">=</span> <span class="dax-function">AVERAGEX</span>(<span class="dax-string">'Healthcare dataset'</span>, 'Healthcare dataset'[Discharge Date] <span class="dax-operator">-</span> 'Healthcare dataset'[Date of Admission])</code></pre></div>
+                                <div class="dax-measure-block"><p><strong>Patients with longest stay</strong>:</p>
+                                    <pre><code><span class="dax-measure">Patients with longest stay</span> <span class="dax-operator">=</span> 
+<span class="dax-keyword">VAR</span> LongestStay <span class="dax-operator">=</span> <span class="dax-function">MAXX</span>(<span class="dax-string">'Healthcare dataset'</span>, <span class="dax-function">DATEDIFF</span>('Healthcare dataset'[Date of Admission], 'Healthcare dataset'[Discharge Date], <span class="dax-keyword">DAY</span>))
+<span class="dax-keyword">VAR</span> LongestStayPatients <span class="dax-operator">=</span> <span class="dax-function">CALCULATE</span>( <span class="dax-function">COUNTROWS</span>(<span class="dax-string">'Healthcare dataset'</span>), <span class="dax-function">FILTER</span>(<span class="dax-string">'Healthcare dataset'</span>, <span class="dax-function">DATEDIFF</span>('Healthcare dataset'[Date of Admission], 'Healthcare dataset'[Discharge Date], <span class="dax-keyword">DAY</span>) <span class="dax-operator">=</span> LongestStay) )
+<span class="dax-keyword">RETURN</span> LongestStayPatients</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM9 12.75a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5H9zM12 9a.75.75 0 0 0-.75.75v6a.75.75 0 0 0 1.5 0v-6A.75.75 0 0 0 12 9z" clip-rule="evenodd" /></svg>
+                                <h3>Implementacja Miar YoY i UI</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <p>Stworzyłem miary YoY do wskaźników m.in <code>AVG Age</code>, <code>AVG Billing Amount</code>.</p>
+                                <div class="dax-measure-block">
+                                    <pre><code><span class="dax-measure">YoY AVG Age</span> <span class="dax-operator">=</span> 
+<span class="dax-keyword">VAR</span> SelectedYear <span class="dax-operator">=</span> <span class="dax-function">SELECTEDVALUE</span>(<span class="dax-string">'Calendar'[Year]</span>)
+<span class="dax-keyword">VAR</span> PrevYear <span class="dax-operator">=</span> <span class="dax-function">IF</span>(<span class="dax-function">NOT</span> <span class="dax-function">ISBLANK</span>(SelectedYear), SelectedYear <span class="dax-operator">-</span> 1, <span class="dax-function">BLANK</span>())
+<span class="dax-keyword">VAR</span> PrevYearValue <span class="dax-operator">=</span> <span class="dax-function">IF</span>(<span class="dax-function">NOT</span> <span class="dax-function">ISBLANK</span>(PrevYear), <span class="dax-function">CALCULATE</span>([AVG Age], <span class="dax-function">YEAR</span>(<span class="dax-string">'Calendar'[Date]</span>) <span class="dax-operator">=</span> PrevYear), <span class="dax-function">BLANK</span>())
+<span class="dax-keyword">VAR</span> CurrValue <span class="dax-operator">=</span> [AVG Age]
+<span class="dax-keyword">VAR</span> YoYChange <span class="dax-operator">=</span> <span class="dax-function">DIVIDE</span>(CurrValue <span class="dax-operator">-</span> PrevYearValue, PrevYearValue)
+<span class="dax-keyword">RETURN</span>
+<span class="dax-function">IF</span>(<span class="dax-function">ISBLANK</span>(SelectedYear), <span class="dax-string">"Not selected"</span>,
+    <span class="dax-function">IF</span>(<span class="dax-function">NOT</span> <span class="dax-function">ISBLANK</span>(YoYChange),
+        <span class="dax-function">IF</span>(YoYChange <span class="dax-operator">></span> 0, <span class="dax-string">"∆ "</span>, <span class="dax-string">"∇ "</span>) <span class="dax-operator">&</span> <span class="dax-function">FORMAT</span>(YoYChange, <span class="dax-string">"0.0%"</span>) <span class="dax-operator">&</span> <span class="dax-string">" vs "</span> <span class="dax-operator">&</span> PrevYear,
+        <span class="dax-string">"No data"</span>
+    )
+)</code></pre>
+                                </div>
+                                <ul>
+                                    <li>Stworzyłem nawigatory zakładek (<strong>Bookmark Navigators</strong>) oraz <strong>Page Navigator</strong>.</li>
+                                    <li>Użyłem parametru <strong>Fields Parameter</strong> dla wymiarów wykresów (Hospital / Insurance Provider).</li>
+                                    <li>Szablon został wykonany w <strong>PowerPoint</strong>.</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ol>
+                `
+            },
+            en: {
+                pageTitle: "Project: Healthcare Analysis | Jakub Nicpoń's Portfolio",
+                navHome: "Home",
+                navAbout: "About",
+                navProjects: "Projects",
+                heroTitle: "Healthcare Analysis Dashboard",
+                heroDesc: "Analyzing medical data enables discovering key patient treatment trends, optimizing costs, and managing hospital resources.<br><br>This interactive dashboard, built on 50,000 records, allows dynamic analysis of patient demographics, treatment effectiveness across conditions, and profitability of specific departments and facilities.",
+                btnDetails: "See details",
+                kpiTitle: "KPI",
+                kpi1Label: "Days <br>(investigated period)",
+                kpi2Label: "Patients Treated",
+                kpi3Label: "Total Hospital Revenue",
+                kpi4Label: "Average Patient Age",
+                detailsTitle: "Project Details",
+                tabColumns: "Column Description",
+                tabKPIs: "KPI",
+                tabAnalysis: "Analysis",
+                tabMethodology: "Methodology",
+                tableHeaderColumn: "Column",
+                tableHeaderDesc: "Description",
+                tableHeaderResult: "Result",
+                tableHeaderArea: "Analysis Area",
+                tableHeaderConclusions: "Conclusions",
+                downloadTitle: "Download Project Assets",
+                btnDownloadRaw: "Download Raw Dataset",
+                btnDownloadPBI: "Download Power BI File",
+                
+                colsData: `
+                    <tr><td>Patient ID</td><td>Patient ID</td></tr>
+                    <tr><td>Age</td><td>Age</td></tr>
+                    <tr><td>Gender</td><td>Gender</td></tr>
+                    <tr><td>Blood Type</td><td>Blood Type</td></tr>
+                    <tr><td>Medical Condition</td><td>Medical Condition / Disease</td></tr>
+                    <tr><td>Date of Admission</td><td>Date of Admission to Hospital</td></tr>
+                    <tr><td>Doctor</td><td>Doctor in charge</td></tr>
+                    <tr><td>Hospital</td><td>Hospital</td></tr>
+                    <tr><td>Insurance Provider</td><td>Insurance Provider</td></tr>
+                    <tr><td>Billing Amount</td><td>Billing Amount / Fee</td></tr>
+                    <tr><td>Room Number</td><td>Room Number</td></tr>
+                    <tr><td>Admission Type</td><td>Type of Admission (e.g., Elective, Urgent)</td></tr>
+                    <tr><td>Discharge Date</td><td>Date of Discharge</td></tr>
+                    <tr><td>Medication</td><td>Prescribed Medication</td></tr>
+                    <tr><td>Test Results</td><td>Medical Test Results</td></tr>
+                    <tr><td>Hospital Latitude</td><td>Hospital Latitude</td></tr>
+                    <tr><td>Hospital Longitude</td><td>Hospital Longitude</td></tr>
+                `,
+                kpisData: `
+                    <tr><td>Total number of patients</td><td>55,500</td></tr>
+                    <tr><td>Average patient age</td><td>52 years</td></tr>
+                    <tr><td>Oldest and youngest patient</td><td>89 / 13 years</td></tr>
+                    <tr><td>Largest patient age group</td><td>56-65 years</td></tr>
+                    <tr><td>Patients by gender</td><td>50% - Female, 40% - Male, 10% - Non-binary</td></tr>
+                    <tr><td>Average length of stay</td><td>15.5 days</td></tr>
+                    <tr><td>Longest stay</td><td>30 days (1,657 patients)</td></tr>
+                    <tr><td>Most common conditions</td><td>Diabetes / Hypertension ~ 13,875 cases</td></tr>
+                    <tr><td>Most common admission type</td><td>Elective admission 18,655</td></tr>
+                    <tr><td>Share of emergency hospitalizations</td><td>Emergency admission 32.9%</td></tr>
+                    <tr><td>Average treatment cost per patient</td><td>$25,539</td></tr>
+                    <tr><td>Highest single bill</td><td>$52,764</td></tr>
+                    <tr><td>Hospital with highest revenue</td><td>Houston Methodist Hospital ~ $521M</td></tr>
+                    <tr><td>Largest insurance provider</td><td>Medicare ~ $707M in hospital revenue</td></tr>
+                `,
+                analysisTableData: `
+                    <tr><td>Dominance of Chronic Diseases</td><td>Conditions such as <strong>Diabetes, Hypertension, and Obesity</strong> dominate the stats, representing 73% of admissions and generating >$1.03B revenue.</td></tr>
+                    <tr><td>Patient Age Range</td><td>The wide age span (13-89 years) demonstrates handling a broad spectrum of needs – from pediatrics to geriatrics.</td></tr>
+                    <tr><td>Age vs. Admission Type</td><td>In the 76+ age group, Urgent admissions are dominant, highlighting the specific health needs of seniors.</td></tr>
+                    <tr><td>Gender Demographics</td><td>Across all age groups and for most conditions (except obesity), more women are admitted than men.</td></tr>
+                    <tr><td>Length of Stay (LOS)</td><td>The average stay for urgent cases remains consistently high (>15 days) year-round, posing a logistical challenge.</td></tr>
+                    <tr><td>Role of Houston Methodist</td><td>This hospital accounts for nearly 37% ($521M) of total revenue, indicating its central market position but also operational risk concentration.</td></tr>
+                    <tr><td>Cost Paradox in Houston</td><td>Despite having the highest single bill ($52k), its average treatment cost is below the general average (volume of cheaper procedures).</td></tr>
+                    <tr><td>Insurance Provider Impact</td><td><strong>Medicare</strong> dominates the market (>50% of insurance revenue, $707M), making financial stability highly dependent on a single payer.</td></tr>
+                `,
+                analysisListData: `
+                    <li><strong>High Cost of Asthma Treatment</strong><p>Although Asthma accounts for only 7% of admissions, it generates the highest average fee ($25,678). This indicates a need to analyze treatment pathways for less frequent but costly diseases.</p></li>
+                    <li><strong>Efficiency of Houston Methodist Hospital</strong><p>The hospital dominates in revenue, but its average bill is below average. This means high operational scale with potentially lower cost-efficiency in extreme cases.<br><strong>Recommendation:</strong> Conduct detailed operational and cost benchmarking to identify sources of high costs.</p></li>
+                    <li><strong>Weekend Load Management</strong><p>Weekends (Saturday-Sunday) account for 28.5% of all admissions. This is a significant load requiring careful resource planning.<br><strong>Recommendation:</strong> Verify if weekend staffing is adequate to avoid burnout and ensure care continuity.</p></li>
+                `,
+                methodologyData: `
+                    <ol class="methodology-steps">
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M21.585 5.584L18.413 2.413a2.011 2.011 0 0 0-2.827 0L2.394 15.59a1.99 1.99 0 0 0-.583 1.21L1.24 21.75a1 1 0 0 0 1.01 1.01l4.95-1.173a1.99 1.99 0 0 0 1.21-.583l13.176-13.174a1.99 1.99 0 0 0 0-2.827zM17 4.53l2.47 2.47-2.58 2.58-2.47-2.47zM4.14 20.36l-1 .235.236-1L6.55 16.42l2.03 2.03zm4.24-3.12l-2.03-2.03L15.17 6.4l2.03 2.03z"></path></svg>
+                                <h3>Data Cleaning & Transformation in Power Query</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <ul>
+                                    <li>To fix parsing errors, I changed date formats in <code>Date of Admission</code> and <code>Discharge Date</code> using the <strong>English (US)</strong> locale.</li>
+                                    <li>Converted <code>Billing Amount</code> to a decimal number, replacing dots with commas beforehand to avoid regional system setting errors.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75zM5.25 6.75c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h13.5c.621 0 1.125-.504 1.125-1.125V7.875c0-.621-.504-1.125-1.125-1.125H5.25z"></path></svg>
+                                <h3>Calendar Table Creation</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <p>To analyze data over time and construct YoY measures, I created a dynamic calendar table linked to the main dataset.</p>
+                                <div class="dax-measure-block">
+                                    <pre><code><span class="dax-measure">Calendar</span> <span class="dax-operator">=</span> 
+<span class="dax-keyword">VAR</span> mindate <span class="dax-operator">=</span> <span class="dax-function">MIN</span>(<span class="dax-string">'Healthcare dataset'[Date of Admission]</span>)
+<span class="dax-keyword">VAR</span> maxdate <span class="dax-operator">=</span> <span class="dax-function">MAX</span>(<span class="dax-string">'Healthcare dataset'[Date of Admission]</span>)
+<span class="dax-keyword">VAR</span> UsedCalendar <span class="dax-operator">=</span> <span class="dax-function">CALENDAR</span>(mindate, maxdate)
+
+<span class="dax-keyword">RETURN</span>
+<span class="dax-function">ADDCOLUMNS</span>(
+    UsedCalendar,
+    <span class="dax-string">"Year"</span>, <span class="dax-function">YEAR</span>([Date]),
+    <span class="dax-string">"Quarter"</span>, <span class="dax-function">QUARTER</span>([Date]),
+    <span class="dax-string">"Month Name"</span>, <span class="dax-function">FORMAT</span>([Date], <span class="dax-string">"MMMM"</span>),
+    <span class="dax-string">"Day Type"</span>, <span class="dax-function">IF</span>(<span class="dax-function">WEEKDAY</span>([Date], 2) <span class="dax-operator">></span> 5, <span class="dax-string">"Weekend"</span>, <span class="dax-string">"Weekday"</span>)
+)</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.75 2.25a.75.75 0 0 0-1.5 0v8.25H3a.75.75 0 0 0 0 1.5h8.25V21a.75.75 0 0 0 1.5 0v-8.25H21a.75.75 0 0 0 0-1.5h-8.25V2.25z"></path></svg>
+                                <h3>Calculated Columns</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <div class="dax-measure-block"><p><strong>Age Group</strong>: Patient categorization by age.</p>
+                                    <pre><code><span class="dax-measure">Age Group</span> <span class="dax-operator">=</span> 
+<span class="dax-function">SWITCH</span>(
+    <span class="dax-keyword">TRUE</span>(),
+    'Healthcare dataset'[Age] <span class="dax-operator"><</span> 18, <span class="dax-string">"<18"</span>,
+    'Healthcare dataset'[Age] <span class="dax-operator"><=</span> 35, <span class="dax-string">"18-35"</span>,
+    'Healthcare dataset'[Age] <span class="dax-operator"><=</span> 55, <span class="dax-string">"36-55"</span>,
+    <span class="dax-string">">55"</span> 
+)</code></pre>
+                                </div>
+                                <div class="dax-measure-block"><p><strong>Length Of Stay Bucket</strong>: Categorization of stay length.</p>
+                                    <pre><code><span class="dax-measure">Length Of Stay Bucket</span> <span class="dax-operator">=</span> 
+<span class="dax-function">SWITCH</span>(
+    <span class="dax-keyword">TRUE</span>(),
+    'Healthcare dataset'[Lenght Of Stay] <span class="dax-operator"><=</span> 3, <span class="dax-string">"Short Stay (1-3)"</span>,
+    'Healthcare dataset'[Lenght Of Stay] <span class="dax-operator"><=</span> 7, <span class="dax-string">"Moderate Stay (4-7)"</span>,
+    'Healthcare dataset'[Lenght Of Stay] <span class="dax-operator"><=</span> 14, <span class="dax-string">"Long Stay (8-14)"</span>,
+    <span class="dax-string">"Extended Stay (15+)"</span>
+)</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9z" clip-rule="evenodd"></path></svg>
+                                <h3>Key KPIs Creation</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <div class="dax-measure-block"><p><strong>Readmitted Patients</strong>: Counts patients admitted > 1 time.</p><pre><code><span class="dax-measure">Readmitted patients</span> <span class="dax-operator">=</span> <span class="dax-function">COUNTROWS</span>(<span class="dax-function">FILTER</span>(<span class="dax-function">VALUES</span>(<span class="dax-string">'Healthcare dataset'[Patient ID]</span>),<span class="dax-function">CALCULATE</span>(<span class="dax-function">COUNT</span>(<span class="dax-string">'Healthcare dataset'[Patient ID]</span>)) <span class="dax-operator">></span> <span class="dax-number">1</span>))</code></pre></div>
+                                <div class="dax-measure-block"><p><strong>Patients with longest stay</strong>: Count of patients with max stay.</p>
+                                    <pre><code><span class="dax-measure">Patients with longest stay</span> <span class="dax-operator">=</span> 
+<span class="dax-keyword">VAR</span> LongestStay <span class="dax-operator">=</span> <span class="dax-function">MAXX</span>(<span class="dax-string">'Healthcare dataset'</span>, <span class="dax-function">DATEDIFF</span>('Healthcare dataset'[Date of Admission], 'Healthcare dataset'[Discharge Date], <span class="dax-keyword">DAY</span>))
+<span class="dax-keyword">VAR</span> LongestStayPatients <span class="dax-operator">=</span> <span class="dax-function">CALCULATE</span>( <span class="dax-function">COUNTROWS</span>(<span class="dax-string">'Healthcare dataset'</span>), <span class="dax-function">FILTER</span>(<span class="dax-string">'Healthcare dataset'</span>, <span class="dax-function">DATEDIFF</span>('Healthcare dataset'[Date of Admission], 'Healthcare dataset'[Discharge Date], <span class="dax-keyword">DAY</span>) <span class="dax-operator">=</span> LongestStay) )
+<span class="dax-keyword">RETURN</span> LongestStayPatients</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="methodology-step-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM9 12.75a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5H9zM12 9a.75.75 0 0 0-.75.75v6a.75.75 0 0 0 1.5 0v-6A.75.75 0 0 0 12 9z" clip-rule="evenodd" /></svg>
+                                <h3>YoY Measures and UI Implementation</h3>
+                            </div>
+                            <div class="methodology-content">
+                                <p>Created dynamic YoY measures for metrics like <code>AVG Age</code>, <code>AVG Billing Amount</code>.</p>
+                                <div class="dax-measure-block">
+                                    <pre><code><span class="dax-measure">YoY AVG Age</span> <span class="dax-operator">=</span> 
+<span class="dax-keyword">VAR</span> SelectedYear <span class="dax-operator">=</span> <span class="dax-function">SELECTEDVALUE</span>(<span class="dax-string">'Calendar'[Year]</span>)
+<span class="dax-keyword">VAR</span> PrevYear <span class="dax-operator">=</span> <span class="dax-function">IF</span>(<span class="dax-function">NOT</span> <span class="dax-function">ISBLANK</span>(SelectedYear), SelectedYear <span class="dax-operator">-</span> 1, <span class="dax-function">BLANK</span>())
+<span class="dax-keyword">VAR</span> PrevYearValue <span class="dax-operator">=</span> <span class="dax-function">IF</span>(<span class="dax-function">NOT</span> <span class="dax-function">ISBLANK</span>(PrevYear), <span class="dax-function">CALCULATE</span>([AVG Age], <span class="dax-function">YEAR</span>(<span class="dax-string">'Calendar'[Date]</span>) <span class="dax-operator">=</span> PrevYear), <span class="dax-function">BLANK</span>())
+<span class="dax-keyword">VAR</span> CurrValue <span class="dax-operator">=</span> [AVG Age]
+<span class="dax-keyword">VAR</span> YoYChange <span class="dax-operator">=</span> <span class="dax-function">DIVIDE</span>(CurrValue <span class="dax-operator">-</span> PrevYearValue, PrevYearValue)
+<span class="dax-keyword">RETURN</span>
+<span class="dax-function">IF</span>(<span class="dax-function">ISBLANK</span>(SelectedYear), <span class="dax-string">"Not selected"</span>,
+    <span class="dax-function">IF</span>(<span class="dax-function">NOT</span> <span class="dax-function">ISBLANK</span>(YoYChange),
+        <span class="dax-function">IF</span>(YoYChange <span class="dax-operator">></span> 0, <span class="dax-string">"∆ "</span>, <span class="dax-string">"∇ "</span>) <span class="dax-operator">&</span> <span class="dax-function">FORMAT</span>(YoYChange, <span class="dax-string">"0.0%"</span>) <span class="dax-operator">&</span> <span class="dax-string">" vs "</span> <span class="dax-operator">&</span> PrevYear,
+        <span class="dax-string">"No data"</span>
+    )
+)</code></pre>
+                                </div>
+                                <ul>
+                                    <li>Created <strong>Bookmark Navigators</strong> and <strong>Page Navigator</strong>.</li>
+                                    <li>Utilized <strong>Fields Parameter</strong> for dynamic chart dimensions (Hospital / Insurance Provider).</li>
+                                    <li>The visual template was built in <strong>PowerPoint</strong>.</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ol>
+                `
+            }
+        };
+
+        const setLocalLanguage = (lang) => {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.dataset.translate;
+                if (translations[lang] && translations[lang][key]) { 
+                    el.innerHTML = translations[lang][key]; 
+                }
+            });
+            if(translations[lang]) {
+                const map = {
+                    'columnsTableBody': 'colsData',
+                    'kpisTableBody': 'kpisData',
+                    'analysisTableBody': 'analysisTableData',
+                    'analysisListBody': 'analysisListData',
+                    'methodologyTableBody': 'methodologyData'
+                };
+                for (const [id, key] of Object.entries(map)) {
+                    const el = document.getElementById(id);
+                    if(el) el.innerHTML = translations[lang][key];
+                }
+            }
+        };
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLocalLanguage(btn.dataset.lang));
+        });
+
+        window.showSection = function(id) {
+            document.querySelectorAll(".info-section").forEach(s => s.classList.remove("active"));
+            document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("is-active"));
+            document.getElementById(id).classList.add("active");
+            document.querySelector(`button[onclick="showSection('${id}')"]`).classList.add("is-active");
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'pl';
+            setLocalLanguage(preferredLanguage);
+
+            const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener("click", () => document.body.classList.toggle("nav-open"));
+                document.querySelectorAll(".mobile-nav-menu a").forEach(t => t.addEventListener("click", () => document.body.classList.remove("nav-open")));
+            }
+            
+            const lenis = new Lenis({
+                duration: 1.5,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: 'vertical',
+                smooth: true,
+                smoothTouch: false,
+                touchMultiplier: 2,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            const lightbox = document.getElementById("lightbox");
+            const openLightbox = (src) => {
+                lightbox.querySelector(".lightbox-image").src = src;
+                lightbox.classList.add("open");
+                lenis.stop();
+            };
+            const closeLightbox = () => {
+                lightbox.classList.remove("open");
+                lenis.start();
+            };
+            
+            document.querySelectorAll(".project-image").forEach(img => {
+                img.addEventListener("click", () => openLightbox(img.src));
+            });
+            lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+            lightbox.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
+
+            document.querySelectorAll(".kpi-card").forEach(t => {
+                t.addEventListener("mousemove", e => {
+                    const o = t.getBoundingClientRect();
+                    t.style.setProperty("--mouse-x", `${e.clientX - o.left}px`);
+                    t.style.setProperty("--mouse-y", `${e.clientY - o.top}px`);
+                });
+            });
+        });
+    </script>
+</BaseLayout>

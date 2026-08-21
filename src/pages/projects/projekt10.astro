@@ -1,0 +1,718 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<BaseLayout title="Projekt: Financial Data Cleaning in Python | Portfolio Jakub Nicpoń">
+    <Navbar />
+
+    <main class="container">
+        <header class="project-hero">
+            <h1 data-translate="heroTitle">Data Cleaning & Analytics in Python</h1>
+            <div class="section-underline centered-underline"></div>
+            <p data-translate="heroDesc">
+                Kompleksowy proces czyszczenia i transformacji danych finansowych przy użyciu biblioteki Pandas.
+                Projekt obejmuje pełen cykl od profilowania surowych i zanieczyszczonych danych transakcyjnych, poprzez 
+                ich standaryzację i naprawę, aż po końcową agregację biznesową wyliczającą portfele inwestorów.
+            </p>
+            <div class="nav-buttons">
+                <a href="#project-details-card" class="btn-nav btn-primary" onclick="showSection('sectionChallenges')" data-translate="btnChallenges">Wyzwania i EDA</a>
+                <a href="#project-details-card" class="btn-nav btn-secondary" onclick="showSection('sectionPython')" data-translate="btnPython">Zobacz Kod Python</a>
+                <a href="#project-details-card" class="btn-nav btn-outline" onclick="showSection('sectionData')" data-translate="btnData">Próbki Danych</a>
+            </div>
+            
+            <div class="hero-image-wrapper">
+                <div class="project-gallery-grid">
+                    <img src="/assets/python_cleaning1.png" alt="Raw Data Snapshot" class="project-image" loading="eager" />
+                    <img src="/assets/python_cleaning2.png" alt="Clean Data Snapshot" class="project-image" loading="lazy" />
+                    <img src="/assets/python_cleaning3.png" alt="Summary Snapshot" class="project-image" loading="lazy" />
+                </div>
+            </div>
+        </header>
+
+        <section class="project-highlights">
+            <h2 data-translate="kpiTitle">Kluczowe Wskaźniki Projektu</h2>
+            <div class="section-underline centered-underline"></div>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <span class="kpi-value" data-translate="kpi1Value">46 ➔ 33</span>
+                    <span class="kpi-label" data-translate="kpi1Label">Rekordy po odrzuceniu szumu</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-value" data-translate="kpi2Value">10</span>
+                    <span class="kpi-label" data-translate="kpi2Label">Ustandaryzowanych Kolumn</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-details">
+            <h2 data-translate="detailsTitle">Szczegóły Projektu</h2>
+            <div class="section-underline centered-underline"></div>
+            
+            <div class="details-card" id="project-details-card">
+                <div class="toggle-buttons">
+                    <button class="toggle-btn is-active" onclick="showSection('sectionChallenges')" data-translate="tabChallenges">Wyzwania i Problemy</button>
+                    <button class="toggle-btn" onclick="showSection('sectionMethodology')" data-translate="tabMethodology">Metodologia</button>
+                    <button class="toggle-btn" onclick="showSection('sectionPython')" data-translate="tabPython">Kod Python</button>
+                    <button class="toggle-btn" onclick="showSection('sectionData')" data-translate="tabData">Próbki Danych</button>
+                </div>
+                
+                <div id="info-sections-container">
+                    
+                    <div id="sectionChallenges" class="info-section active" role="region">
+                        <div class="analysis-grid">
+                            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 1.1rem;" data-translate="challengesIntro">
+                                Surowe dane pochodzące z zewnętrznych systemów transakcyjnych zawierały szereg błędów strukturalnych, technicznych i biznesowych, które uniemożliwiały prowadzenie bezpośrednich analiz wyceny portfela oraz raportowania BI. Wstępna inspekcja profilująca (EDA) wykazała następujące anomalie jakościowe:
+                            </p>
+                            <div class="analysis-conclusions">
+                                <ol id="challengesContentBody"></ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sectionMethodology" class="info-section" role="region">
+                        <div class="table-container-scroll">
+                            <table class="kpi-table">
+                                <thead>
+                                    <tr>
+                                        <th data-translate="methStage">Etap</th>
+                                        <th data-translate="methProcess">Proces</th>
+                                        <th data-translate="methTechniques">Wykorzystane techniki (pandas)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="methodologyContentBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="sectionPython" class="info-section" role="region">
+                        <div class="code-container python-block">
+<pre><code><span class="py-key">import</span> pandas <span class="py-key">as</span> pd
+<span class="py-key">import</span> numpy <span class="py-key">as</span> np
+
+<span class="py-com"># 1. Wczytanie surowych danych</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-obj">df</span> = pd.<span class="py-fun">read_csv</span>(<span class="py-str">'financial_transactions_raw.csv'</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Profilowanie danych'</span>.<span class="py-fun">center</span>(<span class="py-num">50</span>, <span class="py-str">'-'</span>).<span class="py-fun">upper</span>())
+
+<span class="py-com"># 2. Rozmiar zbioru</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">f'Liczba rekordów: &#123;df.shape[0]&#125;, liczba kolumn: &#123;df.shape[1]&#125;'</span>)
+
+<span class="py-com"># 3. Typy danych oraz braki</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Typy danych oraz braki'</span>)
+<span class="py-fun">print</span>(<span class="py-obj">df</span>.<span class="py-fun">info</span>())
+
+<span class="py-com"># 4. Podgląd rekordów</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-obj">df</span>.<span class="py-fun">head</span>())
+
+<span class="py-com"># 5. Analiza wartości null</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Liczba nulli w poszczególnych kolumnach'</span>)
+<span class="py-fun">print</span>(<span class="py-obj">df</span>.<span class="py-fun">isna</span>().<span class="py-fun">sum</span>())
+
+<span class="py-com"># 6. Analiza występywania duplikatów</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">f'Liczba duplikujących się rekordów: &#123;df.duplicated().sum()&#125;'</span>)
+
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Standaryzacja struktury i usunięcie duplikatów'</span>.<span class="py-fun">center</span>(<span class="py-num">50</span>, <span class="py-str">'-'</span>).<span class="py-fun">upper</span>())
+
+<span class="py-com"># 1. Usunięcie skrajnych spacji, zamiana spacji oraz myślników na podłogi, sprowadzenie do małych liter</span>
+<span class="py-fun">print</span>(<span class="py-str">'Usunięcie skrajnych spacji, zamiana spacji i myślników na podłogi, modyfikacja to małych liter'</span>)
+<span class="py-obj">df</span>.<span class="py-obj">columns</span> = (
+    <span class="py-obj">df</span>.<span class="py-obj">columns</span>.<span class="py-obj">str</span>.<span class="py-fun">strip</span>()
+    .<span class="py-obj">str</span>.<span class="py-fun">lower</span>()
+    .<span class="py-obj">str</span>.<span class="py-fun">replace</span>(<span class="py-str">' '</span>, <span class="py-str">'_'</span>)
+    .<span class="py-obj">str</span>.<span class="py-fun">replace</span>(<span class="py-str">'-'</span>, <span class="py-str">'_'</span>)
+)
+<span class="py-fun">print</span>(<span class="py-str">'Ustandaryzowane nazwy kolumn'</span>.<span class="py-fun">center</span>(<span class="py-num">50</span>, <span class="py-str">'-'</span>).<span class="py-fun">upper</span>())
+<span class="py-fun">print</span>(<span class="py-obj">df</span>.<span class="py-obj">columns</span>.<span class="py-fun">to_list</span>())
+
+<span class="py-com"># 2. Usunięcie duplikujących się rekordów</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-obj">wiersze_poczatkowe</span> = <span class="py-fun">len</span>(<span class="py-obj">df</span>)
+<span class="py-obj">df</span> = <span class="py-obj">df</span>.<span class="py-fun">drop_duplicates</span>()
+<span class="py-fun">print</span>(<span class="py-str">f'Usunięto &#123;wiersze_poczatkowe - len(df)&#125; duplikujących się rekordów'</span>)
+
+<span class="py-com"># 3. Usunięcie rekordów bez ID transakcji (klucz główny), bez trans_id niemożliwe jest uzgodnienie sald</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-obj">liczba_brakujacych_id</span> = <span class="py-obj">df</span>[<span class="py-str">'trans_id'</span>].<span class="py-fun">isna</span>().<span class="py-fun">sum</span>()
+<span class="py-obj">df</span> = <span class="py-obj">df</span>.<span class="py-fun">dropna</span>(subset=[<span class="py-str">'trans_id'</span>])
+<span class="py-fun">print</span>(<span class="py-str">f'Usunięte rekordy bez trans_id: &#123;liczba_brakujacych_id&#125;, pozostałe rekordy: &#123;len(df)&#125;'</span>)
+
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Czyszczenie tekstów i mapowanie krajów'</span>.<span class="py-fun">center</span>(<span class="py-num">50</span>, <span class="py-str">'-'</span>).<span class="py-fun">upper</span>())
+
+<span class="py-com"># 1. Czyszczenie danych klienta (client_name)</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Czyszczenie danych klienta -> zamiana pierwszych liter na wielkie, strip spacji'</span>)
+<span class="py-obj">df</span>[<span class="py-str">'client_name'</span>] = <span class="py-obj">df</span>[<span class="py-str">'client_name'</span>].<span class="py-obj">str</span>.<span class="py-fun">strip</span>().<span class="py-obj">str</span>.<span class="py-fun">title</span>().<span class="py-fun">replace</span>([<span class="py-str">'Nan'</span>,<span class="py-str">''</span>], np.<span class="py-obj">nan</span>)
+
+<span class="py-com"># 2. Standaryzacja tickerów</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Standaryzacja tickerów'</span>)
+<span class="py-obj">df</span>[<span class="py-str">'ticker_symbol'</span>] = <span class="py-obj">df</span>[<span class="py-str">'ticker_symbol'</span>].<span class="py-obj">str</span>.<span class="py-fun">strip</span>().<span class="py-obj">str</span>.<span class="py-fun">upper</span>().<span class="py-fun">replace</span>([<span class="py-str">'NAN'</span>,<span class="py-str">''</span>], np.<span class="py-obj">nan</span>)
+
+<span class="py-com"># 3. Ujednolicenie klas aktywów</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Strip spacji i ujednolicenie wariantów'</span>)
+<span class="py-obj">df</span>[<span class="py-str">"asset_class"</span>] = <span class="py-obj">df</span>[<span class="py-str">"asset_class"</span>].<span class="py-obj">str</span>.<span class="py-fun">strip</span>().<span class="py-obj">str</span>.<span class="py-fun">title</span>()
+<span class="py-obj">aktywa_zamiana</span> = &#123;
+    <span class="py-str">"Fixed_Income"</span>: <span class="py-str">"Fixed Income"</span>,
+    <span class="py-str">"Crypto"</span>: <span class="py-str">"Cryptocurrency"</span>,
+    <span class="py-str">"Nan"</span>: np.<span class="py-obj">nan</span>,
+&#125;
+<span class="py-obj">df</span>[<span class="py-str">"asset_class"</span>] = <span class="py-obj">df</span>[<span class="py-str">"asset_class"</span>].<span class="py-fun">replace</span>(<span class="py-obj">aktywa_zamiana</span>)
+
+<span class="py-com"># 4. Standaryzacja kodów krajów na ISO</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Ujednolicenie kodów ISO dla krajów'</span>)
+<span class="py-obj">kraje_mapowanie</span> = &#123;
+    <span class="py-str">"Poland"</span>: <span class="py-str">"PL"</span>,
+    <span class="py-str">"POL"</span>: <span class="py-str">"PL"</span>,
+    <span class="py-str">"USA"</span>: <span class="py-str">"US"</span>,
+    <span class="py-str">"United Kingdom"</span>: <span class="py-str">"UK"</span>,
+    <span class="py-str">"Germany"</span>: <span class="py-str">"DE"</span>,
+    <span class="py-str">"Italy"</span>: <span class="py-str">"IT"</span>,
+    <span class="py-str">"France"</span>: <span class="py-str">"FR"</span>,
+    <span class="py-str">"Sweden"</span>: <span class="py-str">"SE"</span>,
+&#125;
+<span class="py-obj">df</span>[<span class="py-str">'country'</span>] = <span class="py-obj">df</span>[<span class="py-str">'country'</span>].<span class="py-obj">str</span>.<span class="py-fun">strip</span>().<span class="py-fun">replace</span>(<span class="py-obj">kraje_mapowanie</span>).<span class="py-fun">replace</span>([<span class="py-str">'nan'</span>,<span class="py-str">''</span>], np.<span class="py-obj">nan</span>)
+
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Czyszczenie i konwersja danych numerycznych'</span>.<span class="py-fun">center</span>(<span class="py-num">50</span>, <span class="py-str">'-'</span>).<span class="py-fun">upper</span>())
+
+<span class="py-com"># 1. Czyszczenie i konwersja 'volume' (Wolumen transakcji)</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Usunięcie przecinków (1,000 -> 1000) oraz strip nadmiarowych spacji'</span>)
+<span class="py-obj">df</span>[<span class="py-str">"volume"</span>] = <span class="py-obj">df</span>[<span class="py-str">"volume"</span>].<span class="py-fun">astype</span>(<span class="py-obj">str</span>).<span class="py-obj">str</span>.<span class="py-fun">replace</span>(<span class="py-str">","</span>, <span class="py-str">""</span>).<span class="py-obj">str</span>.<span class="py-fun">strip</span>()
+<span class="py-fun">print</span>(<span class="py-str">'Zamiana liczb w postaci string na numeric'</span>)
+<span class="py-obj">df</span>[<span class="py-str">"volume"</span>] = pd.<span class="py-fun">to_numeric</span>(<span class="py-obj">df</span>[<span class="py-str">"volume"</span>])
+<span class="py-fun">print</span>(<span class="py-str">'Wolumen musi byc dodatni, więc zamiana w przypadku błędów przy pomocy abs()'</span>)
+<span class="py-obj">df</span>[<span class="py-str">"volume"</span>] = <span class="py-obj">df</span>[<span class="py-str">"volume"</span>].<span class="py-fun">abs</span>()
+
+<span class="py-com"># 2. Czyszczenie i konwersja 'price_per_share'</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Usunięcie wszystkiego oprócz cyfr, kropek i minusów (np. $150.50 -> 150.50 albo 120.50 EUR -> 120.50'</span>)
+<span class="py-obj">df</span>[<span class="py-str">'price_per_share'</span>] = (
+    <span class="py-obj">df</span>[<span class="py-str">'price_per_share'</span>]
+    .<span class="py-obj">str</span>.<span class="py-fun">replace</span>(<span class="py-str">r'[^\d.-]'</span>, <span class="py-str">''</span>, regex=<span class="py-key">True</span>)
+    .<span class="py-obj">str</span>.<span class="py-fun">strip</span>()
+)
+<span class="py-com"># Konwersja na typ float ze string</span>
+<span class="py-obj">df</span>[<span class="py-str">'price_per_share'</span>] = pd.<span class="py-fun">to_numeric</span>(<span class="py-obj">df</span>[<span class="py-str">'price_per_share'</span>])
+
+<span class="py-com"># Cena nie może być ujemna ani = 0, zamiana <= 0 na NaN żeby poźniej zweryfikować/usunąć</span>
+<span class="py-obj">df</span>.<span class="py-obj">loc</span>[<span class="py-obj">df</span>[<span class="py-str">'price_per_share'</span>] <= <span class="py-num">0</span>, <span class="py-str">'price_per_share'</span>] = np.<span class="py-obj">nan</span>
+
+<span class="py-com"># 3. Czyszczenie i konwersja 'commission_fee'</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Prowizja jako koszt, nie może być ujemna -> zamiana wartości bezweględnej przez abs()'</span>)
+<span class="py-obj">df</span>[<span class="py-str">'commission_fee'</span>] = <span class="py-obj">df</span>[<span class="py-str">'commission_fee'</span>].<span class="py-fun">abs</span>()
+<span class="py-fun">print</span>(<span class="py-str">'Brak wpisu o prowizji może oznaczać transakcje bezprowizyjną'</span>)
+<span class="py-obj">df</span>[<span class="py-str">'commission_fee'</span>] = <span class="py-obj">df</span>[<span class="py-str">'commission_fee'</span>].<span class="py-fun">fillna</span>(<span class="py-num">0.0</span>)
+
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Daty, kalkulacje finansowe i zapis pliku'</span>.<span class="py-fun">center</span>(<span class="py-num">50</span>, <span class="py-str">'-'</span>).<span class="py-fun">upper</span>())
+
+<span class="py-com"># 1. Standaryzacja niespójnych formatów dat</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Wykorzystanie pd.to_datetime z formatem =mixed aby obsłużyć jednocześnie różne formatowania dat oraz errors=coerce w celu zamiany ciągów tekstowych typu invalid_date na NaT'</span>)
+<span class="py-obj">df</span>[<span class="py-str">'trade_date'</span>]=pd.<span class="py-fun">to_datetime</span>(
+    <span class="py-obj">df</span>[<span class="py-str">'trade_date'</span>], format=<span class="py-str">'mixed'</span>, errors=<span class="py-str">'coerce'</span>)
+
+<span class="py-fun">print</span>(<span class="py-str">'Transakcje bez daty uznajemy za bezwartościowe audytowo, usuwamy je z uwzględnieniem copy()'</span>)
+<span class="py-obj">df</span> = <span class="py-obj">df</span>.<span class="py-fun">dropna</span>(subset=[<span class="py-str">'trade_date'</span>].<span class="py-fun">copy</span>())
+
+<span class="py-fun">print</span>(<span class="py-str">'Standaryzacja formatu dat na YYYY-MM-DD'</span>)
+<span class="py-obj">df</span>[<span class="py-str">'trade_date'</span>] = <span class="py-obj">df</span>[<span class="py-str">'trade_date'</span>].<span class="py-obj">dt</span>.<span class="py-fun">strftime</span>(<span class="py-str">'%Y-%m-%d'</span>)
+
+<span class="py-com"># 2. Stworzenie nowej kolumny total_value</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Dodanie kolumny total_value -> wartość transakcji brutto -> (wolumen * cena za akcję) + prowizja'</span>)
+<span class="py-fun">print</span>(<span class="py-str">'total_values'</span>)
+<span class="py-obj">df</span>[<span class="py-str">'total_value'</span>] = (<span class="py-obj">df</span>[<span class="py-str">'volume'</span>] * <span class="py-obj">df</span>[<span class="py-str">'price_per_share'</span>]) + <span class="py-obj">df</span>[<span class="py-str">'commission_fee'</span>]
+<span class="py-obj">df</span>[<span class="py-str">'total_value'</span>] = <span class="py-obj">df</span>[<span class="py-str">'total_value'</span>].<span class="py-fun">round</span>(<span class="py-num">2</span>)
+<span class="py-fun">print</span>(<span class="py-obj">df</span>[<span class="py-str">'total_value'</span>].<span class="py-fun">to_string</span>())
+
+<span class="py-com"># 3. Czyszczenie pozostałych wartości brakujących</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Czyszczenie pozostałych NaN -> w kolumnach krytycznych t.j. client_name, price_per_share, ticker_symbol -> brak danych uniemożliwia dalszą analizę'</span>)
+<span class="py-obj">df</span> = <span class="py-obj">df</span>.<span class="py-fun">dropna</span>(subset=[<span class="py-str">'client_name'</span>, <span class="py-str">'price_per_share'</span>, <span class="py-str">'ticker_symbol'</span>]).<span class="py-fun">copy</span>()
+
+<span class="py-com"># 4. Zmiana kolejności kolumn</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Zmiana kolejności kolumn'</span>)
+<span class="py-obj">kolejnosc_kolumn</span> = [
+    <span class="py-str">'trans_id'</span>,
+    <span class="py-str">'trade_date'</span>,
+    <span class="py-str">'client_name'</span>,
+    <span class="py-str">'country'</span>,
+    <span class="py-str">'asset_class'</span>,
+    <span class="py-str">'ticker_symbol'</span>,
+    <span class="py-str">'volume'</span>,
+    <span class="py-str">'price_per_share'</span>,
+    <span class="py-str">'commission_fee'</span>,
+    <span class="py-str">'total_value'</span>
+]
+<span class="py-fun">print</span>(<span class="py-str">'Nowa kolejność kolumn'</span>)
+<span class="py-obj">df</span> = <span class="py-obj">df</span>[<span class="py-obj">kolejnosc_kolumn</span>]
+
+<span class="py-com"># 5. Podsumowanie końcowe czyszczenia i eksport do CSV</span>
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Inspekcja całego zbioru po czyszczeniu'</span>)
+<span class="py-fun">print</span>(<span class="py-obj">df</span>.<span class="py-fun">info</span>())
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Podgląd pierwszych 5 rekordów po czyszczeniu'</span>)
+<span class="py-fun">print</span>(<span class="py-obj">df</span>.<span class="py-fun">head</span>().<span class="py-fun">to_string</span>())
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">f'Suma wartości brakujących po czyszczeniu \n &#123;df.isna().sum()&#125;'</span>)
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-obj">df</span>.<span class="py-fun">to_csv</span>(<span class="py-str">"clean_financial_transactions.csv"</span>, index=<span class="py-key">False</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Plik clean_financial_transactions.csv został pomyślnie zapisany'</span>)
+
+
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Agregacja danych i proste podsumowanie danych per inwestor'</span>.<span class="py-fun">center</span>(<span class="py-num">50</span>, <span class="py-str">'-'</span>).<span class="py-fun">upper</span>())
+
+<span class="py-com"># 1. Agregacja kluczowych wskaźników per inwestor</span>
+<span class="py-obj">client_summary</span> = (
+    <span class="py-obj">df</span>.<span class="py-fun">groupby</span>(<span class="py-str">'client_name'</span>)
+    .<span class="py-fun">agg</span>(
+        total_invested=(<span class="py-str">'total_value'</span>, <span class="py-str">'sum'</span>),
+        avg_trade_size=(<span class="py-str">'total_value'</span>, <span class="py-str">'mean'</span>),
+        trade_count=(<span class="py-str">'trans_id'</span>, <span class="py-str">'count'</span>)
+    )
+    .<span class="py-fun">round</span>(<span class="py-num">2</span>)
+    .<span class="py-fun">reset_index</span>()
+    .<span class="py-fun">sort_values</span>(by=<span class="py-str">'total_invested'</span>, ascending=<span class="py-key">False</span>)
+)
+
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Raport per inwestor'</span>)
+<span class="py-fun">print</span>(<span class="py-obj">client_summary</span>.<span class="py-fun">to_string</span>(index=<span class="py-key">False</span>))
+<span class="py-fun">print</span>(<span class="py-str">'===================================='</span>)
+<span class="py-obj">client_summary</span>.<span class="py-fun">to_csv</span>(<span class="py-str">"financial_transaction_per_investor.csv"</span>, index=<span class="py-key">False</span>)
+<span class="py-fun">print</span>(<span class="py-str">'Plik financial_transaction_per_investor.csv został pomyślnie zapisany'</span>)</code></pre>
+                        </div>
+                    </div>
+
+                    <div id="sectionData" class="info-section" role="region">
+                        <div id="dataContentBody"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="project-files">
+            <h2 data-translate="downloadTitle">Pobierz Zasoby Projektu</h2>
+            <div class="section-underline centered-underline"></div>
+            <div class="files-container">
+                <a href="/assets/financial_transactions_raw.csv" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadRaw">Surowe dane (CSV)</span></a>
+                <a href="/assets/clean_financial_transactions.csv" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadClean">Wyczyszczone dane (CSV)</span></a>
+                <a href="/assets/financial_transaction_per_investor.csv" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadReport">Raport końcowy (CSV)</span></a>
+                <a href="/assets/finance_data_cleaning.py" download class="gradient__border__container"><span class="gradient__border__text" data-translate="btnDownloadPy">Skrypt Python (.py)</span></a>
+            </div>
+        </section>
+
+    </main>
+
+    <Footer />
+
+    <style>
+        /* === STYLE SPECYFICZNE DLA STRONY PROJEKTU === */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1;}
+        .section-underline { margin: 20px 0 30px 0; width: 80px; height: 4px; border-radius: 2px; background: var(--line-gradient); }
+        .centered-underline { margin: 20px auto 30px auto; }
+
+        /* HERO SECTION */
+        .project-hero { 
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 120px 0 50px 0;
+        }
+        .project-hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; color: var(--text-primary); }
+        .project-hero p { max-width: 850px; color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px; }
+
+        .nav-buttons { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+        .btn-nav { padding: 14px 28px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; border: 1px solid var(--cyan); font-size: 0.95rem; display: inline-block; cursor: pointer; }
+        .btn-primary { background: var(--line-gradient); color: white; border: none; box-shadow: 0 4px 15px var(--spotlight-color); }
+        .btn-secondary { color: var(--cyan); background: var(--bg-surface); border-color: var(--cyan); }
+        .btn-outline { color: var(--text-primary); border: 1px solid var(--border-color); background: var(--bg-surface); }
+        .btn-nav:hover { transform: translateY(-3px); box-shadow: 0 10px 20px var(--spotlight-color); }
+        .btn-outline:hover { background: var(--hover-bg); border-color: var(--cyan); color: var(--cyan); }
+
+        .hero-image-wrapper { perspective: 1000px; margin-top: 50px; width: 100%;}
+        .project-image { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: var(--card-shadow); cursor: pointer; border: 1px solid var(--border-color); transition: transform 0.3s ease, border-color 0.3s ease; }
+        .project-image:hover { transform: scale(1.05) rotateY(-5deg) rotateX(5deg); border-color: var(--cyan); }
+        
+        .project-gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        
+        /* KPI SECTION */
+        .project-highlights { padding: 60px 0; z-index: 1; position: relative;}
+        .project-highlights h2, .project-details h2, .project-files h2 { text-align: center; font-size: 2.5rem; font-weight: 700; background: var(--line-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; margin-top: 50px; justify-content: center; }
+        
+        .kpi-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 15px; padding: 30px; text-align: center; position: relative; overflow: visible; backdrop-filter: blur(10px); transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, transform 0.3s ease;}
+        .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--spotlight-color), transparent 50%); opacity: 0; transition: opacity 0.3s; border-radius: 15px; pointer-events: none; z-index: 0; }
+        .kpi-card > * { position: relative; z-index: 1; }
+        .kpi-card:hover { transform: translateY(-8px) scale(1.03); border-color: var(--cyan); box-shadow: var(--card-shadow); }
+        .kpi-card:hover::before { opacity: 1; }
+        
+        .kpi-value { display: block; font-size: 2.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+        .kpi-label { font-size: 1rem; color: var(--text-secondary); }
+
+        /* DETAILS SECTION (TABS) */
+        .project-details { padding: 60px 0; z-index: 1; position: relative;}
+        .details-card { background: var(--bg-surface); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--card-shadow); transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+        
+        .toggle-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px; }
+        .toggle-btn { appearance: none; background: var(--btn-bg); border: 1px solid var(--border-color); color: var(--text-secondary); font-weight: 600; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 12px 24px; border-radius: 12px; cursor: pointer; transition: all .2s ease;}
+        .toggle-btn:hover { color: var(--text-primary); border-color: var(--cyan); transform: translateY(-2px); }
+        .toggle-btn.is-active { background: var(--line-gradient); color: white; border-color: transparent; transform: scale(1.05); box-shadow: 0 5px 15px var(--spotlight-color); }
+        
+        .info-section { display: none; margin-top: 20px; padding-top: 30px; border-top: 1px solid var(--border-color); }
+        .info-section.active { display: block; animation: fadeIn .4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Style dla sekcji Wyzwań i Tabel (Dynamiczne) */
+        .analysis-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
+        :global(.analysis-conclusions ol) { list-style: none; padding-left: 0; counter-reset: conclusion-counter; }
+        :global(.analysis-conclusions li) { position: relative; padding-left: 45px; margin-bottom: 25px; background: rgba(255,255,255,0.02); padding: 25px 25px 25px 65px; border-radius: 12px; border: 1px solid var(--border-color); }
+        :global(.analysis-conclusions li::before) { counter-increment: conclusion-counter; content: counter(conclusion-counter); position: absolute; left: 15px; top: 25px; width: 35px; height: 35px; border-radius: 50%; background: var(--line-gradient); color: white; font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px var(--spotlight-color);}
+        :global(.analysis-conclusions strong) { display: block; margin-bottom: 5px; color: var(--text-primary); font-size: 1.1rem; }
+        :global(.analysis-conclusions p) { color: var(--text-secondary); font-size: 0.95rem; margin: 0; }
+
+        :global(.kpi-table) { width: 100%; border-collapse: collapse; table-layout: auto; }
+        :global(.kpi-table th), :global(.kpi-table td) { padding: 14px 15px; border-bottom: 1px solid var(--border-color); text-align: left; }
+        :global(.kpi-table tr:last-child td) { border-bottom: none; }
+        :global(.kpi-table thead th) { font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+        :global(.kpi-table td) { color: var(--text-secondary); font-family: 'Consolas', monospace; font-size: 0.9rem; }
+        
+        :global(.table-container-scroll) { overflow-x: auto; border: 1px solid var(--border-color); border-radius: 12px; background: var(--code-bg); margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+        /* === PYTHON CODE BLOCKS === */
+        :global(.code-container) { background: var(--code-bg); border-radius: 12px; border: 1px solid var(--border-color); padding: 25px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative;}
+        [data-theme="light"] :global(.code-container) { box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); }
+        :global(.code-container.python-block::before) { content: 'PYTHON'; position: absolute; top: 12px; right: 20px; font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.3); }
+        :global(pre) { overflow-x: auto; font-family: 'Consolas', 'Courier New', monospace; color: #c9d1d9; font-size: 0.95rem; margin: 0; }
+        
+        /* Python Syntax Highlighting */
+        :global(.py-key) { color: #ff7b72; font-weight: 600;} /* import, as, print */
+        :global(.py-fun) { color: #d2a8ff; } /* print, dropna, etc */
+        :global(.py-str) { color: #a5d6a7; } /* 'strings' */
+        :global(.py-com) { color: #8b949e; font-style: italic; } /* # comments */
+        :global(.py-num) { color: #79c0ff; } /* numbers */
+        :global(.py-obj) { color: #ffab70; } /* df, pd, np */
+
+        /* === DOWNLOADS === */
+        .project-files { padding: 20px 0; z-index: 1; position: relative;}
+        .files-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 50px; }
+        .gradient__border__container { display: inline-block; position: relative; padding: 1px; border-radius: 30px; background: var(--line-gradient); background-size: 200% 200%; animation: spin-gradient 6s linear infinite; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; min-width: 150px; text-align: center; text-decoration: none; box-shadow: 0 4px 20px var(--spotlight-color); }
+        .gradient__border__container:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--spotlight-color); }
+        .gradient__border__container .gradient__border__text { display: block; background: var(--bg-surface); border-radius: 29px; padding: 0.8rem 2rem; font-size: 1rem; font-weight: 600; color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+        .gradient__border__container:hover .gradient__border__text { background: transparent; color: #fff;}
+        @keyframes spin-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        @media (max-width: 900px) {
+            .project-hero h1 { font-size: 2.5rem; }
+            .nav-buttons { flex-direction: column; width: 100%; }
+            .project-gallery-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) { 
+            :global(.analysis-conclusions li) { padding: 20px 15px 20px 15px; } 
+            :global(.analysis-conclusions li::before) { top: -15px; left: 15px;} 
+        }
+    </style>
+
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', () => {
+            // === SYSTEM TŁUMACZEŃ (PL/EN) ===
+            const translations = {
+                pl: {
+                    pageTitle: "Projekt: Financial Data Cleaning in Python | Portfolio Jakub Nicpoń",
+                    navHome: "Home",
+                    navAbout: "O Mnie",
+                    navProjects: "Projekty",
+                    heroTitle: "Data Cleaning & Analytics in Python",
+                    heroDesc: "Kompleksowy proces czyszczenia i transformacji danych finansowych przy użyciu biblioteki Pandas. Projekt obejmuje pełen cykl od profilowania surowych i zanieczyszczonych danych transakcyjnych, poprzez ich standaryzację i naprawę, aż po końcową agregację biznesową wyliczającą portfele inwestorów.",
+                    
+                    btnChallenges: "Wyzwania i EDA",
+                    btnPython: "Zobacz Kod Python",
+                    btnData: "Próbki Danych",
+                    
+                    kpiTitle: "Kluczowe Wskaźniki Projektu",
+                    kpi1Value: "46 ➔ 33",
+                    kpi1Label: "Rekordy po odrzuceniu szumu",
+                    kpi2Value: "10",
+                    kpi2Label: "Ustandaryzowanych Kolumn",
+                    
+                    detailsTitle: "Szczegóły Projektu",
+                    tabChallenges: "Wyzwania i Problemy",
+                    tabMethodology: "Metodologia",
+                    tabPython: "Kod Python",
+                    tabData: "Próbki Danych",
+                    
+                    downloadTitle: "Pobierz Zasoby Projektu",
+                    btnDownloadRaw: "Surowe dane (CSV)",
+                    btnDownloadClean: "Wyczyszczone dane (CSV)",
+                    btnDownloadReport: "Raport końcowy (CSV)",
+                    btnDownloadPy: "Skrypt Python (.py)",
+
+                    challengesIntro: "Surowe dane pochodzące z zewnętrznych systemów transakcyjnych zawierały szereg błędów strukturalnych, technicznych i biznesowych, które uniemożliwiały prowadzenie bezpośrednich analiz wyceny portfela oraz raportowania BI. Wstępna inspekcja profilująca (EDA) wykazała następujące anomalie jakościowe:",
+                    
+                    methStage: "Etap",
+                    methProcess: "Proces",
+                    methTechniques: "Wykorzystane techniki / Metody pandas",
+
+                    challengesContent: `
+                        <li><strong>Struktura i integracja</strong><p>Niespójne nazewnictwo kolumn (spacje, duże/małe litery, znaki specjalne) oraz obecność rekordów pozbawionych klucza głównego (trans_id).</p></li>
+                        <li><strong>Duplikaty</strong><p>Występowanie pełnych powtórzeń wierszy powstałych w wyniku błędów wczytywania systemowego.</p></li>
+                        <li><strong>Anomalie tekstowe</strong><p>Niewidoczne spacje brzegowe (" AAPL "), niespójna wielkość liter ("jan kowalski" vs "JAN KOWALSKI"), mieszany zapis klas aktywów i tickerów.</p></li>
+                        <li><strong>Niespójne kody geolokalizacyjne</strong><p>Brak standaryzacji nazw krajów ("Poland", "POL", "PL").</p></li>
+                        <li><strong>Zanieczyszczenia danych numerycznych</strong><p>Znaki walut oraz teksty wewnątrz pól liczbowych ("$150.50", "100.25 PLN", "UNK"), wartości ujemne w wolumenie transakcji i prowizjach oraz błędne formatowanie separatorów tysięcznych ("1,000").</p></li>
+                        <li><strong>Chaos w formatowaniu dat</strong><p>Łączenie formatów ISO (YYYY-MM-DD), europejskich (DD/MM/YYYY) oraz wpisów błędnych ("INVALID_DATE").</p></li>
+                    `,
+
+                    methodologyContent: `
+                        <tr><td>1. Profilowanie (EDA)</td><td>Analiza wymiarów, rozkładu typów danych i skali braków (NaN).</td><td><code>shape, info(), head(), isna().sum(), duplicated()</code></td></tr>
+                        <tr><td>2. Standaryzacja struktury</td><td>Normalizacja nazw kolumn do snake_case, usunięcie duplikatów i uszkodzonych ID.</td><td><code>str.lower(), drop_duplicates(), dropna(subset=['trans_id'])</code></td></tr>
+                        <tr><td>3. Czyszczenie tekstów</td><td>Usunięcie spacji, standaryzacja rejestru liter oraz mapowanie słownikowe krajów do ISO.</td><td><code>.str.strip(), .str.title(), .str.upper(), .replace(country_map)</code></td></tr>
+                        <tr><td>4. Transformacja numeryczna</td><td>Ekstrakcja czystych liczb (Regex), konwersja typów, korekta znaków ujemnych.</td><td><code>re.sub(), pd.to_numeric(errors='coerce'), .abs(), .fillna()</code></td></tr>
+                        <tr><td>5. Parsowanie dat & Feature Eng.</td><td>Konwersja niespójnych dat do ISO 8601 oraz wyliczenie wartości brutto transakcji (total_value).</td><td><code>pd.to_datetime(format='mixed'), .dt.strftime()</code>, Obliczenia wektorowe</td></tr>
+                        <tr><td>6. Agregacja zarządcza</td><td>Grupowanie wskaźników KPI per inwestor i eksport raportów końcowych.</td><td><code>groupby(), .agg(), to_csv(index=False)</code></td></tr>
+                    `,
+
+                    dataContent: `
+                        <h3 style="color: var(--cyan); margin-bottom: 10px;">1. Brudne dane (Przed czyszczeniem)</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px;">Zwróć uwagę na znaki walut w kwotach, dziwne daty, literówki oraz wielkość znaków.</p>
+                        <div class="table-container-scroll">
+                            <table class="kpi-table">
+                                <thead><tr><th>Trans_ID</th><th>Trade Date</th><th>Client Name</th><th>Asset Class</th><th>Ticker Symbol</th><th>Volume</th><th>Price_Per_Share</th><th>Commission_Fee</th><th>Country</th></tr></thead>
+                                <tbody>
+                                    <tr><td>TXN-1000</td><td>2025-01-15</td><td>  Jan Kowalski </td><td>Equity</td><td>AAPL</td><td>100</td><td>$150.50</td><td>12.5</td><td>PL</td></tr>
+                                    <tr><td>TXN-1001</td><td>15/01/2025</td><td>jan kowalski</td><td>ETF</td><td> VWCE.DE </td><td>50</td><td>115.20 EUR</td><td>0.0</td><td>Poland</td></tr>
+                                    <tr><td>TXN-1002</td><td>2025/02/20</td><td>Anna Nowak</td><td>Fixed Income</td><td>MSFT</td><td>"1,000"</td><td>100.25 PLN</td><td>15.0</td><td>USA</td></tr>
+                                    <tr><td>TXN-1003</td><td>2025-03-01</td><td>ANNA NOWAK</td><td>Crypto</td><td>BTC-USD</td><td>-10</td><td>-50.0</td><td>-5.0</td><td>US</td></tr>
+                                    <tr><td>NaN</td><td>INVALID_DATE</td><td>Piotr Wiśniewski</td><td>ETF</td><td>SPY</td><td>200.5</td><td>UNK</td><td>NaN</td><td>DE</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 style="color: var(--cyan); margin-bottom: 10px; margin-top: 40px;">2. Czyste dane (Po przetworzeniu)</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px;">Standaryzacja tekstu, oczyszczone liczby, poprawione daty oraz nowa kolumna obliczeniowa <code>total_value</code>.</p>
+                        <div class="table-container-scroll">
+                            <table class="kpi-table">
+                                <thead><tr><th>trans_id</th><th>trade_date</th><th>client_name</th><th>country</th><th>asset_class</th><th>ticker_symbol</th><th>volume</th><th>price_per_share</th><th>commission_fee</th><th>total_value</th></tr></thead>
+                                <tbody>
+                                    <tr><td>TXN-1000</td><td>2025-01-15</td><td>Jan Kowalski</td><td>PL</td><td>Equity</td><td>AAPL</td><td>100.0</td><td>150.5</td><td>12.5</td><td>15062.5</td></tr>
+                                    <tr><td>TXN-1001</td><td>2025-01-15</td><td>Jan Kowalski</td><td>PL</td><td>Etf</td><td>VWCE.DE</td><td>50.0</td><td>115.2</td><td>0.0</td><td>5760.0</td></tr>
+                                    <tr><td>TXN-1002</td><td>2025-02-20</td><td>Anna Nowak</td><td>US</td><td>Fixed Income</td><td>MSFT</td><td>1000.0</td><td>100.25</td><td>15.0</td><td>100265.0</td></tr>
+                                    <tr><td>TXN-1006</td><td>2025-01-15</td><td>Jan Kowalski</td><td>PL</td><td>Equity</td><td>NVDA</td><td>100.0</td><td>120.5</td><td>12.5</td><td>12062.5</td></tr>
+                                    <tr><td>TXN-1007</td><td>2025-01-18</td><td>Tomasz Wiśniewski</td><td>PL</td><td>Etf</td><td>QQQ</td><td>150.0</td><td>480.0</td><td>10.0</td><td>72010.0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 style="color: var(--cyan); margin-bottom: 10px; margin-top: 40px;">3. Agregacja per inwestor (Raport końcowy)</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px;">Dane pogrupowane po inwestorach (<code>groupby</code>), pokazujące wartość portfela inwestycyjnego.</p>
+                        <div class="table-container-scroll">
+                            <table class="kpi-table">
+                                <thead><tr><th>client_name</th><th>total_invested</th><th>avg_trade_size</th><th>trade_count</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Sven Svensson</td><td>329540.0</td><td>109846.67</td><td>3</td></tr>
+                                    <tr><td>Maria Dąbrowska</td><td>185768.0</td><td>92884.0</td><td>2</td></tr>
+                                    <tr><td>Marco Rossi</td><td>184586.0</td><td>92293.0</td><td>2</td></tr>
+                                    <tr><td>Michał Zieliński</td><td>178785.0</td><td>89392.5</td><td>2</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    `
+                },
+                en: {
+                    pageTitle: "Project: Financial Data Cleaning in Python | Jakub Nicpoń",
+                    navHome: "Home",
+                    navAbout: "About Me",
+                    navProjects: "Projects",
+                    heroTitle: "Data Cleaning & Analytics in Python",
+                    heroDesc: "A comprehensive financial data cleaning and transformation pipeline using the Pandas library. The project covers the full cycle from profiling raw and dirty transaction data, through its standardization and repair, to the final business aggregation calculating investors' portfolios.",
+                    
+                    btnChallenges: "Challenges & EDA",
+                    btnPython: "View Python Code",
+                    btnData: "Data Samples",
+                    
+                    kpiTitle: "Key Project Indicators",
+                    kpi1Value: "46 ➔ 33",
+                    kpi1Label: "Records after noise reduction",
+                    kpi2Value: "10",
+                    kpi2Label: "Standardized Columns",
+                    
+                    detailsTitle: "Project Details",
+                    tabChallenges: "Challenges & Issues",
+                    tabMethodology: "Methodology",
+                    tabPython: "Python Code",
+                    tabData: "Data Samples",
+                    
+                    downloadTitle: "Download Project Resources",
+                    btnDownloadRaw: "Raw Data (CSV)",
+                    btnDownloadClean: "Clean Data (CSV)",
+                    btnDownloadReport: "Final Report (CSV)",
+                    btnDownloadPy: "Python Script (.py)",
+
+                    challengesIntro: "Raw data from external transaction systems contained a series of structural, technical, and business errors that prevented direct portfolio valuation analysis and BI reporting. Initial Exploratory Data Analysis (EDA) revealed the following quality anomalies:",
+                    
+                    methStage: "Stage",
+                    methProcess: "Process",
+                    methTechniques: "Utilized techniques (pandas)",
+
+                    challengesContent: `
+                        <li><strong>Structure and Integration</strong><p>Inconsistent column naming (spaces, upper/lowercase, special characters) and presence of records missing the primary key (trans_id).</p></li>
+                        <li><strong>Duplicates</strong><p>Occurrence of full row repetitions resulting from system loading errors.</p></li>
+                        <li><strong>Text Anomalies</strong><p>Invisible trailing spaces (" AAPL "), inconsistent casing ("john doe" vs "JOHN DOE"), mixed representation of asset classes and tickers.</p></li>
+                        <li><strong>Inconsistent Geolocation Codes</strong><p>Lack of standardization in country names ("Poland", "POL", "PL").</p></li>
+                        <li><strong>Numerical Data Pollution</strong><p>Currency signs and text inside numeric fields ("$150.50", "100.25 PLN", "UNK"), negative values in transaction volume and commissions, and incorrect formatting of thousands separators ("1,000").</p></li>
+                        <li><strong>Date Formatting Chaos</strong><p>Mixing ISO formats (YYYY-MM-DD), European formats (DD/MM/YYYY), and erroneous entries ("INVALID_DATE").</p></li>
+                    `,
+
+                    methodologyContent: `
+                        <tr><td>1. Profiling (EDA)</td><td>Dimensional analysis, data type distribution, and missing values (NaN) scale.</td><td><code>shape, info(), head(), isna().sum(), duplicated()</code></td></tr>
+                        <tr><td>2. Structure Standardization</td><td>Normalizing column names to snake_case, removing duplicates and broken IDs.</td><td><code>str.lower(), drop_duplicates(), dropna(subset=['trans_id'])</code></td></tr>
+                        <tr><td>3. Text Cleaning</td><td>Removing spaces, case standardization, and dictionary mapping of countries to ISO.</td><td><code>.str.strip(), .str.title(), .str.upper(), .replace(country_map)</code></td></tr>
+                        <tr><td>4. Numerical Transformation</td><td>Extracting clean numbers (Regex), type conversion, negative sign correction.</td><td><code>re.sub(), pd.to_numeric(errors='coerce'), .abs(), .fillna()</code></td></tr>
+                        <tr><td>5. Date Parsing & Feature Eng.</td><td>Converting inconsistent dates to ISO 8601 and calculating gross transaction value (total_value).</td><td><code>pd.to_datetime(format='mixed'), .dt.strftime()</code>, Vectorized operations</td></tr>
+                        <tr><td>6. Management Aggregation</td><td>Grouping KPI metrics per investor and exporting final reports.</td><td><code>groupby(), .agg(), to_csv(index=False)</code></td></tr>
+                    `,
+
+                    dataContent: `
+                        <h3 style="color: var(--cyan); margin-bottom: 10px;">1. Dirty Data (Before Cleaning)</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px;">Note the currency signs in amounts, weird dates, typos, and inconsistent casing.</p>
+                        <div class="table-container-scroll">
+                            <table class="kpi-table">
+                                <thead><tr><th>Trans_ID</th><th>Trade Date</th><th>Client Name</th><th>Asset Class</th><th>Ticker Symbol</th><th>Volume</th><th>Price_Per_Share</th><th>Commission_Fee</th><th>Country</th></tr></thead>
+                                <tbody>
+                                    <tr><td>TXN-1000</td><td>2025-01-15</td><td>  Jan Kowalski </td><td>Equity</td><td>AAPL</td><td>100</td><td>$150.50</td><td>12.5</td><td>PL</td></tr>
+                                    <tr><td>TXN-1001</td><td>15/01/2025</td><td>jan kowalski</td><td>ETF</td><td> VWCE.DE </td><td>50</td><td>115.20 EUR</td><td>0.0</td><td>Poland</td></tr>
+                                    <tr><td>TXN-1002</td><td>2025/02/20</td><td>Anna Nowak</td><td>Fixed Income</td><td>MSFT</td><td>"1,000"</td><td>100.25 PLN</td><td>15.0</td><td>USA</td></tr>
+                                    <tr><td>TXN-1003</td><td>2025-03-01</td><td>ANNA NOWAK</td><td>Crypto</td><td>BTC-USD</td><td>-10</td><td>-50.0</td><td>-5.0</td><td>US</td></tr>
+                                    <tr><td>NaN</td><td>INVALID_DATE</td><td>Piotr Wiśniewski</td><td>ETF</td><td>SPY</td><td>200.5</td><td>UNK</td><td>NaN</td><td>DE</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 style="color: var(--cyan); margin-bottom: 10px; margin-top: 40px;">2. Clean Data (After Processing)</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px;">Standardized text, cleaned numbers, fixed dates, and a new calculated column <code>total_value</code>.</p>
+                        <div class="table-container-scroll">
+                            <table class="kpi-table">
+                                <thead><tr><th>trans_id</th><th>trade_date</th><th>client_name</th><th>country</th><th>asset_class</th><th>ticker_symbol</th><th>volume</th><th>price_per_share</th><th>commission_fee</th><th>total_value</th></tr></thead>
+                                <tbody>
+                                    <tr><td>TXN-1000</td><td>2025-01-15</td><td>Jan Kowalski</td><td>PL</td><td>Equity</td><td>AAPL</td><td>100.0</td><td>150.5</td><td>12.5</td><td>15062.5</td></tr>
+                                    <tr><td>TXN-1001</td><td>2025-01-15</td><td>Jan Kowalski</td><td>PL</td><td>Etf</td><td>VWCE.DE</td><td>50.0</td><td>115.2</td><td>0.0</td><td>5760.0</td></tr>
+                                    <tr><td>TXN-1002</td><td>2025-02-20</td><td>Anna Nowak</td><td>US</td><td>Fixed Income</td><td>MSFT</td><td>1000.0</td><td>100.25</td><td>15.0</td><td>100265.0</td></tr>
+                                    <tr><td>TXN-1006</td><td>2025-01-15</td><td>Jan Kowalski</td><td>PL</td><td>Equity</td><td>NVDA</td><td>100.0</td><td>120.5</td><td>12.5</td><td>12062.5</td></tr>
+                                    <tr><td>TXN-1007</td><td>2025-01-18</td><td>Tomasz Wiśniewski</td><td>PL</td><td>Etf</td><td>QQQ</td><td>150.0</td><td>480.0</td><td>10.0</td><td>72010.0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 style="color: var(--cyan); margin-bottom: 10px; margin-top: 40px;">3. Aggregation per Investor (Final Report)</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 15px;">Data grouped by investors (<code>groupby</code>), showing the total value of their investment portfolio.</p>
+                        <div class="table-container-scroll">
+                            <table class="kpi-table">
+                                <thead><tr><th>client_name</th><th>total_invested</th><th>avg_trade_size</th><th>trade_count</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Sven Svensson</td><td>329540.0</td><td>109846.67</td><td>3</td></tr>
+                                    <tr><td>Maria Dąbrowska</td><td>185768.0</td><td>92884.0</td><td>2</td></tr>
+                                    <tr><td>Marco Rossi</td><td>184586.0</td><td>92293.0</td><td>2</td></tr>
+                                    <tr><td>Michał Zieliński</td><td>178785.0</td><td>89392.5</td><td>2</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    `
+                }
+            };
+
+            const setLocalLanguage = (lang) => {
+                document.documentElement.lang = lang;
+                
+                document.querySelectorAll('[data-translate]').forEach(el => {
+                    const key = el.dataset.translate;
+                    if (translations[lang] && translations[lang][key]) { 
+                        el.innerHTML = translations[lang][key]; 
+                    }
+                });
+
+                if(translations[lang]) {
+                    const chalBody = document.getElementById('challengesContentBody');
+                    if (chalBody) chalBody.innerHTML = translations[lang].challengesContent;
+                    
+                    const methBody = document.getElementById('methodologyContentBody');
+                    if (methBody) methBody.innerHTML = translations[lang].methodologyContent;
+                    
+                    const datBody = document.getElementById('dataContentBody');
+                    if (datBody) datBody.innerHTML = translations[lang].dataContent;
+                }
+            };
+
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'pl';
+            setLocalLanguage(preferredLanguage);
+
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    setLocalLanguage(button.dataset.lang);
+                });
+            });
+
+            // ZAKŁADKI (TABS)
+            window.showSection = function(id) {
+                document.querySelectorAll(".info-section").forEach(s => s.classList.remove("active"));
+                document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("is-active"));
+                
+                const targetSection = document.getElementById(id);
+                if (targetSection) targetSection.classList.add("active");
+                
+                const btn = document.querySelector(`.toggle-btn[onclick="showSection('${id}')"]`);
+                if(btn) btn.classList.add("is-active");
+            };
+
+            // SMOOTH SCROLL FOR ANCHORS
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId.length > 1 && window.lenis) {
+                        window.lenis.scrollTo(targetId, {
+                            offset: -90, 
+                            duration: 1.5,
+                            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                        });
+                    }
+                });
+            });
+
+            // GLOW EFFECT FOR CARDS
+            document.querySelectorAll('.kpi-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+
+            // LIGHTBOX INTEGRATION
+            const projectImages = document.querySelectorAll('.project-image');
+            projectImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    if(window.openLightbox) { window.openLightbox(img.getAttribute('src')); }
+                });
+            });
+        });
+    </script>
+</BaseLayout>
