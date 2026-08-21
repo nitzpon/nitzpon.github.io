@@ -13,6 +13,7 @@
                 <a href="/#home" data-translate="navHome">Home</a>
                 <a href="/#about" data-translate="navAbout">O Mnie</a>
                 <a href="/#projects" data-translate="navProjects">Projekty</a>
+                <a href="/#certificates" data-translate="navCertificates">Certyfikaty</a>
             </div>
             
             <div class="nav-tools">
@@ -43,6 +44,7 @@
     <a href="/#home" data-translate="navHome">Home</a>
     <a href="/#about" data-translate="navAbout">O Mnie</a>
     <a href="/#projects" data-translate="navProjects">Projekty</a>
+    <a href="/#certificates" data-translate="navCertificates">Certyfikaty</a>
     
     <div class="theme-switcher" style="margin-top: 20px;">
         <button class="theme-btn" id="btn-dark-theme-mobile" title="Dark Mode">
@@ -60,7 +62,7 @@
 </div>
 
 <style is:global>
-    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; height: 70px; background: var(--bg-nav); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color); transition: transform 0.5s cubic-bezier(.77, 0, .18, 1), background-color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; height: 70px; background: var(--bg-nav); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color); transition: transform 0.4s cubic-bezier(.77, 0, .18, 1), background-color var(--transition-speed) ease, border-color var(--transition-speed) ease; }
     .navbar.hide { transform: translateY(-100%); }
     .navbar-inner { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; }
     .navbar-logo-container { position: relative; display: flex; align-items: center; gap: 12px; text-decoration: none; }
@@ -130,7 +132,6 @@
             updateThemeButtons(newTheme);
         }
 
-        // Domyślnie ładuj 'light' jeśli brak w localStorage
         updateThemeButtons(document.documentElement.getAttribute('data-theme') || 'light');
         
         themeBtnsDark.forEach(btn => btn.addEventListener('click', () => updateTheme('dark')));
@@ -143,24 +144,31 @@
             document.querySelectorAll(".mobile-nav-menu a").forEach(t => t.addEventListener("click", () => document.body.classList.remove("nav-open")));
         }
 
-        // Ukrywanie Navbara przy scrollu
+        // Ukrywanie/pokazywanie navbara przy scrollu (zintegrowane z Lenis)
         const navbar = document.getElementById("navbar");
         let lastScroll = 0;
         
-        if (window.lenis && navbar) {
-            window.lenis.on('scroll', ({ scroll }) => {
-                const currentScroll = scroll;
-                if (currentScroll <= 0) {
-                    navbar.classList.remove("hide");
-                    return;
-                }
-                if (currentScroll > lastScroll && !document.body.classList.contains("nav-open")) {
-                    navbar.classList.add("hide");
-                } else if (currentScroll < lastScroll && navbar.classList.contains("hide")) {
-                    navbar.classList.remove("hide");
-                }
-                lastScroll = currentScroll;
-            });
+        function setupNavbarScroll() {
+            if (window.lenis && navbar) {
+                window.lenis.on('scroll', ({ scroll }) => {
+                    const currentScroll = scroll;
+                    if (currentScroll <= 10) {
+                        navbar.classList.remove("hide");
+                        lastScroll = currentScroll;
+                        return;
+                    }
+                    if (currentScroll > lastScroll && !document.body.classList.contains("nav-open")) {
+                        navbar.classList.add("hide");
+                    } else if (currentScroll < lastScroll) {
+                        navbar.classList.remove("hide");
+                    }
+                    lastScroll = currentScroll;
+                });
+            } else {
+                // Fallback, gdyby Lenis potrzebował ułamka sekundy na załadowanie
+                setTimeout(setupNavbarScroll, 100);
+            }
         }
+        setupNavbarScroll();
     });
 </script>
