@@ -428,6 +428,24 @@ import Footer from '../../components/Footer.astro';
             :global(.analysis-conclusions li) { padding: 20px 15px 20px 15px; } 
             :global(.analysis-conclusions li::before) { top: -15px; left: 15px;} 
         }
+        /* Stylizacja kontenera tabeli / bloku z danymi */
+    .table-container, .code-block, pre, .data-table-wrapper {
+        background-color: var(--code-bg) !important;
+        color: #f8fafc !important;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        overflow-x: auto;
+    }
+
+    /* Nagłówki i komórki tabeli wewnątrz sekcji danych */
+    table th, table td {
+        color: #f8fafc !important;
+    }
+    
+    /* Zmniejszenie kontrastu dla nagłówków kolumn (np. TRANS_ID, TRADE_DATE), żeby były czytelne, ale lekko stonowane */
+    table th {
+        color: #94a3b8 !important; 
+    }
     </style>
 
     <script is:inline>
