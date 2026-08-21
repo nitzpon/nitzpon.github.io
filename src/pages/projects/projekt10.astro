@@ -746,3 +746,20 @@ import Footer from '../../components/Footer.astro';
         });
     </script>
 </BaseLayout>
+
+<style is:global>
+    /* Wymuszenie jasnego tekstu na ciemnym tle edytora w JASNYM MOTYWIE */
+    [data-theme="light"] table,
+    [data-theme="light"] table td,
+    [data-theme="light"] pre,
+    [data-theme="light"] code,
+    [data-theme="light"] .code-block,
+    [data-theme="light"] .data-table {
+        color: #f8fafc !important;
+    }
+
+    /* Lekko stonowany kolor dla nagłówków tabeli w jasnym motywie */
+    [data-theme="light"] table th {
+        color: #94a3b8 !important; 
+    }
+</style>
