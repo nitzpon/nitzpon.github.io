@@ -18,16 +18,13 @@ const { title } = Astro.props;
 
     <!-- KRYTYCZNY SKRYPT PRZED RENDEROWANIEM STRONY -->
     <script is:inline>
-        // 1. Zastosuj motyw (domyślnie light dla rekruterów)
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
 
-        // 2. Wyłącz natywne przywracanie scrolla przez przeglądarkę
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
 
-        // 3. Jeśli wchodzimy z hashem lub cofamy się, ukrywamy widok na moment kalkulacji pozycji
         const isBackNav = window.performance && 
             window.performance.getEntriesByType('navigation')[0] && 
             window.performance.getEntriesByType('navigation')[0].type === 'back_forward';
@@ -91,14 +88,14 @@ const { title } = Astro.props;
             --header-fade: #f8fafc;
             --hover-bg: #f1f5f9;
             
-            --text-primary: #0f172a;        /* Wyraźny, czytelny Slate 900 */
-            --text-secondary: #475569;      /* Wysoki kontrast Slate 600 */
+            --text-primary: #0f172a;        
+            --text-secondary: #475569;      
             
-            --cyan: #0284c7;                /* Sky 600 */
-            --indigo: #4f46e5;              /* Indigo 600 */
+            --cyan: #0284c7;                
+            --indigo: #4f46e5;              
             --purple: rgba(168, 85, 247, 0.1);
             
-            --border-color: rgba(226, 232, 240, 0.9); /* Dyskretna ramka Slate 200 */
+            --border-color: rgba(226, 232, 240, 0.9); 
             --card-shadow: 0 12px 32px -10px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
             --header-shadow: 0 20px 45px -15px rgba(15, 23, 42, 0.1);
             --big-num-color: linear-gradient(135deg, var(--indigo), var(--cyan));
@@ -115,14 +112,10 @@ const { title } = Astro.props;
             --orb-opacity: 0.22; 
 
             --scroll-arrow-color: var(--indigo);
-            --code-bg: #0f172a;             /* Nowoczesny ciemny edytor kodu w jasnym motywie */
+            --code-bg: #0f172a;             
         }
 
-        /* Blokada mignięcia */
-        html.hash-loading body {
-            opacity: 0 !important;
-        }
-
+        html.hash-loading body { opacity: 0 !important; }
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 5px; border: 2px solid var(--bg-dark); }
@@ -179,6 +172,106 @@ const { title } = Astro.props;
         <img class="lightbox-content" id="lightbox-img">
     </div>
 
+    <!-- GLOBALNY SYSTEM TŁUMACZEŃ -->
+    <script is:inline>
+        const translations = {
+            pl: {
+                navHome: "Home", navAbout: "O Mnie", navProjects: "Projekty", navCertificates: "Certyfikaty",
+                pageTitle: "Portfolio | Jakub Nicpoń", profilePicAlt: "Zdjęcie profilowe",
+                headerWelcome: "Witaj w moim portfolio", jobTitlePart1: "Aspirujący ", jobTitlePart2: "Analityk Danych & BI Developer",
+                headerDesc: "Łączę dane z designem, tworząc nowoczesne rozwiązania analityczne. Odkryj moje projekty!",
+                btnContact: "Kontakt", btnCV: "Pobierz CV", btnLinkedin: "LinkedIn", scrollHint: "Przewiń dalej",
+                skillsTitle: "Technologie i Narzędzia",
+                skillExcel: "Power Query, VBA, zaawansowane formuły, interaktywne dashboardy.",
+                skillPowerBI: "Modelowanie danych, DAX, projektowanie klarownych wizualizacji.",
+                skillSQL: "Złożone Zapytania, Zapytania Zagnieżdżone, Widoki",
+                skillPython: "Pandas, NumPy, czyszczenie i transformacja danych.",
+                skillR: "W trakcie nauki. ⏳", skillDatabricks: "W trakcie nauki. ⏳",
+                aboutTitle: "O Mnie",
+                aboutSubtitle: "Moja podróż w świat danych zaczęła się od fascynacji tym, jak surowe liczby mogą opowiadać historie i napędzać strategiczne decyzje.",
+                aboutPassionTitle: "Moja Pasja & Droga",
+                aboutPassionText: "Inżynier logistyki i student analityki finansowej z pasją do odkrywania wartości w danych. Łączę ścisłe, procesowe myślenie z wiedzą finansową, przekładając złożone zbiory danych na czytelne dashboardy, wnikliwe raporty i realne rekomendacje biznesowe.<br><br>Traktuję pracę z danymi jak wyzwanie intelektualne - im bardziej skomplikowany problem, tym większa satysfakcja z odnalezienia ukrytych zależności. Stale rozwijam swój warsztat technologiczny oraz statystyczny.",
+                projectsTitle: "Projekty", filterAll: "Wszystkie", btnViewCaseStudy: "Zobacz Case Study ➔",
+                project1Desc: "Kompleksowa analiza 1000 transakcji w Excelu pod kątem realizacji celów sprzedażowych.",
+                project2Desc: "Interaktywny dashboard ułatwiający zarządzanie ryzykiem kredytowym (ponad 14 tys. pożyczek).",
+                project3Desc: "Przekształcenie surowych danych o usługach transportowych w konkretne wnioski optymalizacyjne.",
+                project4Desc: "Kompleksowa transformacja i modelowanie wraz z analizą danych HR.",
+                project5Desc: "Interaktywny dashboard sprzedaży dla BMW stworzony w oparciu o ponad 40 000 rekordów.",
+                project6Desc: "Analiza 55000 przyjęć pacjentów pokazująca rentowność i obłożenie placówek medycznych.",
+                project7Desc: "Eksploracja danych w SQL pozwalająca wyłonić najbardziej opłacalne rynki pod nowe kawiarnie.",
+                project8Desc: "ETL i rafinacja danych nieruchomości w Nashville. Transformacja nieustrukturyzowanych rekordów.",
+                project9Desc: "Analiza wpływu popularności utworów na TikToku na ich odtworzenia na Spotify.",
+                project10Desc: "Kompleksowy proces czyszczenia i transformacji danych finansowych przy użyciu biblioteki Pandas.",
+                certificatesTitle: "Certyfikaty"
+            },
+            en: {
+                navHome: "Home", navAbout: "About", navProjects: "Projects", navCertificates: "Certificates",
+                pageTitle: "Portfolio | Jakub Nicpoń", profilePicAlt: "Profile picture",
+                headerWelcome: "Welcome to my portfolio", jobTitlePart1: "Aspiring ", jobTitlePart2: "Data Analyst & BI Developer",
+                headerDesc: "I merge data with design to create modern analytical solutions. Discover my projects!",
+                btnContact: "Contact", btnCV: "Download CV", btnLinkedin: "LinkedIn", scrollHint: "Scroll down",
+                skillsTitle: "Technologies and Tools",
+                skillExcel: "Power Query, VBA, advanced formulas, interactive dashboards.",
+                skillPowerBI: "Data modeling, DAX, designing clear visualizations.",
+                skillSQL: "Complex Queries, Subqueries, Views",
+                skillPython: "Pandas, NumPy, data cleaning and transformation.",
+                skillR: "In progress. ⏳", skillDatabricks: "In progress. ⏳",
+                aboutTitle: "About Me",
+                aboutSubtitle: "My journey into the world of data began with a fascination for how raw numbers can tell stories and drive strategic decisions.",
+                aboutPassionTitle: "My Passion & Path",
+                aboutPassionText: "A logistics engineer and financial analytics student with a passion for discovering value in data. I combine strict, process-oriented thinking with financial knowledge, translating complex data sets into clear dashboards, insightful reports, and actionable business recommendations.<br><br>I treat working with data as an intellectual challenge - the more complex the problem, the greater the satisfaction in finding hidden correlations. I am constantly developing my technological and statistical skill set.",
+                projectsTitle: "Projects", filterAll: "All", btnViewCaseStudy: "View Case Study ➔",
+                project1Desc: "Comprehensive analysis of 1,000 transactions in Excel tracking sales KPIs.",
+                project2Desc: "Interactive dashboard facilitating credit risk management (over 14,000 loans).",
+                project3Desc: "Transforming raw delivery data into concrete supply chain optimization conclusions.",
+                project4Desc: "Comprehensive transformation and modeling along with HR data analysis in Power BI.",
+                project5Desc: "Interactive BMW sales dashboard created based on over 40,000 records.",
+                project6Desc: "Analysis of 55,000 patient admissions showing facility profitability and occupancy.",
+                project7Desc: "SQL data exploration identifying the most profitable markets for new coffee shops.",
+                project8Desc: "ETL and refinement of real estate data in Nashville. Transformation of unstructured records.",
+                project9Desc: "Analysis of the impact of song popularity on TikTok on their Spotify streams.",
+                project10Desc: "A comprehensive financial data cleaning and transformation pipeline using the Pandas library.",
+                certificatesTitle: "Certificates"
+            }
+        };
+
+        function applyLanguage(lang) {
+            localStorage.setItem('preferredLanguage', lang);
+            document.documentElement.lang = lang;
+            
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.dataset.translate;
+                if (translations[lang] && translations[lang][key]) { el.innerHTML = translations[lang][key]; }
+            });
+            document.querySelectorAll('[data-translate-alt]').forEach(el => {
+                const key = el.dataset.translateAlt;
+                if (translations[lang] && translations[lang][key]) { el.alt = translations[lang][key]; }
+            });
+            document.querySelectorAll('[data-translate-title]').forEach(el => {
+                const key = el.dataset.translateTitle;
+                if (translations[lang] && translations[lang][key]) { el.title = translations[lang][key]; }
+            });
+
+            // Aktywacja przycisków globalnie
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentLang = localStorage.getItem('preferredLanguage') || 'pl';
+            applyLanguage(currentLang);
+
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    applyLanguage(e.target.dataset.lang);
+                    document.body.classList.remove('nav-open'); // Zamyka menu mobilne
+                });
+            });
+        });
+    </script>
+
+    <!-- GLOBALNE SKRYPTY PRZEWIJANIA -->
     <script is:inline>
         function initGlobalScripts() {
             window.lenis = new Lenis({

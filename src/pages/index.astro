@@ -616,61 +616,6 @@ import Footer from '../components/Footer.astro';
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
 
-    const translations = {
-      pl: {
-          jobTitlePart1: "Aspirujący ", jobTitlePart2: "Analityk Danych & BI Developer", headerDesc: "Łączę dane z designem, tworząc nowoczesne rozwiązania analityczne. Odkryj moje projekty!", btnContact: "Kontakt", btnCV: "Pobierz CV", btnLinkedin: "LinkedIn", scrollHint: "Przewiń dalej", aboutTitle: "O Mnie", aboutSubtitle: "Moja podróż w świat danych zaczęła się od fascynacji tym, jak surowe liczby mogą opowiadać historie i napędzać strategiczne decyzje.", aboutPassionTitle: "Moja Pasja & Droga", aboutPassionText: "Inżynier logistyki i student analityki finansowej z pasją do odkrywania wartości w danych. Łączę ścisłe, procesowe myślenie z wiedzą finansową, przekładając złożone zbiory danych na czytelne dashboardy, wnikliwe raporty i realne rekomendacje biznesowe.<br><br>Traktuję pracę z danymi jak wyzwanie intelektualne - im bardziej skomplikowany problem, tym większa satysfakcja z odnalezienia ukrytych zależności. Stale rozwijam swój warsztat technologiczny oraz statystyczny.", skillsTitle: "Technologie i Narzędzia", skillExcel: "Power Query, Tabele Przestawne, Formuły Zagnieżdżone, Interaktywne Dashboardy.", skillPowerBI: "Modelowanie Danych, Język DAX, Projektowanie Klarownych Dashboardów.", skillSQL: "Złożone Zapytania (JOINS/UNIONS), Widoki, Podzapytania, CTE, Funkcje Okna. DDL/DML/DQL", skillPython: "Pandas, NumPy, czyszczenie i transformacja danych.", skillDatabricks: "W trakcie nauki. ⏳", skillR: "W trakcie nauki. ⏳", projectsTitle: "Projekty", filterAll: "Wszystkie", btnViewCaseStudy: "Zobacz Case Study ➔",
-          project1Desc: "Kompleksowa analiza 1000 transakcji w Excelu ułatwiająca śledzenie wskaźników takich jak zysk netto, realizacja celów sprzedażowych czy skuteczność działań promocyjnych.",
-          project2Desc: "Przekształciłem zbiór danych (ponad 14 000 pożyczek, blisko 360 000 rekordów) w interaktywny dashboard ułatwiający zarządzanie ryzykiem kredytowym i analizę dłużników.",
-          project3Desc: "Analiza w obszarze logistyki oparta na zrealizowanych usługach transportowych. Przekształcenie surowych danych o dostawach w konkretne wnioski optymalizacyjne.",
-          project4Desc: "Dysponując surowym zbiorem danych HR (114 000 rekordów, 2931 wierszy, 39 kolumn), przeprowadziłem kompleksową transformację i modelowanie wraz z analizą danych w Power BI.",
-          project5Desc: "Na podstawie ponad 40 000 rekordów w tabeli faktów, przeprowadziłem kompleksową transformację i modelowanie. Stworzyłem interaktywny dashboard sprzedaży dla BMW.",
-          project6Desc: "Analiza 55000 przyjęć pacjentów, które wygenerowały blisko 950 000 rekordów surowych danych. Dynamiczny dashboard pokazujący rentowność i obłożenie placówek.",
-          project7Desc: "Eksploracja danych w SQL pozwalająca wyłonić najbardziej opłacalne rynki pod nowe punkty kawiarniane. Zaawansowane złączenia, funkcje okna oraz analizy YoY.",
-          project10Desc: "Kompleksowy proces czyszczenia i transformacji danych finansowych przy użyciu biblioteki Pandas. Od profilowania (EDA), przez standaryzację, po końcową agregację portfeli inwestorów.",
-          project8Desc: "ETL i rafinacja danych nieruchomości w Nashville w SQL. Transformacja nieustrukturyzowanych rekordów w model faktów i wymiarów. Automatyczna normalizacja adresów, precyzyjna deduplikacja oraz autorski system flagowania błędów logicznych.",
-          project9Desc: "Analiza wpływu popularności utworów na TikToku na ich odtworzenia na Spotify.",
-          certificatesTitle: "Certyfikaty", profilePicAlt: "Zdjęcie profilowe", headerWelcome: "Witaj w moim portfolio"
-      },
-      en: {
-          jobTitlePart1: "Aspiring ", jobTitlePart2: "Data Analyst & BI Developer", headerDesc: "I merge data with design to create modern analytical solutions. Discover my projects!", btnContact: "Contact", btnCV: "Download CV", btnLinkedin: "LinkedIn", scrollHint: "Scroll down", aboutTitle: "About Me", aboutSubtitle: "My journey into the world of data began with a fascination for how raw numbers can tell stories and drive strategic decisions.", aboutPassionTitle: "My Passion & Path", aboutPassionText: "A logistics engineer and financial analytics student with a passion for discovering value in data. I combine strict, process-oriented thinking with financial knowledge, translating complex data sets into clear dashboards, insightful reports, and actionable business recommendations.<br><br>I treat working with data as an intellectual challenge - the more complex the problem, the greater the satisfaction in finding hidden correlations. I am constantly developing my technological and statistical skill set.", skillsTitle: "Technologies and Tools", skillExcel: "Power Query, Pivot Tables, Nested Formulas, Interactive Dashboards.", skillPowerBI: "Data Modeling, DAX Language, Designing Dashboards", skillSQL: "Complex Queries (JOINS/UNIONS), Views, Subqueries, CTE, Window Functions. DDL/DML/DQL", skillPython: "Pandas, NumPy, data cleaning & transformation.", skillDatabricks: "In progress. ⏳", skillR: "In progress. ⏳", projectsTitle: "Projects", filterAll: "All", btnViewCaseStudy: "View Case Study ➔",
-          project1Desc: "Comprehensive analysis of 1,000 transactions in Excel to track KPIs such as net profit, sales target achievement, and promotional effectiveness.",
-          project2Desc: "Transformed a dataset (over 14,000 loans, nearly 360,000 records) into an interactive dashboard facilitating credit risk management and debtor analysis.",
-          project3Desc: "Logistics analysis based on completed transport services. Transforming raw delivery data into concrete optimization conclusions.",
-          project4Desc: "Using a raw HR dataset (114,000 records, 2,931 rows, 39 columns), I performed comprehensive transformation and modeling along with data analysis in Power BI.",
-          project5Desc: "Based on over 40,000 records in the fact table, I performed comprehensive transformation and modeling to create an interactive BMW sales dashboard.",
-          project6Desc: "Analysis of 55,000 patient admissions generating nearly 950,000 raw data records. Dynamic dashboard showing facility profitability and occupancy.",
-          project7Desc: "SQL data exploration to identify the most profitable markets for new coffee shop locations. Advanced joins, window functions, and YoY analysis.",
-          project10Desc: "A comprehensive financial data cleaning and transformation pipeline using the Pandas library. From profiling (EDA) and standardization to final business aggregation of investor portfolios.",
-          project8Desc: "ETL and refinement of real estate data in Nashville using SQL. Transformation of unstructured records into a fact and dimension model. Automatic address normalization, precise deduplication, and a custom logic error flagging system.",
-          project9Desc: "Analysis of the impact of song popularity on TikTok on their Spotify streams.",
-          certificatesTitle: "Certificates", profilePicAlt: "Profile picture", headerWelcome: "Welcome to my portfolio"
-      }
-    };
-    
-    const setLocalLanguage = (lang) => {
-      document.querySelectorAll('[data-translate]').forEach(el => {
-        const key = el.dataset.translate;
-        if (translations[lang] && translations[lang][key]) { el.innerHTML = translations[lang][key]; }
-      });
-      document.querySelectorAll('[data-translate-alt]').forEach(el => {
-        const key = el.dataset.translateAlt;
-        if (translations[lang] && translations[lang][key]) { el.alt = translations[lang][key]; }
-      });
-      document.querySelectorAll('[data-translate-title]').forEach(el => {
-        const key = el.dataset.translateTitle;
-        if (translations[lang] && translations[lang][key]) { el.title = translations[lang][key]; }
-      });
-    };
-
-    const preferredLanguage = localStorage.getItem('preferredLanguage') || 'pl';
-    setLocalLanguage(preferredLanguage);
-
-    document.querySelectorAll('.lang-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            setLocalLanguage(button.dataset.lang);
-        });
-    });
-
     // === OBSŁUGA AKTYWNEGO LINKU (SCROLLSPY) + AUTOMATYCZNA AKTUALIZACJA HASH ===
     const desktopNavLinks = document.querySelectorAll('.desktop-nav-links a');
     const sections = document.querySelectorAll('header[id], .stylish-header-wrapper[id]');
