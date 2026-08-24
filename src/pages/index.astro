@@ -579,8 +579,9 @@ import Footer from '../components/Footer.astro';
     @keyframes typing { from { width: 0 } to { width: 100% } }
     @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--cyan) } }
 
-    @media (max-width: 900px) {
-      .header-flex { flex-direction: column; min-height: auto; margin: 30px 20px 0 20px; height: auto; }
+   @media (max-width: 900px) {
+      /* Zmieniony margin (dodane 80px na dole), by karta nie nachodziła na strzałkę */
+      .header-flex { flex-direction: column; min-height: auto; margin: 30px 20px 80px 20px; height: auto; }
       .header-photo { flex: none; height: 250px; border-radius: 0; }
       :global([data-theme="dark"]) .header-photo::after { background: linear-gradient(0deg, var(--header-fade) 0%, transparent 100%); }
       .header-content { flex: none; padding: 40px 30px; text-align: center; }
@@ -598,7 +599,10 @@ import Footer from '../components/Footer.astro';
     }
 
     @media (max-width: 600px) {
-      header { padding-top: 50px;}
+      /* Obniżona i delikatnie zmniejszona strzałka w wersji mobilnej */
+      header { padding-top: 50px; padding-bottom: 40px; }
+      .scroll-indicator { bottom: 10px; transform: scale(0.85); }
+      
       .header-content h1 { font-size: 2.2rem; }
       .header-content h2 { font-size: 1.1rem; }
       .stylish-title { font-size: 1.7rem; letter-spacing: 1px; } 
