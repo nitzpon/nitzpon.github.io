@@ -553,11 +553,12 @@ import Footer from '../components/Footer.astro';
     .certificates-container::before { left: 0; background: linear-gradient(to right, var(--bg-dark), transparent); }
     .certificates-container::after { right: 0; background: linear-gradient(to left, var(--bg-dark), transparent); }
 
-    .carousel-track { display: flex; gap: 30px; width: max-content; animation: scroll-carousel 40s linear infinite; padding: 0 15px; }
+   /* POPRAWKA DLA SAFARI (iOS) - usunięto gap i calc(), dodano akcelerację 3D */
+    .carousel-track { display: flex; width: max-content; animation: scroll-carousel 40s linear infinite; padding: 0; will-change: transform; -webkit-transform-style: preserve-3d; }
     .carousel-track:hover { animation-play-state: paused; }
-    @keyframes scroll-carousel { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 15px)); } }
+    @keyframes scroll-carousel { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
-    .gallery__item { flex: 0 0 250px; cursor: pointer; border-radius: 12px; transition: all 0.4s ease; background: var(--bg-surface); border: 1px solid var(--border-color); box-shadow: var(--card-shadow); }
+    .gallery__item { flex: 0 0 250px; margin-right: 30px; cursor: pointer; border-radius: 12px; transition: all 0.4s ease; background: var(--bg-surface); border: 1px solid var(--border-color); box-shadow: var(--card-shadow); }
     .gallery__item-inner { border-radius: 12px; overflow: hidden; transform-style: preserve-3d; transition: transform 0.1s linear; background: var(--bg-surface); height: 180px; display: flex; align-items: center; }
     .gallery__item img { display: block; width: 100%; height: auto; object-fit: cover; opacity: 0.9; transition: opacity 0.4s ease;}
     .gallery__item:hover { transform: translateY(-10px) scale(1.05); border-color: var(--indigo); z-index: 5; }
@@ -609,7 +610,8 @@ import Footer from '../components/Footer.astro';
       .gradient__border__container { width: 100%; max-width: 280px; }
       .about-section { padding: 0 20px 60px 20px; }
       .projects-grid { gap: 25px; }
-      .gallery .gallery__item { flex-basis: 160px; }
+      .gallery__item { flex: 0 0 180px; margin-right: 20px; }
+      .gallery__item-inner { height: 130px; }
       .horizontal-timeline { flex-direction: column; gap: 30px; padding-left: 20px; padding-top: 0; margin-top: 30px; }
       .ht-line { top: 0; left: 0; width: 2px; height: 100%; }
       .ht-item { text-align: left; padding: 0 0 0 20px; }
