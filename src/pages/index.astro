@@ -554,7 +554,7 @@ import Footer from '../components/Footer.astro';
     .certificates-container::after { right: 0; background: linear-gradient(to left, var(--bg-dark), transparent); }
 
    /* SAFARI BULLETPROOF FIX - Sztywne piksele zamiast procentów */
-    .carousel-track { display: flex; width: 6720px; animation: scroll-desktop 25s linear infinite; padding: 0; will-change: transform; }
+    .carousel-track { display: flex; width: 6720px; animation: scroll-desktop 20s linear infinite; padding: 0; will-change: transform; }
     .carousel-track:hover { animation-play-state: paused; }
     
     /* Zestaw 12 elementów to dokładnie 3360px (12 * 280px) */
@@ -624,6 +624,7 @@ import Footer from '../components/Footer.astro';
       .ht-item { text-align: left; padding: 0 0 0 20px; }
       .ht-dot { top: 10px; left: -26px; transform: none; }
       .ht-item:hover .ht-dot { transform: scale(1.3); }
+      .certificates-container { margin-top: 60px; }
     }
 </style>
 
