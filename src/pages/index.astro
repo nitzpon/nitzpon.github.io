@@ -513,7 +513,7 @@ import Footer from '../components/Footer.astro';
     .project-link-text { font-size: 0.95rem; font-weight: 700; color: var(--indigo); margin-top: auto; display: inline-flex; align-items: center; gap: 8px; }
     .project-card:hover .project-link-text { color: var(--cyan); }
 
-    .highlighted-certs { display: flex; justify-content: center; gap: 60px; margin-bottom: 70px; flex-wrap: wrap; }
+    .highlighted-certs { display: flex; justify-content: center; gap: 60px; margin-bottom: 120px; flex-wrap: wrap; }
     .highlighted-cert-wrapper { position: relative; display: inline-block; }
     .highlighted-cert-img { display: block; max-width: 380px; width: 100%; border-radius: 12px; border: 1px solid var(--border-color); transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; object-fit: cover; position: relative; z-index: 1; cursor: pointer; box-shadow: var(--card-shadow); }
     .highlighted-cert-wrapper:hover .highlighted-cert-img { transform: translateY(-8px) scale(1.02); border-color: var(--cyan); }
@@ -554,7 +554,7 @@ import Footer from '../components/Footer.astro';
     .certificates-container::after { right: 0; background: linear-gradient(to left, var(--bg-dark), transparent); }
 
    /* SAFARI BULLETPROOF FIX - Sztywne piksele zamiast procentów */
-    .carousel-track { display: flex; width: 6720px; animation: scroll-desktop 40s linear infinite; padding: 0; will-change: transform; }
+    .carousel-track { display: flex; width: 6720px; animation: scroll-desktop 25s linear infinite; padding: 0; will-change: transform; }
     .carousel-track:hover { animation-play-state: paused; }
     
     /* Zestaw 12 elementów to dokładnie 3360px (12 * 280px) */
@@ -596,7 +596,8 @@ import Footer from '../components/Footer.astro';
       .about-grid { grid-template-columns: 1fr; gap: 30px; }
       .projects-grid { grid-template-columns: 1fr; }
       .reveal-element { transition-delay: 0s !important; }
-      .highlighted-certs { flex-direction: column; gap: 40px; align-items: center; }
+      /* Większy gap między certyfikatami i ogromny margines dolny dla karuzeli */
+      .highlighted-certs { flex-direction: column; gap: 80px; align-items: center; margin-bottom: 140px; }
       .verify-badge.left, .verify-badge.right { left: 50%; right: auto; top: 100%; transform: translate(-50%, -50%); }
       .verify-badge.left:hover, .verify-badge.right:hover { transform: translate(-50%, -50%) scale(1.1); }
     }
