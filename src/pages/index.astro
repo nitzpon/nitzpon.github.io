@@ -705,15 +705,6 @@ import Footer from '../components/Footer.astro';
         });
     });
     
-    // === PODPIĘCIE LIGHTBOXA ===
-    const galleryItems = document.querySelectorAll('.gallery__item img, .highlighted-cert-img, .cert-verify-card img');
-    galleryItems.forEach(img => {
-      img.style.cursor = 'pointer';
-      img.addEventListener('click', () => {
-          if(window.openLightbox) { window.openLightbox(img.getAttribute('src')); }
-      });
-    });
-
     // === EFEKT 3D DLA KARUZELI ===
     const galleryItems3D = document.querySelectorAll('.gallery__item');
     galleryItems3D.forEach(item => {

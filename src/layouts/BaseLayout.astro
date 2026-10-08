@@ -326,7 +326,7 @@ const { title } = Astro.props;
                 }
             });
 
-            // Lightbox globalny
+// Lightbox globalny
             const lightbox = document.getElementById('lightbox');
             if (lightbox) {
                 const lightboxImg = document.getElementById('lightbox-img');
@@ -348,6 +348,22 @@ const { title } = Astro.props;
                 if (lightboxClose) lightboxClose.addEventListener('click', window.closeLightbox);
                 lightbox.addEventListener('click', (e) => { if (e.target === lightbox) window.closeLightbox(); });
                 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('active')) window.closeLightbox(); });
+
+                // --- NOWY, INTELIGENTNY SYSTEM WYKRYWANIA ZDJĘĆ NA KAŻDEJ PODSTRONIE ---
+                const allPageImages = document.querySelectorAll('img');
+                allPageImages.forEach(img => {
+                    // Ignorujemy logotypy, ikony technologii, filtry, zdjęcie profilowe 
+                    // oraz obrazki, które są bezpośrednimi linkami (np. miniaturki projektów odsyłające do podstron).
+                    if (img.closest('a') || img.closest('.navbar') || img.closest('.skill-card') || img.closest('.project-filters') || img.classList.contains('profile-image')) {
+                        return;
+                    }
+                    
+                    // Każde inne zdjęcie na dowolnej stronie staje się powiększalne
+                    img.style.cursor = 'zoom-in'; // Zmienia kursor myszy na lupę z plusem
+                    img.addEventListener('click', () => {
+                        window.openLightbox(img.getAttribute('src'));
+                    });
+                });
             }
         }
 
