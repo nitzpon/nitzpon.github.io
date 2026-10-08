@@ -10,8 +10,7 @@ import Footer from '../components/Footer.astro';
   <header id="home">
     <div class="header-flex">
       <div class="header-photo">
-        <!-- ZDJĘCIE PROFILOWE MA TERAZ PRIORYTET ŁADOWANIA (LCP FIX) -->
-        <img src="/assets/ownphoto.png" class="profile-image" alt="Zdjęcie profilowe" data-translate-alt="profilePicAlt" fetchpriority="high" loading="eager" />
+        <img src="/assets/ownphoto.png" class="profile-image" alt="Zdjęcie profilowe" data-translate-alt="profilePicAlt" fetchpriority="high" loading="eager" width="500" height="650" />
       </div>
       <div class="header-content">
         <div class="welcome-text" data-translate="headerWelcome">Witaj w moim portfolio</div>
@@ -42,42 +41,41 @@ import Footer from '../components/Footer.astro';
     </div>
   </div>
 
-  <!-- IKONY Z LAZY LOADINGIEM -->
   <section class="about-section">
     <div class="container">
       <div class="skills-container">
         <div class="skills-grid">
           <div class="skill-card reveal-element">
-            <div class="skill-icon"><img src="https://img.icons8.com/?size=100&id=117561&format=png" alt="Excel" loading="lazy"></div>
-            <h4 class="skill-name">Excel</h4>
+            <div class="skill-icon"><img src="https://img.icons8.com/?size=100&id=117561&format=png" alt="Excel" loading="lazy" width="100" height="100"></div>
+            <h3 class="skill-name">Excel</h3>
             <p class="skill-description" data-translate="skillExcel">Power Query, VBA, zaawansowane formuły, interaktywne dashboardy.</p>
           </div>
           <div class="skill-card reveal-element">
-            <div class="skill-icon"><img src="https://img.icons8.com/?size=100&id=Ny0t2MYrJ70p&format=png" alt="Power BI" loading="lazy"></div>
-            <h4 class="skill-name">Power BI</h4>
+            <div class="skill-icon"><img src="https://img.icons8.com/?size=100&id=Ny0t2MYrJ70p&format=png" alt="Power BI" loading="lazy" width="100" height="100"></div>
+            <h3 class="skill-name">Power BI</h3>
             <p class="skill-description" data-translate="skillPowerBI">Modelowanie danych, DAX, projektowanie klarownych wizualizacji.</p>
           </div>
           <div class="skill-card reveal-element">
-            <div class="skill-icon"><img src="https://img.icons8.com/?size=100&id=J6KcaRLsTgpZ&format=png" alt="SQL" loading="lazy"></div>
-            <h4 class="skill-name">SQL</h4>
+            <div class="skill-icon"><img src="https://img.icons8.com/?size=100&id=J6KcaRLsTgpZ&format=png" alt="SQL" loading="lazy" width="100" height="100"></div>
+            <h3 class="skill-name">SQL</h3>
             <p class="skill-description" data-translate="skillSQL">CTE, podzapytania, funkcje okna, join, agregacje.</p>
           </div>
           <div class="skill-card reveal-element">
-            <div class="skill-icon"><img src="https://img.icons8.com/?size=100&id=13441&format=png" alt="Python" loading="lazy"></div>
-            <h4 class="skill-name">Python</h4>
+            <div class="skill-icon"><img src="https://img.icons8.com/?size=100&id=13441&format=png" alt="Python" loading="lazy" width="100" height="100"></div>
+            <h3 class="skill-name">Python</h3>
             <p class="skill-description" data-translate="skillPython">Pandas, NumPy, czyszczenie i transformacja danych.</p>
           </div>
           <div class="skill-card reveal-element">
             <div class="skill-icon" style="width: auto; padding: 0 20px; gap: 12px;">
-                <img src="https://img.icons8.com/color/144/amazon-web-services.png" alt="AWS" loading="lazy">
-                <img src="https://img.icons8.com/color/144/azure-1.png" alt="Azure" loading="lazy">
+                <img src="https://img.icons8.com/color/144/amazon-web-services.png" alt="AWS" loading="lazy" width="144" height="144">
+                <img src="https://img.icons8.com/color/144/azure-1.png" alt="Azure" loading="lazy" width="144" height="144">
             </div>
-            <h4 class="skill-name">AWS / Azure</h4>
+            <h3 class="skill-name">AWS / Azure</h3>
             <p class="skill-description" data-translate="skillCloud">W trakcie nauki. ⏳</p>
           </div>
           <div class="skill-card reveal-element">
-            <div class="skill-icon"><img src="https://zonalogo.com/assets/databricks-logo-png-svg.webp?asset=4825&w=240" alt="Databricks" loading="lazy"></div>
-            <h4 class="skill-name">Databricks</h4>
+            <div class="skill-icon"><img src="https://zonalogo.com/assets/databricks-logo-png-svg.webp?asset=4825&w=240" alt="Databricks" loading="lazy" width="240" height="240"></div>
+            <h3 class="skill-name">Databricks</h3>
             <p class="skill-description" data-translate="skillDatabricks">W trakcie nauki. ⏳</p>
           </div>
         </div>
@@ -122,11 +120,11 @@ import Footer from '../components/Footer.astro';
 
         <div class="about-certificates reveal-element">
             <div class="cert-verify-card">
-                <img src="/assets/Coursera GOOGLE ANALYTICS.png" alt="Google Analytics Certificate" loading="lazy">
+                <img src="/assets/Coursera GOOGLE ANALYTICS.png" alt="Google Analytics Certificate" loading="lazy" width="460" height="355">
                 <a href="https://coursera.org/verify/professional-cert/Q5UMS9IDRWZY" target="_blank" class="verify-btn" data-translate="btnVerify">Zweryfikuj</a>
             </div>
             <div class="cert-verify-card">
-                <img src="/assets/Coursera YALE.png" alt="Yale Certificate" loading="lazy">
+                <img src="/assets/Coursera YALE.png" alt="Yale Certificate" loading="lazy" width="460" height="355">
                 <a href="https://coursera.org/verify/6U3PH5Y75BZ7" target="_blank" class="verify-btn" data-translate="btnVerify">Zweryfikuj</a>
             </div>
         </div>
@@ -142,7 +140,6 @@ import Footer from '../components/Footer.astro';
     </div>
   </div>
 
-  <!-- PROJEKTY Z LAZY LOADINGIEM -->
   <section class="gallery-section">
     <div class="container">
       
@@ -151,19 +148,19 @@ import Footer from '../components/Footer.astro';
             <span data-translate="filterAll">Wszystkie</span>
         </button>
         <button class="filter-btn" data-filter="python">
-            <img src="https://img.icons8.com/?size=48&id=13441&format=png" alt="Python" class="filter-icon" loading="lazy">
+            <img src="https://img.icons8.com/?size=48&id=13441&format=png" alt="Python" class="filter-icon" loading="lazy" width="48" height="48">
             Python
         </button>
         <button class="filter-btn" data-filter="powerbi">
-            <img src="https://img.icons8.com/?size=48&id=Ny0t2MYrJ70p&format=png" alt="Power BI" class="filter-icon" loading="lazy">
+            <img src="https://img.icons8.com/?size=48&id=Ny0t2MYrJ70p&format=png" alt="Power BI" class="filter-icon" loading="lazy" width="48" height="48">
             Power BI
         </button>
         <button class="filter-btn" data-filter="excel">
-            <img src="https://img.icons8.com/?size=48&id=117561&format=png" alt="Excel" class="filter-icon" loading="lazy">
+            <img src="https://img.icons8.com/?size=48&id=117561&format=png" alt="Excel" class="filter-icon" loading="lazy" width="48" height="48">
             Excel
         </button>
         <button class="filter-btn" data-filter="sql">
-            <img src="https://img.icons8.com/?size=48&id=J6KcaRLsTgpZ&format=png" alt="SQL" class="filter-icon" loading="lazy">
+            <img src="https://img.icons8.com/?size=48&id=J6KcaRLsTgpZ&format=png" alt="SQL" class="filter-icon" loading="lazy" width="48" height="48">
             SQL
         </button>
       </div>
@@ -172,8 +169,8 @@ import Footer from '../components/Footer.astro';
         <div class="project-card reveal-element" data-category="python">
           <a href="/projects/projekt10">
             <div class="project-img-wrapper">
-              <img src="/assets/python_cleaning1.png" alt="Data Cleaning in Python" class="project-image" loading="lazy" />
-              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=13441&format=png" alt="Python" loading="lazy"></div>
+              <img src="/assets/python_cleaning1.png" alt="Data Cleaning in Python" class="project-image" loading="lazy" width="600" height="350" />
+              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=13441&format=png" alt="Python" loading="lazy" width="48" height="48"></div>
             </div>
             <div class="project-content">
               <h3 class="project-title">Financial Data Cleaning in Python</h3>
@@ -186,8 +183,8 @@ import Footer from '../components/Footer.astro';
         <div class="project-card reveal-element" data-category="powerbi">
           <a href="/projects/projekt9">
             <div class="project-img-wrapper">
-              <img src="/assets/TikTokSpotify1.png" alt="Dashboard Power BI - TikTok Spotify" class="project-image" loading="lazy" />
-              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=Ny0t2MYrJ70p&format=png" alt="Power Bi" loading="lazy"></div>
+              <img src="/assets/TikTokSpotify1.png" alt="Dashboard Power BI - TikTok Spotify" class="project-image" loading="lazy" width="600" height="350" />
+              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=Ny0t2MYrJ70p&format=png" alt="Power Bi" loading="lazy" width="48" height="48"></div>
             </div>
             <div class="project-content">
               <h3 class="project-title">TikTok & Spotify Correlation Analysis</h3>
@@ -200,8 +197,8 @@ import Footer from '../components/Footer.astro';
         <div class="project-card reveal-element" data-category="powerbi">
           <a href="/projects/projekt4">
             <div class="project-img-wrapper">
-              <img src="/assets/Attrition Analyze 1.1.png" alt="Dashboard Power BI - Analiza Attrition" class="project-image" loading="lazy" />
-              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=Ny0t2MYrJ70p&format=png" alt="Power Bi" loading="lazy"></div>
+              <img src="/assets/Attrition Analyze 1.1.png" alt="Dashboard Power BI - Analiza Attrition" class="project-image" loading="lazy" width="600" height="350" />
+              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=Ny0t2MYrJ70p&format=png" alt="Power Bi" loading="lazy" width="48" height="48"></div>
             </div>
             <div class="project-content">
               <h3 class="project-title">Attrition Analysis Dashboard</h3>
@@ -214,8 +211,8 @@ import Footer from '../components/Footer.astro';
         <div class="project-card reveal-element" data-category="powerbi">
           <a href="/projects/projekt5">
             <div class="project-img-wrapper">
-              <img src="/assets/BMW Analysis 1.png" alt="Dashboard Power BI - Analiza Sprzedaży BMW" class="project-image" loading="lazy" />
-              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=Ny0t2MYrJ70p&format=png" alt="Power Bi" loading="lazy"></div>
+              <img src="/assets/BMW Analysis 1.png" alt="Dashboard Power BI - Analiza Sprzedaży BMW" class="project-image" loading="lazy" width="600" height="350" />
+              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=Ny0t2MYrJ70p&format=png" alt="Power Bi" loading="lazy" width="48" height="48"></div>
             </div>
             <div class="project-content">
               <h3 class="project-title">BMW Sales Analysis Dashboard</h3>
@@ -228,8 +225,8 @@ import Footer from '../components/Footer.astro';
         <div class="project-card reveal-element" data-category="powerbi">
           <a href="/projects/projekt6">
             <div class="project-img-wrapper">
-              <img src="/assets/Hospital Analyze 1.1.png" alt="Dashboard Power BI - Szpitale w USA" class="project-image" loading="lazy" />
-              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=Ny0t2MYrJ70p&format=png" alt="Power Bi" loading="lazy"></div>
+              <img src="/assets/Hospital Analyze 1.1.png" alt="Dashboard Power BI - Szpitale w USA" class="project-image" loading="lazy" width="600" height="350" />
+              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=Ny0t2MYrJ70p&format=png" alt="Power Bi" loading="lazy" width="48" height="48"></div>
             </div>
             <div class="project-content">
               <h3 class="project-title">Hospitals in the USA Analysis</h3>
@@ -242,8 +239,8 @@ import Footer from '../components/Footer.astro';
         <div class="project-card reveal-element" data-category="sql">
           <a href="/projects/projekt7">
             <div class="project-img-wrapper">
-              <img src="/assets/projekt7.jpg" alt="Analiza Rynku Kawiarni SQL" class="project-image" loading="lazy" />
-              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=J6KcaRLsTgpZ&format=png" alt="SQL" loading="lazy"></div>
+              <img src="/assets/projekt7.jpg" alt="Analiza Rynku Kawiarni SQL" class="project-image" loading="lazy" width="600" height="350" />
+              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=J6KcaRLsTgpZ&format=png" alt="SQL" loading="lazy" width="48" height="48"></div>
             </div>
             <div class="project-content">
               <h3 class="project-title">Coffee Shop Market Analysis</h3>
@@ -256,8 +253,8 @@ import Footer from '../components/Footer.astro';
         <div class="project-card reveal-element" data-category="sql">
           <a href="/projects/projekt8">
             <div class="project-img-wrapper">
-              <img src="/assets/projekt8.jpg" alt="Proces czyszczenia danych w SQL" class="project-image" loading="lazy" />
-              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=J6KcaRLsTgpZ&format=png" alt="SQL" loading="lazy"></div>
+              <img src="/assets/projekt8.jpg" alt="Proces czyszczenia danych w SQL" class="project-image" loading="lazy" width="600" height="350" />
+              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=J6KcaRLsTgpZ&format=png" alt="SQL" loading="lazy" width="48" height="48"></div>
             </div>
             <div class="project-content">
               <h3 class="project-title">Nashville Housing ETL process</h3>
@@ -270,8 +267,8 @@ import Footer from '../components/Footer.astro';
         <div class="project-card reveal-element" data-category="excel">
           <a href="/projects/projekt2">
             <div class="project-img-wrapper">
-              <img src="/assets/Project2.png" alt="Dashboard Aplikacji Kredytowych Excel" class="project-image" loading="lazy" />
-              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=117561&format=png" alt="Excel" loading="lazy"></div>
+              <img src="/assets/Project2.png" alt="Dashboard Aplikacji Kredytowych Excel" class="project-image" loading="lazy" width="600" height="350" />
+              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=117561&format=png" alt="Excel" loading="lazy" width="48" height="48"></div>
             </div>
             <div class="project-content">
               <h3 class="project-title">Loan Applications Dashboard</h3>
@@ -284,8 +281,8 @@ import Footer from '../components/Footer.astro';
         <div class="project-card reveal-element" data-category="excel">
           <a href="/projects/projekt1">
             <div class="project-img-wrapper">
-              <img src="/assets/Project1.png" alt="Analityczny Dashboard Sprzedaży Excel" class="project-image" loading="lazy" />
-              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=117561&format=png" alt="Excel" loading="lazy"></div>
+              <img src="/assets/Project1.png" alt="Analityczny Dashboard Sprzedaży Excel" class="project-image" loading="lazy" width="600" height="350" />
+              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=117561&format=png" alt="Excel" loading="lazy" width="48" height="48"></div>
             </div>
             <div class="project-content">
               <h3 class="project-title">Analytical Sales Dashboard</h3>
@@ -298,8 +295,8 @@ import Footer from '../components/Footer.astro';
         <div class="project-card reveal-element" data-category="excel">
           <a href="/projects/projekt3">
             <div class="project-img-wrapper">
-              <img src="/assets/Project3.png" alt="Analityka Łańcucha Dostaw Excel" class="project-image" loading="lazy" />
-              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=117561&format=png" alt="Excel" loading="lazy"></div>
+              <img src="/assets/Project3.png" alt="Analityka Łańcucha Dostaw Excel" class="project-image" loading="lazy" width="600" height="350" />
+              <div class="tech-badge"><img src="https://img.icons8.com/?size=48&id=117561&format=png" alt="Excel" loading="lazy" width="48" height="48"></div>
             </div>
             <div class="project-content">
               <h3 class="project-title">Supply Chain and Freight Analytics</h3>
@@ -323,43 +320,43 @@ import Footer from '../components/Footer.astro';
   <section class="about-section">
     <div class="highlighted-certs container reveal-element">
         <div class="highlighted-cert-wrapper">
-            <img src="/assets/Coursera GOOGLE ANALYTICS.png" alt="Google Analytics Certificate" class="highlighted-cert-img" loading="lazy">
+            <img src="/assets/Coursera GOOGLE ANALYTICS.png" alt="Google Analytics Certificate" class="highlighted-cert-img" loading="lazy" width="460" height="355">
             <a href="https://coursera.org/verify/professional-cert/Q5UMS9IDRWZY" target="_blank" class="verify-badge left" data-translate="btnVerify">Zweryfikuj</a>
         </div>
         <div class="highlighted-cert-wrapper">
-            <img src="/assets/Coursera YALE.png" alt="Yale Certificate" class="highlighted-cert-img" loading="lazy">
+            <img src="/assets/Coursera YALE.png" alt="Yale Certificate" class="highlighted-cert-img" loading="lazy" width="460" height="355">
             <a href="https://coursera.org/verify/6U3PH5Y75BZ7" target="_blank" class="verify-badge right" data-translate="btnVerify">Zweryfikuj</a>
         </div>
     </div>
 
-    <!-- DODAŁEM ATRYBUTY ALT ORAZ LAZY LOADING DO KARUZELI -->
     <div class="certificates-container reveal-element">
         <div class="carousel-track">
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Associate Data Analyst in SQL.jpg" alt="Certyfikat Data Analyst SQL" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/SQL For Business Analyst.jpg" alt="Certyfikat SQL Business" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Analysis.jpg" alt="Certyfikat Data Analysis" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Excel Fundamentals.jpg" alt="Certyfikat Excel" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Financial Modeling in Excel.jpg" alt="Certyfikat Financial Modeling" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Intermediate Power Query in Excel.jpg" alt="Certyfikat Power Query" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Preparation in Excel.jpg" alt="Certyfikat Data Preparation" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Introduction to Statistics.jpg" alt="Certyfikat Statistics" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Modeling in Power BI.jpg" alt="Certyfikat Data Modeling" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Transformation in Power BI.jpg" alt="Certyfikat Data Transformation" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Introduction to DAX in Power BI.jpg" alt="Certyfikat DAX" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Intermediate Data Modeling in Power BI.jpg" alt="Certyfikat Intermediate DAX" loading="lazy" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Associate Data Analyst in SQL.jpg" alt="Certyfikat Data Analyst SQL" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/SQL For Business Analyst.jpg" alt="Certyfikat SQL Business" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Analysis.jpg" alt="Certyfikat Data Analysis" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Excel Fundamentals.jpg" alt="Certyfikat Excel" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Financial Modeling in Excel.jpg" alt="Certyfikat Financial Modeling" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Intermediate Power Query in Excel.jpg" alt="Certyfikat Power Query" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Preparation in Excel.jpg" alt="Certyfikat Data Preparation" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Introduction to Statistics.jpg" alt="Certyfikat Statistics" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Modeling in Power BI.jpg" alt="Certyfikat Data Modeling" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Transformation in Power BI.jpg" alt="Certyfikat Data Transformation" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Introduction to DAX in Power BI.jpg" alt="Certyfikat DAX" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Intermediate Data Modeling in Power BI.jpg" alt="Certyfikat Intermediate DAX" loading="lazy" width="250" height="180" /></div></figure>
           
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Associate Data Analyst in SQL.jpg" alt="Certyfikat Data Analyst SQL" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/SQL For Business Analyst.jpg" alt="Certyfikat SQL Business" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Analysis.jpg" alt="Certyfikat Data Analysis" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Excel Fundamentals.jpg" alt="Certyfikat Excel" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Financial Modeling in Excel.jpg" alt="Certyfikat Financial Modeling" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Intermediate Power Query in Excel.jpg" alt="Certyfikat Power Query" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Preparation in Excel.jpg" alt="Certyfikat Data Preparation" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Introduction to Statistics.jpg" alt="Certyfikat Statistics" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Modeling in Power BI.jpg" alt="Certyfikat Data Modeling" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Transformation in Power BI.jpg" alt="Certyfikat Data Transformation" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Introduction to DAX in Power BI.jpg" alt="Certyfikat DAX" loading="lazy" /></div></figure>
-          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Intermediate Data Modeling in Power BI.jpg" alt="Certyfikat Intermediate DAX" loading="lazy" /></div></figure>
+          <!-- Duplikaty dla płynnej karuzeli -->
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Associate Data Analyst in SQL.jpg" alt="Certyfikat Data Analyst SQL" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/SQL For Business Analyst.jpg" alt="Certyfikat SQL Business" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Analysis.jpg" alt="Certyfikat Data Analysis" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Excel Fundamentals.jpg" alt="Certyfikat Excel" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Financial Modeling in Excel.jpg" alt="Certyfikat Financial Modeling" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Intermediate Power Query in Excel.jpg" alt="Certyfikat Power Query" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Preparation in Excel.jpg" alt="Certyfikat Data Preparation" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Introduction to Statistics.jpg" alt="Certyfikat Statistics" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Modeling in Power BI.jpg" alt="Certyfikat Data Modeling" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Data Transformation in Power BI.jpg" alt="Certyfikat Data Transformation" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Introduction to DAX in Power BI.jpg" alt="Certyfikat DAX" loading="lazy" width="250" height="180" /></div></figure>
+          <figure class="gallery__item"><div class="gallery__item-inner"><img src="/assets/Intermediate Data Modeling in Power BI.jpg" alt="Certyfikat Intermediate DAX" loading="lazy" width="250" height="180" /></div></figure>
         </div>
     </div>
   </section>
@@ -412,18 +409,9 @@ import Footer from '../components/Footer.astro';
     .gradient__border__container:hover .gradient__border__text { background: transparent; color: #fff;}
     
     /* GŁÓWNY PRZYCISK: POBIERZ CV */
-    .gradient__border__container.primary-cta {
-        box-shadow: 0 4px 20px rgba(6, 182, 212, 0.35);
-    }
-    .gradient__border__container.primary-cta .gradient__border__text {
-        background: var(--line-gradient);
-        color: #ffffff !important;
-        font-weight: 700;
-    }
-    .gradient__border__container.primary-cta:hover {
-        box-shadow: 0 8px 30px rgba(6, 182, 212, 0.55);
-        transform: translateY(-2px) scale(1.02);
-    }
+    .gradient__border__container.primary-cta { box-shadow: 0 4px 20px rgba(6, 182, 212, 0.35); }
+    .gradient__border__container.primary-cta .gradient__border__text { background: var(--line-gradient); color: #ffffff !important; font-weight: 700; }
+    .gradient__border__container.primary-cta:hover { box-shadow: 0 8px 30px rgba(6, 182, 212, 0.55); transform: translateY(-2px) scale(1.02); }
 
     @keyframes spin-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
     
@@ -474,7 +462,7 @@ import Footer from '../components/Footer.astro';
     .skill-card:hover { transform: translateY(-5px); border-color: var(--indigo); }
     
     .skill-icon { width: 60px; height: 60px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; background: var(--btn-bg); border-radius: 12px; border: 1px solid var(--border-color); }
-    .skill-icon img { width: 35px; height: 35px; object-fit: contain; filter: none; transition: transform 0.3s; }
+    .skill-icon img { max-width: 35px; max-height: 35px; object-fit: contain; filter: none; transition: transform 0.3s; }
     .skill-card:hover .skill-icon img { transform: scale(1.1); }
     .skill-name { font-size: 1.3rem; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
     .skill-description { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; }
@@ -559,11 +547,8 @@ import Footer from '../components/Footer.astro';
     .certificates-container::before { left: 0; background: linear-gradient(to right, var(--bg-dark), transparent); }
     .certificates-container::after { right: 0; background: linear-gradient(to left, var(--bg-dark), transparent); }
 
-    /* SAFARI BULLETPROOF FIX - Sztywne piksele zamiast procentów */
     .carousel-track { display: flex; width: 6720px; animation: scroll-desktop 25s linear infinite; padding: 0; will-change: transform; }
     .carousel-track:hover { animation-play-state: paused; }
-    
-    /* Zestaw 12 elementów to dokładnie 3360px (12 * 280px) */
     @keyframes scroll-desktop { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-3360px, 0, 0); } }
 
     .gallery__item { width: 250px; flex-shrink: 0; margin-right: 30px; cursor: pointer; border-radius: 12px; transition: all 0.4s ease; background: var(--bg-surface); border: 1px solid var(--border-color); box-shadow: var(--card-shadow); }
@@ -602,7 +587,6 @@ import Footer from '../components/Footer.astro';
       .projects-grid { grid-template-columns: 1fr; }
       .reveal-element { transition-delay: 0s !important; }
       
-      /* Większy gap między certyfikatami i ogromny margines dolny dla karuzeli */
       .highlighted-certs { flex-direction: column; gap: 80px; align-items: center; margin-bottom: 140px; }
       .verify-badge.left, .verify-badge.right { left: 50%; right: auto; top: 100%; transform: translate(-50%, -50%); }
       .verify-badge.left:hover, .verify-badge.right:hover { transform: translate(-50%, -50%) scale(1.1); }
@@ -624,14 +608,11 @@ import Footer from '../components/Footer.astro';
       .ht-dot { top: 10px; left: -26px; transform: none; }
       .ht-item:hover .ht-dot { transform: scale(1.3); }
 
-      /* Odsunięcie karuzeli w dół od przycisków Zweryfikuj */
       .certificates-container { margin-top: 60px; }
       
       .carousel-track { width: 4800px; animation-name: scroll-mobile; }
       .gallery__item { width: 180px; margin-right: 20px; }
       .gallery__item-inner { height: 130px; }
-      
-      /* Na telefonie karty są mniejsze, zestaw 12 elementów to 2400px (12 * 200px) */
       @keyframes scroll-mobile { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-2400px, 0, 0); } }
     }
 </style>
@@ -639,7 +620,6 @@ import Footer from '../components/Footer.astro';
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
 
-    // === OBSŁUGA AKTYWNEGO LINKU (SCROLLSPY) + AUTOMATYCZNA AKTUALIZACJA HASH ===
     const desktopNavLinks = document.querySelectorAll('.desktop-nav-links a');
     const sections = document.querySelectorAll('header[id], .stylish-header-wrapper[id]');
     
@@ -667,7 +647,6 @@ import Footer from '../components/Footer.astro';
         });
     }
 
-    // === PŁYNNE PRZEWIJANIE KOTWIC ===
     document.querySelectorAll('a[href^="/#"], a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -684,7 +663,6 @@ import Footer from '../components/Footer.astro';
       });
     });
 
-    // === FILTROWANIE PROJEKTÓW ===
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
@@ -710,7 +688,6 @@ import Footer from '../components/Footer.astro';
         });
     });
 
-    // === EFEKT 3D DLA KARUZELI ===
     const galleryItems3D = document.querySelectorAll('.gallery__item');
     galleryItems3D.forEach(item => {
       const inner = item.querySelector('.gallery__item-inner');
@@ -731,7 +708,6 @@ import Footer from '../components/Footer.astro';
       });
     });
 
-    // === GLOW EFFECT ===
     const skillCards = document.querySelectorAll('.skill-card');
     skillCards.forEach(card => {
         card.addEventListener('mousemove', e => {
@@ -743,7 +719,6 @@ import Footer from '../components/Footer.astro';
         });
     });
 
-    // === INTERSECTION OBSERVER ===
     const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
