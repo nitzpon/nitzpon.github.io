@@ -8,6 +8,10 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title data-translate="pageTitle">{title}</title>
+    
+    <!-- DODANY META OPIS (POPRAWA SEO Z RAPORTU) -->
+    <meta name="description" content="Portfolio Jakuba Nicponia - Analityk Danych i Data Engineer. Zapraszam do zapoznania się z moimi projektami w SQL, Python, Power BI oraz Excel." />
+    
     <link rel="icon" href="/assets/favicon.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -326,7 +330,7 @@ const { title } = Astro.props;
                 }
             });
 
-// Lightbox globalny
+            // Lightbox globalny
             const lightbox = document.getElementById('lightbox');
             if (lightbox) {
                 const lightboxImg = document.getElementById('lightbox-img');
@@ -352,14 +356,11 @@ const { title } = Astro.props;
                 // --- NOWY, INTELIGENTNY SYSTEM WYKRYWANIA ZDJĘĆ NA KAŻDEJ PODSTRONIE ---
                 const allPageImages = document.querySelectorAll('img');
                 allPageImages.forEach(img => {
-                    // Ignorujemy logotypy, ikony technologii, filtry, zdjęcie profilowe 
-                    // oraz obrazki, które są bezpośrednimi linkami (np. miniaturki projektów odsyłające do podstron).
                     if (img.closest('a') || img.closest('.navbar') || img.closest('.skill-card') || img.closest('.project-filters') || img.classList.contains('profile-image')) {
                         return;
                     }
                     
-                    // Każde inne zdjęcie na dowolnej stronie staje się powiększalne
-                    img.style.cursor = 'zoom-in'; // Zmienia kursor myszy na lupę z plusem
+                    img.style.cursor = 'zoom-in';
                     img.addEventListener('click', () => {
                         window.openLightbox(img.getAttribute('src'));
                     });
