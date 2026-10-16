@@ -25,7 +25,18 @@ import Footer from '../components/Footer.astro';
         <p class="header-desc" data-translate="headerDesc">Łączę dane z designem, tworząc nowoczesne rozwiązania analityczne. Odkryj moje projekty!</p>
         <div class="header-btns">
           <a href="/assets/CV_Nicpon_Jakub.pdf" class="gradient__border__container primary-cta" download><span class="gradient__border__text" data-translate="btnCV">Pobierz CV</span></a>
-          <a href="mailto:nicponjakub@outlook.com" class="gradient__border__container"><span class="gradient__border__text" data-translate="btnContact">Kontakt</span></a>
+          
+          <!-- PRZYCISK KONTAKT Z WYSUWANYM EMAILEM DO SKOPIOWANIA -->
+          <div class="contact-dropdown-wrapper">
+            <a href="mailto:nicponjakub@outlook.com" class="gradient__border__container"><span class="gradient__border__text" data-translate="btnContact">Kontakt</span></a>
+            <div class="email-popover">
+              <button type="button" class="email-copy-pill" id="copy-email-btn" aria-label="Skopiuj adres e-mail nicponjakub@outlook.com">
+                <span class="email-address-text">nicponjakub@outlook.com</span>
+                <span class="email-copy-badge" id="copy-email-status" data-translate="copyEmailAction">Kopiuj</span>
+              </button>
+            </div>
+          </div>
+
           <a href="https://www.linkedin.com/in/jakub-nicpoń-1a449942b/" target="_blank" class="gradient__border__container"><span class="gradient__border__text" data-translate="btnLinkedin">LinkedIn</span></a>
         </div>
       </div>
@@ -74,8 +85,11 @@ import Footer from '../components/Footer.astro';
             <p class="skill-description" data-translate="skillCloud">W trakcie nauki. ⏳</p>
           </div>
           <div class="skill-card reveal-element">
-            <div class="skill-icon"><img src="https://zonalogo.com/assets/databricks-logo-png-svg.webp?asset=4825&w=240" alt="Databricks" loading="lazy" width="240" height="240"></div>
-            <h3 class="skill-name">Databricks</h3>
+            <div class="skill-icon" style="width: auto; padding: 0 20px; gap: 12px;">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/apachespark/apachespark-original.svg" alt="PySpark" loading="lazy" width="100" height="100">
+                <img src="https://zonalogo.com/assets/databricks-logo-png-svg.webp?asset=4825&w=240" alt="Databricks" loading="lazy" width="240" height="240">
+            </div>
+            <h3 class="skill-name">PySpark / Databricks</h3>
             <p class="skill-description" data-translate="skillDatabricks">W trakcie nauki. ⏳</p>
           </div>
         </div>
@@ -148,19 +162,19 @@ import Footer from '../components/Footer.astro';
             <span data-translate="filterAll">Wszystkie</span>
         </button>
         <button class="filter-btn" data-filter="python">
-            <img src="https://img.icons8.com/?size=48&id=13441&format=png" alt="Python" class="filter-icon" loading="lazy" width="48" height="48">
+            <img src="https://img.icons8.com/?size=48&id=13441&format=png" alt="" class="filter-icon" loading="lazy" width="48" height="48">
             Python
         </button>
         <button class="filter-btn" data-filter="powerbi">
-            <img src="https://img.icons8.com/?size=48&id=Ny0t2MYrJ70p&format=png" alt="Power BI" class="filter-icon" loading="lazy" width="48" height="48">
+            <img src="https://img.icons8.com/?size=48&id=Ny0t2MYrJ70p&format=png" alt="" class="filter-icon" loading="lazy" width="48" height="48">
             Power BI
         </button>
         <button class="filter-btn" data-filter="excel">
-            <img src="https://img.icons8.com/?size=48&id=117561&format=png" alt="Excel" class="filter-icon" loading="lazy" width="48" height="48">
+            <img src="https://img.icons8.com/?size=48&id=117561&format=png" alt="" class="filter-icon" loading="lazy" width="48" height="48">
             Excel
         </button>
         <button class="filter-btn" data-filter="sql">
-            <img src="https://img.icons8.com/?size=48&id=J6KcaRLsTgpZ&format=png" alt="SQL" class="filter-icon" loading="lazy" width="48" height="48">
+            <img src="https://img.icons8.com/?size=48&id=J6KcaRLsTgpZ&format=png" alt="" class="filter-icon" loading="lazy" width="48" height="48">
             SQL
         </button>
       </div>
@@ -175,6 +189,12 @@ import Footer from '../components/Footer.astro';
             <div class="project-content">
               <h3 class="project-title">Financial Data Cleaning in Python</h3>
               <p class="project-desc-text" data-translate="project10Desc">Kompleksowy proces czyszczenia i transformacji danych finansowych przy użyciu biblioteki Pandas.</p>
+              <div class="project-tags">
+                <span class="project-tag">Python</span>
+                <span class="project-tag">Pandas</span>
+                <span class="project-tag">NumPy</span>
+                <span class="project-tag">ETL</span>
+              </div>
               <span class="project-link-text" data-translate="btnViewCaseStudy">Zobacz Case Study ➔</span>
             </div>
           </a>
@@ -189,6 +209,12 @@ import Footer from '../components/Footer.astro';
             <div class="project-content">
               <h3 class="project-title">TikTok & Spotify Correlation Analysis</h3>
               <p class="project-desc-text" data-translate="project9Desc">Analiza wpływu popularności utworów na TikToku na ich odtworzenia na Spotify.</p>
+              <div class="project-tags">
+                <span class="project-tag">Power BI</span>
+                <span class="project-tag">DAX</span>
+                <span class="project-tag">Power Query</span>
+                <span class="project-tag">Data Modeling</span>
+              </div>
               <span class="project-link-text" data-translate="btnViewCaseStudy">Zobacz Case Study ➔</span>
             </div>
           </a>
@@ -203,6 +229,12 @@ import Footer from '../components/Footer.astro';
             <div class="project-content">
               <h3 class="project-title">Attrition Analysis Dashboard</h3>
               <p class="project-desc-text" data-translate="project4Desc">Kompleksowa transformacja i modelowanie wraz z analizą danych HR.</p>
+              <div class="project-tags">
+                <span class="project-tag">Power BI</span>
+                <span class="project-tag">DAX</span>
+                <span class="project-tag">Power Query</span>
+                <span class="project-tag">HR Analytics</span>
+              </div>
               <span class="project-link-text" data-translate="btnViewCaseStudy">Zobacz Case Study ➔</span>
             </div>
           </a>
@@ -217,6 +249,12 @@ import Footer from '../components/Footer.astro';
             <div class="project-content">
               <h3 class="project-title">BMW Sales Analysis Dashboard</h3>
               <p class="project-desc-text" data-translate="project5Desc">Interaktywny dashboard sprzedaży dla BMW stworzony w oparciu o ponad 40 000 rekordów.</p>
+              <div class="project-tags">
+                <span class="project-tag">Power BI</span>
+                <span class="project-tag">DAX</span>
+                <span class="project-tag">Time Intelligence</span>
+                <span class="project-tag">KPI</span>
+              </div>
               <span class="project-link-text" data-translate="btnViewCaseStudy">Zobacz Case Study ➔</span>
             </div>
           </a>
@@ -231,6 +269,12 @@ import Footer from '../components/Footer.astro';
             <div class="project-content">
               <h3 class="project-title">Hospitals in the USA Analysis</h3>
               <p class="project-desc-text" data-translate="project6Desc">Analiza 55000 przyjęć pacjentów pokazująca rentowność i obłożenie placówek medycznych.</p>
+              <div class="project-tags">
+                <span class="project-tag">Power BI</span>
+                <span class="project-tag">DAX</span>
+                <span class="project-tag">Data Modeling</span>
+                <span class="project-tag">KPI</span>
+              </div>
               <span class="project-link-text" data-translate="btnViewCaseStudy">Zobacz Case Study ➔</span>
             </div>
           </a>
@@ -245,6 +289,12 @@ import Footer from '../components/Footer.astro';
             <div class="project-content">
               <h3 class="project-title">Coffee Shop Market Analysis</h3>
               <p class="project-desc-text" data-translate="project7Desc">Eksploracja danych w SQL pozwalająca wyłonić najbardziej opłacalne rynki pod nowe kawiarnie.</p>
+              <div class="project-tags">
+                <span class="project-tag">SQL</span>
+                <span class="project-tag">CTE</span>
+                <span class="project-tag">Window Functions</span>
+                <span class="project-tag">JOIN</span>
+              </div>
               <span class="project-link-text" data-translate="btnViewCaseStudy">Zobacz Case Study ➔</span>
             </div>
           </a>
@@ -259,6 +309,12 @@ import Footer from '../components/Footer.astro';
             <div class="project-content">
               <h3 class="project-title">Nashville Housing ETL process</h3>
               <p class="project-desc-text" data-translate="project8Desc">ETL i rafinacja danych nieruchomości w Nashville. Transformacja nieustrukturyzowanych rekordów.</p>
+              <div class="project-tags">
+                <span class="project-tag">SQL</span>
+                <span class="project-tag">ETL</span>
+                <span class="project-tag">Subqueries</span>
+                <span class="project-tag">Data Cleaning</span>
+              </div>
               <span class="project-link-text" data-translate="btnViewCaseStudy">Zobacz Case Study ➔</span>
             </div>
           </a>
@@ -273,6 +329,12 @@ import Footer from '../components/Footer.astro';
             <div class="project-content">
               <h3 class="project-title">Loan Applications Dashboard</h3>
               <p class="project-desc-text" data-translate="project2Desc">Interaktywny dashboard ułatwiający zarządzanie ryzykiem kredytowym (ponad 14 tys. pożyczek).</p>
+              <div class="project-tags">
+                <span class="project-tag">Excel</span>
+                <span class="project-tag">Power Query</span>
+                <span class="project-tag">Pivot Tables</span>
+                <span class="project-tag">Dashboard</span>
+              </div>
               <span class="project-link-text" data-translate="btnViewCaseStudy">Zobacz Case Study ➔</span>
             </div>
           </a>
@@ -287,6 +349,12 @@ import Footer from '../components/Footer.astro';
             <div class="project-content">
               <h3 class="project-title">Analytical Sales Dashboard</h3>
               <p class="project-desc-text" data-translate="project1Desc">Kompleksowa analiza 1000 transakcji w Excelu pod kątem realizacji celów sprzedażowych.</p>
+              <div class="project-tags">
+                <span class="project-tag">Excel</span>
+                <span class="project-tag">Power Query</span>
+                <span class="project-tag">Formulas</span>
+                <span class="project-tag">KPI</span>
+              </div>
               <span class="project-link-text" data-translate="btnViewCaseStudy">Zobacz Case Study ➔</span>
             </div>
           </a>
@@ -301,6 +369,12 @@ import Footer from '../components/Footer.astro';
             <div class="project-content">
               <h3 class="project-title">Supply Chain and Freight Analytics</h3>
               <p class="project-desc-text" data-translate="project3Desc">Przekształcenie surowych danych o usługach transportowych w konkretne wnioski optymalizacyjne.</p>
+              <div class="project-tags">
+                <span class="project-tag">Excel</span>
+                <span class="project-tag">Power Query</span>
+                <span class="project-tag">Supply Chain</span>
+                <span class="project-tag">Dashboard</span>
+              </div>
               <span class="project-link-text" data-translate="btnViewCaseStudy">Zobacz Case Study ➔</span>
             </div>
           </a>
@@ -391,7 +465,7 @@ import Footer from '../components/Footer.astro';
     .header-photo::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 100%; pointer-events: none; }
     :global([data-theme="dark"]) .header-photo::after { background: linear-gradient(90deg, transparent 40%, rgba(14, 23, 38, 0.85) 100%); }
     
-    .header-content { flex: 1 1 55%; display: flex; flex-direction: column; justify-content: center; padding: 60px 40px; background: transparent; z-index: 2; }
+    .header-content { flex: 1 1 55%; display: flex; flex-direction: column; justify-content: center; padding: 60px 40px 75px 40px; background: transparent; z-index: 2; }
     .header-content .welcome-text { font-size: 1.5rem; font-weight: 700; color: var(--cyan); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; animation: fadeInDown 2s ease-out; }
     .header-content h1 { font-size: 3.8rem; font-weight: 800; margin-bottom: 10px; line-height: 1.1; color: var(--text-primary); text-shadow: var(--title-shadow); animation: fadeInDown 2s ease-out; }
     .header-content h2 { font-size: 1.4rem; font-weight: 500; letter-spacing: 1px; color: var(--text-secondary); display: flex; align-items: center; margin-bottom: 25px; animation: fadeInUp 2s ease-out 0.3s both; }
@@ -412,6 +486,79 @@ import Footer from '../components/Footer.astro';
     .gradient__border__container.primary-cta { box-shadow: 0 4px 20px rgba(6, 182, 212, 0.35); }
     .gradient__border__container.primary-cta .gradient__border__text { background: var(--line-gradient); color: #ffffff !important; font-weight: 700; }
     .gradient__border__container.primary-cta:hover { box-shadow: 0 8px 30px rgba(6, 182, 212, 0.55); transform: translateY(-2px) scale(1.02); }
+
+    /* WYSUWANY EMAIL POD PRZYCISKIEM KONTAKT */
+    .contact-dropdown-wrapper {
+        position: relative;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 30;
+    }
+    .email-popover {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-8px) scale(0.95);
+        background: var(--line-gradient);
+        padding: 3px;
+        border-radius: 999px;
+        box-shadow: 0 12px 28px rgba(6, 182, 212, 0.32);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+        will-change: transform, opacity;
+    }
+    /* Niewidzialny pomost utrzymujący stan :hover przy zjeżdżaniu myszką w dół */
+    .email-popover::before {
+        content: '';
+        position: absolute;
+        top: -14px;
+        left: 0;
+        width: 100%;
+        height: 14px;
+        background: transparent;
+    }
+    .contact-dropdown-wrapper:hover .email-popover,
+    .contact-dropdown-wrapper:focus-within .email-popover {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+    .email-copy-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #ffffff;
+        color: #0f172a;
+        border: none;
+        border-radius: 999px;
+        padding: 5px 7px 5px 14px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: transform 0.2s ease;
+    }
+    .email-address-text {
+        color: #0f172a;
+        letter-spacing: 0.2px;
+    }
+    .email-copy-badge {
+        background: var(--line-gradient);
+        color: #ffffff;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 0.74rem;
+        font-weight: 700;
+        transition: transform 0.2s ease;
+    }
+    .email-copy-pill:hover .email-copy-badge {
+        transform: scale(1.05);
+    }
 
     @keyframes spin-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
     
@@ -462,7 +609,7 @@ import Footer from '../components/Footer.astro';
     .skill-card:hover { transform: translateY(-5px); border-color: var(--indigo); }
     
     .skill-icon { width: 60px; height: 60px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; background: var(--btn-bg); border-radius: 12px; border: 1px solid var(--border-color); }
-    .skill-icon img { max-width: 35px; max-height: 35px; object-fit: contain; filter: none; transition: transform 0.3s; }
+    .skill-icon img { width: 35px; height: 35px; max-width: 35px; max-height: 35px; object-fit: contain; filter: none; transition: transform 0.3s; }
     .skill-card:hover .skill-icon img { transform: scale(1.1); }
     .skill-name { font-size: 1.3rem; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
     .skill-description { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; }
@@ -504,7 +651,31 @@ import Footer from '../components/Footer.astro';
     .project-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
     .project-title { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; transition: color 0.3s; }
     .project-card:hover .project-title { color: var(--cyan); }
-    .project-desc-text { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex-grow: 1; }
+    .project-desc-text { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex-grow: 1; }
+    
+    /* PIGUŁKI ZE STACKIEM NA KARTACH PROJEKTÓW */
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 18px;
+    }
+    .project-tag {
+        font-size: 0.76rem;
+        font-weight: 600;
+        padding: 4px 11px;
+        border-radius: 20px;
+        background: var(--btn-bg);
+        color: var(--text-secondary);
+        border: 1px solid var(--border-color);
+        letter-spacing: 0.2px;
+        transition: border-color 0.3s ease, color 0.3s ease;
+    }
+    .project-card:hover .project-tag {
+        border-color: rgba(6, 182, 212, 0.4);
+        color: var(--text-primary);
+    }
+
     .project-link-text { font-size: 0.95rem; font-weight: 700; color: var(--indigo); margin-top: auto; display: inline-flex; align-items: center; gap: 8px; }
     .project-card:hover .project-link-text { color: var(--cyan); }
 
@@ -577,7 +748,7 @@ import Footer from '../components/Footer.astro';
       .header-flex { flex-direction: column; min-height: auto; margin: 30px 20px 80px 20px; height: auto; }
       .header-photo { flex: none; height: 250px; border-radius: 0; }
       :global([data-theme="dark"]) .header-photo::after { background: linear-gradient(0deg, var(--header-fade) 0%, transparent 100%); }
-      .header-content { flex: none; padding: 40px 30px; text-align: center; }
+      .header-content { flex: none; padding: 40px 30px 55px 30px; text-align: center; }
       .header-content h1 { font-size: 2.8rem; }
       .header-content h2 { justify-content: center; }
       .typewriter-full-text { white-space: normal; height: auto; border: none; animation: fadeInDown 2s ease; width: auto; text-align: center; }
@@ -599,7 +770,7 @@ import Footer from '../components/Footer.astro';
       .header-content h1 { font-size: 2.2rem; }
       .header-content h2 { font-size: 1.1rem; }
       .stylish-title { font-size: 1.7rem; letter-spacing: 1px; } 
-      .gradient__border__container { width: 100%; max-width: 280px; }
+      .gradient__border__container, .contact-dropdown-wrapper { width: 100%; max-width: 280px; }
       .about-section { padding: 0 20px 60px 20px; }
       .projects-grid { gap: 25px; }
       .horizontal-timeline { flex-direction: column; gap: 30px; padding-left: 20px; padding-top: 0; margin-top: 30px; }
@@ -619,6 +790,24 @@ import Footer from '../components/Footer.astro';
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
+
+    // === KOPIOWANIE ADRESU E-MAIL DO SCHOWKA ===
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    const copyEmailStatus = document.getElementById('copy-email-status');
+    if (copyEmailBtn && copyEmailStatus) {
+        copyEmailBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            navigator.clipboard.writeText('nicponjakub@outlook.com').then(() => {
+                const lang = localStorage.getItem('preferredLanguage') || 'pl';
+                copyEmailStatus.textContent = lang === 'en' ? 'Copied! ✓' : 'Skopiowano! ✓';
+                setTimeout(() => {
+                    const currentLang = localStorage.getItem('preferredLanguage') || 'pl';
+                    copyEmailStatus.textContent = currentLang === 'en' ? 'Copy' : 'Kopiuj';
+                }, 2000);
+            });
+        });
+    }
 
     const desktopNavLinks = document.querySelectorAll('.desktop-nav-links a');
     const sections = document.querySelectorAll('header[id], .stylish-header-wrapper[id]');

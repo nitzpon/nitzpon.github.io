@@ -8,10 +8,7 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title data-translate="pageTitle">{title}</title>
-    
-    <!-- DODANY META OPIS (POPRAWA SEO Z RAPORTU) -->
     <meta name="description" content="Portfolio Jakuba Nicponia - Analityk Danych i Data Engineer. Zapraszam do zapoznania się z moimi projektami w SQL, Python, Power BI oraz Excel." />
-    
     <link rel="icon" href="/assets/favicon.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -151,7 +148,7 @@ const { title } = Astro.props;
         /* Lightbox */
         .lightbox { position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(7, 13, 24, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .lightbox.active { opacity: 1; pointer-events: auto; }
-        .lightbox-content { max-width: 90%; max-height: 85%; border-radius: 6px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .lightbox-content { width: auto; height: auto; max-width: 90%; max-height: 85%; border-radius: 6px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .lightbox.active .lightbox-content { transform: scale(1); }
         .lightbox-close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 35px; font-weight: 300; cursor: pointer; transition: color 0.2s, transform 0.2s; user-select: none; z-index: 2001; }
         .lightbox-close:hover { color: var(--cyan); transform: scale(1.1); }
@@ -171,9 +168,9 @@ const { title } = Astro.props;
 
     <slot />
 
-  <div id="lightbox" class="lightbox">
+    <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
-        <img class="lightbox-content" id="lightbox-img" alt="Powiększony widok obrazu">
+        <img class="lightbox-content" id="lightbox-img" alt="Powiększony widok obrazu" width="1200" height="800">
     </div>
 
     <!-- GLOBALNY SYSTEM TŁUMACZEŃ -->
@@ -185,6 +182,7 @@ const { title } = Astro.props;
                 headerWelcome: "Witaj w moim portfolio", jobTitlePart1: "Aspirujący ", jobTitlePart2: "Analityk Danych & Data Engineer",
                 headerDesc: "Łączę dane z designem, tworząc nowoczesne rozwiązania analityczne. Odkryj moje projekty!",
                 btnContact: "Kontakt", btnCV: "Pobierz CV", btnLinkedin: "LinkedIn", scrollHint: "Przewiń dalej", btnVerify: "Zweryfikuj",
+                copyEmailAction: "Kopiuj",
                 skillsTitle: "Technologie i Narzędzia",
                 skillExcel: "Power Query, VBA, zaawansowane formuły, interaktywne dashboardy.",
                 skillPowerBI: "Modelowanie danych, DAX, projektowanie klarownych wizualizacji.",
@@ -217,6 +215,7 @@ const { title } = Astro.props;
                 headerWelcome: "Welcome to my portfolio", jobTitlePart1: "Aspiring ", jobTitlePart2: "Data Analyst & Data Engineer",
                 headerDesc: "I merge data with design to create modern analytical solutions. Discover my projects!",
                 btnContact: "Contact", btnCV: "Download CV", btnLinkedin: "LinkedIn", scrollHint: "Scroll down", btnVerify: "Verify",
+                copyEmailAction: "Copy",
                 skillsTitle: "Technologies and Tools",
                 skillExcel: "Power Query, VBA, advanced formulas, interactive dashboards.",
                 skillPowerBI: "Data modeling, DAX, designing clear visualizations.",
@@ -262,7 +261,6 @@ const { title } = Astro.props;
                 if (translations[lang] && translations[lang][key]) { el.title = translations[lang][key]; }
             });
 
-            // Aktywacja przycisków globalnie
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
@@ -275,7 +273,7 @@ const { title } = Astro.props;
             document.querySelectorAll('.lang-btn').forEach(button => {
                 button.addEventListener('click', (e) => {
                     applyLanguage(e.target.dataset.lang);
-                    document.body.classList.remove('nav-open'); // Zamyka menu mobilne
+                    document.body.classList.remove('nav-open');
                 });
             });
         });
@@ -353,7 +351,6 @@ const { title } = Astro.props;
                 lightbox.addEventListener('click', (e) => { if (e.target === lightbox) window.closeLightbox(); });
                 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('active')) window.closeLightbox(); });
 
-                // --- NOWY, INTELIGENTNY SYSTEM WYKRYWANIA ZDJĘĆ NA KAŻDEJ PODSTRONIE ---
                 const allPageImages = document.querySelectorAll('img');
                 allPageImages.forEach(img => {
                     if (img.closest('a') || img.closest('.navbar') || img.closest('.skill-card') || img.closest('.project-filters') || img.classList.contains('profile-image')) {
