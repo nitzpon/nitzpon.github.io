@@ -791,9 +791,11 @@ import Footer from '../components/Footer.astro';
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
 
-    // === KOPIOWANIE ADRESU E-MAIL DO SCHOWKA ===
+// === KOPIOWANIE ADRESU E-MAIL DO SCHOWKA ===
     const copyEmailBtn = document.getElementById('copy-email-btn');
     const copyEmailStatus = document.getElementById('copy-email-status');
+    const contactWrapper = document.querySelector('.contact-dropdown-wrapper'); // Pobranie kontenera
+    
     if (copyEmailBtn && copyEmailStatus) {
         copyEmailBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -807,6 +809,13 @@ import Footer from '../components/Footer.astro';
                 }, 2000);
             });
         });
+
+        // POPRAWKA: Automatyczne ukrywanie dymka po zjechaniu myszką (zdjęcie focusu)
+        if (contactWrapper) {
+            contactWrapper.addEventListener('mouseleave', () => {
+                copyEmailBtn.blur();
+            });
+        }
     }
 
     const desktopNavLinks = document.querySelectorAll('.desktop-nav-links a');
