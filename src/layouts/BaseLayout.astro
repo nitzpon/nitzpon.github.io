@@ -17,10 +17,16 @@ const { title } = Astro.props;
     
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
+
     <!-- KRYTYCZNY SKRYPT PRZED RENDEROWANIEM STRONY -->
     <script is:inline>
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        } else {
+            const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', systemPrefersDark ? 'dark' : 'light');
+        }
 
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
