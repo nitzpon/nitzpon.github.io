@@ -44,6 +44,8 @@ import Footer from '../components/Footer.astro';
     <a href="#about" class="scroll-indicator" title="Przewiń dalej" data-translate-title="scrollHint"></a>
   </header>
 
+<main class="content-overlay">
+
   <div class="stylish-header-wrapper reveal-element" id="about">
     <span class="header-big-number">01</span>
     <div class="stylish-header-content">
@@ -434,13 +436,27 @@ import Footer from '../components/Footer.astro';
         </div>
     </div>
   </section>
+</main>
 
   <Footer />
 
   <style>
     /* STYLE SPECYFICZNE DLA STRONY GŁÓWNEJ (INDEX) */
-    header { min-height: 100vh; background: transparent; color: var(--text-primary); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; transition: filter 0.3s ease, opacity 0.3s ease; padding-top: 70px; }
-    
+    header { 
+        position: sticky; 
+        top: 0; 
+        min-height: 100vh; 
+        background: transparent; 
+        color: var(--text-primary); 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        overflow: hidden; 
+        padding-top: 70px;
+        z-index: 1; /* Hero zostaje z tyłu */
+        will-change: transform, opacity;
+    }
+
     .header-flex {
         display: flex;
         flex-direction: row;
@@ -458,6 +474,23 @@ import Footer from '../components/Footer.astro';
         z-index: 1;
         margin: 40px auto 0 auto;
         overflow: hidden;
+    }
+
+    /* WYGLĄD WYJEŻDŻAJĄCEJ KURTYNY */
+    .content-overlay {
+        position: relative;
+        z-index: 10; /* Kurtyna wyjeżdża na wierzch Hero */
+        background: var(--bg-dark); /* Kolor tła przejęty ze zmiennych motywu */
+        border-top-left-radius: 40px; /* Zaokrąglenie w stylu iOS / Modern SaaS */
+        border-top-right-radius: 40px;
+        box-shadow: 0 -25px 50px rgba(15, 23, 42, 0.08); /* Elegancki cień padający na sekcję Hero */
+        padding-top: 20px;
+        transition: background-color var(--transition-speed) ease;
+    }
+    
+    /* Na telefonach zmniejszamy promień zaokrąglenia */
+    @media (max-width: 600px) {
+        .content-overlay { border-top-left-radius: 25px; border-top-right-radius: 25px; }
     }
     
     .header-photo { flex: 1 1 45%; position: relative; overflow: hidden; }
@@ -841,6 +874,30 @@ import Footer from '../components/Footer.astro';
                 if (window.location.hash !== '#' + currentSectionId) {
                     history.replaceState(null, '', '#' + currentSectionId);
                 }
+            }
+        });
+    }
+
+    // === ANIMACJA HERO SCROLL (PARALLAX SCALE) ===
+    const headerFlex = document.querySelector('.header-flex');
+    const heroSection = document.querySelector('header');
+    
+    if (window.lenis && headerFlex && heroSection) {
+        window.lenis.on('scroll', ({ scroll }) => {
+            // Animujemy tylko do momentu, aż Hero zniknie pod kurtyną (wysokość okna)
+            const maxScroll = window.innerHeight;
+            if (scroll <= maxScroll) {
+                const progress = scroll / maxScroll;
+                
+                // Płynne pomniejszanie od 1.0 do 0.85
+                const scale = 1 - (progress * 0.15);
+                // Rozmywanie i delikatne wygaszanie
+                const opacity = 1 - (progress * 0.6);
+                // Efekt lekkiego pchania w dół (Parallax)
+                const yOffset = progress * 80;
+                
+                headerFlex.style.transform = `translateY(${yOffset}px) scale(${scale})`;
+                headerFlex.style.opacity = Math.max(0, opacity);
             }
         });
     }
